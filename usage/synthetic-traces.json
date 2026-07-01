@@ -1,0 +1,8973 @@
+[
+ {
+  "t": "app_open",
+  "sid": "s1h1igf",
+  "ts": 1781634017889,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s1h1igf",
+  "ts": 1781634054921,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s1h1igf",
+  "ts": 1781634061944,
+  "deals": 8,
+  "deployed": 72,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s1h1igf",
+  "ts": 1781634098161,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1lioa8",
+  "ts": 1781639179614,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s1lioa8",
+  "ts": 1781639215639,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1lioa8",
+  "ts": 1781639219410,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1lioa8",
+  "ts": 1781639225396,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s1lioa8",
+  "ts": 1781639252790,
+  "deal": 0,
+  "company": "Coinbase",
+  "invested": true,
+  "amount": 20,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 60
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1lioa8",
+  "ts": 1781639288506,
+  "cat": "team",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1lioa8",
+  "ts": 1781639296525,
+  "cat": "risk",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s1lioa8",
+  "ts": 1781639307877,
+  "deal": 1,
+  "company": "Notion",
+  "invested": true,
+  "amount": 18,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 40
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1lioa8",
+  "ts": 1781639330738,
+  "cat": "team",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s1lioa8",
+  "ts": 1781639364121,
+  "deal": 2,
+  "company": "Uber",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 90
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1lioa8",
+  "ts": 1781639380060,
+  "cat": "product",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1lioa8",
+  "ts": 1781639399908,
+  "cat": "market",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "s1lioa8",
+  "ts": 1781639422844,
+  "deal": 3,
+  "company": "Theranos",
+  "invested": true,
+  "amount": 3,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1lioa8",
+  "ts": 1781639455550,
+  "cat": "market",
+  "deal": 4
+ },
+ {
+  "t": "decision",
+  "sid": "s1lioa8",
+  "ts": 1781639489795,
+  "deal": 4,
+  "company": "Notion",
+  "invested": true,
+  "amount": 18,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 40
+ },
+ {
+  "t": "app_open",
+  "sid": "s2dk3gz",
+  "ts": 1781639522000,
+  "path": "memo.html"
+ },
+ {
+  "t": "drop",
+  "sid": "s1lioa8",
+  "ts": 1781639528799,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s2dk3gz",
+  "ts": 1781639552226,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2dk3gz",
+  "ts": 1781639557508,
+  "cat": "product",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2dk3gz",
+  "ts": 1781639571613,
+  "cat": "risk",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s2dk3gz",
+  "ts": 1781639599173,
+  "deal": 0,
+  "company": "Fast",
+  "invested": true,
+  "amount": 2,
+  "boxes": 2,
+  "pBreak": 70,
+  "pWipe": 89,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2dk3gz",
+  "ts": 1781639626012,
+  "cat": "product",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2dk3gz",
+  "ts": 1781639647522,
+  "cat": "team",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s2dk3gz",
+  "ts": 1781639681125,
+  "deal": 1,
+  "company": "Bird",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2dk3gz",
+  "ts": 1781639713498,
+  "cat": "team",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s2dk3gz",
+  "ts": 1781639749924,
+  "deal": 2,
+  "company": "Fast",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2dk3gz",
+  "ts": 1781639753029,
+  "cat": "risk",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2dk3gz",
+  "ts": 1781639762650,
+  "cat": "product",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2dk3gz",
+  "ts": 1781639772890,
+  "cat": "team",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "s2dk3gz",
+  "ts": 1781639775529,
+  "deal": 3,
+  "company": "Stripe",
+  "invested": false,
+  "amount": 0,
+  "boxes": 3,
+  "pBreak": 10,
+  "pWipe": 49,
+  "mult": 120
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2dk3gz",
+  "ts": 1781639793775,
+  "cat": "product",
+  "deal": 4
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2dk3gz",
+  "ts": 1781639813064,
+  "cat": "market",
+  "deal": 4
+ },
+ {
+  "t": "decision",
+  "sid": "s2dk3gz",
+  "ts": 1781639846315,
+  "deal": 4,
+  "company": "Coinbase",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 60
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2dk3gz",
+  "ts": 1781639863108,
+  "cat": "team",
+  "deal": 5
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2dk3gz",
+  "ts": 1781639878361,
+  "cat": "team",
+  "deal": 5
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2dk3gz",
+  "ts": 1781639881962,
+  "cat": "team",
+  "deal": 5
+ },
+ {
+  "t": "decision",
+  "sid": "s2dk3gz",
+  "ts": 1781639911956,
+  "deal": 5,
+  "company": "Airbnb",
+  "invested": true,
+  "amount": 20,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 200
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2dk3gz",
+  "ts": 1781639949620,
+  "cat": "risk",
+  "deal": 6
+ },
+ {
+  "t": "decision",
+  "sid": "s2dk3gz",
+  "ts": 1781639965661,
+  "deal": 6,
+  "company": "Instacart",
+  "invested": true,
+  "amount": 10,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 9
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2dk3gz",
+  "ts": 1781639992697,
+  "cat": "product",
+  "deal": 7
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2dk3gz",
+  "ts": 1781640001721,
+  "cat": "market",
+  "deal": 7
+ },
+ {
+  "t": "decision",
+  "sid": "s2dk3gz",
+  "ts": 1781640016076,
+  "deal": 7,
+  "company": "Notion",
+  "invested": true,
+  "amount": 16,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 40
+ },
+ {
+  "t": "drop",
+  "sid": "s2dk3gz",
+  "ts": 1781640025047,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "sd1tc3",
+  "ts": 1781651511386,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "sd1tc3",
+  "ts": 1781651516119,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sd1tc3",
+  "ts": 1781651522174,
+  "cat": "terms",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sd1tc3",
+  "ts": 1781651536663,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "sd1tc3",
+  "ts": 1781651576327,
+  "deal": 0,
+  "company": "Uber",
+  "invested": true,
+  "amount": 10,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 90
+ },
+ {
+  "t": "drop",
+  "sid": "sd1tc3",
+  "ts": 1781651613758,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s3boh0d",
+  "ts": 1781664935342,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s3boh0d",
+  "ts": 1781664939193,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s3boh0d",
+  "ts": 1781664954625,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s3boh0d",
+  "ts": 1781664981493,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s3boh0d",
+  "ts": 1781665017683,
+  "deal": 0,
+  "company": "Stripe",
+  "invested": true,
+  "amount": 13,
+  "boxes": 1,
+  "pBreak": 11,
+  "pWipe": 83,
+  "mult": 120
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s3boh0d",
+  "ts": 1781665032098,
+  "cat": "product",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s3boh0d",
+  "ts": 1781665061902,
+  "cat": "team",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s3boh0d",
+  "ts": 1781665075621,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s3boh0d",
+  "ts": 1781665078594,
+  "deal": 1,
+  "company": "Notion",
+  "invested": false,
+  "amount": 0,
+  "boxes": 3,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 40
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s3boh0d",
+  "ts": 1781665103912,
+  "cat": "risk",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s3boh0d",
+  "ts": 1781665120014,
+  "cat": "team",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s3boh0d",
+  "ts": 1781665158426,
+  "cat": "team",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s3boh0d",
+  "ts": 1781665164100,
+  "deal": 2,
+  "company": "Fast",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 30,
+  "pWipe": 72,
+  "mult": 0
+ },
+ {
+  "t": "drop",
+  "sid": "s3boh0d",
+  "ts": 1781665195408,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1sfn0w",
+  "ts": 1781674666227,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s1sfn0w",
+  "ts": 1781674676286,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1sfn0w",
+  "ts": 1781674706084,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s1sfn0w",
+  "ts": 1781674717838,
+  "deal": 0,
+  "company": "WeWork",
+  "invested": true,
+  "amount": 7,
+  "boxes": 1,
+  "pBreak": 79,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1sfn0w",
+  "ts": 1781674734609,
+  "cat": "product",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s1sfn0w",
+  "ts": 1781674760140,
+  "deal": 1,
+  "company": "Notion",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 57,
+  "pWipe": 21,
+  "mult": 40
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1sfn0w",
+  "ts": 1781674799638,
+  "cat": "market",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1sfn0w",
+  "ts": 1781674812336,
+  "cat": "risk",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s1sfn0w",
+  "ts": 1781674818404,
+  "deal": 2,
+  "company": "Bird",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 29,
+  "pWipe": 98,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1sfn0w",
+  "ts": 1781674851898,
+  "cat": "team",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1sfn0w",
+  "ts": 1781674875072,
+  "cat": "risk",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "s1sfn0w",
+  "ts": 1781674906127,
+  "deal": 3,
+  "company": "Theranos",
+  "invested": true,
+  "amount": 7,
+  "boxes": 2,
+  "pBreak": 52,
+  "pWipe": 11,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1sfn0w",
+  "ts": 1781674909412,
+  "cat": "product",
+  "deal": 4
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1sfn0w",
+  "ts": 1781674931186,
+  "cat": "product",
+  "deal": 4
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1sfn0w",
+  "ts": 1781674940107,
+  "cat": "traction",
+  "deal": 4
+ },
+ {
+  "t": "decision",
+  "sid": "s1sfn0w",
+  "ts": 1781674970766,
+  "deal": 4,
+  "company": "Theranos",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "drop",
+  "sid": "s1sfn0w",
+  "ts": 1781675008917,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1bn3fx",
+  "ts": 1781676986362,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s1bn3fx",
+  "ts": 1781676995982,
+  "thesis": "Talent-first",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s1bn3fx",
+  "ts": 1781677027108,
+  "deals": 7,
+  "deployed": 78,
+  "thesis": "Talent-first",
+  "finW": 0.3
+ },
+ {
+  "t": "season_end",
+  "sid": "s1bn3fx",
+  "ts": 1781677051263,
+  "rank": 4,
+  "funds": 5,
+  "profit": 7692,
+  "mult": 77.92,
+  "judgment": 66,
+  "newBlood": false,
+  "thesis": "Talent-first"
+ },
+ {
+  "t": "drop",
+  "sid": "s1bn3fx",
+  "ts": 1781677053663,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1pxbyc",
+  "ts": 1781689247209,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s1pxbyc",
+  "ts": 1781689272237,
+  "thesis": "Product / Moat",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s1pxbyc",
+  "ts": 1781689299268,
+  "deals": 8,
+  "deployed": 39,
+  "thesis": "Product / Moat",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s1pxbyc",
+  "ts": 1781689336347,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "sb2pcz",
+  "ts": 1781694091829,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "sb2pcz",
+  "ts": 1781694126491,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sb2pcz",
+  "ts": 1781694130718,
+  "cat": "risk",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sb2pcz",
+  "ts": 1781694138404,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "sb2pcz",
+  "ts": 1781694166922,
+  "deal": 0,
+  "company": "Theranos",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 98,
+  "pWipe": 43,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sb2pcz",
+  "ts": 1781694198027,
+  "cat": "product",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sb2pcz",
+  "ts": 1781694205008,
+  "cat": "team",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "sb2pcz",
+  "ts": 1781694232042,
+  "deal": 1,
+  "company": "Theranos",
+  "invested": true,
+  "amount": 18,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "drop",
+  "sid": "sb2pcz",
+  "ts": 1781694271438,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "stji4a",
+  "ts": 1781696032621,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "stji4a",
+  "ts": 1781696068647,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "stji4a",
+  "ts": 1781696087443,
+  "deals": 7,
+  "deployed": 37,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_end",
+  "sid": "stji4a",
+  "ts": 1781696095989,
+  "rank": 2,
+  "funds": 5,
+  "profit": 6859,
+  "mult": 69.59,
+  "judgment": 49,
+  "newBlood": false,
+  "thesis": "Balanced"
+ },
+ {
+  "t": "drop",
+  "sid": "stji4a",
+  "ts": 1781696120292,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s18tugk",
+  "ts": 1781701852469,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s18tugk",
+  "ts": 1781701858083,
+  "thesis": "Talent-first",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s18tugk",
+  "ts": 1781701866278,
+  "deals": 6,
+  "deployed": 71,
+  "thesis": "Talent-first",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s18tugk",
+  "ts": 1781701873107,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1ji50b",
+  "ts": 1781701940829,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s1ji50b",
+  "ts": 1781701960371,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ji50b",
+  "ts": 1781701997426,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ji50b",
+  "ts": 1781702036206,
+  "cat": "risk",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s1ji50b",
+  "ts": 1781702058586,
+  "deal": 0,
+  "company": "Instacart",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 9
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ji50b",
+  "ts": 1781702095973,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ji50b",
+  "ts": 1781702130573,
+  "cat": "product",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ji50b",
+  "ts": 1781702144856,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s1ji50b",
+  "ts": 1781702162667,
+  "deal": 1,
+  "company": "Notion",
+  "invested": true,
+  "amount": 16,
+  "boxes": 2,
+  "pBreak": 69,
+  "pWipe": 74,
+  "mult": 40
+ },
+ {
+  "t": "drop",
+  "sid": "s1ji50b",
+  "ts": 1781702181465,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s36azkw",
+  "ts": 1781708479285,
+  "path": "index.html"
+ },
+ {
+  "t": "season_begin",
+  "sid": "s36azkw",
+  "ts": 1781708502348,
+  "deals": 7,
+  "deployed": 44,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s36azkw",
+  "ts": 1781708514488,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s356anl",
+  "ts": 1781728937233,
+  "path": "index.html"
+ },
+ {
+  "t": "season_begin",
+  "sid": "s356anl",
+  "ts": 1781728955684,
+  "deals": 5,
+  "deployed": 34,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_end",
+  "sid": "s356anl",
+  "ts": 1781728990719,
+  "rank": 4,
+  "funds": 5,
+  "profit": 3772,
+  "mult": 38.72,
+  "judgment": 57,
+  "newBlood": false,
+  "thesis": "Balanced"
+ },
+ {
+  "t": "drop",
+  "sid": "s356anl",
+  "ts": 1781729026620,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "slrbcu",
+  "ts": 1781731365713,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "slrbcu",
+  "ts": 1781731402382,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "slrbcu",
+  "ts": 1781731412431,
+  "deals": 6,
+  "deployed": 70,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_end",
+  "sid": "slrbcu",
+  "ts": 1781731432287,
+  "rank": 3,
+  "funds": 5,
+  "profit": 6382,
+  "mult": 64.82,
+  "judgment": 53,
+  "newBlood": false,
+  "thesis": "Balanced"
+ },
+ {
+  "t": "drop",
+  "sid": "slrbcu",
+  "ts": 1781731469937,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s0d04i",
+  "ts": 1781741583787,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s0d04i",
+  "ts": 1781741608599,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s0d04i",
+  "ts": 1781741631319,
+  "cat": "risk",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s0d04i",
+  "ts": 1781741640304,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s0d04i",
+  "ts": 1781741664552,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s0d04i",
+  "ts": 1781741688129,
+  "deal": 0,
+  "company": "Uber",
+  "invested": true,
+  "amount": 17,
+  "boxes": 3,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 90
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s0d04i",
+  "ts": 1781741719445,
+  "cat": "terms",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s0d04i",
+  "ts": 1781741758624,
+  "cat": "traction",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s0d04i",
+  "ts": 1781741761216,
+  "deal": 1,
+  "company": "Airbnb",
+  "invested": true,
+  "amount": 24,
+  "boxes": 2,
+  "pBreak": 51,
+  "pWipe": 30,
+  "mult": 200
+ },
+ {
+  "t": "drop",
+  "sid": "s0d04i",
+  "ts": 1781741771509,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "sncyth",
+  "ts": 1781751912186,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "sncyth",
+  "ts": 1781751921302,
+  "thesis": "Talent-first",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "sncyth",
+  "ts": 1781751950629,
+  "deals": 9,
+  "deployed": 75,
+  "thesis": "Talent-first",
+  "finW": 0.3
+ },
+ {
+  "t": "season_end",
+  "sid": "sncyth",
+  "ts": 1781751967297,
+  "rank": 4,
+  "funds": 5,
+  "profit": 3827,
+  "mult": 39.27,
+  "judgment": 82,
+  "newBlood": false,
+  "thesis": "Talent-first"
+ },
+ {
+  "t": "drop",
+  "sid": "sncyth",
+  "ts": 1781752003210,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s335ejc",
+  "ts": 1781754603241,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s335ejc",
+  "ts": 1781754607385,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s335ejc",
+  "ts": 1781754646562,
+  "deals": 9,
+  "deployed": 68,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s335ejc",
+  "ts": 1781754668664,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s5idpz",
+  "ts": 1781771021520,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s5idpz",
+  "ts": 1781771045133,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s5idpz",
+  "ts": 1781771070296,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s5idpz",
+  "ts": 1781771099337,
+  "deal": 0,
+  "company": "Figma",
+  "invested": true,
+  "amount": 4,
+  "boxes": 1,
+  "pBreak": 71,
+  "pWipe": 73,
+  "mult": 110
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s5idpz",
+  "ts": 1781771129336,
+  "cat": "team",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s5idpz",
+  "ts": 1781771168396,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s5idpz",
+  "ts": 1781771183038,
+  "deal": 1,
+  "company": "Figma",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 110
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s5idpz",
+  "ts": 1781771205663,
+  "cat": "product",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s5idpz",
+  "ts": 1781771210625,
+  "cat": "product",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s5idpz",
+  "ts": 1781771250432,
+  "deal": 2,
+  "company": "Instacart",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 9
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s5idpz",
+  "ts": 1781771257080,
+  "cat": "product",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s5idpz",
+  "ts": 1781771292602,
+  "cat": "risk",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "s5idpz",
+  "ts": 1781771329786,
+  "deal": 3,
+  "company": "Theranos",
+  "invested": true,
+  "amount": 19,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s5idpz",
+  "ts": 1781771355283,
+  "cat": "traction",
+  "deal": 4
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s5idpz",
+  "ts": 1781771380847,
+  "cat": "terms",
+  "deal": 4
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s5idpz",
+  "ts": 1781771397620,
+  "cat": "team",
+  "deal": 4
+ },
+ {
+  "t": "decision",
+  "sid": "s5idpz",
+  "ts": 1781771403372,
+  "deal": 4,
+  "company": "Figma",
+  "invested": true,
+  "amount": 3,
+  "boxes": 3,
+  "pBreak": 90,
+  "pWipe": 83,
+  "mult": 110
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s5idpz",
+  "ts": 1781771432148,
+  "cat": "team",
+  "deal": 5
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s5idpz",
+  "ts": 1781771471268,
+  "cat": "market",
+  "deal": 5
+ },
+ {
+  "t": "decision",
+  "sid": "s5idpz",
+  "ts": 1781771480075,
+  "deal": 5,
+  "company": "Fast",
+  "invested": true,
+  "amount": 16,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "drop",
+  "sid": "s5idpz",
+  "ts": 1781771492960,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1ye57d",
+  "ts": 1781789139672,
+  "path": "index.html"
+ },
+ {
+  "t": "season_begin",
+  "sid": "s1ye57d",
+  "ts": 1781789168299,
+  "deals": 6,
+  "deployed": 88,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_end",
+  "sid": "s1ye57d",
+  "ts": 1781789172403,
+  "rank": 2,
+  "funds": 5,
+  "profit": 590,
+  "mult": 6.9,
+  "judgment": 87,
+  "newBlood": false,
+  "thesis": "Balanced"
+ },
+ {
+  "t": "drop",
+  "sid": "s1ye57d",
+  "ts": 1781789191655,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s179mkd",
+  "ts": 1781862403054,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s179mkd",
+  "ts": 1781862442529,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s179mkd",
+  "ts": 1781862453448,
+  "deals": 5,
+  "deployed": 73,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_end",
+  "sid": "s179mkd",
+  "ts": 1781862484890,
+  "rank": 3,
+  "funds": 5,
+  "profit": 1855,
+  "mult": 19.55,
+  "judgment": 91,
+  "newBlood": false,
+  "thesis": "Balanced"
+ },
+ {
+  "t": "drop",
+  "sid": "s179mkd",
+  "ts": 1781862501107,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1f3wnh",
+  "ts": 1781864408436,
+  "path": "index.html"
+ },
+ {
+  "t": "season_begin",
+  "sid": "s1f3wnh",
+  "ts": 1781864426937,
+  "deals": 6,
+  "deployed": 44,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s1f3wnh",
+  "ts": 1781864447672,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "sv91kk",
+  "ts": 1781871169305,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "sv91kk",
+  "ts": 1781871177079,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sv91kk",
+  "ts": 1781871190411,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sv91kk",
+  "ts": 1781871225164,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sv91kk",
+  "ts": 1781871245291,
+  "cat": "product",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "sv91kk",
+  "ts": 1781871259482,
+  "deal": 0,
+  "company": "Airbnb",
+  "invested": false,
+  "amount": 0,
+  "boxes": 3,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 200
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sv91kk",
+  "ts": 1781871280266,
+  "cat": "product",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sv91kk",
+  "ts": 1781871312074,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "sv91kk",
+  "ts": 1781871339113,
+  "deal": 1,
+  "company": "Uber",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 90
+ },
+ {
+  "t": "drop",
+  "sid": "sv91kk",
+  "ts": 1781871341560,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2w157o",
+  "ts": 1781881398329,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s2w157o",
+  "ts": 1781881428931,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2w157o",
+  "ts": 1781881461556,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2w157o",
+  "ts": 1781881501034,
+  "cat": "risk",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2w157o",
+  "ts": 1781881535412,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s2w157o",
+  "ts": 1781881556541,
+  "deal": 0,
+  "company": "Bird",
+  "invested": true,
+  "amount": 24,
+  "boxes": 3,
+  "pBreak": 88,
+  "pWipe": 77,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2w157o",
+  "ts": 1781881558576,
+  "cat": "traction",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2w157o",
+  "ts": 1781881578688,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s2w157o",
+  "ts": 1781881606118,
+  "deal": 1,
+  "company": "Uber",
+  "invested": true,
+  "amount": 22,
+  "boxes": 2,
+  "pBreak": 16,
+  "pWipe": 61,
+  "mult": 90
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2w157o",
+  "ts": 1781881627799,
+  "cat": "team",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2w157o",
+  "ts": 1781881645870,
+  "cat": "market",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s2w157o",
+  "ts": 1781881661758,
+  "deal": 2,
+  "company": "Stripe",
+  "invested": true,
+  "amount": 25,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 120
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2w157o",
+  "ts": 1781881677815,
+  "cat": "market",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "s2w157o",
+  "ts": 1781881680012,
+  "deal": 3,
+  "company": "WeWork",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 3,
+  "pWipe": 90,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2w157o",
+  "ts": 1781881690260,
+  "cat": "risk",
+  "deal": 4
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2w157o",
+  "ts": 1781881712545,
+  "cat": "market",
+  "deal": 4
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2w157o",
+  "ts": 1781881722448,
+  "cat": "market",
+  "deal": 4
+ },
+ {
+  "t": "decision",
+  "sid": "s2w157o",
+  "ts": 1781881747691,
+  "deal": 4,
+  "company": "Instacart",
+  "invested": true,
+  "amount": 24,
+  "boxes": 2,
+  "pBreak": 23,
+  "pWipe": 32,
+  "mult": 9
+ },
+ {
+  "t": "drop",
+  "sid": "s2w157o",
+  "ts": 1781881781734,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1033l6",
+  "ts": 1781887002384,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s1033l6",
+  "ts": 1781887024410,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1033l6",
+  "ts": 1781887061105,
+  "cat": "traction",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s1033l6",
+  "ts": 1781887067972,
+  "deal": 0,
+  "company": "Uber",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 83,
+  "pWipe": 22,
+  "mult": 90
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1033l6",
+  "ts": 1781887076516,
+  "cat": "traction",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1033l6",
+  "ts": 1781887094917,
+  "cat": "team",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s1033l6",
+  "ts": 1781887100690,
+  "deal": 1,
+  "company": "Figma",
+  "invested": true,
+  "amount": 10,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 110
+ },
+ {
+  "t": "drop",
+  "sid": "s1033l6",
+  "ts": 1781887117833,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1r2gei",
+  "ts": 1781891117148,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s1r2gei",
+  "ts": 1781891145382,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1r2gei",
+  "ts": 1781891184946,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1r2gei",
+  "ts": 1781891215160,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s1r2gei",
+  "ts": 1781891220074,
+  "deal": 0,
+  "company": "Uber",
+  "invested": true,
+  "amount": 24,
+  "boxes": 1,
+  "pBreak": 44,
+  "pWipe": 6,
+  "mult": 90
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1r2gei",
+  "ts": 1781891230972,
+  "cat": "team",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1r2gei",
+  "ts": 1781891268102,
+  "cat": "terms",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s1r2gei",
+  "ts": 1781891302794,
+  "deal": 1,
+  "company": "Quibi",
+  "invested": true,
+  "amount": 15,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1r2gei",
+  "ts": 1781891310173,
+  "cat": "market",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s1r2gei",
+  "ts": 1781891340507,
+  "deal": 2,
+  "company": "WeWork",
+  "invested": true,
+  "amount": 5,
+  "boxes": 1,
+  "pBreak": 94,
+  "pWipe": 90,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1r2gei",
+  "ts": 1781891344944,
+  "cat": "team",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1r2gei",
+  "ts": 1781891356037,
+  "cat": "market",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1r2gei",
+  "ts": 1781891370145,
+  "cat": "team",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "s1r2gei",
+  "ts": 1781891391351,
+  "deal": 3,
+  "company": "Stripe",
+  "invested": true,
+  "amount": 24,
+  "boxes": 2,
+  "pBreak": 3,
+  "pWipe": 95,
+  "mult": 120
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1r2gei",
+  "ts": 1781891410105,
+  "cat": "market",
+  "deal": 4
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1r2gei",
+  "ts": 1781891422169,
+  "cat": "risk",
+  "deal": 4
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1r2gei",
+  "ts": 1781891427302,
+  "cat": "market",
+  "deal": 4
+ },
+ {
+  "t": "decision",
+  "sid": "s1r2gei",
+  "ts": 1781891441814,
+  "deal": 4,
+  "company": "Figma",
+  "invested": true,
+  "amount": 4,
+  "boxes": 2,
+  "pBreak": 32,
+  "pWipe": 13,
+  "mult": 110
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1r2gei",
+  "ts": 1781891444357,
+  "cat": "team",
+  "deal": 5
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1r2gei",
+  "ts": 1781891483952,
+  "cat": "market",
+  "deal": 5
+ },
+ {
+  "t": "decision",
+  "sid": "s1r2gei",
+  "ts": 1781891493904,
+  "deal": 5,
+  "company": "WeWork",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "drop",
+  "sid": "s1r2gei",
+  "ts": 1781891529068,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2nwero",
+  "ts": 1781937823083,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s2nwero",
+  "ts": 1781937828057,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2nwero",
+  "ts": 1781937865720,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2nwero",
+  "ts": 1781937884827,
+  "cat": "product",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s2nwero",
+  "ts": 1781937903600,
+  "deal": 0,
+  "company": "Bird",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 89,
+  "pWipe": 15,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2nwero",
+  "ts": 1781937941212,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2nwero",
+  "ts": 1781937967753,
+  "cat": "traction",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s2nwero",
+  "ts": 1781938005393,
+  "deal": 1,
+  "company": "Bird",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2nwero",
+  "ts": 1781938023355,
+  "cat": "team",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2nwero",
+  "ts": 1781938033310,
+  "cat": "product",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s2nwero",
+  "ts": 1781938067084,
+  "deal": 2,
+  "company": "Uber",
+  "invested": true,
+  "amount": 24,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 90
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2nwero",
+  "ts": 1781938077173,
+  "cat": "market",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2nwero",
+  "ts": 1781938116883,
+  "cat": "team",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2nwero",
+  "ts": 1781938149894,
+  "cat": "product",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "s2nwero",
+  "ts": 1781938159842,
+  "deal": 3,
+  "company": "Quibi",
+  "invested": false,
+  "amount": 0,
+  "boxes": 3,
+  "pBreak": 17,
+  "pWipe": 28,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2nwero",
+  "ts": 1781938182016,
+  "cat": "product",
+  "deal": 4
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2nwero",
+  "ts": 1781938198197,
+  "cat": "risk",
+  "deal": 4
+ },
+ {
+  "t": "decision",
+  "sid": "s2nwero",
+  "ts": 1781938219533,
+  "deal": 4,
+  "company": "Figma",
+  "invested": true,
+  "amount": 22,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 110
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2nwero",
+  "ts": 1781938254268,
+  "cat": "market",
+  "deal": 5
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2nwero",
+  "ts": 1781938277615,
+  "cat": "traction",
+  "deal": 5
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2nwero",
+  "ts": 1781938296720,
+  "cat": "traction",
+  "deal": 5
+ },
+ {
+  "t": "decision",
+  "sid": "s2nwero",
+  "ts": 1781938306531,
+  "deal": 5,
+  "company": "Bird",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 39,
+  "pWipe": 41,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2nwero",
+  "ts": 1781938336605,
+  "cat": "team",
+  "deal": 6
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2nwero",
+  "ts": 1781938365164,
+  "cat": "market",
+  "deal": 6
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2nwero",
+  "ts": 1781938394504,
+  "cat": "risk",
+  "deal": 6
+ },
+ {
+  "t": "decision",
+  "sid": "s2nwero",
+  "ts": 1781938411684,
+  "deal": 6,
+  "company": "Airbnb",
+  "invested": true,
+  "amount": 8,
+  "boxes": 3,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 200
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2nwero",
+  "ts": 1781938449140,
+  "cat": "product",
+  "deal": 7
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2nwero",
+  "ts": 1781938464833,
+  "cat": "team",
+  "deal": 7
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2nwero",
+  "ts": 1781938485244,
+  "cat": "risk",
+  "deal": 7
+ },
+ {
+  "t": "decision",
+  "sid": "s2nwero",
+  "ts": 1781938497971,
+  "deal": 7,
+  "company": "Fast",
+  "invested": false,
+  "amount": 0,
+  "boxes": 3,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "drop",
+  "sid": "s2nwero",
+  "ts": 1781938516580,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "srswju",
+  "ts": 1781960132740,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "srswju",
+  "ts": 1781960140793,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "srswju",
+  "ts": 1781960156423,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "srswju",
+  "ts": 1781960166315,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "srswju",
+  "ts": 1781960194880,
+  "deal": 0,
+  "company": "WeWork",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "srswju",
+  "ts": 1781960229402,
+  "cat": "risk",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "srswju",
+  "ts": 1781960245328,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "srswju",
+  "ts": 1781960281827,
+  "cat": "terms",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "srswju",
+  "ts": 1781960289232,
+  "deal": 1,
+  "company": "Stripe",
+  "invested": true,
+  "amount": 15,
+  "boxes": 3,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 120
+ },
+ {
+  "t": "diligence_open",
+  "sid": "srswju",
+  "ts": 1781960296304,
+  "cat": "team",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "srswju",
+  "ts": 1781960314635,
+  "cat": "market",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "srswju",
+  "ts": 1781960318285,
+  "deal": 2,
+  "company": "Instacart",
+  "invested": true,
+  "amount": 2,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 9
+ },
+ {
+  "t": "diligence_open",
+  "sid": "srswju",
+  "ts": 1781960341256,
+  "cat": "traction",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "srswju",
+  "ts": 1781960363504,
+  "cat": "risk",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "srswju",
+  "ts": 1781960382830,
+  "deal": 3,
+  "company": "Theranos",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "srswju",
+  "ts": 1781960404819,
+  "cat": "product",
+  "deal": 4
+ },
+ {
+  "t": "decision",
+  "sid": "srswju",
+  "ts": 1781960443791,
+  "deal": 4,
+  "company": "Uber",
+  "invested": true,
+  "amount": 9,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 90
+ },
+ {
+  "t": "diligence_open",
+  "sid": "srswju",
+  "ts": 1781960475525,
+  "cat": "team",
+  "deal": 5
+ },
+ {
+  "t": "diligence_open",
+  "sid": "srswju",
+  "ts": 1781960509750,
+  "cat": "traction",
+  "deal": 5
+ },
+ {
+  "t": "decision",
+  "sid": "srswju",
+  "ts": 1781960519102,
+  "deal": 5,
+  "company": "Theranos",
+  "invested": true,
+  "amount": 3,
+  "boxes": 2,
+  "pBreak": 73,
+  "pWipe": 26,
+  "mult": 0
+ },
+ {
+  "t": "drop",
+  "sid": "srswju",
+  "ts": 1781960549449,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2x8gbg",
+  "ts": 1781962831677,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s2x8gbg",
+  "ts": 1781962845300,
+  "thesis": "Product / Moat",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s2x8gbg",
+  "ts": 1781962865143,
+  "deals": 6,
+  "deployed": 69,
+  "thesis": "Product / Moat",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s2x8gbg",
+  "ts": 1781962895233,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s14bu9f",
+  "ts": 1781964699475,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s14bu9f",
+  "ts": 1781964702919,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s14bu9f",
+  "ts": 1781964732416,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s14bu9f",
+  "ts": 1781964766306,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s14bu9f",
+  "ts": 1781964773193,
+  "deal": 0,
+  "company": "Airbnb",
+  "invested": true,
+  "amount": 17,
+  "boxes": 1,
+  "pBreak": 12,
+  "pWipe": 7,
+  "mult": 200
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s14bu9f",
+  "ts": 1781964787827,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s14bu9f",
+  "ts": 1781964791693,
+  "cat": "team",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s14bu9f",
+  "ts": 1781964804186,
+  "deal": 1,
+  "company": "Figma",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 110
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s14bu9f",
+  "ts": 1781964830241,
+  "cat": "product",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s14bu9f",
+  "ts": 1781964851234,
+  "cat": "product",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s14bu9f",
+  "ts": 1781964874544,
+  "deal": 2,
+  "company": "Bird",
+  "invested": true,
+  "amount": 18,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s14bu9f",
+  "ts": 1781964909628,
+  "cat": "risk",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s14bu9f",
+  "ts": 1781964913457,
+  "cat": "team",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "s14bu9f",
+  "ts": 1781964934557,
+  "deal": 3,
+  "company": "Theranos",
+  "invested": true,
+  "amount": 18,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "drop",
+  "sid": "s14bu9f",
+  "ts": 1781964965690,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1qnf3b",
+  "ts": 1781984874875,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s1qnf3b",
+  "ts": 1781984912544,
+  "thesis": "Market-first",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s1qnf3b",
+  "ts": 1781984931284,
+  "deals": 7,
+  "deployed": 73,
+  "thesis": "Market-first",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s1qnf3b",
+  "ts": 1781984957910,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s31ad9i",
+  "ts": 1781987201538,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s31ad9i",
+  "ts": 1781987240103,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s31ad9i",
+  "ts": 1781987277787,
+  "deals": 5,
+  "deployed": 71,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s31ad9i",
+  "ts": 1781987314232,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s6je9r",
+  "ts": 1782012632071,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s6je9r",
+  "ts": 1782012650203,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s6je9r",
+  "ts": 1782012665960,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s6je9r",
+  "ts": 1782012697576,
+  "deal": 0,
+  "company": "Bird",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s6je9r",
+  "ts": 1782012710865,
+  "cat": "risk",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s6je9r",
+  "ts": 1782012740934,
+  "deal": 1,
+  "company": "Theranos",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s6je9r",
+  "ts": 1782012771228,
+  "cat": "product",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s6je9r",
+  "ts": 1782012810502,
+  "cat": "team",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s6je9r",
+  "ts": 1782012833270,
+  "cat": "terms",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s6je9r",
+  "ts": 1782012840747,
+  "deal": 2,
+  "company": "Notion",
+  "invested": true,
+  "amount": 20,
+  "boxes": 3,
+  "pBreak": 6,
+  "pWipe": 49,
+  "mult": 40
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s6je9r",
+  "ts": 1782012875804,
+  "cat": "traction",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s6je9r",
+  "ts": 1782012879768,
+  "cat": "traction",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s6je9r",
+  "ts": 1782012919489,
+  "cat": "team",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "s6je9r",
+  "ts": 1782012941391,
+  "deal": 3,
+  "company": "Bird",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 97,
+  "pWipe": 54,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s6je9r",
+  "ts": 1782012971258,
+  "cat": "risk",
+  "deal": 4
+ },
+ {
+  "t": "decision",
+  "sid": "s6je9r",
+  "ts": 1782012980949,
+  "deal": 4,
+  "company": "Fast",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 80,
+  "pWipe": 15,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s6je9r",
+  "ts": 1782012994241,
+  "cat": "team",
+  "deal": 5
+ },
+ {
+  "t": "decision",
+  "sid": "s6je9r",
+  "ts": 1782013001207,
+  "deal": 5,
+  "company": "Notion",
+  "invested": true,
+  "amount": 17,
+  "boxes": 1,
+  "pBreak": 18,
+  "pWipe": 42,
+  "mult": 40
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s6je9r",
+  "ts": 1782013009292,
+  "cat": "team",
+  "deal": 6
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s6je9r",
+  "ts": 1782013044380,
+  "cat": "market",
+  "deal": 6
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s6je9r",
+  "ts": 1782013058941,
+  "cat": "team",
+  "deal": 6
+ },
+ {
+  "t": "decision",
+  "sid": "s6je9r",
+  "ts": 1782013070353,
+  "deal": 6,
+  "company": "Fast",
+  "invested": true,
+  "amount": 19,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s6je9r",
+  "ts": 1782013088596,
+  "cat": "traction",
+  "deal": 7
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s6je9r",
+  "ts": 1782013111201,
+  "cat": "team",
+  "deal": 7
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s6je9r",
+  "ts": 1782013119877,
+  "cat": "terms",
+  "deal": 7
+ },
+ {
+  "t": "decision",
+  "sid": "s6je9r",
+  "ts": 1782013143136,
+  "deal": 7,
+  "company": "Figma",
+  "invested": true,
+  "amount": 18,
+  "boxes": 3,
+  "pBreak": 12,
+  "pWipe": 80,
+  "mult": 110
+ },
+ {
+  "t": "memo_end",
+  "sid": "s6je9r",
+  "ts": 1782013173350,
+  "profit": 7534,
+  "mult": 76.34,
+  "acc": 61,
+  "bank": 1288,
+  "bankDelta": 288,
+  "trapsDodged": 1,
+  "traps": 3,
+  "newBlood": false
+ },
+ {
+  "t": "drop",
+  "sid": "s6je9r",
+  "ts": 1782013177511,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s12krus",
+  "ts": 1782022950585,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s12krus",
+  "ts": 1782022976423,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s12krus",
+  "ts": 1782022995465,
+  "cat": "product",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s12krus",
+  "ts": 1782022997510,
+  "cat": "product",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s12krus",
+  "ts": 1782023020184,
+  "deal": 0,
+  "company": "Uber",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 90
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s12krus",
+  "ts": 1782023039874,
+  "cat": "product",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s12krus",
+  "ts": 1782023062426,
+  "deal": 1,
+  "company": "Instacart",
+  "invested": true,
+  "amount": 15,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 9
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s12krus",
+  "ts": 1782023078430,
+  "cat": "team",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s12krus",
+  "ts": 1782023116663,
+  "cat": "traction",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s12krus",
+  "ts": 1782023145426,
+  "deal": 2,
+  "company": "Fast",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 67,
+  "pWipe": 60,
+  "mult": 0
+ },
+ {
+  "t": "drop",
+  "sid": "s12krus",
+  "ts": 1782023184482,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "swu2vt",
+  "ts": 1782030697546,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "swu2vt",
+  "ts": 1782030701240,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "swu2vt",
+  "ts": 1782030726831,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "swu2vt",
+  "ts": 1782030750035,
+  "deal": 0,
+  "company": "Coinbase",
+  "invested": true,
+  "amount": 7,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 60
+ },
+ {
+  "t": "drop",
+  "sid": "swu2vt",
+  "ts": 1782030760742,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s26xzby",
+  "ts": 1782046864802,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s26xzby",
+  "ts": 1782046878346,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s26xzby",
+  "ts": 1782046911454,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s26xzby",
+  "ts": 1782046926924,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s26xzby",
+  "ts": 1782046960803,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s26xzby",
+  "ts": 1782046967432,
+  "deal": 0,
+  "company": "Figma",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 74,
+  "pWipe": 91,
+  "mult": 110
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s26xzby",
+  "ts": 1782046969595,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s26xzby",
+  "ts": 1782046973821,
+  "cat": "team",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s26xzby",
+  "ts": 1782047007627,
+  "deal": 1,
+  "company": "Airbnb",
+  "invested": true,
+  "amount": 19,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 200
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s26xzby",
+  "ts": 1782047022849,
+  "cat": "team",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s26xzby",
+  "ts": 1782047050226,
+  "deal": 2,
+  "company": "Notion",
+  "invested": true,
+  "amount": 9,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 40
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s26xzby",
+  "ts": 1782047070755,
+  "cat": "market",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s26xzby",
+  "ts": 1782047105952,
+  "cat": "team",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "s26xzby",
+  "ts": 1782047143610,
+  "deal": 3,
+  "company": "Notion",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 17,
+  "pWipe": 41,
+  "mult": 40
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s26xzby",
+  "ts": 1782047179940,
+  "cat": "risk",
+  "deal": 4
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s26xzby",
+  "ts": 1782047192560,
+  "cat": "market",
+  "deal": 4
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s26xzby",
+  "ts": 1782047200831,
+  "cat": "team",
+  "deal": 4
+ },
+ {
+  "t": "decision",
+  "sid": "s26xzby",
+  "ts": 1782047237837,
+  "deal": 4,
+  "company": "Coinbase",
+  "invested": true,
+  "amount": 17,
+  "boxes": 3,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 60
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s26xzby",
+  "ts": 1782047272562,
+  "cat": "terms",
+  "deal": 5
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s26xzby",
+  "ts": 1782047288127,
+  "cat": "team",
+  "deal": 5
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s26xzby",
+  "ts": 1782047293792,
+  "cat": "team",
+  "deal": 5
+ },
+ {
+  "t": "decision",
+  "sid": "s26xzby",
+  "ts": 1782047300734,
+  "deal": 5,
+  "company": "Bird",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 37,
+  "pWipe": 70,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s26xzby",
+  "ts": 1782047323075,
+  "cat": "traction",
+  "deal": 6
+ },
+ {
+  "t": "decision",
+  "sid": "s26xzby",
+  "ts": 1782047341017,
+  "deal": 6,
+  "company": "Airbnb",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 88,
+  "pWipe": 81,
+  "mult": 200
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s26xzby",
+  "ts": 1782047357518,
+  "cat": "team",
+  "deal": 7
+ },
+ {
+  "t": "decision",
+  "sid": "s26xzby",
+  "ts": 1782047391130,
+  "deal": 7,
+  "company": "WeWork",
+  "invested": true,
+  "amount": 21,
+  "boxes": 1,
+  "pBreak": 77,
+  "pWipe": 42,
+  "mult": 0
+ },
+ {
+  "t": "drop",
+  "sid": "s26xzby",
+  "ts": 1782047397653,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1cxosy",
+  "ts": 1782050196968,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s1cxosy",
+  "ts": 1782050216713,
+  "thesis": "Product / Moat",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s1cxosy",
+  "ts": 1782050242291,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s97jnx",
+  "ts": 1782053285211,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s97jnx",
+  "ts": 1782053293659,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s97jnx",
+  "ts": 1782053319348,
+  "cat": "product",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s97jnx",
+  "ts": 1782053325145,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s97jnx",
+  "ts": 1782053332066,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s97jnx",
+  "ts": 1782053346707,
+  "deal": 0,
+  "company": "Stripe",
+  "invested": true,
+  "amount": 22,
+  "boxes": 3,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 120
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s97jnx",
+  "ts": 1782053363009,
+  "cat": "team",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s97jnx",
+  "ts": 1782053369200,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s97jnx",
+  "ts": 1782053403312,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s97jnx",
+  "ts": 1782053428020,
+  "deal": 1,
+  "company": "Notion",
+  "invested": true,
+  "amount": 12,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 40
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s97jnx",
+  "ts": 1782053439791,
+  "cat": "product",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s97jnx",
+  "ts": 1782053472030,
+  "deal": 2,
+  "company": "Instacart",
+  "invested": true,
+  "amount": 10,
+  "boxes": 1,
+  "pBreak": 82,
+  "pWipe": 95,
+  "mult": 9
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s97jnx",
+  "ts": 1782053488051,
+  "cat": "market",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s97jnx",
+  "ts": 1782053506648,
+  "cat": "product",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "s97jnx",
+  "ts": 1782053519715,
+  "deal": 3,
+  "company": "Uber",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 90
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s97jnx",
+  "ts": 1782053538770,
+  "cat": "product",
+  "deal": 4
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s97jnx",
+  "ts": 1782053546946,
+  "cat": "team",
+  "deal": 4
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s97jnx",
+  "ts": 1782053561720,
+  "cat": "market",
+  "deal": 4
+ },
+ {
+  "t": "decision",
+  "sid": "s97jnx",
+  "ts": 1782053591927,
+  "deal": 4,
+  "company": "Notion",
+  "invested": false,
+  "amount": 0,
+  "boxes": 3,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 40
+ },
+ {
+  "t": "drop",
+  "sid": "s97jnx",
+  "ts": 1782053624369,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s215k7k",
+  "ts": 1782069478415,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s215k7k",
+  "ts": 1782069503886,
+  "thesis": "Talent-first",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s215k7k",
+  "ts": 1782069514748,
+  "deals": 8,
+  "deployed": 53,
+  "thesis": "Talent-first",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s215k7k",
+  "ts": 1782069536227,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2j6dj4",
+  "ts": 1782079716130,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s2j6dj4",
+  "ts": 1782079731445,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s2j6dj4",
+  "ts": 1782079753061,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "sq7jsm",
+  "ts": 1782082414236,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "sq7jsm",
+  "ts": 1782082438778,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "sq7jsm",
+  "ts": 1782082441185,
+  "deals": 4,
+  "deployed": 85,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "sq7jsm",
+  "ts": 1782082443843,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s28lowj",
+  "ts": 1782083855296,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s28lowj",
+  "ts": 1782083883932,
+  "thesis": "Market-first",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s28lowj",
+  "ts": 1782083909046,
+  "deals": 5,
+  "deployed": 49,
+  "thesis": "Market-first",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s28lowj",
+  "ts": 1782083916694,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2k0n1t",
+  "ts": 1782087389698,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s2k0n1t",
+  "ts": 1782087416521,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s2k0n1t",
+  "ts": 1782087427562,
+  "deals": 6,
+  "deployed": 48,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s2k0n1t",
+  "ts": 1782087460085,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1wx3qd",
+  "ts": 1782087865988,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s1wx3qd",
+  "ts": 1782087868336,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s1wx3qd",
+  "ts": 1782087889362,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s15i76l",
+  "ts": 1782088773295,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s15i76l",
+  "ts": 1782088799853,
+  "thesis": "Product / Moat",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s15i76l",
+  "ts": 1782088825357,
+  "deals": 7,
+  "deployed": 95,
+  "thesis": "Product / Moat",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s15i76l",
+  "ts": 1782088848724,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s34mtpv",
+  "ts": 1782101334044,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s34mtpv",
+  "ts": 1782101360010,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s34mtpv",
+  "ts": 1782101398520,
+  "cat": "product",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s34mtpv",
+  "ts": 1782101426521,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s34mtpv",
+  "ts": 1782101430002,
+  "deal": 0,
+  "company": "Figma",
+  "invested": true,
+  "amount": 8,
+  "boxes": 2,
+  "pBreak": 20,
+  "pWipe": 91,
+  "mult": 110
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s34mtpv",
+  "ts": 1782101444797,
+  "cat": "product",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s34mtpv",
+  "ts": 1782101451379,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s34mtpv",
+  "ts": 1782101475846,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s34mtpv",
+  "ts": 1782101478382,
+  "deal": 1,
+  "company": "Figma",
+  "invested": true,
+  "amount": 24,
+  "boxes": 2,
+  "pBreak": 89,
+  "pWipe": 43,
+  "mult": 110
+ },
+ {
+  "t": "drop",
+  "sid": "s34mtpv",
+  "ts": 1782101482403,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s13wd9o",
+  "ts": 1782106811358,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s13wd9o",
+  "ts": 1782106815130,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s13wd9o",
+  "ts": 1782106849082,
+  "deals": 8,
+  "deployed": 58,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s13wd9o",
+  "ts": 1782106888947,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s380ze8",
+  "ts": 1782140041976,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s380ze8",
+  "ts": 1782140044249,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s380ze8",
+  "ts": 1782140046814,
+  "deals": 8,
+  "deployed": 47,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s380ze8",
+  "ts": 1782140075865,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "sptj2a",
+  "ts": 1782140221265,
+  "path": "memo.html"
+ },
+ {
+  "t": "drop",
+  "sid": "sptj2a",
+  "ts": 1782140242137,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s23n1md",
+  "ts": 1782154049323,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s23n1md",
+  "ts": 1782154057709,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s23n1md",
+  "ts": 1782154086529,
+  "deals": 8,
+  "deployed": 82,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_end",
+  "sid": "s23n1md",
+  "ts": 1782154118897,
+  "rank": 4,
+  "funds": 5,
+  "profit": 3032,
+  "mult": 31.32,
+  "judgment": 65,
+  "newBlood": false,
+  "thesis": "Balanced"
+ },
+ {
+  "t": "drop",
+  "sid": "s23n1md",
+  "ts": 1782154138217,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s201ddr",
+  "ts": 1782205935868,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s201ddr",
+  "ts": 1782205939098,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s201ddr",
+  "ts": 1782205957503,
+  "deals": 5,
+  "deployed": 57,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_end",
+  "sid": "s201ddr",
+  "ts": 1782205988550,
+  "rank": 4,
+  "funds": 5,
+  "profit": 8954,
+  "mult": 90.54,
+  "judgment": 86,
+  "newBlood": false,
+  "thesis": "Balanced"
+ },
+ {
+  "t": "drop",
+  "sid": "s201ddr",
+  "ts": 1782206013477,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1klkuu",
+  "ts": 1782218283692,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s1klkuu",
+  "ts": 1782218321445,
+  "thesis": "Product / Moat",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s1klkuu",
+  "ts": 1782218354072,
+  "deals": 8,
+  "deployed": 67,
+  "thesis": "Product / Moat",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s1klkuu",
+  "ts": 1782218361049,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s3ac02o",
+  "ts": 1782218944858,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s3ac02o",
+  "ts": 1782218951797,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s3ac02o",
+  "ts": 1782218973206,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s3ac02o",
+  "ts": 1782218976458,
+  "deal": 0,
+  "company": "WeWork",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "drop",
+  "sid": "s3ac02o",
+  "ts": 1782219011371,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s11t03r",
+  "ts": 1782242149840,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s11t03r",
+  "ts": 1782242183804,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s11t03r",
+  "ts": 1782242200782,
+  "deals": 4,
+  "deployed": 28,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s11t03r",
+  "ts": 1782242229522,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "ssbtnq",
+  "ts": 1782247322556,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "ssbtnq",
+  "ts": 1782247347330,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "ssbtnq",
+  "ts": 1782247382662,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "ssbtnq",
+  "ts": 1782247408959,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "ssbtnq",
+  "ts": 1782247447912,
+  "deal": 0,
+  "company": "Figma",
+  "invested": true,
+  "amount": 9,
+  "boxes": 1,
+  "pBreak": 76,
+  "pWipe": 83,
+  "mult": 110
+ },
+ {
+  "t": "drop",
+  "sid": "ssbtnq",
+  "ts": 1782247486797,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2mox9c",
+  "ts": 1782278758431,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s2mox9c",
+  "ts": 1782278761876,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s2mox9c",
+  "ts": 1782278767470,
+  "deals": 7,
+  "deployed": 36,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s2mox9c",
+  "ts": 1782278771293,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2yw2y7",
+  "ts": 1782279087286,
+  "path": "memo.html"
+ },
+ {
+  "t": "drop",
+  "sid": "s2yw2y7",
+  "ts": 1782279095644,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1eyzgb",
+  "ts": 1782281008123,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s1eyzgb",
+  "ts": 1782281044075,
+  "thesis": "Product / Moat",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s1eyzgb",
+  "ts": 1782281055443,
+  "deals": 7,
+  "deployed": 42,
+  "thesis": "Product / Moat",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s1eyzgb",
+  "ts": 1782281061276,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "si9cae",
+  "ts": 1782308770568,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "si9cae",
+  "ts": 1782308786987,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "si9cae",
+  "ts": 1782308824323,
+  "deals": 4,
+  "deployed": 49,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "si9cae",
+  "ts": 1782308860273,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s30onft",
+  "ts": 1782314304517,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s30onft",
+  "ts": 1782314322946,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s30onft",
+  "ts": 1782314334549,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s30onft",
+  "ts": 1782314353061,
+  "deal": 0,
+  "company": "Uber",
+  "invested": true,
+  "amount": 23,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 90
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s30onft",
+  "ts": 1782314362598,
+  "cat": "product",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s30onft",
+  "ts": 1782314369358,
+  "deal": 1,
+  "company": "Bird",
+  "invested": true,
+  "amount": 24,
+  "boxes": 1,
+  "pBreak": 26,
+  "pWipe": 66,
+  "mult": 0
+ },
+ {
+  "t": "drop",
+  "sid": "s30onft",
+  "ts": 1782314408119,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s29vs9o",
+  "ts": 1782323877556,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s29vs9o",
+  "ts": 1782323893560,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s29vs9o",
+  "ts": 1782323924880,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s29vs9o",
+  "ts": 1782323935914,
+  "cat": "risk",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s29vs9o",
+  "ts": 1782323944067,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s29vs9o",
+  "ts": 1782323971201,
+  "deal": 0,
+  "company": "Coinbase",
+  "invested": true,
+  "amount": 14,
+  "boxes": 3,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 60
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s29vs9o",
+  "ts": 1782324000186,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s29vs9o",
+  "ts": 1782324020167,
+  "cat": "terms",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s29vs9o",
+  "ts": 1782324022368,
+  "deal": 1,
+  "company": "Uber",
+  "invested": true,
+  "amount": 15,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 90
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s29vs9o",
+  "ts": 1782324036912,
+  "cat": "team",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s29vs9o",
+  "ts": 1782324047253,
+  "deal": 2,
+  "company": "Airbnb",
+  "invested": true,
+  "amount": 6,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 200
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s29vs9o",
+  "ts": 1782324081617,
+  "cat": "traction",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "s29vs9o",
+  "ts": 1782324087843,
+  "deal": 3,
+  "company": "Stripe",
+  "invested": true,
+  "amount": 19,
+  "boxes": 1,
+  "pBreak": 18,
+  "pWipe": 98,
+  "mult": 120
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s29vs9o",
+  "ts": 1782324116422,
+  "cat": "product",
+  "deal": 4
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s29vs9o",
+  "ts": 1782324133826,
+  "cat": "market",
+  "deal": 4
+ },
+ {
+  "t": "decision",
+  "sid": "s29vs9o",
+  "ts": 1782324156859,
+  "deal": 4,
+  "company": "Notion",
+  "invested": true,
+  "amount": 22,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 40
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s29vs9o",
+  "ts": 1782324187054,
+  "cat": "market",
+  "deal": 5
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s29vs9o",
+  "ts": 1782324206282,
+  "cat": "risk",
+  "deal": 5
+ },
+ {
+  "t": "decision",
+  "sid": "s29vs9o",
+  "ts": 1782324222702,
+  "deal": 5,
+  "company": "Notion",
+  "invested": true,
+  "amount": 21,
+  "boxes": 2,
+  "pBreak": 48,
+  "pWipe": 41,
+  "mult": 40
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s29vs9o",
+  "ts": 1782324242017,
+  "cat": "market",
+  "deal": 6
+ },
+ {
+  "t": "decision",
+  "sid": "s29vs9o",
+  "ts": 1782324249358,
+  "deal": 6,
+  "company": "Stripe",
+  "invested": true,
+  "amount": 8,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 120
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s29vs9o",
+  "ts": 1782324267777,
+  "cat": "team",
+  "deal": 7
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s29vs9o",
+  "ts": 1782324290590,
+  "cat": "team",
+  "deal": 7
+ },
+ {
+  "t": "decision",
+  "sid": "s29vs9o",
+  "ts": 1782324307558,
+  "deal": 7,
+  "company": "Coinbase",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 66,
+  "pWipe": 59,
+  "mult": 60
+ },
+ {
+  "t": "drop",
+  "sid": "s29vs9o",
+  "ts": 1782324341287,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s3dtqe",
+  "ts": 1782325279824,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s3dtqe",
+  "ts": 1782325289370,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s3dtqe",
+  "ts": 1782325292535,
+  "cat": "product",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s3dtqe",
+  "ts": 1782325302438,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s3dtqe",
+  "ts": 1782325322370,
+  "deal": 0,
+  "company": "Stripe",
+  "invested": true,
+  "amount": 12,
+  "boxes": 2,
+  "pBreak": 40,
+  "pWipe": 10,
+  "mult": 120
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s3dtqe",
+  "ts": 1782325347607,
+  "cat": "traction",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s3dtqe",
+  "ts": 1782325366489,
+  "deal": 1,
+  "company": "Notion",
+  "invested": true,
+  "amount": 23,
+  "boxes": 1,
+  "pBreak": 79,
+  "pWipe": 97,
+  "mult": 40
+ },
+ {
+  "t": "drop",
+  "sid": "s3dtqe",
+  "ts": 1782325391966,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2otpv3",
+  "ts": 1782329082472,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s2otpv3",
+  "ts": 1782329113304,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s2otpv3",
+  "ts": 1782329149906,
+  "deals": 7,
+  "deployed": 65,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s2otpv3",
+  "ts": 1782329152090,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "scamg0",
+  "ts": 1782350054584,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "scamg0",
+  "ts": 1782350073144,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "scamg0",
+  "ts": 1782350108207,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s42vip",
+  "ts": 1782367834864,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s42vip",
+  "ts": 1782367853262,
+  "thesis": "Product / Moat",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s42vip",
+  "ts": 1782367889522,
+  "deals": 4,
+  "deployed": 52,
+  "thesis": "Product / Moat",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s42vip",
+  "ts": 1782367918164,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2hj3ur",
+  "ts": 1782376179875,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s2hj3ur",
+  "ts": 1782376202525,
+  "thesis": "Market-first",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s2hj3ur",
+  "ts": 1782376227375,
+  "deals": 7,
+  "deployed": 42,
+  "thesis": "Market-first",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s2hj3ur",
+  "ts": 1782376250098,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s19kibt",
+  "ts": 1782377768019,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s19kibt",
+  "ts": 1782377772604,
+  "thesis": "Product / Moat",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s19kibt",
+  "ts": 1782377793806,
+  "deals": 4,
+  "deployed": 35,
+  "thesis": "Product / Moat",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s19kibt",
+  "ts": 1782377818863,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2zfasz",
+  "ts": 1782392300219,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s2zfasz",
+  "ts": 1782392313438,
+  "thesis": "Risk-averse",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s2zfasz",
+  "ts": 1782392350448,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1hrm5",
+  "ts": 1782413705592,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s1hrm5",
+  "ts": 1782413738433,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1hrm5",
+  "ts": 1782413762566,
+  "cat": "terms",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1hrm5",
+  "ts": 1782413796579,
+  "cat": "terms",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1hrm5",
+  "ts": 1782413819837,
+  "cat": "product",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s1hrm5",
+  "ts": 1782413852264,
+  "deal": 0,
+  "company": "Quibi",
+  "invested": true,
+  "amount": 24,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1hrm5",
+  "ts": 1782413858547,
+  "cat": "product",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s1hrm5",
+  "ts": 1782413883337,
+  "deal": 1,
+  "company": "Quibi",
+  "invested": true,
+  "amount": 16,
+  "boxes": 1,
+  "pBreak": 54,
+  "pWipe": 46,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1hrm5",
+  "ts": 1782413906725,
+  "cat": "market",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s1hrm5",
+  "ts": 1782413939361,
+  "deal": 2,
+  "company": "Theranos",
+  "invested": true,
+  "amount": 16,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1hrm5",
+  "ts": 1782413971845,
+  "cat": "risk",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1hrm5",
+  "ts": 1782413990507,
+  "cat": "team",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "s1hrm5",
+  "ts": 1782414000232,
+  "deal": 3,
+  "company": "WeWork",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 90,
+  "pWipe": 4,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1hrm5",
+  "ts": 1782414007518,
+  "cat": "team",
+  "deal": 4
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1hrm5",
+  "ts": 1782414034032,
+  "cat": "product",
+  "deal": 4
+ },
+ {
+  "t": "decision",
+  "sid": "s1hrm5",
+  "ts": 1782414036780,
+  "deal": 4,
+  "company": "Notion",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 69,
+  "pWipe": 81,
+  "mult": 40
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1hrm5",
+  "ts": 1782414064609,
+  "cat": "product",
+  "deal": 5
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1hrm5",
+  "ts": 1782414071865,
+  "cat": "team",
+  "deal": 5
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1hrm5",
+  "ts": 1782414087288,
+  "cat": "team",
+  "deal": 5
+ },
+ {
+  "t": "decision",
+  "sid": "s1hrm5",
+  "ts": 1782414103758,
+  "deal": 5,
+  "company": "Bird",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 58,
+  "pWipe": 23,
+  "mult": 0
+ },
+ {
+  "t": "drop",
+  "sid": "s1hrm5",
+  "ts": 1782414120943,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1v8hhf",
+  "ts": 1782416945835,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s1v8hhf",
+  "ts": 1782416955664,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1v8hhf",
+  "ts": 1782416975764,
+  "cat": "product",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s1v8hhf",
+  "ts": 1782417008340,
+  "deal": 0,
+  "company": "Stripe",
+  "invested": true,
+  "amount": 17,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 120
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1v8hhf",
+  "ts": 1782417045506,
+  "cat": "product",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s1v8hhf",
+  "ts": 1782417071882,
+  "deal": 1,
+  "company": "Instacart",
+  "invested": true,
+  "amount": 14,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 9
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1v8hhf",
+  "ts": 1782417102740,
+  "cat": "team",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1v8hhf",
+  "ts": 1782417115424,
+  "cat": "product",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1v8hhf",
+  "ts": 1782417121323,
+  "cat": "market",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s1v8hhf",
+  "ts": 1782417127416,
+  "deal": 2,
+  "company": "Stripe",
+  "invested": true,
+  "amount": 22,
+  "boxes": 3,
+  "pBreak": 41,
+  "pWipe": 33,
+  "mult": 120
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1v8hhf",
+  "ts": 1782417138437,
+  "cat": "team",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1v8hhf",
+  "ts": 1782417160794,
+  "cat": "team",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "s1v8hhf",
+  "ts": 1782417165164,
+  "deal": 3,
+  "company": "Coinbase",
+  "invested": true,
+  "amount": 15,
+  "boxes": 1,
+  "pBreak": 60,
+  "pWipe": 30,
+  "mult": 60
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1v8hhf",
+  "ts": 1782417185691,
+  "cat": "team",
+  "deal": 4
+ },
+ {
+  "t": "decision",
+  "sid": "s1v8hhf",
+  "ts": 1782417216527,
+  "deal": 4,
+  "company": "Stripe",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 120
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1v8hhf",
+  "ts": 1782417220880,
+  "cat": "team",
+  "deal": 5
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1v8hhf",
+  "ts": 1782417233135,
+  "cat": "risk",
+  "deal": 5
+ },
+ {
+  "t": "decision",
+  "sid": "s1v8hhf",
+  "ts": 1782417238335,
+  "deal": 5,
+  "company": "Figma",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 110
+ },
+ {
+  "t": "drop",
+  "sid": "s1v8hhf",
+  "ts": 1782417253930,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1ur6v4",
+  "ts": 1782420524426,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s1ur6v4",
+  "ts": 1782420553977,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s1ur6v4",
+  "ts": 1782420565295,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "sxydzm",
+  "ts": 1782428943753,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "sxydzm",
+  "ts": 1782428955774,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sxydzm",
+  "ts": 1782428989518,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sxydzm",
+  "ts": 1782429003390,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sxydzm",
+  "ts": 1782429038967,
+  "cat": "terms",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "sxydzm",
+  "ts": 1782429046039,
+  "deal": 0,
+  "company": "Quibi",
+  "invested": true,
+  "amount": 23,
+  "boxes": 3,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "drop",
+  "sid": "sxydzm",
+  "ts": 1782429067386,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2gp8x5",
+  "ts": 1782431937682,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s2gp8x5",
+  "ts": 1782431975349,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2gp8x5",
+  "ts": 1782431985634,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2gp8x5",
+  "ts": 1782432014314,
+  "cat": "risk",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2gp8x5",
+  "ts": 1782432021929,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s2gp8x5",
+  "ts": 1782432053220,
+  "deal": 0,
+  "company": "Stripe",
+  "invested": true,
+  "amount": 8,
+  "boxes": 3,
+  "pBreak": 80,
+  "pWipe": 69,
+  "mult": 120
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2gp8x5",
+  "ts": 1782432073106,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2gp8x5",
+  "ts": 1782432081239,
+  "cat": "risk",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s2gp8x5",
+  "ts": 1782432117241,
+  "deal": 1,
+  "company": "Uber",
+  "invested": true,
+  "amount": 20,
+  "boxes": 2,
+  "pBreak": 34,
+  "pWipe": 25,
+  "mult": 90
+ },
+ {
+  "t": "drop",
+  "sid": "s2gp8x5",
+  "ts": 1782432148899,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1muzs7",
+  "ts": 1782436252057,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s1muzs7",
+  "ts": 1782436255413,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s1muzs7",
+  "ts": 1782436283071,
+  "deals": 6,
+  "deployed": 71,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s1muzs7",
+  "ts": 1782436303348,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s250h00",
+  "ts": 1782437808577,
+  "path": "memo.html"
+ },
+ {
+  "t": "drop",
+  "sid": "s250h00",
+  "ts": 1782437843600,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2uxwvz",
+  "ts": 1782467396940,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s2uxwvz",
+  "ts": 1782467408031,
+  "thesis": "Risk-averse",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s2uxwvz",
+  "ts": 1782467421815,
+  "deals": 9,
+  "deployed": 38,
+  "thesis": "Risk-averse",
+  "finW": 0.3
+ },
+ {
+  "t": "season_end",
+  "sid": "s2uxwvz",
+  "ts": 1782467441116,
+  "rank": 3,
+  "funds": 5,
+  "profit": 3027,
+  "mult": 31.27,
+  "judgment": 56,
+  "newBlood": false,
+  "thesis": "Risk-averse"
+ },
+ {
+  "t": "drop",
+  "sid": "s2uxwvz",
+  "ts": 1782467475893,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2qns0g",
+  "ts": 1782468434712,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s2qns0g",
+  "ts": 1782468461117,
+  "thesis": "Talent-first",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s2qns0g",
+  "ts": 1782468495360,
+  "deals": 6,
+  "deployed": 70,
+  "thesis": "Talent-first",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s2qns0g",
+  "ts": 1782468499138,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1ixdsy",
+  "ts": 1782480478068,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s1ixdsy",
+  "ts": 1782480514249,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ixdsy",
+  "ts": 1782480527196,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ixdsy",
+  "ts": 1782480543476,
+  "cat": "product",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ixdsy",
+  "ts": 1782480563757,
+  "cat": "risk",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s1ixdsy",
+  "ts": 1782480569566,
+  "deal": 0,
+  "company": "Bird",
+  "invested": false,
+  "amount": 0,
+  "boxes": 3,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ixdsy",
+  "ts": 1782480577963,
+  "cat": "product",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ixdsy",
+  "ts": 1782480584758,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s1ixdsy",
+  "ts": 1782480603846,
+  "deal": 1,
+  "company": "Figma",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 87,
+  "pWipe": 59,
+  "mult": 110
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ixdsy",
+  "ts": 1782480620760,
+  "cat": "team",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s1ixdsy",
+  "ts": 1782480643541,
+  "deal": 2,
+  "company": "Instacart",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 94,
+  "pWipe": 6,
+  "mult": 9
+ },
+ {
+  "t": "drop",
+  "sid": "s1ixdsy",
+  "ts": 1782480668339,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "susz98",
+  "ts": 1782480769468,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "susz98",
+  "ts": 1782480800303,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "susz98",
+  "ts": 1782480836564,
+  "deals": 8,
+  "deployed": 37,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_end",
+  "sid": "susz98",
+  "ts": 1782480841854,
+  "rank": 2,
+  "funds": 5,
+  "profit": 1650,
+  "mult": 17.5,
+  "judgment": 60,
+  "newBlood": false,
+  "thesis": "Balanced"
+ },
+ {
+  "t": "drop",
+  "sid": "susz98",
+  "ts": 1782480859052,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1zhjk3",
+  "ts": 1782491402713,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s1zhjk3",
+  "ts": 1782491437199,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1zhjk3",
+  "ts": 1782491460322,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1zhjk3",
+  "ts": 1782491464865,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s1zhjk3",
+  "ts": 1782491482487,
+  "deal": 0,
+  "company": "Bird",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1zhjk3",
+  "ts": 1782491503375,
+  "cat": "product",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s1zhjk3",
+  "ts": 1782491543154,
+  "deal": 1,
+  "company": "Fast",
+  "invested": true,
+  "amount": 19,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1zhjk3",
+  "ts": 1782491563194,
+  "cat": "market",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s1zhjk3",
+  "ts": 1782491599903,
+  "deal": 2,
+  "company": "Airbnb",
+  "invested": true,
+  "amount": 17,
+  "boxes": 1,
+  "pBreak": 36,
+  "pWipe": 20,
+  "mult": 200
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1zhjk3",
+  "ts": 1782491602383,
+  "cat": "team",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1zhjk3",
+  "ts": 1782491610808,
+  "cat": "team",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "s1zhjk3",
+  "ts": 1782491643148,
+  "deal": 3,
+  "company": "Coinbase",
+  "invested": true,
+  "amount": 12,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 60
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1zhjk3",
+  "ts": 1782491671759,
+  "cat": "team",
+  "deal": 4
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1zhjk3",
+  "ts": 1782491680935,
+  "cat": "terms",
+  "deal": 4
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1zhjk3",
+  "ts": 1782491691687,
+  "cat": "product",
+  "deal": 4
+ },
+ {
+  "t": "decision",
+  "sid": "s1zhjk3",
+  "ts": 1782491716387,
+  "deal": 4,
+  "company": "Coinbase",
+  "invested": true,
+  "amount": 6,
+  "boxes": 3,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 60
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1zhjk3",
+  "ts": 1782491752609,
+  "cat": "traction",
+  "deal": 5
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1zhjk3",
+  "ts": 1782491781555,
+  "cat": "product",
+  "deal": 5
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1zhjk3",
+  "ts": 1782491819983,
+  "cat": "team",
+  "deal": 5
+ },
+ {
+  "t": "decision",
+  "sid": "s1zhjk3",
+  "ts": 1782491822421,
+  "deal": 5,
+  "company": "Notion",
+  "invested": true,
+  "amount": 22,
+  "boxes": 3,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 40
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1zhjk3",
+  "ts": 1782491854193,
+  "cat": "team",
+  "deal": 6
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1zhjk3",
+  "ts": 1782491863642,
+  "cat": "terms",
+  "deal": 6
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1zhjk3",
+  "ts": 1782491902271,
+  "cat": "team",
+  "deal": 6
+ },
+ {
+  "t": "decision",
+  "sid": "s1zhjk3",
+  "ts": 1782491935666,
+  "deal": 6,
+  "company": "Uber",
+  "invested": true,
+  "amount": 3,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 90
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1zhjk3",
+  "ts": 1782491966816,
+  "cat": "market",
+  "deal": 7
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1zhjk3",
+  "ts": 1782492006386,
+  "cat": "market",
+  "deal": 7
+ },
+ {
+  "t": "decision",
+  "sid": "s1zhjk3",
+  "ts": 1782492012049,
+  "deal": 7,
+  "company": "Notion",
+  "invested": true,
+  "amount": 13,
+  "boxes": 1,
+  "pBreak": 16,
+  "pWipe": 50,
+  "mult": 40
+ },
+ {
+  "t": "drop",
+  "sid": "s1zhjk3",
+  "ts": 1782492042957,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2st6at",
+  "ts": 1782513398278,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s2st6at",
+  "ts": 1782513408856,
+  "thesis": "Market-first",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s2st6at",
+  "ts": 1782513423494,
+  "deals": 7,
+  "deployed": 82,
+  "thesis": "Market-first",
+  "finW": 0.3
+ },
+ {
+  "t": "season_end",
+  "sid": "s2st6at",
+  "ts": 1782513444114,
+  "rank": 5,
+  "funds": 5,
+  "profit": 394,
+  "mult": 4.94,
+  "judgment": 47,
+  "newBlood": false,
+  "thesis": "Market-first"
+ },
+ {
+  "t": "drop",
+  "sid": "s2st6at",
+  "ts": 1782513448681,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1g29sl",
+  "ts": 1782538334388,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s1g29sl",
+  "ts": 1782538374338,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s1g29sl",
+  "ts": 1782538376926,
+  "deals": 9,
+  "deployed": 63,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_end",
+  "sid": "s1g29sl",
+  "ts": 1782538408595,
+  "rank": 1,
+  "funds": 5,
+  "profit": 567,
+  "mult": 6.67,
+  "judgment": 63,
+  "newBlood": false,
+  "thesis": "Balanced"
+ },
+ {
+  "t": "drop",
+  "sid": "s1g29sl",
+  "ts": 1782538431365,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s3737la",
+  "ts": 1782538688438,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s3737la",
+  "ts": 1782538692014,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s3737la",
+  "ts": 1782538710927,
+  "deals": 5,
+  "deployed": 67,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s3737la",
+  "ts": 1782538715259,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2tywii",
+  "ts": 1782546038608,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s2tywii",
+  "ts": 1782546078482,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s2tywii",
+  "ts": 1782546085620,
+  "deals": 7,
+  "deployed": 35,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s2tywii",
+  "ts": 1782546113581,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2oapf",
+  "ts": 1782556490628,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s2oapf",
+  "ts": 1782556529154,
+  "thesis": "Risk-averse",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s2oapf",
+  "ts": 1782556554595,
+  "deals": 6,
+  "deployed": 80,
+  "thesis": "Risk-averse",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s2oapf",
+  "ts": 1782556560684,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1x28nz",
+  "ts": 1782557491069,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s1x28nz",
+  "ts": 1782557521159,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s1x28nz",
+  "ts": 1782557557564,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1t21fc",
+  "ts": 1782561331605,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s1t21fc",
+  "ts": 1782561334595,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1t21fc",
+  "ts": 1782561370431,
+  "cat": "product",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1t21fc",
+  "ts": 1782561386695,
+  "cat": "risk",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s1t21fc",
+  "ts": 1782561390586,
+  "deal": 0,
+  "company": "Quibi",
+  "invested": true,
+  "amount": 12,
+  "boxes": 2,
+  "pBreak": 13,
+  "pWipe": 80,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1t21fc",
+  "ts": 1782561403378,
+  "cat": "product",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1t21fc",
+  "ts": 1782561438490,
+  "cat": "product",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s1t21fc",
+  "ts": 1782561469255,
+  "deal": 1,
+  "company": "Theranos",
+  "invested": true,
+  "amount": 6,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "drop",
+  "sid": "s1t21fc",
+  "ts": 1782561481872,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s162zib",
+  "ts": 1782564222296,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s162zib",
+  "ts": 1782564227054,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s162zib",
+  "ts": 1782564245219,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s162zib",
+  "ts": 1782564282651,
+  "deal": 0,
+  "company": "Quibi",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 13,
+  "pWipe": 53,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s162zib",
+  "ts": 1782564314238,
+  "cat": "product",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s162zib",
+  "ts": 1782564327253,
+  "cat": "traction",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s162zib",
+  "ts": 1782564348929,
+  "deal": 1,
+  "company": "Uber",
+  "invested": true,
+  "amount": 21,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 90
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s162zib",
+  "ts": 1782564387455,
+  "cat": "team",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s162zib",
+  "ts": 1782564391182,
+  "cat": "risk",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s162zib",
+  "ts": 1782564408846,
+  "deal": 2,
+  "company": "Coinbase",
+  "invested": true,
+  "amount": 12,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 60
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s162zib",
+  "ts": 1782564411620,
+  "cat": "market",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s162zib",
+  "ts": 1782564440077,
+  "cat": "team",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "s162zib",
+  "ts": 1782564446730,
+  "deal": 3,
+  "company": "Instacart",
+  "invested": true,
+  "amount": 23,
+  "boxes": 2,
+  "pBreak": 7,
+  "pWipe": 14,
+  "mult": 9
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s162zib",
+  "ts": 1782564471813,
+  "cat": "team",
+  "deal": 4
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s162zib",
+  "ts": 1782564485181,
+  "cat": "market",
+  "deal": 4
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s162zib",
+  "ts": 1782564502343,
+  "cat": "team",
+  "deal": 4
+ },
+ {
+  "t": "decision",
+  "sid": "s162zib",
+  "ts": 1782564533726,
+  "deal": 4,
+  "company": "Instacart",
+  "invested": true,
+  "amount": 7,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 9
+ },
+ {
+  "t": "drop",
+  "sid": "s162zib",
+  "ts": 1782564572931,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s8k0pr",
+  "ts": 1782572905733,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s8k0pr",
+  "ts": 1782572932017,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s8k0pr",
+  "ts": 1782572934088,
+  "cat": "terms",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s8k0pr",
+  "ts": 1782572937778,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s8k0pr",
+  "ts": 1782572977076,
+  "deal": 0,
+  "company": "Airbnb",
+  "invested": true,
+  "amount": 6,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 200
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s8k0pr",
+  "ts": 1782572980161,
+  "cat": "risk",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s8k0pr",
+  "ts": 1782572988323,
+  "cat": "traction",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s8k0pr",
+  "ts": 1782573028258,
+  "deal": 1,
+  "company": "Figma",
+  "invested": true,
+  "amount": 12,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 110
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s8k0pr",
+  "ts": 1782573062551,
+  "cat": "product",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s8k0pr",
+  "ts": 1782573085351,
+  "cat": "team",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s8k0pr",
+  "ts": 1782573115407,
+  "deal": 2,
+  "company": "Stripe",
+  "invested": true,
+  "amount": 8,
+  "boxes": 2,
+  "pBreak": 88,
+  "pWipe": 72,
+  "mult": 120
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s8k0pr",
+  "ts": 1782573138169,
+  "cat": "market",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s8k0pr",
+  "ts": 1782573145556,
+  "cat": "team",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "s8k0pr",
+  "ts": 1782573156659,
+  "deal": 3,
+  "company": "Coinbase",
+  "invested": true,
+  "amount": 18,
+  "boxes": 2,
+  "pBreak": 44,
+  "pWipe": 63,
+  "mult": 60
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s8k0pr",
+  "ts": 1782573189285,
+  "cat": "team",
+  "deal": 4
+ },
+ {
+  "t": "decision",
+  "sid": "s8k0pr",
+  "ts": 1782573192913,
+  "deal": 4,
+  "company": "WeWork",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s8k0pr",
+  "ts": 1782573229622,
+  "cat": "risk",
+  "deal": 5
+ },
+ {
+  "t": "decision",
+  "sid": "s8k0pr",
+  "ts": 1782573245299,
+  "deal": 5,
+  "company": "Instacart",
+  "invested": true,
+  "amount": 4,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 9
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s8k0pr",
+  "ts": 1782573251976,
+  "cat": "team",
+  "deal": 6
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s8k0pr",
+  "ts": 1782573275458,
+  "cat": "traction",
+  "deal": 6
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s8k0pr",
+  "ts": 1782573299520,
+  "cat": "market",
+  "deal": 6
+ },
+ {
+  "t": "decision",
+  "sid": "s8k0pr",
+  "ts": 1782573306051,
+  "deal": 6,
+  "company": "Quibi",
+  "invested": true,
+  "amount": 25,
+  "boxes": 3,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s8k0pr",
+  "ts": 1782573327793,
+  "cat": "product",
+  "deal": 7
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s8k0pr",
+  "ts": 1782573367229,
+  "cat": "team",
+  "deal": 7
+ },
+ {
+  "t": "decision",
+  "sid": "s8k0pr",
+  "ts": 1782573374577,
+  "deal": 7,
+  "company": "Theranos",
+  "invested": true,
+  "amount": 13,
+  "boxes": 2,
+  "pBreak": 90,
+  "pWipe": 44,
+  "mult": 0
+ },
+ {
+  "t": "memo_end",
+  "sid": "s8k0pr",
+  "ts": 1782573394590,
+  "profit": 3546,
+  "mult": 36.46,
+  "acc": 57,
+  "bank": 1250,
+  "bankDelta": 250,
+  "trapsDodged": 5,
+  "traps": 5,
+  "newBlood": false
+ },
+ {
+  "t": "drop",
+  "sid": "s8k0pr",
+  "ts": 1782573400816,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "szoux8",
+  "ts": 1782580221207,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "szoux8",
+  "ts": 1782580225804,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "szoux8",
+  "ts": 1782580252329,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "szoux8",
+  "ts": 1782580288842,
+  "cat": "product",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "szoux8",
+  "ts": 1782580294567,
+  "cat": "traction",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "szoux8",
+  "ts": 1782580329302,
+  "deal": 0,
+  "company": "Figma",
+  "invested": true,
+  "amount": 16,
+  "boxes": 3,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 110
+ },
+ {
+  "t": "diligence_open",
+  "sid": "szoux8",
+  "ts": 1782580351226,
+  "cat": "traction",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "szoux8",
+  "ts": 1782580373751,
+  "cat": "traction",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "szoux8",
+  "ts": 1782580408040,
+  "cat": "team",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "szoux8",
+  "ts": 1782580433643,
+  "deal": 1,
+  "company": "Fast",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "szoux8",
+  "ts": 1782580448639,
+  "cat": "market",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "szoux8",
+  "ts": 1782580451317,
+  "cat": "market",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "szoux8",
+  "ts": 1782580471499,
+  "cat": "market",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "szoux8",
+  "ts": 1782580509615,
+  "deal": 2,
+  "company": "Bird",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 0,
+  "pWipe": 43,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "szoux8",
+  "ts": 1782580547664,
+  "cat": "product",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "szoux8",
+  "ts": 1782580585068,
+  "cat": "traction",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "szoux8",
+  "ts": 1782580615432,
+  "deal": 3,
+  "company": "Notion",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 78,
+  "pWipe": 62,
+  "mult": 40
+ },
+ {
+  "t": "drop",
+  "sid": "szoux8",
+  "ts": 1782580619230,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2aj067",
+  "ts": 1782605448169,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s2aj067",
+  "ts": 1782605476557,
+  "thesis": "Talent-first",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s2aj067",
+  "ts": 1782605510343,
+  "deals": 8,
+  "deployed": 42,
+  "thesis": "Talent-first",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s2aj067",
+  "ts": 1782605513367,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2pat2c",
+  "ts": 1782608150761,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s2pat2c",
+  "ts": 1782608184003,
+  "thesis": "Talent-first",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s2pat2c",
+  "ts": 1782608209263,
+  "deals": 9,
+  "deployed": 72,
+  "thesis": "Talent-first",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s2pat2c",
+  "ts": 1782608227554,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1dopol",
+  "ts": 1782618737690,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s1dopol",
+  "ts": 1782618754542,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s1dopol",
+  "ts": 1782618764943,
+  "deals": 6,
+  "deployed": 88,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_end",
+  "sid": "s1dopol",
+  "ts": 1782618776148,
+  "rank": 2,
+  "funds": 5,
+  "profit": 6486,
+  "mult": 65.86,
+  "judgment": 61,
+  "newBlood": false,
+  "thesis": "Balanced"
+ },
+ {
+  "t": "drop",
+  "sid": "s1dopol",
+  "ts": 1782618811886,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s27hd4p",
+  "ts": 1782625677481,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s27hd4p",
+  "ts": 1782625709126,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s27hd4p",
+  "ts": 1782625713058,
+  "cat": "traction",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s27hd4p",
+  "ts": 1782625736357,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s27hd4p",
+  "ts": 1782625756975,
+  "deal": 0,
+  "company": "Bird",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s27hd4p",
+  "ts": 1782625786611,
+  "cat": "product",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s27hd4p",
+  "ts": 1782625817631,
+  "cat": "product",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s27hd4p",
+  "ts": 1782625853146,
+  "deal": 1,
+  "company": "Instacart",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 9
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s27hd4p",
+  "ts": 1782625870096,
+  "cat": "market",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s27hd4p",
+  "ts": 1782625888856,
+  "deal": 2,
+  "company": "Theranos",
+  "invested": true,
+  "amount": 8,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s27hd4p",
+  "ts": 1782625905857,
+  "cat": "risk",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s27hd4p",
+  "ts": 1782625945461,
+  "cat": "market",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s27hd4p",
+  "ts": 1782625953257,
+  "cat": "terms",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "s27hd4p",
+  "ts": 1782625990260,
+  "deal": 3,
+  "company": "Quibi",
+  "invested": false,
+  "amount": 0,
+  "boxes": 3,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s27hd4p",
+  "ts": 1782626018661,
+  "cat": "team",
+  "deal": 4
+ },
+ {
+  "t": "decision",
+  "sid": "s27hd4p",
+  "ts": 1782626023593,
+  "deal": 4,
+  "company": "WeWork",
+  "invested": true,
+  "amount": 24,
+  "boxes": 1,
+  "pBreak": 70,
+  "pWipe": 67,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s27hd4p",
+  "ts": 1782626063125,
+  "cat": "product",
+  "deal": 5
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s27hd4p",
+  "ts": 1782626090583,
+  "cat": "risk",
+  "deal": 5
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s27hd4p",
+  "ts": 1782626125097,
+  "cat": "risk",
+  "deal": 5
+ },
+ {
+  "t": "decision",
+  "sid": "s27hd4p",
+  "ts": 1782626142367,
+  "deal": 5,
+  "company": "Instacart",
+  "invested": true,
+  "amount": 5,
+  "boxes": 2,
+  "pBreak": 46,
+  "pWipe": 17,
+  "mult": 9
+ },
+ {
+  "t": "drop",
+  "sid": "s27hd4p",
+  "ts": 1782626174918,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2fzvoo",
+  "ts": 1782630758945,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s2fzvoo",
+  "ts": 1782630767620,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2fzvoo",
+  "ts": 1782630805917,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2fzvoo",
+  "ts": 1782630831764,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s2fzvoo",
+  "ts": 1782630839971,
+  "deal": 0,
+  "company": "WeWork",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 21,
+  "pWipe": 85,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2fzvoo",
+  "ts": 1782630865776,
+  "cat": "risk",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2fzvoo",
+  "ts": 1782630878935,
+  "cat": "product",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s2fzvoo",
+  "ts": 1782630912473,
+  "deal": 1,
+  "company": "Figma",
+  "invested": true,
+  "amount": 4,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 110
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2fzvoo",
+  "ts": 1782630925345,
+  "cat": "product",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2fzvoo",
+  "ts": 1782630936112,
+  "cat": "risk",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s2fzvoo",
+  "ts": 1782630938761,
+  "deal": 2,
+  "company": "Figma",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 78,
+  "pWipe": 47,
+  "mult": 110
+ },
+ {
+  "t": "drop",
+  "sid": "s2fzvoo",
+  "ts": 1782630947580,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "sfm3lu",
+  "ts": 1782640323844,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "sfm3lu",
+  "ts": 1782640361112,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sfm3lu",
+  "ts": 1782640363951,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sfm3lu",
+  "ts": 1782640391559,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "sfm3lu",
+  "ts": 1782640414089,
+  "deal": 0,
+  "company": "WeWork",
+  "invested": true,
+  "amount": 4,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sfm3lu",
+  "ts": 1782640447522,
+  "cat": "team",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "sfm3lu",
+  "ts": 1782640469959,
+  "deal": 1,
+  "company": "Quibi",
+  "invested": true,
+  "amount": 14,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sfm3lu",
+  "ts": 1782640478064,
+  "cat": "team",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sfm3lu",
+  "ts": 1782640518055,
+  "cat": "team",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sfm3lu",
+  "ts": 1782640532599,
+  "cat": "team",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "sfm3lu",
+  "ts": 1782640544910,
+  "deal": 2,
+  "company": "Quibi",
+  "invested": true,
+  "amount": 11,
+  "boxes": 1,
+  "pBreak": 46,
+  "pWipe": 26,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sfm3lu",
+  "ts": 1782640574482,
+  "cat": "traction",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sfm3lu",
+  "ts": 1782640583343,
+  "cat": "team",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "sfm3lu",
+  "ts": 1782640602561,
+  "deal": 3,
+  "company": "Quibi",
+  "invested": true,
+  "amount": 7,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "drop",
+  "sid": "sfm3lu",
+  "ts": 1782640614031,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "sevxln",
+  "ts": 1782645590994,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "sevxln",
+  "ts": 1782645628885,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "sevxln",
+  "ts": 1782645645284,
+  "deals": 5,
+  "deployed": 70,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "sevxln",
+  "ts": 1782645662817,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1oq1gf",
+  "ts": 1782646940544,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s1oq1gf",
+  "ts": 1782646979932,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1oq1gf",
+  "ts": 1782646990433,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1oq1gf",
+  "ts": 1782646993856,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1oq1gf",
+  "ts": 1782647005053,
+  "cat": "product",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s1oq1gf",
+  "ts": 1782647041716,
+  "deal": 0,
+  "company": "Coinbase",
+  "invested": true,
+  "amount": 9,
+  "boxes": 3,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 60
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1oq1gf",
+  "ts": 1782647051282,
+  "cat": "traction",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1oq1gf",
+  "ts": 1782647090022,
+  "cat": "product",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1oq1gf",
+  "ts": 1782647119321,
+  "cat": "team",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s1oq1gf",
+  "ts": 1782647130656,
+  "deal": 1,
+  "company": "Theranos",
+  "invested": false,
+  "amount": 0,
+  "boxes": 3,
+  "pBreak": 9,
+  "pWipe": 22,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1oq1gf",
+  "ts": 1782647141513,
+  "cat": "team",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1oq1gf",
+  "ts": 1782647149968,
+  "cat": "market",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1oq1gf",
+  "ts": 1782647154996,
+  "cat": "product",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s1oq1gf",
+  "ts": 1782647190566,
+  "deal": 2,
+  "company": "Uber",
+  "invested": true,
+  "amount": 9,
+  "boxes": 3,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 90
+ },
+ {
+  "t": "drop",
+  "sid": "s1oq1gf",
+  "ts": 1782647214637,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2v7dmt",
+  "ts": 1782658440205,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s2v7dmt",
+  "ts": 1782658472122,
+  "thesis": "Risk-averse",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s2v7dmt",
+  "ts": 1782658489298,
+  "deals": 8,
+  "deployed": 37,
+  "thesis": "Risk-averse",
+  "finW": 0.3
+ },
+ {
+  "t": "season_end",
+  "sid": "s2v7dmt",
+  "ts": 1782658493461,
+  "rank": 4,
+  "funds": 5,
+  "profit": 3477,
+  "mult": 35.77,
+  "judgment": 85,
+  "newBlood": false,
+  "thesis": "Risk-averse"
+ },
+ {
+  "t": "drop",
+  "sid": "s2v7dmt",
+  "ts": 1782658526282,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "soul3d",
+  "ts": 1782662483034,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "soul3d",
+  "ts": 1782662519650,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "soul3d",
+  "ts": 1782662552845,
+  "deals": 7,
+  "deployed": 55,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "soul3d",
+  "ts": 1782662555472,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s24qkpk",
+  "ts": 1782673961537,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s24qkpk",
+  "ts": 1782673976385,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s24qkpk",
+  "ts": 1782674005463,
+  "deals": 4,
+  "deployed": 74,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_end",
+  "sid": "s24qkpk",
+  "ts": 1782674027887,
+  "rank": 4,
+  "funds": 5,
+  "profit": 618,
+  "mult": 7.18,
+  "judgment": 75,
+  "newBlood": false,
+  "thesis": "Balanced"
+ },
+ {
+  "t": "drop",
+  "sid": "s24qkpk",
+  "ts": 1782674055864,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2eszrk",
+  "ts": 1782719420691,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s2eszrk",
+  "ts": 1782719451120,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s2eszrk",
+  "ts": 1782719476505,
+  "deals": 8,
+  "deployed": 74,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s2eszrk",
+  "ts": 1782719484870,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s3917ii",
+  "ts": 1782735863761,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s3917ii",
+  "ts": 1782735888013,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s3917ii",
+  "ts": 1782735911572,
+  "cat": "product",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s3917ii",
+  "ts": 1782735930253,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s3917ii",
+  "ts": 1782735942116,
+  "deal": 0,
+  "company": "Theranos",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s3917ii",
+  "ts": 1782735953721,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s3917ii",
+  "ts": 1782735990337,
+  "cat": "team",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s3917ii",
+  "ts": 1782736028404,
+  "deal": 1,
+  "company": "Quibi",
+  "invested": true,
+  "amount": 19,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 42,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s3917ii",
+  "ts": 1782736039482,
+  "cat": "traction",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s3917ii",
+  "ts": 1782736075454,
+  "cat": "team",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s3917ii",
+  "ts": 1782736080017,
+  "deal": 2,
+  "company": "Airbnb",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 200
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s3917ii",
+  "ts": 1782736108384,
+  "cat": "team",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s3917ii",
+  "ts": 1782736119755,
+  "cat": "market",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "s3917ii",
+  "ts": 1782736131919,
+  "deal": 3,
+  "company": "Bird",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "drop",
+  "sid": "s3917ii",
+  "ts": 1782736167214,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "sk4zha",
+  "ts": 1782737566937,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "sk4zha",
+  "ts": 1782737588844,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sk4zha",
+  "ts": 1782737611200,
+  "cat": "traction",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sk4zha",
+  "ts": 1782737614363,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sk4zha",
+  "ts": 1782737619759,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "sk4zha",
+  "ts": 1782737625299,
+  "deal": 0,
+  "company": "Airbnb",
+  "invested": false,
+  "amount": 0,
+  "boxes": 3,
+  "pBreak": 22,
+  "pWipe": 33,
+  "mult": 200
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sk4zha",
+  "ts": 1782737649636,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sk4zha",
+  "ts": 1782737671476,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "sk4zha",
+  "ts": 1782737694156,
+  "deal": 1,
+  "company": "Figma",
+  "invested": true,
+  "amount": 10,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 110
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sk4zha",
+  "ts": 1782737698918,
+  "cat": "team",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sk4zha",
+  "ts": 1782737707365,
+  "cat": "team",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sk4zha",
+  "ts": 1782737746716,
+  "cat": "team",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "sk4zha",
+  "ts": 1782737780784,
+  "deal": 2,
+  "company": "Figma",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 110
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sk4zha",
+  "ts": 1782737807570,
+  "cat": "product",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sk4zha",
+  "ts": 1782737825562,
+  "cat": "market",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "sk4zha",
+  "ts": 1782737853051,
+  "deal": 3,
+  "company": "Coinbase",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 72,
+  "pWipe": 54,
+  "mult": 60
+ },
+ {
+  "t": "drop",
+  "sid": "sk4zha",
+  "ts": 1782737857836,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "sg437o",
+  "ts": 1782738953393,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "sg437o",
+  "ts": 1782738983529,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "sg437o",
+  "ts": 1782739012480,
+  "deals": 8,
+  "deployed": 63,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "sg437o",
+  "ts": 1782739030513,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "sa40a4",
+  "ts": 1782741561751,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "sa40a4",
+  "ts": 1782741574433,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sa40a4",
+  "ts": 1782741584426,
+  "cat": "terms",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "sa40a4",
+  "ts": 1782741610614,
+  "deal": 0,
+  "company": "Bird",
+  "invested": true,
+  "amount": 15,
+  "boxes": 1,
+  "pBreak": 97,
+  "pWipe": 81,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sa40a4",
+  "ts": 1782741621270,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sa40a4",
+  "ts": 1782741655495,
+  "cat": "team",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sa40a4",
+  "ts": 1782741662745,
+  "cat": "team",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "sa40a4",
+  "ts": 1782741682931,
+  "deal": 1,
+  "company": "Theranos",
+  "invested": true,
+  "amount": 18,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sa40a4",
+  "ts": 1782741704998,
+  "cat": "market",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sa40a4",
+  "ts": 1782741709262,
+  "cat": "risk",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "sa40a4",
+  "ts": 1782741715124,
+  "deal": 2,
+  "company": "Uber",
+  "invested": true,
+  "amount": 10,
+  "boxes": 2,
+  "pBreak": 60,
+  "pWipe": 99,
+  "mult": 90
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sa40a4",
+  "ts": 1782741747612,
+  "cat": "risk",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sa40a4",
+  "ts": 1782741766657,
+  "cat": "product",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sa40a4",
+  "ts": 1782741778081,
+  "cat": "market",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "sa40a4",
+  "ts": 1782741801092,
+  "deal": 3,
+  "company": "Figma",
+  "invested": false,
+  "amount": 0,
+  "boxes": 3,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 110
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sa40a4",
+  "ts": 1782741814096,
+  "cat": "product",
+  "deal": 4
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sa40a4",
+  "ts": 1782741840627,
+  "cat": "product",
+  "deal": 4
+ },
+ {
+  "t": "decision",
+  "sid": "sa40a4",
+  "ts": 1782741860313,
+  "deal": 4,
+  "company": "Figma",
+  "invested": true,
+  "amount": 2,
+  "boxes": 1,
+  "pBreak": 33,
+  "pWipe": 86,
+  "mult": 110
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sa40a4",
+  "ts": 1782741880933,
+  "cat": "market",
+  "deal": 5
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sa40a4",
+  "ts": 1782741893103,
+  "cat": "market",
+  "deal": 5
+ },
+ {
+  "t": "decision",
+  "sid": "sa40a4",
+  "ts": 1782741910707,
+  "deal": 5,
+  "company": "Bird",
+  "invested": true,
+  "amount": 20,
+  "boxes": 1,
+  "pBreak": 41,
+  "pWipe": 20,
+  "mult": 0
+ },
+ {
+  "t": "drop",
+  "sid": "sa40a4",
+  "ts": 1782741943131,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "sydhae",
+  "ts": 1782754219490,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "sydhae",
+  "ts": 1782754243473,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sydhae",
+  "ts": 1782754265782,
+  "cat": "risk",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "sydhae",
+  "ts": 1782754302804,
+  "deal": 0,
+  "company": "Fast",
+  "invested": true,
+  "amount": 7,
+  "boxes": 1,
+  "pBreak": 43,
+  "pWipe": 100,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sydhae",
+  "ts": 1782754312913,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sydhae",
+  "ts": 1782754352029,
+  "cat": "team",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sydhae",
+  "ts": 1782754374189,
+  "cat": "terms",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "sydhae",
+  "ts": 1782754394378,
+  "deal": 1,
+  "company": "Instacart",
+  "invested": true,
+  "amount": 9,
+  "boxes": 3,
+  "pBreak": 28,
+  "pWipe": 28,
+  "mult": 9
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sydhae",
+  "ts": 1782754397756,
+  "cat": "risk",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sydhae",
+  "ts": 1782754426732,
+  "cat": "product",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "sydhae",
+  "ts": 1782754437016,
+  "deal": 2,
+  "company": "Fast",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sydhae",
+  "ts": 1782754463179,
+  "cat": "terms",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sydhae",
+  "ts": 1782754469718,
+  "cat": "traction",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "sydhae",
+  "ts": 1782754503197,
+  "deal": 3,
+  "company": "WeWork",
+  "invested": true,
+  "amount": 22,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "drop",
+  "sid": "sydhae",
+  "ts": 1782754538968,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "sjx4t4",
+  "ts": 1782757738796,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "sjx4t4",
+  "ts": 1782757764180,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sjx4t4",
+  "ts": 1782757773821,
+  "cat": "product",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sjx4t4",
+  "ts": 1782757791182,
+  "cat": "traction",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sjx4t4",
+  "ts": 1782757827311,
+  "cat": "risk",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "sjx4t4",
+  "ts": 1782757865340,
+  "deal": 0,
+  "company": "Instacart",
+  "invested": true,
+  "amount": 14,
+  "boxes": 3,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 9
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sjx4t4",
+  "ts": 1782757900552,
+  "cat": "team",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sjx4t4",
+  "ts": 1782757926326,
+  "cat": "product",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sjx4t4",
+  "ts": 1782757952928,
+  "cat": "team",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "sjx4t4",
+  "ts": 1782757987521,
+  "deal": 1,
+  "company": "Coinbase",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 60
+ },
+ {
+  "t": "drop",
+  "sid": "sjx4t4",
+  "ts": 1782758020691,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1ngvx0",
+  "ts": 1782760866170,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s1ngvx0",
+  "ts": 1782760885024,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ngvx0",
+  "ts": 1782760920414,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ngvx0",
+  "ts": 1782760949488,
+  "cat": "traction",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s1ngvx0",
+  "ts": 1782760962641,
+  "deal": 0,
+  "company": "Fast",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ngvx0",
+  "ts": 1782760989773,
+  "cat": "product",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ngvx0",
+  "ts": 1782761011771,
+  "cat": "team",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ngvx0",
+  "ts": 1782761026988,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s1ngvx0",
+  "ts": 1782761041520,
+  "deal": 1,
+  "company": "Bird",
+  "invested": false,
+  "amount": 0,
+  "boxes": 3,
+  "pBreak": 11,
+  "pWipe": 58,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ngvx0",
+  "ts": 1782761045190,
+  "cat": "product",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ngvx0",
+  "ts": 1782761072750,
+  "cat": "market",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s1ngvx0",
+  "ts": 1782761101929,
+  "deal": 2,
+  "company": "Instacart",
+  "invested": true,
+  "amount": 21,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 9
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ngvx0",
+  "ts": 1782761129176,
+  "cat": "team",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ngvx0",
+  "ts": 1782761162945,
+  "cat": "market",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "s1ngvx0",
+  "ts": 1782761191332,
+  "deal": 3,
+  "company": "Figma",
+  "invested": true,
+  "amount": 9,
+  "boxes": 2,
+  "pBreak": 74,
+  "pWipe": 13,
+  "mult": 110
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ngvx0",
+  "ts": 1782761194686,
+  "cat": "traction",
+  "deal": 4
+ },
+ {
+  "t": "decision",
+  "sid": "s1ngvx0",
+  "ts": 1782761197265,
+  "deal": 4,
+  "company": "Notion",
+  "invested": true,
+  "amount": 13,
+  "boxes": 1,
+  "pBreak": 74,
+  "pWipe": 31,
+  "mult": 40
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ngvx0",
+  "ts": 1782761215286,
+  "cat": "traction",
+  "deal": 5
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ngvx0",
+  "ts": 1782761241834,
+  "cat": "market",
+  "deal": 5
+ },
+ {
+  "t": "decision",
+  "sid": "s1ngvx0",
+  "ts": 1782761252713,
+  "deal": 5,
+  "company": "Coinbase",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 30,
+  "pWipe": 22,
+  "mult": 60
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ngvx0",
+  "ts": 1782761288972,
+  "cat": "team",
+  "deal": 6
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s1ngvx0",
+  "ts": 1782761298259,
+  "cat": "market",
+  "deal": 6
+ },
+ {
+  "t": "decision",
+  "sid": "s1ngvx0",
+  "ts": 1782761322258,
+  "deal": 6,
+  "company": "Fast",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 51,
+  "pWipe": 6,
+  "mult": 0
+ },
+ {
+  "t": "drop",
+  "sid": "s1ngvx0",
+  "ts": 1782761331891,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s32s1wj",
+  "ts": 1782761939022,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s32s1wj",
+  "ts": 1782761953151,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s32s1wj",
+  "ts": 1782761987162,
+  "deals": 9,
+  "deployed": 33,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s32s1wj",
+  "ts": 1782762021571,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2l2vhl",
+  "ts": 1782779271732,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s2l2vhl",
+  "ts": 1782779292848,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2l2vhl",
+  "ts": 1782779303920,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2l2vhl",
+  "ts": 1782779319634,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s2l2vhl",
+  "ts": 1782779327050,
+  "deal": 0,
+  "company": "Fast",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 86,
+  "pWipe": 56,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2l2vhl",
+  "ts": 1782779354829,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2l2vhl",
+  "ts": 1782779381902,
+  "cat": "risk",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2l2vhl",
+  "ts": 1782779408569,
+  "cat": "traction",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s2l2vhl",
+  "ts": 1782779427388,
+  "deal": 1,
+  "company": "Stripe",
+  "invested": true,
+  "amount": 10,
+  "boxes": 3,
+  "pBreak": 89,
+  "pWipe": 31,
+  "mult": 120
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2l2vhl",
+  "ts": 1782779430948,
+  "cat": "risk",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2l2vhl",
+  "ts": 1782779459375,
+  "cat": "traction",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2l2vhl",
+  "ts": 1782779487718,
+  "cat": "risk",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s2l2vhl",
+  "ts": 1782779514229,
+  "deal": 2,
+  "company": "Bird",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2l2vhl",
+  "ts": 1782779539814,
+  "cat": "team",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "s2l2vhl",
+  "ts": 1782779574492,
+  "deal": 3,
+  "company": "Fast",
+  "invested": true,
+  "amount": 15,
+  "boxes": 1,
+  "pBreak": 7,
+  "pWipe": 6,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2l2vhl",
+  "ts": 1782779583031,
+  "cat": "team",
+  "deal": 4
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2l2vhl",
+  "ts": 1782779592940,
+  "cat": "market",
+  "deal": 4
+ },
+ {
+  "t": "decision",
+  "sid": "s2l2vhl",
+  "ts": 1782779624978,
+  "deal": 4,
+  "company": "Theranos",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 76,
+  "pWipe": 15,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2l2vhl",
+  "ts": 1782779664473,
+  "cat": "traction",
+  "deal": 5
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2l2vhl",
+  "ts": 1782779679557,
+  "cat": "product",
+  "deal": 5
+ },
+ {
+  "t": "decision",
+  "sid": "s2l2vhl",
+  "ts": 1782779713822,
+  "deal": 5,
+  "company": "Instacart",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 9
+ },
+ {
+  "t": "drop",
+  "sid": "s2l2vhl",
+  "ts": 1782779719950,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "sm8drr",
+  "ts": 1782779761399,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "sm8drr",
+  "ts": 1782779787946,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sm8drr",
+  "ts": 1782779801712,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "sm8drr",
+  "ts": 1782779815270,
+  "deal": 0,
+  "company": "Quibi",
+  "invested": true,
+  "amount": 7,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sm8drr",
+  "ts": 1782779845876,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "sm8drr",
+  "ts": 1782779864767,
+  "deal": 1,
+  "company": "Fast",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sm8drr",
+  "ts": 1782779896242,
+  "cat": "team",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sm8drr",
+  "ts": 1782779926326,
+  "cat": "traction",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "sm8drr",
+  "ts": 1782779957922,
+  "deal": 2,
+  "company": "Airbnb",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 200
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sm8drr",
+  "ts": 1782779997915,
+  "cat": "traction",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sm8drr",
+  "ts": 1782780002079,
+  "cat": "product",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "sm8drr",
+  "ts": 1782780038816,
+  "deal": 3,
+  "company": "Stripe",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 120
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sm8drr",
+  "ts": 1782780065490,
+  "cat": "terms",
+  "deal": 4
+ },
+ {
+  "t": "diligence_open",
+  "sid": "sm8drr",
+  "ts": 1782780085909,
+  "cat": "market",
+  "deal": 4
+ },
+ {
+  "t": "decision",
+  "sid": "sm8drr",
+  "ts": 1782780122776,
+  "deal": 4,
+  "company": "Theranos",
+  "invested": true,
+  "amount": 5,
+  "boxes": 2,
+  "pBreak": 10,
+  "pWipe": 89,
+  "mult": 0
+ },
+ {
+  "t": "drop",
+  "sid": "sm8drr",
+  "ts": 1782780153190,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s1abbv3",
+  "ts": 1782797101345,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s1abbv3",
+  "ts": 1782797132175,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s1abbv3",
+  "ts": 1782797167245,
+  "deals": 8,
+  "deployed": 45,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s1abbv3",
+  "ts": 1782797170402,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2r43bj",
+  "ts": 1782797363132,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s2r43bj",
+  "ts": 1782797375395,
+  "thesis": "Balanced",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "s2r43bj",
+  "ts": 1782797385754,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2cr4q6",
+  "ts": 1782799391591,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "s2cr4q6",
+  "ts": 1782799415839,
+  "thesis": "Market-first",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "s2cr4q6",
+  "ts": 1782799452236,
+  "deals": 4,
+  "deployed": 72,
+  "thesis": "Market-first",
+  "finW": 0.3
+ },
+ {
+  "t": "season_end",
+  "sid": "s2cr4q6",
+  "ts": 1782799465066,
+  "rank": 4,
+  "funds": 5,
+  "profit": 3620,
+  "mult": 37.2,
+  "judgment": 63,
+  "newBlood": false,
+  "thesis": "Market-first"
+ },
+ {
+  "t": "drop",
+  "sid": "s2cr4q6",
+  "ts": 1782799487070,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2b7m2n",
+  "ts": 1782803086391,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s2b7m2n",
+  "ts": 1782803100582,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2b7m2n",
+  "ts": 1782803109345,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2b7m2n",
+  "ts": 1782803147352,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2b7m2n",
+  "ts": 1782803159255,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s2b7m2n",
+  "ts": 1782803174074,
+  "deal": 0,
+  "company": "Uber",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 90
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2b7m2n",
+  "ts": 1782803196927,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s2b7m2n",
+  "ts": 1782803211891,
+  "deal": 1,
+  "company": "Notion",
+  "invested": true,
+  "amount": 3,
+  "boxes": 1,
+  "pBreak": 40,
+  "pWipe": 40,
+  "mult": 40
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2b7m2n",
+  "ts": 1782803219627,
+  "cat": "product",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2b7m2n",
+  "ts": 1782803229119,
+  "cat": "product",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2b7m2n",
+  "ts": 1782803239889,
+  "cat": "market",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s2b7m2n",
+  "ts": 1782803264858,
+  "deal": 2,
+  "company": "Notion",
+  "invested": true,
+  "amount": 19,
+  "boxes": 2,
+  "pBreak": 28,
+  "pWipe": 94,
+  "mult": 40
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2b7m2n",
+  "ts": 1782803292897,
+  "cat": "product",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2b7m2n",
+  "ts": 1782803314991,
+  "cat": "traction",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2b7m2n",
+  "ts": 1782803349711,
+  "cat": "team",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "s2b7m2n",
+  "ts": 1782803376864,
+  "deal": 3,
+  "company": "Bird",
+  "invested": false,
+  "amount": 0,
+  "boxes": 3,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2b7m2n",
+  "ts": 1782803405866,
+  "cat": "traction",
+  "deal": 4
+ },
+ {
+  "t": "decision",
+  "sid": "s2b7m2n",
+  "ts": 1782803411382,
+  "deal": 4,
+  "company": "Instacart",
+  "invested": false,
+  "amount": 0,
+  "boxes": 1,
+  "pBreak": 18,
+  "pWipe": 46,
+  "mult": 9
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2b7m2n",
+  "ts": 1782803416876,
+  "cat": "traction",
+  "deal": 5
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2b7m2n",
+  "ts": 1782803425502,
+  "cat": "team",
+  "deal": 5
+ },
+ {
+  "t": "decision",
+  "sid": "s2b7m2n",
+  "ts": 1782803458387,
+  "deal": 5,
+  "company": "WeWork",
+  "invested": true,
+  "amount": 24,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "drop",
+  "sid": "s2b7m2n",
+  "ts": 1782803464011,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s2ik1vf",
+  "ts": 1782817705115,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s2ik1vf",
+  "ts": 1782817712409,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2ik1vf",
+  "ts": 1782817728443,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2ik1vf",
+  "ts": 1782817742314,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s2ik1vf",
+  "ts": 1782817748651,
+  "deal": 0,
+  "company": "Instacart",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 58,
+  "pWipe": 96,
+  "mult": 9
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2ik1vf",
+  "ts": 1782817752127,
+  "cat": "product",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2ik1vf",
+  "ts": 1782817759084,
+  "cat": "terms",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2ik1vf",
+  "ts": 1782817766913,
+  "cat": "product",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s2ik1vf",
+  "ts": 1782817789117,
+  "deal": 1,
+  "company": "Theranos",
+  "invested": true,
+  "amount": 14,
+  "boxes": 2,
+  "pBreak": 28,
+  "pWipe": 61,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2ik1vf",
+  "ts": 1782817815627,
+  "cat": "market",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2ik1vf",
+  "ts": 1782817844876,
+  "cat": "product",
+  "deal": 2
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2ik1vf",
+  "ts": 1782817872345,
+  "cat": "product",
+  "deal": 2
+ },
+ {
+  "t": "decision",
+  "sid": "s2ik1vf",
+  "ts": 1782817908622,
+  "deal": 2,
+  "company": "Fast",
+  "invested": false,
+  "amount": 0,
+  "boxes": 2,
+  "pBreak": 14,
+  "pWipe": 84,
+  "mult": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2ik1vf",
+  "ts": 1782817945538,
+  "cat": "team",
+  "deal": 3
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s2ik1vf",
+  "ts": 1782817983616,
+  "cat": "product",
+  "deal": 3
+ },
+ {
+  "t": "decision",
+  "sid": "s2ik1vf",
+  "ts": 1782817993789,
+  "deal": 3,
+  "company": "Quibi",
+  "invested": true,
+  "amount": 20,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "drop",
+  "sid": "s2ik1vf",
+  "ts": 1782818017896,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s22om9o",
+  "ts": 1782822612552,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s22om9o",
+  "ts": 1782822633368,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s22om9o",
+  "ts": 1782822662014,
+  "cat": "risk",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s22om9o",
+  "ts": 1782822680563,
+  "cat": "team",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s22om9o",
+  "ts": 1782822685403,
+  "cat": "product",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s22om9o",
+  "ts": 1782822712331,
+  "deal": 0,
+  "company": "Fast",
+  "invested": true,
+  "amount": 16,
+  "boxes": 3,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 0
+ },
+ {
+  "t": "drop",
+  "sid": "s22om9o",
+  "ts": 1782822732779,
+  "path": "memo.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "shkbe6",
+  "ts": 1782826506236,
+  "path": "index.html"
+ },
+ {
+  "t": "thesis_select",
+  "sid": "shkbe6",
+  "ts": 1782826537266,
+  "thesis": "Market-first",
+  "finW": 0.3
+ },
+ {
+  "t": "season_begin",
+  "sid": "shkbe6",
+  "ts": 1782826558708,
+  "deals": 8,
+  "deployed": 57,
+  "thesis": "Market-first",
+  "finW": 0.3
+ },
+ {
+  "t": "drop",
+  "sid": "shkbe6",
+  "ts": 1782826583569,
+  "path": "index.html"
+ },
+ {
+  "t": "app_open",
+  "sid": "s7bijn",
+  "ts": 1782830270411,
+  "path": "memo.html"
+ },
+ {
+  "t": "memo_start",
+  "sid": "s7bijn",
+  "ts": 1782830305523,
+  "deals": 8
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s7bijn",
+  "ts": 1782830339789,
+  "cat": "traction",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s7bijn",
+  "ts": 1782830346929,
+  "cat": "product",
+  "deal": 0
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s7bijn",
+  "ts": 1782830372403,
+  "cat": "market",
+  "deal": 0
+ },
+ {
+  "t": "decision",
+  "sid": "s7bijn",
+  "ts": 1782830380195,
+  "deal": 0,
+  "company": "Uber",
+  "invested": true,
+  "amount": 18,
+  "boxes": 3,
+  "pBreak": 69,
+  "pWipe": 68,
+  "mult": 90
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s7bijn",
+  "ts": 1782830396110,
+  "cat": "market",
+  "deal": 1
+ },
+ {
+  "t": "diligence_open",
+  "sid": "s7bijn",
+  "ts": 1782830408396,
+  "cat": "risk",
+  "deal": 1
+ },
+ {
+  "t": "decision",
+  "sid": "s7bijn",
+  "ts": 1782830437773,
+  "deal": 1,
+  "company": "Stripe",
+  "invested": true,
+  "amount": 20,
+  "boxes": 2,
+  "pBreak": 50,
+  "pWipe": 50,
+  "mult": 120
+ },
+ {
+  "t": "drop",
+  "sid": "s7bijn",
+  "ts": 1782830446224,
+  "path": "memo.html"
+ }
+]

@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="fvc-collector" content="https://fvc-collector.onrender.com/collect" />
+<title>Fantasy VC — The League</title>
+<style>
+  :root{
+    --bg:#0a0b10; --panel:#13151d; --panel2:#1a1d28; --line:#262a38;
+    --txt:#e7e9f0; --mut:#8b90a4; --acc:#7c5cff; --acc2:#19c37d;
+    --warn:#ffb020; --bad:#ff5470; --good:#19c37d; --gold:#ffd166;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:radial-gradient(1200px 700px at 80% -10%, #1b1640 0%, transparent 55%),
+               radial-gradient(900px 600px at -10% 10%, #0e2a26 0%, transparent 50%), var(--bg);
+    color:var(--txt); font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;
+    min-height:100vh;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 22px 80px}
+  header.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:8px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,var(--acc),#3a2bd6);
+    display:grid;place-items:center;font-weight:800;font-size:20px;box-shadow:0 6px 24px rgba(124,92,255,.45)}
+  h1{font-size:22px;margin:0;letter-spacing:.3px}
+  .tag{color:var(--mut);font-size:12.5px;margin-top:2px}
+  .pill{font-size:11px;color:var(--acc2);border:1px solid #1c4a3a;background:#0e221b;padding:3px 9px;border-radius:999px}
+  input.fund{background:var(--panel2);border:1px solid var(--line);color:var(--txt);border-radius:10px;
+    padding:9px 12px;font-size:14px;min-width:190px;outline:none}
+  input.fund:focus{border-color:var(--acc)}
+
+  .bankbar{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin:18px 0 6px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 16px;min-width:140px}
+  .stat .k{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.6px}
+  .stat .v{font-size:20px;font-weight:700;margin-top:2px}
+  .stat .v.green{color:var(--good)} .stat .v.red{color:var(--bad)}
+
+  /* thesis */
+  .thesis{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:15px 16px;margin-top:16px}
+  .thesis h3{margin:0 0 10px;font-size:13px;letter-spacing:.4px;text-transform:uppercase;color:var(--mut)}
+  .trow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:9px}
+  .trow .lab{font-size:11px;color:var(--mut);min-width:96px}
+  #thesisChips,#finChips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{display:inline-block;vertical-align:top;line-height:1.25;padding:7px 12px;border-radius:10px;
+    border:1px solid var(--line);background:var(--panel2);cursor:pointer;font-size:12.5px;font-weight:600;transition:.12s}
+  .chip:hover{border-color:#3a3f52}
+  .chip.on{border-color:var(--acc);background:#191634;color:#fff;box-shadow:0 0 0 1px var(--acc) inset}
+  .chip small{display:block;color:var(--mut);font-weight:400;font-size:10px;margin-top:1px}
+  .wbar{display:flex;height:7px;border-radius:5px;overflow:hidden;flex:1;min-width:160px;border:1px solid var(--line)}
+  .wseg{height:100%}
+  .toppick{font-size:12.5px;color:#c7cbe0;margin-top:11px;border-top:1px solid var(--line);padding-top:11px}
+  .toppick b{color:#fff}
+  .rankchip{position:absolute;top:-8px;left:-8px;background:var(--panel2);border:1px solid var(--line);
+    color:var(--mut);font-size:10px;font-weight:800;padding:2px 7px;border-radius:999px;z-index:2}
+  .rankchip.top{background:linear-gradient(135deg,var(--gold),#f08c00);color:#1a1300;border:none}
+  @keyframes cardflash{0%{box-shadow:0 0 0 2px var(--gold) inset,0 0 26px rgba(255,209,102,.55)}100%{box-shadow:0 0 0 0 transparent}}
+  .card.moved{animation:cardflash .9s ease-out}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:14px;margin-top:18px}
+  .card{background:linear-gradient(180deg,var(--panel) 0%,#11131b 100%);border:1px solid var(--line);
+    border-radius:16px;padding:15px;position:relative;transition:.15s;display:flex;flex-direction:column;gap:9px}
+  .card:hover{border-color:#34384a;transform:translateY(-2px)}
+  .card.in{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc) inset,0 8px 30px rgba(124,92,255,.18)}
+  .crow{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+  .cname{font-weight:700;font-size:16px}
+  .sector{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px}
+  .conv{text-align:right}
+  .conv .cv{font-size:22px;font-weight:800;line-height:1}
+  .conv .cl{font-size:9.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px}
+  .blurb{font-size:12.5px;color:#b9bdce;min-height:34px}
+  .factors{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;margin-top:2px}
+  .fac{text-align:center}
+  .fac .fb{height:34px;width:100%;background:var(--panel2);border-radius:4px;position:relative;overflow:hidden;display:flex;align-items:flex-end}
+  .fac .fill{width:100%;background:linear-gradient(180deg,#5b6cff,#3a2bd6);border-radius:4px}
+  .fac.risklow .fill{background:linear-gradient(180deg,#ff7a90,#ff5470)}
+  .fac .fl{font-size:9px;color:var(--mut);margin-top:3px;letter-spacing:.3px}
+  .fac .fn{font-size:9px;color:#cfd3e2}
+  .meta{display:flex;justify-content:space-between;font-size:12px;color:var(--mut);border-top:1px solid var(--line);padding-top:9px}
+  .meta b{color:var(--txt)}
+  .stars{color:var(--gold);letter-spacing:1px;font-size:12px}
+  .alloc{display:flex;align-items:center;gap:8px}
+  .alloc input[type=range]{flex:1;accent-color:var(--acc)}
+  .chk{font-variant-numeric:tabular-nums;font-weight:700;color:var(--acc);min-width:54px;text-align:right}
+  .maxnote{font-size:10.5px;color:var(--mut)}
+
+  .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px;align-items:center}
+  button{font:inherit;cursor:pointer;border-radius:11px;border:1px solid var(--line);
+    background:var(--panel2);color:var(--txt);padding:11px 18px;transition:.15s;font-weight:600}
+  button:hover{border-color:#3a3f52}
+  button.primary{background:linear-gradient(135deg,var(--acc),#4b34d8);border:none;box-shadow:0 6px 22px rgba(124,92,255,.4)}
+  button.primary:hover{filter:brightness(1.08)}
+  button:disabled{opacity:.4;cursor:not-allowed}
+  .hint{color:var(--mut);font-size:12.5px}
+
+  /* season */
+  .season{display:none;margin-top:8px}
+  .seasonctl{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+    background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 18px;margin-top:18px}
+  .seasonctl .ri{font-size:18px;font-weight:800}
+  .seasonctl .sub{font-size:12px;color:var(--mut)}
+  .seasonctl .res{color:var(--good);font-weight:800;font-size:18px}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px}
+  .panel h3{margin:0 0 10px;font-size:13px;letter-spacing:.4px;text-transform:uppercase;color:var(--mut)}
+  .holdings{margin-top:14px}
+  .hrow{display:grid;grid-template-columns:1.4fr .7fr .9fr 1fr auto;gap:10px;align-items:center;
+    padding:10px 12px;border-radius:11px;background:var(--panel2);border:1px solid var(--line);margin-bottom:7px}
+  .hrow.dead{opacity:.45}
+  .hn{font-weight:700}.hn small{display:block;color:var(--mut);font-weight:400;font-size:11px}
+  .mark{font-variant-numeric:tabular-nums;font-weight:700}
+  .pnl{font-variant-numeric:tabular-nums;font-weight:700}
+  .pnl.green{color:var(--good)}.pnl.red{color:var(--bad)}
+  .hact{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end;align-items:center}
+  .hact button{padding:6px 9px;font-size:11.5px;border-radius:8px}
+  .bsell{border-color:#5a2a3a;color:#ffb9c6}.bfo{border-color:#2a4a3a;color:#aef0cf}
+  .fonote{font-size:10px;color:var(--mut);width:100%;text-align:right}
+  .seasongrid{display:grid;grid-template-columns:1.3fr 1fr;gap:18px;margin-top:14px}
+  canvas{width:100%;height:220px;display:block}
+  .lb{display:flex;flex-direction:column;gap:7px}
+  .lbrow{display:grid;grid-template-columns:26px 1fr auto;gap:10px;align-items:center;padding:9px 11px;border-radius:11px;background:var(--panel2);border:1px solid transparent}
+  .lbrow.you{border-color:var(--acc);background:#191634}
+  .lbrow .rank{font-weight:800;color:var(--mut);text-align:center}
+  .lbrow .nm{font-weight:600;display:flex;flex-direction:column}.lbrow .nm small{color:var(--mut);font-weight:400;font-size:11px}
+  .lbrow .pf{font-variant-numeric:tabular-nums;font-weight:700;text-align:right}
+  .pf.green{color:var(--good)}.pf.red{color:var(--bad)}
+  .badge{font-size:10px;background:linear-gradient(135deg,var(--gold),#f08c00);color:#1a1300;font-weight:800;padding:2px 7px;border-radius:999px;margin-left:6px}
+  .log{margin-top:14px;max-height:230px;overflow:auto;font-size:13px;display:flex;flex-direction:column;gap:6px}
+  .ev{padding:8px 11px;border-radius:9px;background:var(--panel2);border-left:3px solid var(--line)}
+  .ev.up{border-left-color:var(--good)}.ev.down{border-left-color:var(--bad)}.ev.dead{border-left-color:#555}
+  .ev.sell{border-left-color:var(--gold)}.ev.buy{border-left-color:var(--acc)}
+  .roundtag{font-size:12px;color:var(--mut);margin:8px 0 2px;font-weight:700;letter-spacing:.5px}
+
+  .endcard{display:none;margin-top:22px;background:linear-gradient(180deg,#191634,#11131b);
+    border:1px solid var(--acc);border-radius:20px;padding:26px;text-align:center}
+  .endcard h2{margin:0 0 6px;font-size:25px}
+  .scoregrid{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+  .scorebox{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:12px 20px;min-width:130px}
+  .scorebox .k{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px}
+  .scorebox .v{font-size:22px;font-weight:800;margin-top:2px}
+  .verdict{font-size:14.5px;color:#c7cbe0;max-width:660px;margin:6px auto 0}
+  .scoutbadge{display:inline-block;margin-top:16px;padding:10px 20px;border-radius:14px;
+    background:linear-gradient(135deg,var(--gold),#f08c00);color:#1a1300;font-weight:800;font-size:16px;
+    box-shadow:0 8px 30px rgba(255,180,0,.35)}
+  .scoutbadge.silver{background:linear-gradient(135deg,#dfe3ea,#9aa0b2);color:#13151d;box-shadow:0 8px 30px rgba(170,180,200,.3)}
+  .scoutbadge.bronze{background:linear-gradient(135deg,#d68b46,#9c5a22);color:#1a1300;box-shadow:0 8px 30px rgba(180,110,40,.3)}
+  .scoutbadge.miss{background:var(--panel2);color:var(--mut);box-shadow:none;border:1px solid var(--line)}
+  footer{margin-top:40px;color:var(--mut);font-size:11.5px;text-align:center;line-height:1.7}
+  .disc{max-width:780px;margin:10px auto 0}
+  @media(max-width:820px){.seasongrid{grid-template-columns:1fr}.hrow{grid-template-columns:1fr 1fr}.hact{grid-column:1/-1}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <div class="logo">VC</div>
+      <div>
+        <h1>Fantasy VC <span class="pill">SEASON 01</span></h1>
+        <div class="tag">Set a thesis. Build a portfolio. Manage it round by round. Pure profit decides the table.</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <a href="memo.html" style="font-size:12.5px;color:var(--mut);text-decoration:none;border:1px solid var(--line);padding:9px 13px;border-radius:10px;background:var(--panel2);font-weight:600">🔍 Diligence Desk →</a>
+      <a href="usage.html" style="font-size:12.5px;color:var(--mut);text-decoration:none;border:1px solid var(--line);padding:9px 13px;border-radius:10px;background:var(--panel2);font-weight:600">📊 Usage</a>
+      <input class="fund" id="fundName" maxlength="22" placeholder="Name your fund…" />
+    </div>
+  </header>
+
+  <!-- ===================== SEED / DRAFT PHASE ===================== -->
+  <div id="seedPhase">
+    <div class="bankbar">
+      <div class="stat"><div class="k">Committed Capital</div><div class="v">$100.0M</div></div>
+      <div class="stat"><div class="k">Deployed at Seed</div><div class="v" id="deployed">$0.0M</div></div>
+      <div class="stat"><div class="k">Reserves (dry powder)</div><div class="v green" id="dry">$100.0M</div></div>
+      <div class="stat"><div class="k">Deals</div><div class="v" id="dealcount">0</div></div>
+    </div>
+
+    <div class="thesis">
+      <h3>Your Investment Thesis &nbsp;<span style="color:#555;font-weight:400;text-transform:none;letter-spacing:0">— how you weigh a deal (drives your Conviction score)</span></h3>
+      <div class="trow">
+        <span class="lab">Factor weighting</span>
+        <span id="thesisChips"></span>
+        <span class="wbar" id="wbar" title="weighting mix"></span>
+      </div>
+      <div class="trow">
+        <span class="lab">Financials vs read</span>
+        <span id="finChips"></span>
+        <span class="hint" id="thesisNote"></span>
+      </div>
+      <div class="toppick" id="topPick"></div>
+    </div>
+
+    <div class="hint" id="rules" style="margin-top:12px">Hold back <b>reserves</b> — you'll deploy follow-ons into your winners as the season unfolds. Back at least <b>4</b> startups. Factor bars are analyst scores; the red bar is <b>Additional Risk / governance</b> (low = dangerous). The crowd's <b>hype</b> often points the opposite way of the risk.</div>
+
+    <div class="grid" id="grid"></div>
+
+    <div class="actions">
+      <button class="primary" id="beginBtn" disabled>▶ Begin Season</button>
+      <button id="reshuffleBtn">⟳ New Deal Flow</button>
+      <span class="hint" id="actHint"></span>
+    </div>
+  </div>
+
+  <!-- ===================== SEASON PHASE ===================== -->
+  <div class="season" id="season">
+    <div class="seasonctl">
+      <div>
+        <div class="ri" id="roundInfo">Seed deployed</div>
+        <div class="sub" id="roundSub">Advance to play the round. Follow on into winners; sell before the craters.</div>
+      </div>
+      <div style="text-align:right">
+        <div class="sub">Reserves / cash</div>
+        <div class="res" id="reserves">$0.0M</div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <button id="autoBtn" title="Skip to the final marks without managing each round">⏩ Auto-resolve to Exit</button>
+        <button class="primary" id="advBtn">▶ Advance</button>
+      </div>
+    </div>
+
+    <div class="panel holdings" id="holdingsPanel">
+      <h3>Your Portfolio</h3>
+      <div id="holdings"></div>
+    </div>
+
+    <div class="seasongrid">
+      <div class="panel">
+        <h3>Fund NAV by round</h3>
+        <canvas id="chart" width="700" height="220"></canvas>
+        <div class="log" id="log"></div>
+      </div>
+      <div class="panel">
+        <h3>League Table — total profit</h3>
+        <div class="lb" id="lb"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== END ===================== -->
+  <div class="endcard" id="endcard">
+    <h2 id="endTitle"></h2>
+    <div class="scoregrid" id="endScores"></div>
+    <div class="verdict" id="endVerdict"></div>
+    <div id="scoutWrap"></div>
+    <div style="margin-top:22px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="primary" id="shareBtn">📋 Share your Scout Card</button><button class="primary" id="againBtn" style="background:#232838">Run it back →</button></div>
+  </div>
+
+  <footer>
+    <div><b>Fantasy VC</b> — a playable prototype. Diligence model inspired by SimCap's 6-factor scorecard; competitive league + scouting is ours.</div>
+    <div class="disc">Companies are real. Factor scores, analyst ratings and round paths are approximate, dramatized and net-of-dilution for game balance — not investment data. The point isn't the exact numbers; it's whether your thesis would have seen through the hype. League outperformers get flagged to a scout network as "new blood."</div>
+  </footer>
+</div>
+
+<script src="analytics.js"></script>
+<script>
+/* ========== UNIVERSE ==========
+ * f = analyst factor scores 0-100: team, ps(problem/solution), diff(differentiation),
+ *     market, comm(commercialization), ar(additional-risk/governance — HIGH = clean).
+ * fin = financial attractiveness 0-100 (frauds juice this). hype = crowd rating 1-5.
+ * path = value of $1 invested at seed, over 5 post-seed rounds (path[0]=1). 0 = wiped out.
+ * maxCheck = $M deployable into this round (per-round cap, also caps follow-ons). */
+const UNIVERSE = [
+  {n:"Stripe",   s:"Payments",     b:"Two brothers fixing payments with seven lines of code.",            hype:4, maxCheck:8,  fin:85, f:{team:95,ps:90,diff:85,market:90,comm:85,ar:88}, path:[1,3,14,45,80,120]},
+  {n:"Airbnb",   s:"Travel",       b:"Strangers renting air mattresses. Sounds insane.",                  hype:2, maxCheck:5,  fin:70, f:{team:80,ps:85,diff:70,market:95,comm:75,ar:78}, path:[1,4,18,60,130,200]},
+  {n:"Uber",     s:"Mobility",     b:"Press a button, a black car appears. Regulators will hate it.",     hype:3, maxCheck:8,  fin:75, f:{team:88,ps:80,diff:65,market:95,comm:80,ar:55}, path:[1,3,12,40,70,90]},
+  {n:"DoorDash", s:"Delivery",     b:"Suburban food delivery. Thin margins, brutal ops.",                 hype:3, maxCheck:10, fin:65, f:{team:78,ps:75,diff:60,market:80,comm:78,ar:70}, path:[1,2,8,25,50,70]},
+  {n:"Figma",    s:"Design Tools", b:"Design software in the browser. Adobe owns this space.",            hype:3, maxCheck:8,  fin:78, f:{team:85,ps:88,diff:90,market:80,comm:82,ar:85}, path:[1,3,15,45,85,110]},
+  {n:"Coinbase", s:"Crypto",       b:"A friendly on-ramp for Bitcoin. Volatile, unclear regulation.",      hype:3, maxCheck:10, fin:80, f:{team:80,ps:78,diff:70,market:85,comm:75,ar:50}, path:[1,4,20,55,90,60]},
+  {n:"Notion",   s:"Productivity", b:"Yet another notes app. Rebuilt from scratch twice.",                hype:2, maxCheck:6,  fin:60, f:{team:82,ps:80,diff:78,market:70,comm:72,ar:80}, path:[1,2,6,18,32,40]},
+  {n:"Plaid",    s:"Fintech",      b:"Plumbing connecting apps to banks. Visa wants to buy it.",          hype:4, maxCheck:15, fin:70, f:{team:80,ps:78,diff:75,market:78,comm:70,ar:60}, path:[1,3,8,12,9,8]},
+  {n:"Brex",     s:"Fintech",      b:"Corporate cards for startups. Crowded, big incumbents.",            hype:4, maxCheck:15, fin:72, f:{team:78,ps:72,diff:60,market:75,comm:75,ar:68}, path:[1,3,7,9,7,6]},
+  {n:"Robinhood",s:"Fintech",      b:"Commission-free trading for millennials. Gamified, controversial.",  hype:4, maxCheck:12, fin:75, f:{team:75,ps:78,diff:65,market:80,comm:80,ar:45}, path:[1,3,9,22,18,15]},
+  {n:"Instacart",s:"Grocery",      b:"Same-day grocery delivery. Pandemic rocket — but after?",           hype:5, maxCheck:12, fin:78, f:{team:76,ps:75,diff:58,market:82,comm:80,ar:60}, path:[1,4,15,50,22,9]},
+  {n:"WeWork",   s:"Real Estate",  b:"Beautiful co-working, 'community-adjusted EBITDA', a charismatic founder.", hype:5, maxCheck:20, fin:75, f:{team:70,ps:65,diff:50,market:75,comm:70,ar:20}, path:[1,4,18,40,8,0]},
+  {n:"Theranos", s:"HealthTech",   b:"One drop of blood, hundreds of tests. A magazine-cover founder.",    hype:5, maxCheck:15, fin:80, f:{team:72,ps:80,diff:85,market:90,comm:70,ar:10}, path:[1,5,25,30,0,0]},
+  {n:"Quibi",    s:"Streaming",    b:"Hollywood-grade short video. $1.75B raised at launch.",             hype:5, maxCheck:25, fin:50, f:{team:85,ps:55,diff:45,market:60,comm:65,ar:35}, path:[1,2,3,0,0,0]},
+  {n:"Fast",     s:"Checkout",     b:"One-click checkout everywhere. Spending fast, growing faster.",      hype:4, maxCheck:6,  fin:45, f:{team:65,ps:60,diff:50,market:65,comm:70,ar:25}, path:[1,3,10,0,0,0]},
+  {n:"Bird",     s:"Micromobility",b:"Scooters on every corner. Fastest company ever to a $1B valuation.", hype:4, maxCheck:12, fin:55, f:{team:68,ps:62,diff:45,market:70,comm:72,ar:35}, path:[1,3,7,5,1,0]},
+];
+
+const CAPITAL=100, MIN_DEALS=4;
+const ROUNDS=["Seed","Series A","Series B","Series C","Series D","Exit / Mark"];
+const FK=[["team","Team"],["ps","P/S"],["diff","Diff"],["market","Mkt"],["comm","Comm"],["ar","Risk"]];
+/* Weights are sharp, differentiated tilts (each sums to 100) so the thesis choice visibly
+ * re-ranks the board. Correlated factor scores mean only uneven profiles move much — e.g. a
+ * moat thesis (diff-heavy) tempts you toward Theranos (high differentiation, but a fraud),
+ * while the governance thesis (ar-heavy) filters it out. That divergence is the lesson. */
+const THESES=[
+  {n:"Balanced",     w:{team:17,ps:17,diff:16,market:17,comm:16,ar:17}, d:"equal weight"},
+  {n:"Talent-first", w:{team:40,ps:25,diff:8, market:7, comm:12,ar:8},  d:"founders & execution"},
+  {n:"Market-first", w:{team:12,ps:12,diff:7, market:40,comm:22,ar:7},  d:"TAM & go-to-market"},
+  {n:"Product / Moat",w:{team:12,ps:25,diff:40,market:10,comm:5, ar:8},  d:"differentiation & wedge"},
+  {n:"Risk-averse",  w:{team:15,ps:12,diff:8, market:7, comm:18,ar:40},  d:"governance filter"},
+];
+const FINSPLITS=[0.1,0.2,0.3,0.4,0.5,0.6];
+
+const fmt=m=>(m<0?"-":"")+"$"+Math.abs(m).toLocaleString(undefined,{maximumFractionDigits:1})+"M";
+const star=h=>"★".repeat(h)+"<span style='color:#33384a'>"+"★".repeat(5-h)+"</span>";
+
+let deals=[], alloc={}, thesis={wIdx:0, finW:0.3};
+let G=null;
+let prevRanks=null;   // conviction ranks from the last render, to flash cards that move on thesis switch
+
+function pick(arr,k){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a.slice(0,k);}
+
+/* ---- conviction from thesis ---- */
+function conviction(d){
+  const w=THESES[thesis.wIdx].w;
+  let tw=0,acc=0; for(const k in w){acc+=w[k]*d.f[k]; tw+=w[k];}
+  const nf=acc/tw;                       // weighted avg of non-financial factor scores
+  return Math.round(thesis.finW*d.fin + (1-thesis.finW)*nf);
+}
+function convColor(c){return c>=78?'#19c37d':c>=66?'#ffd166':'#ff7a90';}
+
+/* ---- seed phase rendering ---- */
+function newDealFlow(){
+  deals=pick(UNIVERSE,10);
+  prevRanks=null;   // fresh board — nothing to flash on the first render
+  alloc={}; deals.forEach(d=>alloc[d.n]=0);
+  renderThesis(); renderGrid(); updateBank();
+  document.getElementById('seedPhase').style.display='block';
+  document.getElementById('season').style.display='none';
+  document.getElementById('endcard').style.display='none';
+}
+
+function renderThesis(){
+  const tc=document.getElementById('thesisChips'); tc.innerHTML='';
+  THESES.forEach((t,i)=>{
+    const c=document.createElement('span');
+    c.className='chip'+(i===thesis.wIdx?' on':'');
+    c.innerHTML=`${t.n}<small>${t.d}</small>`;
+    c.onclick=()=>{thesis.wIdx=i;window.FVC&&FVC.track('thesis_select',{thesis:t.n,finW:thesis.finW});renderThesis();renderGrid();};
+    tc.appendChild(c);
+  });
+  // weighting bar
+  const wb=document.getElementById('wbar'); wb.innerHTML='';
+  const w=THESES[thesis.wIdx].w; const cols={team:'#7c5cff',ps:'#5ac8fa',diff:'#19c37d',market:'#ffd166',comm:'#ff9f40',ar:'#ff5470'};
+  FK.forEach(([k])=>{const seg=document.createElement('div');seg.className='wseg';seg.style.width=w[k]+'%';seg.style.background=cols[k];seg.title=k+' '+w[k]+'%';wb.appendChild(seg);});
+  const fc=document.getElementById('finChips'); fc.innerHTML='';
+  FINSPLITS.forEach(v=>{
+    const c=document.createElement('span');
+    c.className='chip'+(Math.abs(v-thesis.finW)<.001?' on':'');
+    c.textContent=Math.round(v*100)+'% fin';
+    c.onclick=()=>{thesis.finW=v;renderThesis();renderGrid();};
+    fc.appendChild(c);
+  });
+  document.getElementById('thesisNote').textContent =
+    thesis.finW>=0.5 ? "Heavy on the numbers — careful, juiced metrics are a classic trap."
+    : THESES[thesis.wIdx].w.ar>=25 ? "Governance-weighted — you'll dodge the frauds, but may pass on rockets."
+    : "Tip: the names that go to zero score high on hype and low on the red Risk bar.";
+}
+
+function renderGrid(){
+  const g=document.getElementById('grid'); g.innerHTML='';
+  // rank the visible deals by conviction so switching thesis has a legible consequence
+  const ranked=[...deals].sort((a,b)=>conviction(b)-conviction(a));
+  const rankOf={}; ranked.forEach((d,i)=>rankOf[d.n]=i+1);
+  const moved={}; if(prevRanks){deals.forEach(d=>{ if(prevRanks[d.n]!==undefined && prevRanks[d.n]!==rankOf[d.n]) moved[d.n]=true; });}
+  deals.forEach(d=>{
+    const c=conviction(d), max=d.maxCheck;
+    const facs=FK.map(([k,lbl])=>{
+      const v=d.f[k], risk=(k==='ar');
+      return `<div class="fac ${risk&&v<40?'risklow':''}">
+        <div class="fb"><div class="fill" style="height:${v}%"></div></div>
+        <div class="fn">${v}</div><div class="fl">${lbl}</div></div>`;
+    }).join('');
+    const el=document.createElement('div');
+    el.className='card'+(alloc[d.n]>0?' in':'')+(moved[d.n]?' moved':'');
+    el.innerHTML=`
+      <div class="rankchip${rankOf[d.n]<=3?' top':''}" title="conviction rank under your thesis">#${rankOf[d.n]}</div>
+      <div class="crow">
+        <div><div class="cname">${d.n}</div><div class="sector">${d.s}</div></div>
+        <div class="conv"><div class="cv" style="color:${convColor(c)}">${c}</div><div class="cl">conviction</div></div>
+      </div>
+      <div class="blurb">${d.b}</div>
+      <div class="factors">${facs}</div>
+      <div class="meta"><span>Crowd hype <span class="stars">${star(d.hype)}</span></span><span>round ≤ <b>${fmt(max)}</b></span></div>
+      <div class="alloc"><input type="range" min="0" max="${max}" step="0.5" value="${alloc[d.n]}" data-n="${d.n}"><span class="chk">${fmt(alloc[d.n])}</span></div>
+      <div class="maxnote">Your seed check into ${d.n}</div>`;
+    g.appendChild(el);
+  });
+  const medals=['🥇','🥈','🥉'];
+  // biggest rank shift vs the previous thesis (the teachable "your thesis has a blind spot" moment)
+  let mover=null, moverDelta=0;
+  if(prevRanks){ deals.forEach(d=>{ if(prevRanks[d.n]===undefined)return; const dif=prevRanks[d.n]-rankOf[d.n]; if(Math.abs(dif)>Math.abs(moverDelta)){moverDelta=dif;mover=d;} }); }
+  document.getElementById('topPick').innerHTML=
+    `Under <b>${THESES[thesis.wIdx].n}</b>, your model's top picks: `
+    + ranked.slice(0,3).map((d,i)=>`${medals[i]} ${d.n} <span style="color:var(--mut)">(${conviction(d)})</span>`).join(' &nbsp;·&nbsp; ')
+    + (mover&&moverDelta!==0
+        ? ` &nbsp;·&nbsp; biggest shift: <b>${mover.n}</b> <span style="color:${moverDelta>0?'var(--good)':'var(--bad)'}">${moverDelta>0?'▲':'▼'}${Math.abs(moverDelta)}</span>`
+        : ` &nbsp;<span style="color:#5a6075">— switch thesis and watch the board re-rank.</span>`);
+  prevRanks=rankOf;
+  g.querySelectorAll('input[type=range]').forEach(inp=>{
+    inp.addEventListener('input',e=>{
+      const n=e.target.dataset.n; let v=parseFloat(e.target.value);
+      const others=Object.entries(alloc).reduce((s,[k,x])=>s+(k===n?0:x),0);
+      if(others+v>CAPITAL){v=Math.max(0,CAPITAL-others);e.target.value=v;}
+      alloc[n]=v;
+      e.target.closest('.card').querySelector('.chk').textContent=fmt(v);
+      e.target.closest('.card').classList.toggle('in',v>0);
+      updateBank();
+    });
+  });
+}
+
+function updateBank(){
+  const dep=Object.values(alloc).reduce((a,b)=>a+b,0), dry=CAPITAL-dep;
+  const count=Object.values(alloc).filter(v=>v>0).length;
+  document.getElementById('deployed').textContent=fmt(dep);
+  const de=document.getElementById('dry'); de.textContent=fmt(dry); de.className='v '+(dry>0?'green':'');
+  document.getElementById('dealcount').textContent=count;
+  const ok=count>=MIN_DEALS;
+  document.getElementById('beginBtn').disabled=!ok;
+  document.getElementById('actHint').textContent= ok
+    ? `${count} deals • ${fmt(dep)} deployed • ${fmt(dry)} reserves for follow-ons`
+    : `Back ${MIN_DEALS-count} more startup${MIN_DEALS-count>1?'s':''} to qualify.`;
+}
+
+/* ========== FUND ENGINE (unit-based, shared by player + AIs) ========== */
+function makeFund(o){
+  const f={name:o.name,tagline:o.tagline,you:!!o.you,pol:o.pol,cash:CAPITAL,pos:{}};
+  deals.forEach(d=>{const amt=o.seed[d.n]||0; if(amt>0){f.pos[d.n]={units:amt/d.path[0],cost:amt}; f.cash-=amt;}});
+  return f;
+}
+function value(f,r){let v=f.cash; deals.forEach(d=>{const p=f.pos[d.n]; if(p)v+=p.units*d.path[r];}); return v;}
+function followOn(f,d,amount,r){
+  amount=Math.min(amount,f.cash); if(amount<=0||d.path[r]<=0)return 0;
+  const p=f.pos[d.n]||(f.pos[d.n]={units:0,cost:0});
+  p.units+=amount/d.path[r]; p.cost+=amount; f.cash-=amount; return amount;
+}
+function doSell(f,d,frac,r){
+  const p=f.pos[d.n]; if(!p||p.units<=0)return 0;
+  const units=p.units*frac, proceeds=units*d.path[r], costOut=p.cost*frac;
+  p.units-=units; p.cost-=costOut; f.cash+=proceeds; return proceeds;
+}
+
+function buildAIs(){
+  const personas=[
+    {name:"Bandwagon Capital", tagline:"Doubles down on hype, never sells", reserve:0.15, w:d=>Math.pow(d.hype,2), pol:"bandwagon"},
+    {name:"Index Ventures Bot", tagline:"Sprays evenly, then sleeps",       reserve:0.0,  w:d=>1,               pol:"index"},
+    {name:"Momentum Partners",  tagline:"Chases up-rounds in loud names",    reserve:0.30, w:d=>d.hype>=4?d.hype*2:0.3, pol:"momentum"},
+    {name:"Contrarian & Co.",   tagline:"Takes profits early, buys the dip", reserve:0.40, w:d=>(6-d.hype),     pol:"contrarian"},
+  ];
+  return personas.map(p=>{
+    const deployable=CAPITAL*(1-p.reserve);
+    const weights=deals.map(d=>({d,wt:p.w(d)*(0.6+Math.random()*0.8)}));
+    const tw=weights.reduce((s,x)=>s+x.wt,0)||1; const seed={};
+    weights.forEach(x=>{seed[x.d.n]=Math.min(x.d.maxCheck, Math.round(deployable*x.wt/tw*2)/2);});
+    return {name:p.name,tagline:p.tagline,pol:p.pol,seed};
+  });
+}
+function applyAI(f,r){
+  deals.forEach(d=>{
+    const p=f.pos[d.n]; if(!p||p.units<=0)return;
+    const up=d.path[r]>d.path[r-1], alive=d.path[r]>0;
+    if(f.pol==='bandwagon' && up && alive) followOn(f,d,Math.min(d.maxCheck*0.6,f.cash*0.4),r);
+    else if(f.pol==='momentum' && up && alive && d.hype>=4) followOn(f,d,Math.min(d.maxCheck*0.5,f.cash*0.5),r);
+    else if(f.pol==='contrarian'){
+      if(d.path[r]>=8) doSell(f,d,0.4,r);                                  // take profits
+      else if(alive && d.path[r]<=d.path[r-1]) followOn(f,d,Math.min(d.maxCheck*0.3,f.cash*0.25),r); // buy the dip
+    }
+  });
+}
+
+/* ========== SEASON CONTROL ========== */
+function enterSeason(){
+  document.getElementById('seedPhase').style.display='none';
+  document.getElementById('season').style.display='block';
+  document.getElementById('endcard').style.display='none';
+  const nm=(document.getElementById('fundName').value||'Your Fund').slice(0,22);
+  const player=makeFund({name:nm,tagline:'You',seed:alloc,you:true});
+  const ais=buildAIs().map(makeFund);
+  G={round:0, funds:[player,...ais], pIdx:0, foRound:{}, hist:null};
+  G.hist=G.funds.map(f=>[value(f,0)]);
+  window.FVC&&FVC.track('season_begin',{deals:Object.values(alloc).filter(v=>v>0).length,deployed:Object.values(alloc).reduce((a,b)=>a+b,0),thesis:THESES[thesis.wIdx].n,finW:thesis.finW});
+  document.getElementById('log').innerHTML='';
+  setHeader(); renderHoldings(); renderLB(); drawChart();
+  document.getElementById('advBtn').disabled=false;
+  const au=document.getElementById('autoBtn'); au.disabled=false; au.textContent='⏩ Auto-resolve to Exit';
+  document.getElementById('season').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function setHeader(){
+  const r=G.round, p=G.funds[G.pIdx];
+  document.getElementById('roundInfo').textContent = r===0?'Seed deployed':ROUNDS[r]+' round';
+  document.getElementById('reserves').textContent=fmt(p.cash);
+  const ab=document.getElementById('advBtn');
+  if(r>=5){ab.textContent='Season complete';ab.disabled=true;}
+  else ab.textContent='▶ Advance to '+ROUNDS[r+1];
+  document.getElementById('roundSub').textContent = r===0
+    ? 'Advance to play Series A. Follow on into winners; sell before the craters.'
+    : r>=5 ? 'Final marks are in.' : `It's the ${ROUNDS[r]} round — trim, sell, or pour reserves into your winners, then advance.`;
+}
+function advance(){
+  if(G.round>=5)return;
+  G.round++; G.foRound={};
+  if(G.round<=4) G.funds.forEach(f=>{if(!f.you)applyAI(f,G.round);});
+  G.funds.forEach((f,i)=>G.hist[i].push(value(f,G.round)));
+  logRound(G.round);
+  setHeader(); renderHoldings(); renderLB(); drawChart();
+  if(G.round>=5){document.getElementById('holdingsPanel').style.opacity=.6; endSeason();}
+}
+function autoResolve(){ // escape hatch: roll through every remaining round to the Exit marks
+  if(!G||G.round>=5)return;
+  window.FVC&&FVC.track('auto_resolve',{fromRound:G.round});
+  const ab=document.getElementById('advBtn'), au=document.getElementById('autoBtn');
+  ab.disabled=true; au.disabled=true; au.textContent='Resolving…';
+  const step=()=>{ if(!G||G.round>=5)return; advance(); if(G.round<5) setTimeout(step,360); };
+  step(); // advance() fires endSeason() on the final round
+}
+function refresh(){ // after a player action mid-round
+  const p=G.funds[G.pIdx];
+  G.hist[G.pIdx][G.round]=value(p,G.round);
+  document.getElementById('reserves').textContent=fmt(p.cash);
+  renderHoldings(); renderLB(); drawChart();
+}
+
+function renderHoldings(){
+  const c=document.getElementById('holdings'); c.innerHTML='';
+  const p=G.funds[G.pIdx], r=G.round, actionable=(r>=1&&r<=4);
+  const held=deals.filter(d=>p.pos[d.n]&&p.pos[d.n].units>1e-9);
+  if(!held.length){c.innerHTML='<div class="hint">No live positions.</div>';return;}
+  held.forEach(d=>{
+    const pos=p.pos[d.n], val=pos.units*d.path[r], pnl=val-pos.cost, alive=d.path[r]>0;
+    const foLeft=Math.max(0,d.maxCheck-(G.foRound[d.n]||0));
+    let act='';
+    if(actionable && alive){
+      act=`<button class="bsell" data-act="s25" data-n="${d.n}">Trim 25%</button>
+           <button class="bsell" data-act="s50" data-n="${d.n}">Sell ½</button>
+           <button class="bsell" data-act="s100" data-n="${d.n}">Exit</button>`;
+      if(foLeft>0.01) act+=`
+           <button class="bfo" data-act="fo2" data-n="${d.n}" ${p.cash<2?'disabled':''}>+$2M</button>
+           <button class="bfo" data-act="fo5" data-n="${d.n}" ${p.cash<5?'disabled':''}>+$5M</button>
+           <button class="bfo" data-act="foM" data-n="${d.n}" ${p.cash<0.5?'disabled':''}>Max</button>`;
+    } else if(!alive){ act=`<span class="hint">wrote off</span>`; }
+    c.insertAdjacentHTML('beforeend',`
+      <div class="hrow${alive?'':' dead'}">
+        <div class="hn">${d.n}<small>${d.s} · cost basis ${fmt(pos.cost)}</small></div>
+        <div class="mark">${alive?d.path[r].toFixed(0)+'×':'0×'}</div>
+        <div class="mark">${fmt(val)}</div>
+        <div class="pnl ${pnl>=0?'green':'red'}">${pnl>=0?'+':''}${fmt(pnl)}</div>
+        <div class="hact">${act}${actionable&&alive&&foLeft>0.01?`<div class="fonote">follow-on room: ${fmt(foLeft)}</div>`:''}</div>
+      </div>`);
+  });
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]'); if(!b||!G)return;
+  const n=b.dataset.n, d=deals.find(x=>x.n===n), p=G.funds[G.pIdx], r=G.round;
+  if(b.dataset.act.startsWith('s')){
+    const frac={s25:.25,s50:.5,s100:1}[b.dataset.act];
+    const proceeds=doSell(p,d,frac,r);
+    if(proceeds>0) addEv('sell',`<b>Sold ${Math.round(frac*100)}% of ${d.n}</b> at ${d.path[r].toFixed(0)}× → <b style="color:var(--gold)">${fmt(proceeds)}</b> to reserves.`);
+  } else {
+    let amt = b.dataset.act==='fo2'?2 : b.dataset.act==='fo5'?5 : Math.min(p.cash, d.maxCheck-(G.foRound[n]||0));
+    amt=Math.min(amt, d.maxCheck-(G.foRound[n]||0), p.cash);
+    const added=followOn(p,d,amt,r);
+    if(added>0){G.foRound[n]=(G.foRound[n]||0)+added; addEv('buy',`<b>Followed on ${fmt(added)} into ${d.n}</b> at ${d.path[r].toFixed(0)}×.`);}
+  }
+  refresh();
+});
+function addEv(cls,html){const el=document.createElement('div');el.className='ev '+cls;el.innerHTML=html;document.getElementById('log').prepend(el);}
+
+function logRound(r){
+  const p=G.funds[G.pIdx], evs=[];
+  deals.forEach(d=>{
+    const prev=d.path[r-1],cur=d.path[r];
+    const held=p.pos[d.n]&&p.pos[d.n].units>1e-9;
+    if(cur===0&&prev!==0) evs.push({c:'dead',h:`<b>${d.n}</b> collapsed to $0.${held?' <b style="color:var(--bad)">Your stake is wiped.</b>':' (You weren\'t in it.)'}`});
+    else if(held&&cur>prev) evs.push({c:'up',h:`<b>${d.n}</b> raised an up-round — now ${cur.toFixed(0)}× on cost.`});
+    else if(held&&cur<prev) evs.push({c:'down',h:`<b>${d.n}</b> marked down to ${cur.toFixed(0)}×.`});
+  });
+  evs.reverse().forEach(e=>addEv(e.c,e.h));
+  const tag=document.createElement('div');tag.className='roundtag';tag.textContent='▸ '+ROUNDS[r]+' round';document.getElementById('log').prepend(tag);
+}
+
+function renderLB(){
+  const r=G.round;
+  const rows=G.funds.map(f=>({f,prof:value(f,r)-CAPITAL})).sort((a,b)=>b.prof-a.prof);
+  const lb=document.getElementById('lb'); lb.innerHTML='';
+  rows.forEach((row,i)=>{
+    const el=document.createElement('div'); el.className='lbrow'+(row.f.you?' you':'');
+    const lead=i===0&&r>=5?'<span class="badge">🏆 TOP</span>':'';
+    el.innerHTML=`<div class="rank">${i+1}</div>
+      <div class="nm">${row.f.name}${lead}<small>${row.f.tagline}</small></div>
+      <div class="pf ${row.prof>=0?'green':'red'}">${row.prof>=0?'+':''}${fmt(row.prof)}</div>`;
+    lb.appendChild(el);
+  });
+}
+
+function drawChart(){
+  const ctx=document.getElementById('chart').getContext('2d');
+  const W=700,H=220,pad=30; ctx.clearRect(0,0,W,H);
+  const all=G.hist.flat(), max=Math.max(...all,CAPITAL*1.1), min=Math.min(...all,CAPITAL*0.9);
+  const x=i=>pad+(W-2*pad)*i/5, y=v=>H-pad-(H-2*pad)*(v-min)/(max-min||1);
+  ctx.strokeStyle='#20242f';ctx.lineWidth=1;
+  for(let g=0;g<=4;g++){const yy=pad+(H-2*pad)*g/4;ctx.beginPath();ctx.moveTo(pad,yy);ctx.lineTo(W-pad,yy);ctx.stroke();}
+  ctx.fillStyle='#5a6075';ctx.font='10px sans-serif';
+  ROUNDS.forEach((rn,i)=>ctx.fillText(rn.split(' ')[0].slice(0,4),x(i)-9,H-10));
+  const colors=['#7c5cff','#ff7a90','#19c37d','#ffb020','#5ac8fa'];
+  G.funds.forEach((f,ci)=>{
+    const h=G.hist[ci]; ctx.beginPath();
+    h.forEach((v,i)=>{i?ctx.lineTo(x(i),y(v)):ctx.moveTo(x(i),y(v));});
+    ctx.strokeStyle=f.you?'#7c5cff':colors[ci%colors.length];
+    ctx.lineWidth=f.you?3:1.5; ctx.globalAlpha=f.you?1:.5; ctx.stroke();
+    if(f.you){const last=h[h.length-1];ctx.fillStyle='#7c5cff';ctx.beginPath();ctx.arc(x(h.length-1),y(last),3.5,0,7);ctx.fill();}
+    ctx.globalAlpha=1;
+  });
+}
+
+/* ---- judgment accuracy: did conviction rank predict realized returns? ---- */
+function judgmentScore(){
+  const arr=deals.map(d=>({c:conviction(d),m:d.path[5]}));
+  let conc=0,tot=0;
+  for(let i=0;i<arr.length;i++)for(let j=i+1;j<arr.length;j++){
+    if(arr[i].c===arr[j].c||arr[i].m===arr[j].m)continue; tot++;
+    if((arr[i].c>arr[j].c)===(arr[i].m>arr[j].m))conc++;
+  }
+  return tot?Math.round(100*conc/tot):50;
+}
+
+function endSeason(){
+  const rows=G.funds.map(f=>({f,prof:value(f,5)-CAPITAL})).sort((a,b)=>b.prof-a.prof);
+  const myRank=rows.findIndex(r=>r.f.you)+1, my=rows.find(r=>r.f.you);
+  const mult=value(G.funds[G.pIdx],5)/CAPITAL, js=judgmentScore();
+  // Tiered scout flag (was binary). Gold = beat every bot; Silver = top half & green; Bronze = green.
+  const gold=myRank===1;
+  const silver=!gold && myRank<=Math.ceil(rows.length/2) && my.prof>0;
+  const bronze=!gold && !silver && my.prof>0;
+  const scoutTier=gold?'gold':silver?'silver':bronze?'bronze':'none';
+  window.FVC&&FVC.track('season_end',{rank:myRank,funds:rows.length,profit:Math.round(my.prof),mult:+mult.toFixed(2),judgment:js,newBlood:gold,scoutTier,thesis:THESES[thesis.wIdx].n});
+  // any zeros held?
+  const blewUp=deals.filter(d=>d.path[5]===0 && (G.funds[G.pIdx].pos[d.n]?.cost>0)).map(d=>d.n);
+  const card=document.getElementById('endcard'); card.style.display='block';
+  document.getElementById('endTitle').innerHTML=`Rank #${myRank} of ${rows.length} — ${my.prof>=0?'+':''}${fmt(my.prof)} profit`;
+  document.getElementById('endScores').innerHTML=`
+    <div class="scorebox"><div class="k">Fund Multiple</div><div class="v">${mult.toFixed(2)}×</div></div>
+    <div class="scorebox"><div class="k">Total Profit</div><div class="v" style="color:${my.prof>=0?'var(--good)':'var(--bad)'}">${my.prof>=0?'+':''}${fmt(my.prof)}</div></div>
+    <div class="scorebox"><div class="k">Judgment Accuracy</div><div class="v" style="color:${js>=70?'var(--good)':js>=55?'var(--gold)':'var(--bad)'}">${js}%</div></div>`;
+  const beatAll=gold;
+  let v;
+  if(beatAll) v=`You beat every algorithm — including the hype-chasers. Pure judgment, not crowd-following. That's the signal a scout network hunts for.`;
+  else if(myRank<=Math.ceil(rows.length/2)) v=`Top half. Solid fund. To get flagged as <b>new blood</b> you have to beat <b>all</b> the bots — especially Bandwagon Capital, who blindly piles into 5-star hype.`;
+  else v=`The hype-followers beat you. ${blewUp.length?`What sank you: <b>${blewUp.join(', ')}</b> — high hype, rock-bottom Risk scores, straight to zero.`:`Look at the timing — winners that peaked then bled while you held.`}`;
+  v+=` <br><br><b>Judgment ${js}%:</b> ${js>=70?'your conviction ranking closely tracked real outcomes — your thesis has edge.':js>=55?'partial signal — your thesis caught some winners but misread others.':'your conviction pointed the wrong way. Try weighting Risk/Differentiation higher to filter the frauds.'}`;
+  document.getElementById('endVerdict').innerHTML=v;
+  document.getElementById('scoutWrap').innerHTML =
+      gold   ? `<div class="scoutbadge">🥇 NEW BLOOD — flagged to the scout network</div>`
+    : silver ? `<div class="scoutbadge silver">🥈 SILVER SCOUT — top half &amp; in the green. Finish #1 for New Blood.</div>`
+    : bronze ? `<div class="scoutbadge bronze">🥉 BRONZE SCOUT — you finished green. Crack the top half for Silver.</div>`
+    : `<div class="scoutbadge miss">🔒 Scout flag locked — finish in the green to earn Bronze</div>`;
+  // Shareable Scout Card — copy as markdown or push to X/LinkedIn.
+  const shareResult={
+    mode:'league', tier:scoutTier, rank:`Rank #${myRank} of ${rows.length}`,
+    thesis:THESES[thesis.wIdx].n,
+    stats:[
+      {k:'Fund Multiple', v:mult.toFixed(2)+'×'},
+      {k:'Total Profit', v:(my.prof>=0?'+':'')+fmt(my.prof)},
+      {k:'Judgment Accuracy', v:js+'%'},
+    ],
+    line: gold?'Beat every algorithm on real startups & rounds — pure judgment, not crowd-following.'
+      : myRank<=Math.ceil(rows.length/2)?'Top-half fund, picking real startups against the bots.'
+      : 'Learning the tape — the algorithms won this round.'
+  };
+  document.getElementById('shareBtn').onclick=()=>window.FVC&&FVC.share(shareResult);
+}
+
+/* wire up */
+document.getElementById('beginBtn').addEventListener('click',enterSeason);
+document.getElementById('advBtn').addEventListener('click',advance);
+document.getElementById('autoBtn').addEventListener('click',autoResolve);
+document.getElementById('reshuffleBtn').addEventListener('click',newDealFlow);
+document.getElementById('againBtn').addEventListener('click',()=>{document.getElementById('holdingsPanel').style.opacity=1;newDealFlow();window.scrollTo({top:0,behavior:'smooth'});});
+newDealFlow();
+</script>
+</body>
+</html>

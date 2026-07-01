@@ -1,0 +1,33 @@
+# Render Blueprint — deploys the static games + the usage collector in one shot.
+# Docs: https://render.com/docs/blueprint-spec
+# Deploy: Render dashboard → New + → Blueprint → pick this repo → Apply.
+services:
+  # 1) The games — a free static site. Serves index.html / memo.html / usage.html + analytics.js.
+  - type: web
+    name: fvc
+    runtime: static
+    buildCommand: ""
+    staticPublishPath: .
+    pullRequestPreviewsEnabled: false
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+
+  # 2) The usage collector — the zero-dep Node service (collector.js).
+  #    ⚠️ The free tier has an EPHEMERAL disk and idle spin-down, so usage/events.jsonl is
+  #    wiped on every redeploy/restart. Fine for a demo. For durable multi-user data, attach a
+  #    Render Disk (paid) mounted at ./usage, or point the collector at a database.
+  #    The service URL becomes https://fvc-collector.onrender.com — that must match the
+  #    <meta name="fvc-collector"> tag in the HTML. If Render appends a suffix (name taken),
+  #    update the meta tag in index.html / memo.html / usage.html to the real URL.
+  - type: web
+    name: fvc-collector
+    runtime: node
+    plan: free
+    buildCommand: ""
+    startCommand: node collector.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "20"

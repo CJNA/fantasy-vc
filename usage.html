@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="fvc-collector" content="https://fvc-collector.onrender.com/collect" />
+<title>Fantasy VC — Usage & Loop Console</title>
+<style>
+  :root{--bg:#0a0b10;--panel:#13151d;--panel2:#1a1d28;--line:#262a38;--txt:#e7e9f0;--mut:#8b90a4;--acc:#7c5cff;--good:#19c37d;--bad:#ff5470;--gold:#ffd166}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif}
+  .wrap{max-width:1000px;margin:0 auto;padding:26px 22px 80px}
+  header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  h1{font-size:20px;margin:0}.tag{color:var(--mut);font-size:12.5px}
+  .nav a{font-size:12.5px;color:var(--mut);text-decoration:none;border:1px solid var(--line);padding:7px 12px;border-radius:9px;background:var(--panel2);font-weight:600;margin-left:6px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-top:18px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:13px 15px}
+  .stat .k{font-size:10.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px}
+  .stat .v{font-size:24px;font-weight:800;margin-top:3px}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:18px}
+  .panel h3{margin:0 0 12px;font-size:13px;text-transform:uppercase;letter-spacing:.4px;color:var(--mut)}
+  .funnel{display:flex;flex-direction:column;gap:8px}
+  .frow{display:grid;grid-template-columns:160px 1fr 90px;gap:10px;align-items:center}
+  .frow .lbl{font-size:13px}
+  .track{height:22px;background:var(--panel2);border-radius:7px;overflow:hidden;border:1px solid var(--line)}
+  .fill{height:100%;background:linear-gradient(90deg,var(--acc),#4b34d8);border-radius:7px}
+  .frow .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+  .frow .n small{color:var(--mut);font-weight:400}
+  .bars{display:flex;flex-direction:column;gap:6px}
+  .bar{display:grid;grid-template-columns:130px 1fr 50px;gap:8px;align-items:center;font-size:13px}
+  .bar .bt{height:16px;background:linear-gradient(90deg,var(--good),#0f8a59);border-radius:5px;min-width:2px}
+  .bar.risk .bt{background:linear-gradient(90deg,var(--bad),#b03048)}
+  .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+  button{font:inherit;font-weight:600;cursor:pointer;border-radius:10px;padding:10px 16px;border:1px solid var(--line);background:var(--panel2);color:var(--txt)}
+  button:hover{border-color:#3a3f52}
+  button.primary{background:linear-gradient(135deg,var(--acc),#4b34d8);border:none}
+  button.danger{border-color:#5a2a3a;color:#ffb9c6}
+  .empty{color:var(--mut);font-size:13px}
+  pre{background:#0c0e14;border:1px solid var(--line);border-radius:10px;padding:12px;max-height:280px;overflow:auto;font-size:11.5px;color:#aeb4c8}
+  .insight{font-size:13px;color:#c7cbe0;background:var(--panel2);border-left:3px solid var(--gold);border-radius:8px;padding:10px 13px;margin-bottom:8px}
+  .insight b{color:#fff}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div><h1>📊 Usage &amp; Loop Console</h1><div class="tag">The observability layer — the trace the hill-climbing loop reads.</div></div>
+    <div class="nav"><a href="index.html">League</a><a href="memo.html">Diligence</a></div>
+  </header>
+
+  <div id="out"></div>
+
+  <div class="panel">
+    <h3>Trace export (feed this to the analysis agent)</h3>
+    <div class="btns">
+      <button class="primary" onclick="FVC.download()">⬇ Download usage JSON</button>
+      <button onclick="render()">↻ Refresh</button>
+      <button class="danger" onclick="if(confirm('Clear all captured usage events?')){FVC.clear();render();}">Clear events</button>
+    </div>
+    <pre id="raw"></pre>
+  </div>
+</div>
+
+<script src="analytics.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+function pct(n,d){return d?Math.round(100*n/d):0;}
+function countBy(ev,t,key){const m={};ev.filter(e=>e.t===t).forEach(e=>{const k=e[key]??'(none)';m[k]=(m[k]||0)+1;});return m;}
+function avg(arr){return arr.length?arr.reduce((a,b)=>a+b,0)/arr.length:0;}
+
+function render(){
+  const ev=FVC.load();
+  $('raw').textContent=ev.length?JSON.stringify(ev.slice(-60),null,1):'(no events yet — play a few rounds in the League or Diligence Desk, then come back)';
+  if(!ev.length){$('out').innerHTML='<div class="panel empty">No usage captured yet. Open the League or Diligence Desk, play through a session, and your activity will show up here.</div>';return;}
+  const s=FVC.summary();
+  const memoEnds=ev.filter(e=>e.t==='memo_end'), seasonEnds=ev.filter(e=>e.t==='season_end');
+
+  // funnel
+  const F=[
+    ['App opens',s.opens,s.opens],
+    ['League: started',s.leagueStarts,s.opens],
+    ['League: finished',s.leagueFinishes,s.opens],
+    ['Diligence: started',s.memoStarts,s.opens],
+    ['Diligence: finished',s.memoFinishes,s.opens],
+  ];
+  const funnel=F.map(([l,n,base])=>`<div class="frow"><div class="lbl">${l}</div>
+    <div class="track"><div class="fill" style="width:${pct(n,base)}%"></div></div>
+    <div class="n">${n} <small>${pct(n,base)}%</small></div></div>`).join('');
+
+  // diligence category usage (which boxes players open)
+  const dOpen=countBy(ev,'diligence_open','cat');
+  const dMax=Math.max(1,...Object.values(dOpen));
+  const CATL={team:'Team',traction:'Traction',market:'Market',product:'Product',risk:'Risk & Gov',terms:'Terms'};
+  const dbars=Object.keys(CATL).map(k=>{const n=dOpen[k]||0;
+    return `<div class="bar ${k==='risk'||k==='terms'?'risk':''}"><div>${CATL[k]}</div><div><div class="bt" style="width:${pct(n,dMax)}%"></div></div><div style="text-align:right">${n}</div></div>`;}).join('');
+
+  // thesis distribution (league)
+  const th=countBy(ev,'season_begin','thesis');
+  const thMax=Math.max(1,...Object.values(th));
+  const thbars=Object.keys(th).length?Object.entries(th).map(([k,n])=>`<div class="bar"><div>${k}</div><div><div class="bt" style="width:${pct(n,thMax)}%"></div></div><div style="text-align:right">${n}</div></div>`).join(''):'<div class="empty">No league sessions yet.</div>';
+
+  // outcomes
+  const avgJ=Math.round(avg(seasonEnds.map(e=>e.judgment).filter(x=>x!=null)));
+  const avgAcc=Math.round(avg(memoEnds.map(e=>e.acc).filter(x=>x!=null)));
+  const nb=s.newBlood;
+
+  // scout tiers (proposal #3) — distribution across both modes' end events
+  const tierCounts={gold:0,silver:0,bronze:0,none:0};
+  [...seasonEnds,...memoEnds].forEach(e=>{if(e.scoutTier!=null)tierCounts[e.scoutTier]=(tierCounts[e.scoutTier]||0)+1;});
+  const tierTotal=Object.values(tierCounts).reduce((a,b)=>a+b,0);
+  const TIERL={gold:['🥇 Gold (New Blood)','gold'],silver:['🥈 Silver','#9aa0b2'],bronze:['🥉 Bronze','#d68b46'],none:['🔒 None','#5a6075']};
+  const tierbars=tierTotal?Object.entries(TIERL).map(([k,[lbl,col]])=>{const n=tierCounts[k]||0;
+    return `<div class="bar"><div>${lbl}</div><div><div class="bt" style="width:${pct(n,tierTotal)}%;background:${col}"></div></div><div style="text-align:right">${n} <small style="color:var(--mut)">${pct(n,tierTotal)}%</small></div></div>`;}).join(''):'<div class="empty">No completed runs with a tier yet.</div>';
+
+  // auto-resolve uptake (proposal #2)
+  const autoCount=ev.filter(e=>e.t==='auto_resolve').length;
+
+  // auto-insights (a preview of what the hill-climbing agent would flag)
+  const ins=[];
+  if(s.opens>=3){
+    const leagueDrop=pct(s.leagueStarts-s.leagueFinishes,s.leagueStarts||1);
+    const memoDrop=pct(s.memoStarts-s.memoFinishes,s.memoStarts||1);
+    if(s.leagueStarts&&leagueDrop>40) ins.push(`<b>League drop-off ${leagueDrop}%</b> — many start a season but don't finish. Friction likely in the round-by-round flow.`);
+    if(s.memoStarts&&memoDrop>40) ins.push(`<b>Diligence drop-off ${memoDrop}%</b> — players abandon mid-run. Consider shortening the desk (fewer than 8 deals).`);
+    const riskOpens=(dOpen.risk||0)+(dOpen.terms||0), allOpens=Object.values(dOpen).reduce((a,b)=>a+b,0);
+    if(allOpens>5 && pct(riskOpens,allOpens)<20) ins.push(`<b>Risk &amp; Terms under-checked (${pct(riskOpens,allOpens)}% of diligence)</b> — players ignore the boxes where traps hide; the reveal feedback may need to teach this harder.`);
+    if(seasonEnds.length+memoEnds.length>=3 && nb===0) ins.push(`<b>Nobody has earned New Blood</b> — the scout bar may be too strict; consider relaxing the clean-sheet requirement.`);
+    if(Object.keys(th).length===1 && s.leagueStarts>=3) ins.push(`<b>Only one thesis ever used (${Object.keys(th)[0]})</b> — the thesis choice may not feel consequential enough.`);
+  }
+  const insights=ins.length?ins.map(i=>`<div class="insight">${i}</div>`).join(''):'<div class="empty">Not enough data yet for auto-insights (need a few sessions). These previews approximate what the hill-climbing agent would flag.</div>';
+
+  $('out').innerHTML=`
+    <div class="grid">
+      <div class="stat"><div class="k">Sessions</div><div class="v">${s.sessions}</div></div>
+      <div class="stat"><div class="k">Events</div><div class="v">${s.events}</div></div>
+      <div class="stat"><div class="k">League runs</div><div class="v">${s.leagueFinishes}<span style="font-size:13px;color:var(--mut)">/${s.leagueStarts}</span></div></div>
+      <div class="stat"><div class="k">Diligence runs</div><div class="v">${s.memoFinishes}<span style="font-size:13px;color:var(--mut)">/${s.memoStarts}</span></div></div>
+      <div class="stat"><div class="k">Avg Judgment</div><div class="v">${avgJ||'–'}<span style="font-size:13px">%</span></div></div>
+      <div class="stat"><div class="k">Avg Diligence</div><div class="v">${avgAcc||'–'}<span style="font-size:13px">%</span></div></div>
+      <div class="stat"><div class="k">New Blood</div><div class="v" style="color:var(--gold)">${nb}</div></div>
+      <div class="stat"><div class="k">Auto-resolve used</div><div class="v">${autoCount}<span style="font-size:13px;color:var(--mut)">/${s.leagueStarts}</span></div></div>
+    </div>
+
+    <div class="panel"><h3>Auto-insights (hill-climbing preview)</h3>${insights}</div>
+    <div class="panel"><h3>Funnel</h3><div class="funnel">${funnel}</div></div>
+    <div class="panel"><h3>Scout tiers earned (Bronze → Silver → Gold)</h3><div class="bars">${tierbars}</div></div>
+    <div class="panel"><h3>Where players look (diligence box opens)</h3><div class="bars">${dbars}</div></div>
+    <div class="panel"><h3>Thesis chosen (league)</h3><div class="bars">${thbars}</div></div>
+  `;
+}
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+TOTAL events 1105 | sessions 120 | span 14d
+opens: 120  league 64  memo 56
+LEAGUE funnel: begin 56  end 17  drop-off 70%
+MEMO funnel: start 53  end 2  drop-off 96%
+THESIS: {"Balanced":33,"Talent-first":7,"Product / Moat":7,"Market-first":6,"Risk-averse":3} -> Balanced share 59%
+DILIGENCE opens: {"team":140,"market":114,"risk":49,"product":88,"terms":21,"traction":45} total 457
+  Risk+Terms share: 15%
+DECISIONS: 220  wager left at 50/50: 120 (55%)
+TRAP decisions: 90  invested into a zero: 44 (49%)
+MEMO reach by deal idx: {"0":53,"1":47,"2":35,"3":30,"4":23,"5":17,"6":8,"7":7}
+NEW BLOOD earned: 0 of 19 finishes

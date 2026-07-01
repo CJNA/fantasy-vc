@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="fvc-collector" content="https://fvc-collector.onrender.com/collect" />
+<title>Fantasy VC — The Diligence Desk (Blind Deals)</title>
+<style>
+  :root{
+    --bg:#0a0b10; --panel:#13151d; --panel2:#1a1d28; --line:#262a38;
+    --txt:#e7e9f0; --mut:#8b90a4; --acc:#7c5cff; --acc2:#19c37d;
+    --warn:#ffb020; --bad:#ff5470; --good:#19c37d; --gold:#ffd166;
+  }
+  *{box-sizing:border-box} html,body{margin:0;padding:0}
+  body{background:radial-gradient(1100px 650px at 82% -10%, #1b1640 0%, transparent 55%),
+       radial-gradient(800px 550px at -10% 8%, #0e2a26 0%, transparent 50%), var(--bg);
+       color:var(--txt);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;min-height:100vh}
+  .wrap{max-width:840px;margin:0 auto;padding:26px 22px 80px}
+  header.top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,#19c37d,#0f8a59);
+    display:grid;place-items:center;font-weight:800;font-size:18px;box-shadow:0 6px 24px rgba(25,195,125,.4)}
+  h1{font-size:21px;margin:0}
+  .tag{color:var(--mut);font-size:12.5px;margin-top:2px}
+  .nav{display:flex;gap:8px}
+  .nav a{font-size:12.5px;color:var(--mut);text-decoration:none;border:1px solid var(--line);
+    padding:7px 12px;border-radius:9px;background:var(--panel2);font-weight:600}
+  .nav a.on{color:#fff;border-color:var(--acc2);background:#0e221b}
+  .nav a:hover{border-color:#3a3f52}
+
+  .bar{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 4px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:10px 15px;min-width:118px}
+  .stat .k{font-size:10.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.6px}
+  .stat .v{font-size:19px;font-weight:800;margin-top:2px}
+  .stat .v.green{color:var(--good)}.stat .v.red{color:var(--bad)}
+
+  .card{background:linear-gradient(180deg,var(--panel),#11131b);border:1px solid var(--line);border-radius:18px;padding:22px;margin-top:16px}
+  .kicker{font-size:11px;letter-spacing:.7px;text-transform:uppercase;color:var(--acc2);font-weight:700}
+  .dealname{font-size:24px;font-weight:800;margin:4px 0 2px;letter-spacing:.3px}
+  .teaser{color:#c7cbe0;font-size:15px;margin-top:8px}
+  .facts{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .fact{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:8px 13px;font-size:13px}
+  .fact b{color:var(--txt)} .fact span{color:var(--mut);font-size:11px;display:block;text-transform:uppercase;letter-spacing:.4px}
+
+  .ddhead{display:flex;justify-content:space-between;align-items:center;margin:22px 0 10px}
+  .ddhead h3{margin:0;font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut)}
+  .dp{font-size:13px;font-weight:700}
+  .dp b{color:var(--gold)}
+  .ddgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+  @media(max-width:640px){.ddgrid{grid-template-columns:repeat(2,1fr)}.facts .fact{flex:1}}
+  .ddbtn{text-align:left;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:11px 13px;
+    cursor:pointer;transition:.13s;color:var(--txt);font:inherit}
+  .ddbtn:not(.open):not(.locked):not(.armed):hover{border-color:var(--acc)}
+  .ddbtn.locked{opacity:.42;cursor:default}
+  .ddbtn.open{border-color:#34384a;background:#10131b;cursor:default}
+  .ddbtn.armed{border-color:var(--gold);background:#1a160c}
+  .confirm{margin-top:8px;border-top:1px solid var(--line);padding-top:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:11.5px;color:var(--gold)}
+  .mini{font:inherit;font-size:11.5px;font-weight:700;border-radius:8px;padding:5px 11px;cursor:pointer;border:1px solid var(--line);background:var(--panel)}
+  .mini.ok{background:linear-gradient(135deg,#19c37d,#0f8a59);border:none;color:#04130c}
+  .mini.no{color:var(--mut)}
+  .ddbtn .t{font-weight:700;font-size:13.5px;display:flex;justify-content:space-between;align-items:center}
+  .ddbtn .c{font-size:10.5px;color:var(--mut);margin-top:2px}
+  .ddbtn .cost{font-size:10px;color:var(--gold);font-weight:700}
+  .revtext{font-size:13px;color:#cdd1e0;margin-top:8px;line-height:1.5;border-top:1px solid var(--line);padding-top:8px;display:none}
+  .ddbtn.open .revtext{display:block}
+  .ddbtn.open .cost{display:none}
+
+  .decide{margin-top:22px;border-top:1px solid var(--line);padding-top:18px}
+  .checkrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .checkrow input[type=range]{flex:1;min-width:180px;accent-color:var(--acc2)}
+  .checkval{font-variant-numeric:tabular-nums;font-weight:800;font-size:18px;min-width:74px;color:var(--acc2)}
+  .btns{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+  button.act{font:inherit;font-weight:700;cursor:pointer;border-radius:12px;padding:12px 22px;border:1px solid var(--line);background:var(--panel2);color:var(--txt);transition:.13s}
+  button.act:hover{border-color:#3a3f52}
+  button.invest{background:linear-gradient(135deg,#19c37d,#0f8a59);border:none;box-shadow:0 6px 20px rgba(25,195,125,.35)}
+  button.pass{background:transparent}
+  button.invest:hover{filter:brightness(1.08)}
+  .hint{color:var(--mut);font-size:12.5px;margin-top:8px}
+  .coach{font-size:12.5px;color:#ffd7a0;background:#1e1810;border:1px solid #4a3a1c;border-radius:10px;padding:9px 12px;margin:0 0 12px;line-height:1.45}
+  .coach b{color:#ffd166}
+
+  /* reveal */
+  .reveal .real{font-size:13px;color:var(--mut);text-transform:uppercase;letter-spacing:.6px}
+  .reveal .rn{font-size:30px;font-weight:800;margin:2px 0 4px}
+  .multbig{font-size:40px;font-weight:800;line-height:1}
+  .narr{color:#cdd1e0;font-size:14.5px;margin-top:12px}
+  .pnlrow{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}
+  .tellbox{border-radius:12px;padding:12px 15px;font-size:13.5px;margin-top:10px}
+  .tellbox.good{background:#0e221b;border:1px solid #1c4a3a;color:#aef0cf}
+  .tellbox.bad{background:#2a121a;border:1px solid #5a2a3a;color:#ffc0cc}
+  .tellbox.meh{background:var(--panel2);border:1px solid var(--line);color:var(--mut)}
+  .social{font-size:12.5px;color:var(--mut);margin-top:10px}
+
+  .scoutbadge{display:inline-block;margin-top:14px;padding:10px 20px;border-radius:14px;
+    background:linear-gradient(135deg,var(--gold),#f08c00);color:#1a1300;font-weight:800;font-size:16px;box-shadow:0 8px 30px rgba(255,180,0,.35)}
+  .scoutbadge.silver{background:linear-gradient(135deg,#dfe3ea,#9aa0b2);color:#13151d;box-shadow:0 8px 30px rgba(170,180,200,.3)}
+  .scoutbadge.bronze{background:linear-gradient(135deg,#d68b46,#9c5a22);color:#1a1300;box-shadow:0 8px 30px rgba(180,110,40,.3)}
+  .scoutbadge.miss{background:var(--panel2);color:var(--mut);box-shadow:none;border:1px solid var(--line)}
+  .center{text-align:center}
+  footer{margin-top:38px;color:var(--mut);font-size:11.5px;text-align:center;line-height:1.7}
+  .disc{max-width:680px;margin:8px auto 0}
+  .scoregrid{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:16px 0}
+  .scorebox{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:12px 20px;min-width:120px}
+  .scorebox .k{font-size:11px;color:var(--mut);text-transform:uppercase}.scorebox .v{font-size:22px;font-weight:800;margin-top:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">DD</div>
+      <div><h1>The Diligence Desk</h1><div class="tag">Real deals, names hidden. Choose where to look. Invest or pass. Outcomes revealed after you commit.</div></div>
+    </div>
+    <div class="nav"><a href="index.html">League</a><a class="on" href="memo.html">Diligence</a><a href="usage.html">📊 Usage</a></div>
+  </header>
+
+  <div id="app"></div>
+
+  <footer>
+    <div><b>Fantasy VC — Diligence Desk.</b> A blind deal-memo mode. The decisive tell is hidden behind a specific diligence category — looking in the right place is the skill.</div>
+    <div class="disc">Companies are real; memo facts, metrics and outcomes are approximate and dramatized for the game — not investment data or a representation of what any real founder or investor did.</div>
+  </footer>
+</div>
+
+<script src="analytics.js"></script>
+<script>
+/* ======= BLIND DEAL MEMOS =======
+ * Each deal: free teaser + 6 diligence categories. The decisive TELL is gated behind
+ * specific categories (tellsBad / tellsGood) — you only see it if you spend a point there.
+ * mult = net-of-dilution return on a seed check (0 = wiped out). */
+const DEALS=[
+ {real:"Stripe", sector:"Payments", stage:"Seed", ask:"$2M @ ~$20M post", hype:4,
+  teaser:"A developer-first API that lets any website accept payments in a few lines of code.",
+  dd:{team:"Two brothers, deeply technical, dropped out to build this. Sold a small company before. Ship weekly, recruit elite engineers, obsessive about the docs.",
+      traction:"Hundreds of devs in private beta; integrations up ~30%/mo. Revenue tiny but usage-based and compounding; near-zero churn.",
+      market:"Online payments — enormous and growing with e-commerce. Incumbents (PayPal, Braintree) are clunky and developer-hostile.",
+      product:"A genuinely 10x better developer experience. Devs evangelize it unprompted. The 'seven lines of code' demo converts on the spot.",
+      risk:"Money movement = heavy compliance. Big incumbents could copy. Founders young but unusually coachable. No governance red flags.",
+      terms:"Clean priced seed, standard docs, respected angels already in (incl. YC, top seed funds circling)."},
+  outcome:{mult:120, narr:"A generational company. The developer-experience wedge compounded into one of the most valuable private companies in the world."},
+  tellsGood:["product","team"], tellsBad:[]},
+
+ {real:"Airbnb", sector:"Travel / Marketplace", stage:"Seed", ask:"$600K @ ~$2.4M post", hype:2,
+  teaser:"A marketplace for booking a stranger's spare room or air mattress instead of a hotel.",
+  dd:{team:"Two designers + one engineer. Funded themselves selling novelty cereal boxes when broke. Absurdly resourceful; will not die.",
+      traction:"Slow, lumpy growth, but the cohorts that book once come back. Hosts in a handful of cities; revenue per booking small.",
+      market:"Sounds niche, but it's really 'all lodging.' If behavior shifts, the TAM is hotels — gigantic.",
+      product:"Photos were terrible until founders flew out and shot listings themselves — then bookings jumped. Product instinct is strong.",
+      risk:"Trust/safety is the whole ballgame (strangers in homes). Regulatory fights with cities likely. No financial red flags.",
+      terms:"Cheap entry, founder-friendly. Most investors are passing — 'people won't sleep in strangers' homes.'"},
+  outcome:{mult:200, narr:"The contrarian call of the decade. 'Insane' became obvious in hindsight; a global travel giant. Most investors passed."},
+  tellsGood:["market","team"], tellsBad:[]},
+
+ {real:"Theranos", sector:"HealthTech / Diagnostics", stage:"Series B-ish", ask:"$30M @ ~$1B post", hype:5,
+  teaser:"A device that runs hundreds of lab tests from a single drop of blood. A magazine-cover founder.",
+  dd:{team:"Charismatic, Stanford-dropout founder with a once-in-a-generation story. Board packed with ex-statesmen and generals.",
+      traction:"Big retail-pharmacy partnership announced. Press is euphoric. Valuation has rocketed on the narrative.",
+      market:"Diagnostics is massive and ripe for disruption. If it works, it changes medicine.",
+      product:"Claims hundreds of assays from microscopic samples — but there is NO peer-reviewed data, and the company won't allow independent third-party validation of the device.",
+      risk:"Board has Kissinger-tier names but ZERO clinical/diagnostics experts. Founder is intensely secretive about how the tech actually works. NDAs everywhere; ex-employees silenced.",
+      terms:"Hot round, heavily oversubscribed, minimal access to underlying technical data during diligence."},
+  outcome:{mult:0, narr:"Fraud. The technology never worked. Total loss, criminal convictions. The hype and the board were the camouflage."},
+  tellsGood:[], tellsBad:["product","risk"]},
+
+ {real:"WeWork", sector:"Real Estate", stage:"Growth", ask:"$300M @ ~$16B post", hype:5,
+  teaser:"Beautifully designed co-working spaces with kombucha on tap and a charismatic, messianic founder.",
+  dd:{team:"Magnetic founder, incredible fundraiser, sweeping 'elevate the world's consciousness' vision.",
+      traction:"Locations exploding; occupancy strong in flagship cities. Top-line growth is genuinely fast.",
+      market:"'We're a tech company,' they say. Flexible office demand is real and growing.",
+      product:"Nice spaces, strong brand, real community events. But fundamentally it's leasing real estate and subleasing it short-term.",
+      risk:"Founder has super-voting control, leases buildings HE personally owns back to the company, trademarked 'We' and sold it to his own company. Reports a made-up metric: 'community-adjusted EBITDA.'",
+      terms:"Valued at ~20x revenue like a software company — for a real-estate arbitrage with a duration mismatch (long leases, short revenue)."},
+  outcome:{mult:0, narr:"The valuation collapsed from $47B toward zero. The 'tech multiple' on a real-estate business, plus governance rot, unwound spectacularly."},
+  tellsGood:[], tellsBad:["risk","terms"]},
+
+ {real:"Uber", sector:"Mobility", stage:"Seed/A", ask:"$1.25M seed", hype:3,
+  teaser:"Push a button on your phone and a black car shows up. Starting with premium rides in one city.",
+  dd:{team:"Aggressive, relentless founder who has done this before. Will run through walls — and regulators.",
+      traction:"In one city, but utilization and repeat usage are excellent; the magic-moment retention is obvious.",
+      market:"Starts as 'black cars for techies' but the real prize is replacing car ownership — enormous.",
+      product:"The first time you use it, it feels like the future. Logistics/dispatch is genuinely hard tech.",
+      risk:"Regulators and taxi lobbies will fight hard, city by city. Culture is combative — could become a liability later.",
+      terms:"Competitive round, founder driving a hard bargain on price."},
+  outcome:{mult:90, narr:"Despite endless regulatory war and culture scandals, it redefined an industry. Massive outcome for early backers."},
+  tellsGood:["market","product"], tellsBad:[]},
+
+ {real:"Quibi", sector:"Streaming / Media", stage:"Mega-seed", ask:"$1.75B pre-launch", hype:5,
+  teaser:"Hollywood-grade, big-budget shows cut into 10-minute 'quick bites' for your phone. Star-studded leadership.",
+  dd:{team:"Legendary media + tech executives. Maybe the most credentialed founding team ever assembled.",
+      traction:"None — it hasn't launched. $1.75B was raised on the pedigree and the deck alone, before any user.",
+      market:"Bets that people want premium, paid, short-form video on mobile — a behavior YouTube/TikTok already serve for free.",
+      product:"Slick 'turn your phone' feature. But no evidence anyone wants polished 10-min episodes they must pay for.",
+      risk:"Enormous burn locked in before product-market fit. No ability to cheaply test the core demand assumption.",
+      terms:"Raising at a huge valuation on reputation; little de-risking of the central hypothesis."},
+  outcome:{mult:0, narr:"Shut down ~6 months after launch. Spent the war chest before validating that anyone wanted the product."},
+  tellsGood:[], tellsBad:["traction","market"]},
+
+ {real:"Figma", sector:"Design Tools", stage:"Seed", ask:"$3.8M @ ~$15M post", hype:3,
+  teaser:"A design tool that runs entirely in the browser, with real-time multiplayer collaboration.",
+  dd:{team:"Young technical founder, deeply patient — happy to spend years on hard rendering tech before shipping.",
+      traction:"Long stealth, but designers who try the multiplayer demo refuse to go back. Word-of-mouth is intense.",
+      market:"Adobe owns design software. Risky to attack — but the collaboration angle is a real wedge incumbents can't easily copy.",
+      product:"Doing in a browser what people said was impossible (WebGL rendering). Multiplayer is a genuine 10x for teams.",
+      risk:"Adobe is the 800-lb gorilla. Long time-to-revenue while building the hard tech. No governance concerns.",
+      terms:"Clean seed, founder-friendly, strong technical-investor interest."},
+  outcome:{mult:110, narr:"Browser-based, multiplayer-first design won. A category-defining company and a landmark acquisition offer."},
+  tellsGood:["product","traction"], tellsBad:[]},
+
+ {real:"Fast", sector:"Fintech / Checkout", stage:"Series A/B", ask:"$20M, then $102M", hype:4,
+  teaser:"One-click checkout that works on any site. Loud, fast-growing, hype-heavy founder on social media.",
+  dd:{team:"Magnetic, hyper-promotional founder with a big online following and a checkered prior-company history.",
+      traction:"Headline GMV numbers look big — but revenue is tiny (<$1M) and the GMV figures don't reconcile with the customer count.",
+      market:"One-click checkout is real (see Shopify/Bolt), but it's crowded and Shopify owns the funnel.",
+      product:"Works, but not clearly differentiated from several well-funded competitors.",
+      risk:"Burning $10M+/month against near-zero revenue. Spending on brand/parties outpaces product.",
+      terms:"Raising fast on momentum and founder charisma; unit economics not disclosed cleanly."},
+  outcome:{mult:0, narr:"Shut down abruptly. Spend vastly outran revenue; the GMV story never converted to a real business."},
+  tellsGood:[], tellsBad:["traction","risk"]},
+
+ {real:"Notion", sector:"Productivity SaaS", stage:"Seed", ask:"$2M @ ~$20M post", hype:2,
+  teaser:"An all-in-one workspace — docs, notes, wikis, databases — that you can shape into anything.",
+  dd:{team:"Tiny, design-obsessed team. So committed to getting it right they scrapped the codebase and rebuilt from scratch — twice.",
+      traction:"Small but fanatical user base; organic word-of-mouth and a cult-like community forming.",
+      market:"Crowded productivity space (Evernote, Google Docs), but users consolidate many tools into it.",
+      product:"Beautiful, flexible 'lego blocks' model. Power users build entire workflows; retention among them is exceptional.",
+      risk:"'Yet another notes app' skepticism. Monetization unproven early. No red flags.",
+      terms:"Modest valuation, founder-friendly, under-the-radar."},
+  outcome:{mult:40, narr:"The patient rebuilds paid off. A beloved, viral product and a multi-billion-dollar company."},
+  tellsGood:["product","team"], tellsBad:[]},
+
+ {real:"Bird", sector:"Micromobility", stage:"Series A/B", ask:"fastest-ever to $1B", hype:4,
+  teaser:"Dockless electric scooters on every street corner. Explosive, record-breaking growth.",
+  dd:{team:"Experienced ride-share operator founder; moving extremely fast to land-grab cities.",
+      traction:"Rides skyrocketing; reached a $1B valuation faster than any startup before it. Top-line looks incredible.",
+      market:"'Last-mile transport' framed as huge. Lots of capital pouring into the category.",
+      product:"Scooters get vandalized, stolen, and break within ~2-3 months — often before the hardware cost is recouped per unit.",
+      risk:"Unit economics underwater once you load in depreciation, repairs, charging, and theft. Cities threatening bans/impounds.",
+      terms:"Hot, competitive round at a rich valuation justified by growth, not margins."},
+  outcome:{mult:0, narr:"Growth was real but the per-scooter economics never worked. Slid into bankruptcy."},
+  tellsGood:[], tellsBad:["product","risk"]},
+
+ {real:"Coinbase", sector:"Crypto", stage:"Seed/A", ask:"$5M-ish early round", hype:3,
+  teaser:"A clean, friendly, regulated on-ramp for ordinary people to buy and hold Bitcoin.",
+  dd:{team:"Ex-Airbnb engineer founder; unusually focused on compliance and trust in a wild-west industry.",
+      traction:"Steady user growth tracking Bitcoin's hype cycles — spiky but trending up over time.",
+      market:"If crypto is anything, the trusted exchange is the toll booth. If it's nothing, this is zero.",
+      product:"Simple, safe UX in a space full of scams and lost keys. The 'safe default' for normies.",
+      risk:"Regulatory uncertainty is severe and existential. Revenue is highly volatile with the crypto cycle.",
+      terms:"Reasonable early valuation; many traditional investors too skeptical of crypto to participate."},
+  outcome:{mult:60, narr:"Rode crypto's volatility to a landmark public listing. Volatile, but a major win for early conviction."},
+  tellsGood:["product","market"], tellsBad:[]},
+
+ {real:"Instacart", sector:"Grocery / Delivery", stage:"Seed/A", ask:"early round", hype:5,
+  teaser:"Same-day grocery delivery via a network of personal shoppers. Beloved by busy households.",
+  dd:{team:"Ex-Amazon supply-chain founder who actually understands logistics economics.",
+      traction:"Strong, accelerating order growth; explodes during any disruption to normal shopping.",
+      market:"Groceries are a massive, low-margin category; delivery convenience has real pull.",
+      product:"Works well, but thin margins and heavy dependence on retailer relationships and gig labor.",
+      risk:"Razor-thin economics; vulnerable to Amazon/Walmart and to demand normalizing after any spike.",
+      terms:"Competitive round; valuation runs ahead during demand surges."},
+  outcome:{mult:9, narr:"A real, durable business — but the pandemic-peak valuation overshot. Solid, not spectacular, for those who paid up late."},
+  tellsGood:["team"], tellsBad:["product"]},
+];
+
+const CAT=[
+  ["team","Team & Founders","Who's building it"],
+  ["traction","Traction & Metrics","Numbers, growth, retention"],
+  ["market","Market & Timing","TAM, why now"],
+  ["product","Product & Moat","Is it 10x? defensible?"],
+  ["risk","Risk & Governance","Red flags, structure"],
+  ["terms","Terms & Round","Valuation, syndicate"],
+];
+const DP_PER_DEAL=3, CAP=25, START=100, N=5;
+const BANK_START=1000, STAKE=100;
+/* Brier-centered proper scoring rule: 50% = 0, confident-right up to +STAKE, confident-wrong down to -3*STAKE.
+   Honest probabilities maximize expected score; overconfidence is punished asymmetrically. */
+const brierDelta=(pPct,outcome)=>{const p=pPct/100,o=outcome?1:0;return Math.round(STAKE*(1-4*Math.pow(p-o,2)));};
+
+let S=null;
+const fmt=m=>(m<0?"-":"")+"$"+Math.abs(m).toLocaleString(undefined,{maximumFractionDigits:1})+"M";
+const pick=(a,k)=>{const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]];}return x.slice(0,k);};
+const app=()=>document.getElementById('app');
+
+function start(){
+  S={deals:pick(DEALS,Math.min(N,DEALS.length)), i:0, cash:START, log:[], dp:DP_PER_DEAL, seen:new Set(), bank:BANK_START, pBreak:50, pWipe:50, nudged:false, wagerNudged:false};
+  window.FVC&&FVC.track('memo_start',{deals:S.deals.length});
+  showDeal();
+}
+function startScreen(){
+  app().innerHTML=`
+  <div class="card center">
+    <div class="kicker">Solo GP · Blind Diligence</div>
+    <div class="dealname">You have ${fmt(START)} and ${Math.min(N,DEALS.length)} deals on your desk.</div>
+    <p class="teaser" style="max-width:600px;margin:12px auto 0">Each company is real but <b>anonymized</b>. You get <b>${DP_PER_DEAL} diligence points per deal</b> — there are 6 things you could investigate, so you can only look at half. The decisive clue is often hidden in the one box you didn't open. Write a check (up to ${fmt(CAP)}) or pass. Outcomes are revealed only after you decide.</p>
+    <div class="btns" style="justify-content:center"><button class="act invest" onclick="start()">Open the first deal →</button></div>
+    <div class="hint">Tip from the desk: the frauds always look great on Team and Market. The rot hides in Risk, Terms, and real Traction.</div>
+  </div>`;
+}
+
+function bar(){
+  const inv=START-S.cash;
+  return `<div class="bar">
+    <div class="stat"><div class="k">Deal</div><div class="v">${S.i+1} / ${S.deals.length}</div></div>
+    <div class="stat"><div class="k">Dry Powder</div><div class="v green">${fmt(S.cash)}</div></div>
+    <div class="stat"><div class="k">Deployed</div><div class="v">${fmt(inv)}</div></div>
+    <div class="stat"><div class="k">Conviction Bank</div><div class="v" style="color:${S.bank>=BANK_START?'var(--gold)':'var(--bad)'}">${S.bank} pts</div></div>
+  </div>`;
+}
+
+function showDeal(){
+  const d=S.deals[S.i]; S.dp=DP_PER_DEAL; S.seen=new Set(); S.pBreak=50; S.pWipe=50; S.armed=null;
+  render();
+  function render(){
+    const cap=Math.min(CAP,S.cash);
+    app().innerHTML=bar()+`
+    <div class="card">
+      <div class="kicker">${d.stage} · ${d.sector}</div>
+      <div class="dealname">Project ${String.fromCharCode(65+S.i)} <span style="color:var(--mut);font-weight:600;font-size:15px">· name withheld</span></div>
+      <div class="teaser">${d.teaser}</div>
+      <div class="facts">
+        <div class="fact"><span>Stage</span><b>${d.stage}</b></div>
+        <div class="fact"><span>The ask</span><b>${d.ask}</b></div>
+        <div class="fact"><span>Sector</span><b>${d.sector}</b></div>
+      </div>
+      <div class="ddhead"><h3>Diligence</h3><div class="dp">Points left: <b>${S.dp}</b> / ${DP_PER_DEAL}</div></div>
+      <div class="ddgrid">${CAT.map(([k,t,c])=>{
+        const open=S.seen.has(k), armed=S.armed===k, locked=!open&&!armed&&S.dp<=0;
+        return `<div class="ddbtn ${open?'open':''} ${armed?'armed':''} ${locked?'locked':''}" data-k="${k}">
+          <div class="t">${t} ${open||armed?'':`<span class="cost">1 pt</span>`}</div>
+          <div class="c">${c}</div>
+          ${open?`<div class="revtext">${d.dd[k]}</div>`:''}
+          ${armed?`<div class="confirm"><span>Spend 1 point to open?</span><button class="mini ok" data-ok="${k}">Open</button><button class="mini no" data-no="${k}">Cancel</button></div>`:''}
+        </div>`;}).join('')}</div>
+      <div class="decide">
+        ${!S.nudged?`<div class="coach">🚩 <b>Desk tip:</b> the decisive red flag usually hides in <b>Risk &amp; Governance</b> or <b>Terms</b> — the two boxes players skip most. Spend a point there before you commit.</div>`:''}
+        <h3 style="margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut)">Make the call <span style="text-transform:none;letter-spacing:0;color:#5a6075;font-weight:400">— wager conviction; 50% risks nothing, honest odds score best</span></h3>
+        <div class="checkrow">
+          <span class="hint" style="margin:0;min-width:150px">🚀 Breakout (≥10×)?</span>
+          <input type="range" id="pb" min="0" max="100" step="5" value="50" style="accent-color:var(--good)">
+          <span class="checkval" id="pbv" style="color:var(--good);min-width:48px">50%</span>
+        </div>
+        <div class="checkrow">
+          <span class="hint" style="margin:0;min-width:150px">💀 Wipeout ($0)?</span>
+          <input type="range" id="pw" min="0" max="100" step="5" value="50" style="accent-color:var(--bad)">
+          <span class="checkval" id="pwv" style="color:var(--bad);min-width:48px">50%</span>
+        </div>
+        <div class="hint" id="wagerHint" style="margin-top:4px"></div>
+        <div class="checkrow" style="margin-top:14px;border-top:1px solid var(--line);padding-top:14px">
+          <span class="hint" style="margin:0">Check size</span>
+          <input type="range" id="chk" min="0" max="${cap}" step="0.5" value="0">
+          <span class="checkval" id="chkv">$0M</span>
+        </div>
+        <div class="btns">
+          <button class="act invest" id="investBtn">Invest $0M</button>
+          <button class="act pass" id="passBtn">Pass</button>
+        </div>
+        <div class="hint">You've opened ${S.seen.size} of 6 boxes. Commit when ready — you can't un-see the outcome.</div>
+      </div>
+    </div>`;
+    app().querySelectorAll('.ddbtn[data-k]').forEach(b=>b.onclick=()=>{
+      const k=b.dataset.k; if(S.seen.has(k)||S.armed===k||S.dp<=0)return; S.armed=k; render();   // arm, don't spend yet
+    });
+    app().querySelectorAll('[data-ok]').forEach(btn=>btn.onclick=e=>{
+      e.stopPropagation(); const k=btn.dataset.ok; if(S.dp>0&&!S.seen.has(k)){S.seen.add(k);S.dp--;window.FVC&&FVC.track('diligence_open',{cat:k,deal:S.i});} S.armed=null; render();
+    });
+    app().querySelectorAll('[data-no]').forEach(btn=>btn.onclick=e=>{
+      e.stopPropagation(); S.armed=null; render();
+    });
+    const chk=document.getElementById('chk'), chkv=document.getElementById('chkv'), ib=document.getElementById('investBtn');
+    chk.oninput=()=>{const v=parseFloat(chk.value);chkv.textContent=fmt(v);ib.textContent='Invest '+fmt(v);ib.disabled=v<=0;};
+    chk.oninput();
+    ib.onclick=()=>commit(parseFloat(chk.value));
+    document.getElementById('passBtn').onclick=()=>commit(0);
+    const pb=document.getElementById('pb'), pw=document.getElementById('pw'), wh=document.getElementById('wagerHint');
+    const updWager=()=>{
+      S.pBreak=parseInt(pb.value); S.pWipe=parseInt(pw.value);
+      document.getElementById('pbv').textContent=S.pBreak+'%'; document.getElementById('pwv').textContent=S.pWipe+'%';
+      const sgn=x=>(x>=0?'+':'')+x;
+      wh.innerHTML=`🚀 if right <b style="color:var(--good)">${sgn(brierDelta(S.pBreak,true))}</b> / if wrong <b style="color:var(--bad)">${sgn(brierDelta(S.pBreak,false))}</b>`
+        +` &nbsp;·&nbsp; 💀 if right <b style="color:var(--good)">${sgn(brierDelta(S.pWipe,true))}</b> / if wrong <b style="color:var(--bad)">${sgn(brierDelta(S.pWipe,false))}</b> &nbsp;<span style="color:#5a6075">(pts)</span>`;
+    };
+    pb.oninput=updWager; pw.oninput=updWager; updWager();
+  }
+}
+
+function commit(amount){
+  const d=S.deals[S.i];
+  // #5 — one-time nudge if the conviction wager was left untouched at 50/50 (scores 0)
+  if(S.pBreak===50 && S.pWipe===50 && !S.wagerNudged){
+    S.wagerNudged=true;
+    window.FVC&&FVC.track('wager_nudge',{deal:S.i});
+    const wh=document.getElementById('wagerHint');
+    if(wh){ wh.innerHTML='⚠️ <b>Wager left at 50/50</b> — moving the odds is how you build a forecasting track record (50/50 scores 0 points). Set them, or click again to commit as-is.'; wh.style.color='var(--gold)'; }
+    return;   // let them reconsider; a second click on Invest/Pass proceeds
+  }
+  S.nudged=true;   // first real commit retires the Risk/Terms coach tip for the rest of the run
+  amount=Math.min(amount,S.cash);
+  S.cash-=amount;
+  const value=amount*d.outcome.mult;          // what the check is worth at the outcome
+  const pnl=value-amount;
+  const breakout=d.outcome.mult>=10, wipeout=d.outcome.mult<1;
+  const dBreak=brierDelta(S.pBreak,breakout), dWipe=brierDelta(S.pWipe,wipeout);
+  S.bank+=dBreak+dWipe;
+  const pred={pBreak:S.pBreak,pWipe:S.pWipe,breakout,wipeout,dBreak,dWipe};
+  S.log.push({d, amount, value, pnl, mult:d.outcome.mult, looked:[...S.seen], pred});
+  window.FVC&&FVC.track('decision',{deal:S.i,company:d.real,invested:amount>0,amount,boxes:S.seen.size,pBreak:S.pBreak,pWipe:S.pWipe,mult:d.outcome.mult});
+  reveal({d,amount,value,pnl,pred});
+}
+
+function reveal({d,amount,value,pnl,pred}){
+  const win=d.outcome.mult>=3, dead=d.outcome.mult<1;
+  const mkt=(label,p,hit,delta)=>`<div class="scorebox"><div class="k">${label}</div>
+    <div class="v" style="font-size:15px">${p}% → <b style="color:${hit?'var(--good)':'var(--mut)'}">${hit?'YES':'NO'}</b>
+    <span style="color:${delta>=0?'var(--good)':'var(--bad)'};font-size:13px">${delta>=0?'+':''}${delta}</span></div></div>`;
+  const crowd=Math.round(d.hype*15+8);        // % of "players" who invested (hype-driven)
+  // tell feedback
+  const lookedTellBad=d.tellsBad.filter(k=>S.seen.has(k));
+  const missedTellBad=d.tellsBad.filter(k=>!S.seen.has(k));
+  const lookedTellGood=d.tellsGood.filter(k=>S.seen.has(k));
+  let tell;
+  if(dead){
+    if(amount>0 && missedTellBad.length) tell={c:'bad',h:`💥 You invested and got wiped. The tell was in <b>${missedTellBad.map(catName).join(' & ')}</b> — and you never opened ${missedTellBad.length>1?'those boxes':'that box'}.`};
+    else if(amount>0 && lookedTellBad.length) tell={c:'bad',h:`💥 Wiped — and you <b>saw the red flag</b> in ${lookedTellBad.map(catName).join(' & ')} but invested anyway. The hardest discipline in VC is passing on a great story.`};
+    else tell={c:'good',h:`✅ You passed on a zero. ${lookedTellBad.length?`You caught the tell in <b>${lookedTellBad.map(catName).join(' & ')}</b>.`:`Good instincts — the rot was hiding in ${d.tellsBad.map(catName).join(' & ')}.`}`};
+  } else if(win){
+    if(amount>0) tell={c:'good',h:`🚀 You backed a winner${lookedTellGood.length?` — and your read on <b>${lookedTellGood.map(catName).join(' & ')}</b> was the right signal`:''}. ${amount>=CAP*0.8?'And you sized up — conviction rewarded.':'Worth sizing these up next time.'}`};
+    else tell={c:'meh',h:`😬 You passed on a ${d.outcome.mult}× outcome. ${d.tellsGood.length?`The signal was in <b>${d.tellsGood.map(catName).join(' & ')}</b>.`:''} The best deals usually look risky at the table.`};
+  } else {
+    tell={c:'meh',h:amount>0?`A modest outcome (${d.outcome.mult}×). Fine, not a fund-maker.`:`You passed on a modest ${d.outcome.mult}× — no harm.`};
+  }
+  app().innerHTML=bar()+`
+  <div class="card reveal center">
+    <div class="real">The deal was</div>
+    <div class="rn">${d.real}</div>
+    <div class="multbig" style="color:${dead?'var(--bad)':win?'var(--good)':'var(--gold)'}">${d.outcome.mult}×</div>
+    <div class="narr" style="max-width:600px;margin:12px auto 0">${d.outcome.narr}</div>
+    <div class="pnlrow" style="justify-content:center">
+      <div class="scorebox"><div class="k">Your check</div><div class="v">${fmt(amount)}</div></div>
+      <div class="scorebox"><div class="k">Now worth</div><div class="v">${fmt(value)}</div></div>
+      <div class="scorebox"><div class="k">P&L</div><div class="v" style="color:${pnl>=0?'var(--good)':'var(--bad)'}">${pnl>=0?'+':''}${fmt(pnl)}</div></div>
+    </div>
+    <div class="real" style="margin-top:6px">Your wager</div>
+    <div class="pnlrow" style="justify-content:center;margin:6px 0 0">
+      ${mkt('🚀 Breakout?',pred.pBreak,pred.breakout,pred.dBreak)}
+      ${mkt('💀 Wipeout?',pred.pWipe,pred.wipeout,pred.dWipe)}
+      <div class="scorebox"><div class="k">Conviction Δ</div><div class="v" style="color:${(pred.dBreak+pred.dWipe)>=0?'var(--good)':'var(--bad)'}">${(pred.dBreak+pred.dWipe)>=0?'+':''}${pred.dBreak+pred.dWipe}</div></div>
+    </div>
+    <div class="tellbox ${tell.c}">${tell.h}</div>
+    <div class="social">📊 ${crowd}% of players wrote a check on this deal.</div>
+    <div class="btns" style="justify-content:center">
+      <button class="act invest" id="next">${S.i+1>=S.deals.length?'See your track record →':'Next deal →'}</button>
+    </div>
+  </div>`;
+  document.getElementById('next').onclick=()=>{ S.i++; if(S.i>=S.deals.length) endRun(); else showDeal(); };
+}
+function catName(k){return CAT.find(c=>c[0]===k)[1].split(' ')[0];}
+
+function endRun(){
+  const finalVal=S.cash+S.log.reduce((s,l)=>s+l.value,0);
+  const profit=finalVal-START, mult=finalVal/START;
+  // judgment accuracy: right call per deal
+  let correct=0; S.log.forEach(l=>{
+    const m=l.mult, inv=l.amount>0;
+    if((m>=3&&inv)||(m<1&&!inv)||(m>=1&&m<3)) correct++;
+  });
+  const acc=Math.round(100*correct/S.log.length);
+  // traps faced vs stepped on
+  const traps=S.log.filter(l=>l.mult<1), stepped=traps.filter(l=>l.amount>0);
+  const cleanSheet=traps.length>0 && stepped.length===0;
+  const bankDelta=S.bank-BANK_START, forecastEdge=bankDelta>0;
+  // Tiered scout flag (was binary). Gold = the original four-condition New Blood.
+  const gold=profit>0 && cleanSheet && acc>=70 && forecastEdge;
+  const silver=!gold && profit>0 && acc>=70;
+  const bronze=!gold && !silver && profit>0;
+  const scoutTier=gold?'gold':silver?'silver':bronze?'bronze':'none';
+  const newBlood=gold; // back-compat for the summary/usage layer
+  window.FVC&&FVC.track('memo_end',{profit:Math.round(profit),mult:+mult.toFixed(2),acc,bank:S.bank,bankDelta,trapsDodged:traps.length-stepped.length,traps:traps.length,newBlood,scoutTier});
+  app().innerHTML=`
+  <div class="card center">
+    <div class="kicker">Track Record</div>
+    <div class="dealname">${profit>=0?'+':''}${fmt(profit)} · ${mult.toFixed(2)}× fund</div>
+    <div class="scoregrid">
+      <div class="scorebox"><div class="k">Final Fund</div><div class="v">${fmt(finalVal)}</div></div>
+      <div class="scorebox"><div class="k">Diligence Rating</div><div class="v" style="color:${acc>=70?'var(--good)':acc>=55?'var(--gold)':'var(--bad)'}">${acc}%</div></div>
+      <div class="scorebox"><div class="k">Traps dodged</div><div class="v" style="color:${cleanSheet?'var(--good)':'var(--bad)'}">${traps.length-stepped.length}/${traps.length}</div></div>
+      <div class="scorebox"><div class="k">Conviction Bank</div><div class="v" style="color:${forecastEdge?'var(--good)':'var(--bad)'}">${S.bank} <span style="font-size:12px">(${bankDelta>=0?'+':''}${bankDelta})</span></div></div>
+    </div>
+    <div class="narr" style="max-width:620px;margin:0 auto">${
+      gold? "Clean sheet on the frauds, positive returns, your invest/pass calls tracked outcomes — and your <b>forecasts beat the market</b>. That's the rare read a scout network hunts for."
+      : silver? `Positive returns and <b>${acc}% diligence accuracy</b> — a real scout signal. To reach <b>Gold</b>: a clean sheet on the zeros${stepped.length?` (you stepped on ${stepped.length})`:''} and a winning conviction bank${!forecastEdge?` (yours is ${bankDelta})`:''}.`
+      : bronze? `You finished in the green. <b>Silver</b> wants 70%+ diligence accuracy (you're at ${acc}%); <b>Gold</b> adds a clean fraud sheet and a winning conviction bank.`
+      : stepped.length? `You stepped on ${stepped.length} zero${stepped.length>1?'s':''} (${stepped.map(l=>l.d.real).join(', ')}) and finished underwater. Re-run and spend a diligence point on Risk & Terms when a story feels too good.`
+      : `You finished underwater. Tighten your invest/pass calls and your conviction wagers — positive returns is the first scout rung (Bronze).`
+    }</div>
+    ${gold?`<div class="scoutbadge">🥇 NEW BLOOD — flagged to the scout network</div>`
+      :silver?`<div class="scoutbadge silver">🥈 SILVER SCOUT</div>`
+      :bronze?`<div class="scoutbadge bronze">🥉 BRONZE SCOUT</div>`
+      :`<div class="scoutbadge miss">🔒 Scout flag locked — finish in the green to earn Bronze</div>`}
+    <div class="btns" style="justify-content:center;margin-top:18px">
+      <button class="act invest" id="shareBtn">📋 Share your Scout Card</button>
+      <button class="act pass" onclick="start()">New desk →</button>
+      <button class="act pass" onclick="location.href='index.html'">Back to the League</button>
+    </div>
+  </div>`;
+  // Shareable Scout Card — copy as markdown or push to X/LinkedIn.
+  const shareResult={
+    mode:'diligence', tier:scoutTier, rank:`${mult.toFixed(2)}× fund`,
+    stats:[
+      {k:'Final Fund', v:fmt(finalVal)},
+      {k:'Diligence Accuracy', v:acc+'%'},
+      {k:'Traps Dodged', v:(traps.length-stepped.length)+'/'+traps.length},
+      {k:'Conviction Bank', v:S.bank+' ('+(bankDelta>=0?'+':'')+bankDelta+')'},
+    ],
+    line: gold?'Clean sheet on the frauds and my forecasts beat the market — the rare read a scout network hunts for.'
+      : silver?'Positive returns and a real diligence edge on blind deals.'
+      : bronze?'Finished in the green reading blind deals.'
+      : 'Sharpening my read on blind deals — the frauds got me this round.'
+  };
+  const sb=document.getElementById('shareBtn'); if(sb) sb.onclick=()=>window.FVC&&FVC.share(shareResult);
+}
+
+startScreen();
+</script>
+</body>
+</html>
