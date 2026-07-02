@@ -1,6 +1,7 @@
 # Live collector output (per-deployment usage data — never commit real user traces).
 usage/events.jsonl
 usage/live-events.json
+usage/lp-waitlist.jsonl   # LP demand capture — contains PII, never commit
 
 # Local exports downloaded from usage.html
 fvc_usage_*.json
