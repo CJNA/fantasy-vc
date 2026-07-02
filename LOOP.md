@@ -36,8 +36,9 @@ apply) improvements.**
 | event | key fields |
 |---|---|
 | `app_open` / `drop` | `path` |
-| `thesis_select` | `thesis`, `finW` |
-| `season_begin` | `deals`, `deployed`, `thesis`, `finW` |
+| `thesis_select` | `thesis`, `finW` — preset (or `Custom`) chosen |
+| `thesis_custom` | `factor`, `val` — a factor slider was dragged (fine-tune granularity) |
+| `season_begin` | `deals`, `deployed`, `thesis`, `finW`, `customW` (the raw weight vector when `thesis==='Custom'`, else `null`) |
 | `auto_resolve` | `fromRound` — player skipped the rest of the season to the Exit marks |
 | `season_end` | `rank`, `funds`, `profit`, `mult`, `judgment`, `newBlood`, `scoutTier`, `thesis` |
 | `memo_start` | `deals` |
@@ -45,8 +46,13 @@ apply) improvements.**
 | `decision` | `deal`, `company`, `invested`, `amount`, `boxes`, `pBreak`, `pWipe`, `mult` |
 | `wager_nudge` | `deal` — fired once/run when a player commits with the wager still at 50/50 |
 | `memo_end` | `profit`, `mult`, `acc`, `bank`, `bankDelta`, `trapsDodged`, `traps`, `newBlood`, `scoutTier` |
+| `share_open` / `share_copy` / `share_close` | `mode`, `tier` — Scout Card opened / copied / dismissed |
+| `share_click` | `net` (`x｜linkedin`), `mode`, `tier` — public share pushed |
+| `leaderboard_optin` / `leaderboard_optout` | `mode`, `tier`, `handle` — consent-based VC-leaderboard toggle |
 
 > `scoutTier` ∈ `gold｜silver｜bronze｜none` (tiered scout flag); `newBlood` stays = `gold` for back-compat.
+> Thesis is now either a preset name or `Custom` (per-factor sliders); `customW` on `season_begin`
+> carries the tuned mix. Stage-as-an-axis is scoped but not built — see `STAGE-SCOPE.md`.
 
 ## The data path (prototype → production)
 - **Single-machine:** play → events in `localStorage` → `usage.html` → **Download usage JSON**

@@ -49,7 +49,12 @@
   .chip.on{border-color:var(--acc);background:#191634;color:#fff;box-shadow:0 0 0 1px var(--acc) inset}
   .chip small{display:block;color:var(--mut);font-weight:400;font-size:10px;margin-top:1px}
   .wbar{display:flex;height:7px;border-radius:5px;overflow:hidden;flex:1;min-width:160px;border:1px solid var(--line)}
-  .wseg{height:100%}
+  .wseg{height:100%;transition:width .18s ease}
+  #factorSliders{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center}
+  .fsl{display:flex;align-items:center;gap:7px;font-size:11px}
+  .fsl-l{min-width:30px;font-weight:700;letter-spacing:.3px}
+  .fsl input[type=range]{width:96px;height:4px}
+  .fsl b{min-width:18px;text-align:right;color:var(--txt);font-variant-numeric:tabular-nums;font-size:11.5px}
   .toppick{font-size:12.5px;color:#c7cbe0;margin-top:11px;border-top:1px solid var(--line);padding-top:11px}
   .toppick b{color:#fff}
   .rankchip{position:absolute;top:-8px;left:-8px;background:var(--panel2);border:1px solid var(--line);
@@ -185,6 +190,10 @@
         <span class="wbar" id="wbar" title="weighting mix"></span>
       </div>
       <div class="trow">
+        <span class="lab">Fine-tune</span>
+        <span id="factorSliders"></span>
+      </div>
+      <div class="trow">
         <span class="lab">Financials vs read</span>
         <span id="finChips"></span>
         <span class="hint" id="thesisNote"></span>
@@ -299,17 +308,21 @@ const FINSPLITS=[0.1,0.2,0.3,0.4,0.5,0.6];
 const fmt=m=>(m<0?"-":"")+"$"+Math.abs(m).toLocaleString(undefined,{maximumFractionDigits:1})+"M";
 const star=h=>"★".repeat(h)+"<span style='color:#33384a'>"+"★".repeat(5-h)+"</span>";
 
-let deals=[], alloc={}, thesis={wIdx:0, finW:0.3};
+let deals=[], alloc={}, thesis={wIdx:0, finW:0.3, custom:null};
+// custom===null → use preset THESES[wIdx].w. Dragging a factor slider sets custom={...} (raw
+// 0-50 weights; conviction() normalizes by their sum, so they needn't total 100).
 let G=null;
 let prevRanks=null;   // conviction ranks from the last render, to flash cards that move on thesis switch
 
 function pick(arr,k){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a.slice(0,k);}
 
 /* ---- conviction from thesis ---- */
+function curW(){ return thesis.custom || THESES[thesis.wIdx].w; }      // active weight vector
+function curName(){ return thesis.custom ? 'Custom' : THESES[thesis.wIdx].n; }
 function conviction(d){
-  const w=THESES[thesis.wIdx].w;
+  const w=curW();
   let tw=0,acc=0; for(const k in w){acc+=w[k]*d.f[k]; tw+=w[k];}
-  const nf=acc/tw;                       // weighted avg of non-financial factor scores
+  const nf=acc/tw;                       // weighted avg of non-financial factor scores (self-normalizing)
   return Math.round(thesis.finW*d.fin + (1-thesis.finW)*nf);
 }
 function convColor(c){return c>=78?'#19c37d':c>=66?'#ffd166':'#ff7a90';}
@@ -325,19 +338,41 @@ function newDealFlow(){
   document.getElementById('endcard').style.display='none';
 }
 
+const WCOLS={team:'#7c5cff',ps:'#5ac8fa',diff:'#19c37d',market:'#ffd166',comm:'#ff9f40',ar:'#ff5470'};
+function noteText(){
+  const w=curW();
+  return thesis.finW>=0.5 ? "Heavy on the numbers — careful, juiced metrics are a classic trap."
+    : w.ar>=25 ? "Governance-weighted — you'll dodge the frauds, but may pass on rockets."
+    : thesis.custom ? "Custom mix — you're tuning the model yourself. Watch the board re-rank."
+    : "Tip: the names that go to zero score high on hype and low on the red Risk bar.";
+}
+// Light repaint: weighting bar + chip highlights + note. Safe to call mid-drag — it never
+// rebuilds the sliders, so grabbing a slider handle keeps working.
+function repaintThesisChrome(){
+  const w=curW(), sum=FK.reduce((a,[k])=>a+w[k],0)||1;
+  const wb=document.getElementById('wbar'); wb.innerHTML='';
+  FK.forEach(([k])=>{const seg=document.createElement('div');seg.className='wseg';const pct=w[k]/sum*100;seg.style.width=pct+'%';seg.style.background=WCOLS[k];seg.title=k+' '+Math.round(pct)+'%';wb.appendChild(seg);});
+  document.querySelectorAll('#thesisChips .chip').forEach((c,i)=>{
+    const isCustom=c.dataset.custom==='1';
+    c.classList.toggle('on', isCustom ? !!thesis.custom : (!thesis.custom && i===thesis.wIdx));
+  });
+  document.getElementById('thesisNote').textContent=noteText();
+}
 function renderThesis(){
   const tc=document.getElementById('thesisChips'); tc.innerHTML='';
   THESES.forEach((t,i)=>{
     const c=document.createElement('span');
-    c.className='chip'+(i===thesis.wIdx?' on':'');
+    c.className='chip';
     c.innerHTML=`${t.n}<small>${t.d}</small>`;
-    c.onclick=()=>{thesis.wIdx=i;window.FVC&&FVC.track('thesis_select',{thesis:t.n,finW:thesis.finW});renderThesis();renderGrid();};
+    c.onclick=()=>{thesis.custom=null;thesis.wIdx=i;window.FVC&&FVC.track('thesis_select',{thesis:t.n,finW:thesis.finW});renderThesis();renderGrid();};
     tc.appendChild(c);
   });
-  // weighting bar
-  const wb=document.getElementById('wbar'); wb.innerHTML='';
-  const w=THESES[thesis.wIdx].w; const cols={team:'#7c5cff',ps:'#5ac8fa',diff:'#19c37d',market:'#ffd166',comm:'#ff9f40',ar:'#ff5470'};
-  FK.forEach(([k])=>{const seg=document.createElement('div');seg.className='wseg';seg.style.width=w[k]+'%';seg.style.background=cols[k];seg.title=k+' '+w[k]+'%';wb.appendChild(seg);});
+  // "Custom" quick-start chip — snaps to an editable copy of the current weights.
+  const cc=document.createElement('span'); cc.className='chip'; cc.dataset.custom='1';
+  cc.innerHTML=`🎚 Custom<small>tune it yourself</small>`;
+  cc.onclick=()=>{ if(!thesis.custom){ thesis.custom=Object.assign({},THESES[thesis.wIdx].w); window.FVC&&FVC.track('thesis_select',{thesis:'Custom',finW:thesis.finW}); renderThesis(); renderGrid(); } };
+  tc.appendChild(cc);
+  // financials-vs-read chips
   const fc=document.getElementById('finChips'); fc.innerHTML='';
   FINSPLITS.forEach(v=>{
     const c=document.createElement('span');
@@ -346,10 +381,24 @@ function renderThesis(){
     c.onclick=()=>{thesis.finW=v;renderThesis();renderGrid();};
     fc.appendChild(c);
   });
-  document.getElementById('thesisNote').textContent =
-    thesis.finW>=0.5 ? "Heavy on the numbers — careful, juiced metrics are a classic trap."
-    : THESES[thesis.wIdx].w.ar>=25 ? "Governance-weighted — you'll dodge the frauds, but may pass on rockets."
-    : "Tip: the names that go to zero score high on hype and low on the red Risk bar.";
+  // per-factor fine-tune sliders (the granularity: dial each factor 0–50, drag flips to Custom)
+  const fs=document.getElementById('factorSliders'); fs.innerHTML='';
+  const w=curW();
+  FK.forEach(([k,lbl])=>{
+    const wrap=document.createElement('span'); wrap.className='fsl';
+    const val=document.createElement('b'); val.textContent=w[k];
+    const r=document.createElement('input'); r.type='range'; r.min=0; r.max=50; r.step=1; r.value=w[k];
+    r.style.accentColor=WCOLS[k];
+    r.oninput=()=>{
+      const base=Object.assign({},curW()); base[k]=+r.value; thesis.custom=base;
+      val.textContent=r.value;
+      repaintThesisChrome(); renderGrid();   // NOT renderThesis — keep the slider grabbable
+    };
+    r.onchange=()=>{ window.FVC&&FVC.track('thesis_custom',{factor:k,val:+r.value}); };
+    wrap.innerHTML=`<span class="fsl-l" style="color:${WCOLS[k]}">${lbl}</span>`;
+    wrap.appendChild(r); wrap.appendChild(val); fs.appendChild(wrap);
+  });
+  repaintThesisChrome();
 }
 
 function renderGrid(){
@@ -386,7 +435,7 @@ function renderGrid(){
   let mover=null, moverDelta=0;
   if(prevRanks){ deals.forEach(d=>{ if(prevRanks[d.n]===undefined)return; const dif=prevRanks[d.n]-rankOf[d.n]; if(Math.abs(dif)>Math.abs(moverDelta)){moverDelta=dif;mover=d;} }); }
   document.getElementById('topPick').innerHTML=
-    `Under <b>${THESES[thesis.wIdx].n}</b>, your model's top picks: `
+    `Under <b>${curName()}</b>, your model's top picks: `
     + ranked.slice(0,3).map((d,i)=>`${medals[i]} ${d.n} <span style="color:var(--mut)">(${conviction(d)})</span>`).join(' &nbsp;·&nbsp; ')
     + (mover&&moverDelta!==0
         ? ` &nbsp;·&nbsp; biggest shift: <b>${mover.n}</b> <span style="color:${moverDelta>0?'var(--good)':'var(--bad)'}">${moverDelta>0?'▲':'▼'}${Math.abs(moverDelta)}</span>`
@@ -474,7 +523,7 @@ function enterSeason(){
   const ais=buildAIs().map(makeFund);
   G={round:0, funds:[player,...ais], pIdx:0, foRound:{}, hist:null};
   G.hist=G.funds.map(f=>[value(f,0)]);
-  window.FVC&&FVC.track('season_begin',{deals:Object.values(alloc).filter(v=>v>0).length,deployed:Object.values(alloc).reduce((a,b)=>a+b,0),thesis:THESES[thesis.wIdx].n,finW:thesis.finW});
+  window.FVC&&FVC.track('season_begin',{deals:Object.values(alloc).filter(v=>v>0).length,deployed:Object.values(alloc).reduce((a,b)=>a+b,0),thesis:curName(),finW:thesis.finW,customW:thesis.custom||null});
   document.getElementById('log').innerHTML='';
   setHeader(); renderHoldings(); renderLB(); drawChart();
   document.getElementById('advBtn').disabled=false;
@@ -628,7 +677,7 @@ function endSeason(){
   const silver=!gold && myRank<=Math.ceil(rows.length/2) && my.prof>0;
   const bronze=!gold && !silver && my.prof>0;
   const scoutTier=gold?'gold':silver?'silver':bronze?'bronze':'none';
-  window.FVC&&FVC.track('season_end',{rank:myRank,funds:rows.length,profit:Math.round(my.prof),mult:+mult.toFixed(2),judgment:js,newBlood:gold,scoutTier,thesis:THESES[thesis.wIdx].n});
+  window.FVC&&FVC.track('season_end',{rank:myRank,funds:rows.length,profit:Math.round(my.prof),mult:+mult.toFixed(2),judgment:js,newBlood:gold,scoutTier,thesis:curName()});
   // any zeros held?
   const blewUp=deals.filter(d=>d.path[5]===0 && (G.funds[G.pIdx].pos[d.n]?.cost>0)).map(d=>d.n);
   const card=document.getElementById('endcard'); card.style.display='block';
@@ -652,7 +701,7 @@ function endSeason(){
   // Shareable Scout Card — copy as markdown or push to X/LinkedIn.
   const shareResult={
     mode:'league', tier:scoutTier, rank:`Rank #${myRank} of ${rows.length}`,
-    thesis:THESES[thesis.wIdx].n,
+    thesis:curName(),
     stats:[
       {k:'Fund Multiple', v:mult.toFixed(2)+'×'},
       {k:'Total Profit', v:(my.prof>=0?'+':'')+fmt(my.prof)},
