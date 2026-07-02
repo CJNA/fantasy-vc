@@ -4,7 +4,7 @@
 
 Two ways to play, one shared analytics + self-improvement loop behind them. No build step, no framework, no dependencies — every app is a single HTML file you can open by double-clicking.
 
-> **Live:** https://fvc.onrender.com  ·  **Deploy your own:** one-click [Render Blueprint](#deploy-to-render) below.
+> **Live:** [https://fvc.onrender.com](https://fvc-l5hd.onrender.com/)  ·  **Deploy your own:** one-click [Render Blueprint](#deploy-to-render) below.
 
 ---
 
