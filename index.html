@@ -205,10 +205,13 @@
 
     <div class="grid" id="grid"></div>
 
-    <div class="actions">
-      <button class="primary" id="beginBtn" disabled>▶ Begin Season</button>
-      <button id="reshuffleBtn">⟳ New Deal Flow</button>
-      <span class="hint" id="actHint"></span>
+    <div class="actions" style="justify-content:space-between">
+      <span id="boardChips" style="display:flex;gap:8px;flex-wrap:wrap"></span>
+      <span style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <span class="hint" id="actHint"></span>
+        <button id="reshuffleBtn">⟳ New Deal Flow</button>
+        <button class="primary" id="beginBtn" disabled>▶ Begin Season</button>
+      </span>
     </div>
   </div>
 
@@ -253,7 +256,7 @@
     <div class="scoregrid" id="endScores"></div>
     <div class="verdict" id="endVerdict"></div>
     <div id="scoutWrap"></div>
-    <div style="margin-top:22px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="primary" id="shareBtn">📋 Share your Scout Card</button><button class="primary" id="againBtn" style="background:#232838">Run it back →</button></div>
+    <div style="margin-top:22px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="primary" id="shareBtn">📋 Share your Scout Card</button><button class="primary" id="lpBtn" style="background:linear-gradient(135deg,#19c37d,#0f8a59);box-shadow:0 6px 22px rgba(25,195,125,.35)">📜 Write my LP letter</button><button class="primary" id="againBtn" style="background:#232838">Run it back →</button></div>
   </div>
 
   <footer>
@@ -314,7 +317,19 @@ let deals=[], alloc={}, thesis={wIdx:0, finW:0.3, custom:null};
 let G=null;
 let prevRanks=null;   // conviction ranks from the last render, to flash cards that move on thesis switch
 
-function pick(arr,k){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a.slice(0,k);}
+/* ---- board modes (the DFS mechanic) ----
+ * 'daily': the RNG is seeded by today's date, so EVERYONE gets the same 10 deals and the same
+ *          bot behavior — scores are directly comparable, which is what makes a leaderboard
+ *          (and the scout credential) mean anything. Deal paths are static and applyAI() is
+ *          deterministic, so seeding the shuffle + bot jitter pins the whole game.
+ * 'free':  classic random practice board. */
+let boardMode='daily', rng=Math.random;
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
+function seedFrom(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
+function todayId(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function boardId(){return boardMode==='daily'?todayId():'free';}
+
+function pick(arr,k){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a.slice(0,k);}
 
 /* ---- conviction from thesis ---- */
 function curW(){ return thesis.custom || THESES[thesis.wIdx].w; }      // active weight vector
@@ -329,10 +344,12 @@ function convColor(c){return c>=78?'#19c37d':c>=66?'#ffd166':'#ff7a90';}
 
 /* ---- seed phase rendering ---- */
 function newDealFlow(){
+  // Re-seed per flow: same day + daily mode → identical board, deals AND bot behavior.
+  rng = boardMode==='daily' ? mulberry32(seedFrom('fvc-'+todayId())) : Math.random;
   deals=pick(UNIVERSE,10);
   prevRanks=null;   // fresh board — nothing to flash on the first render
   alloc={}; deals.forEach(d=>alloc[d.n]=0);
-  renderThesis(); renderGrid(); updateBank();
+  renderBoardChips(); renderThesis(); renderGrid(); updateBank();
   document.getElementById('seedPhase').style.display='block';
   document.getElementById('season').style.display='none';
   document.getElementById('endcard').style.display='none';
@@ -358,6 +375,21 @@ function repaintThesisChrome(){
   });
   document.getElementById('thesisNote').textContent=noteText();
 }
+function renderBoardChips(){
+  const bc=document.getElementById('boardChips'); if(!bc)return; bc.innerHTML='';
+  [['daily',`🗓 Daily board · ${todayId()}`,'same deals for everyone — ranked'],
+   ['free','🎲 Free play','random board — practice']].forEach(([m,l,d])=>{
+    const c=document.createElement('span');
+    c.className='chip'+(boardMode===m?' on':'');
+    c.innerHTML=`${l}<small>${d}</small>`;
+    c.onclick=()=>{ if(boardMode!==m){ boardMode=m; window.FVC&&FVC.track('board_mode',{board:boardId()}); newDealFlow(); } };
+    bc.appendChild(c);
+  });
+  const rs=document.getElementById('reshuffleBtn');
+  rs.disabled = boardMode==='daily';
+  rs.title = boardMode==='daily' ? 'The daily board is fixed — everyone plays the same deals. Switch to Free play to reshuffle.' : '';
+}
+
 function renderThesis(){
   const tc=document.getElementById('thesisChips'); tc.innerHTML='';
   THESES.forEach((t,i)=>{
@@ -494,7 +526,7 @@ function buildAIs(){
   ];
   return personas.map(p=>{
     const deployable=CAPITAL*(1-p.reserve);
-    const weights=deals.map(d=>({d,wt:p.w(d)*(0.6+Math.random()*0.8)}));
+    const weights=deals.map(d=>({d,wt:p.w(d)*(0.6+rng()*0.8)}));
     const tw=weights.reduce((s,x)=>s+x.wt,0)||1; const seed={};
     weights.forEach(x=>{seed[x.d.n]=Math.min(x.d.maxCheck, Math.round(deployable*x.wt/tw*2)/2);});
     return {name:p.name,tagline:p.tagline,pol:p.pol,seed};
@@ -523,7 +555,7 @@ function enterSeason(){
   const ais=buildAIs().map(makeFund);
   G={round:0, funds:[player,...ais], pIdx:0, foRound:{}, hist:null};
   G.hist=G.funds.map(f=>[value(f,0)]);
-  window.FVC&&FVC.track('season_begin',{deals:Object.values(alloc).filter(v=>v>0).length,deployed:Object.values(alloc).reduce((a,b)=>a+b,0),thesis:curName(),finW:thesis.finW,customW:thesis.custom||null});
+  window.FVC&&FVC.track('season_begin',{deals:Object.values(alloc).filter(v=>v>0).length,deployed:Object.values(alloc).reduce((a,b)=>a+b,0),thesis:curName(),finW:thesis.finW,customW:thesis.custom||null,board:boardId()});
   document.getElementById('log').innerHTML='';
   setHeader(); renderHoldings(); renderLB(); drawChart();
   document.getElementById('advBtn').disabled=false;
@@ -677,7 +709,7 @@ function endSeason(){
   const silver=!gold && myRank<=Math.ceil(rows.length/2) && my.prof>0;
   const bronze=!gold && !silver && my.prof>0;
   const scoutTier=gold?'gold':silver?'silver':bronze?'bronze':'none';
-  window.FVC&&FVC.track('season_end',{rank:myRank,funds:rows.length,profit:Math.round(my.prof),mult:+mult.toFixed(2),judgment:js,newBlood:gold,scoutTier,thesis:curName()});
+  window.FVC&&FVC.track('season_end',{rank:myRank,funds:rows.length,profit:Math.round(my.prof),mult:+mult.toFixed(2),judgment:js,newBlood:gold,scoutTier,thesis:curName(),board:boardId()});
   // any zeros held?
   const blewUp=deals.filter(d=>d.path[5]===0 && (G.funds[G.pIdx].pos[d.n]?.cost>0)).map(d=>d.n);
   const card=document.getElementById('endcard'); card.style.display='block';
@@ -706,12 +738,82 @@ function endSeason(){
       {k:'Fund Multiple', v:mult.toFixed(2)+'×'},
       {k:'Total Profit', v:(my.prof>=0?'+':'')+fmt(my.prof)},
       {k:'Judgment Accuracy', v:js+'%'},
+      {k:'Board', v:boardMode==='daily'?'🗓 Daily '+todayId():'🎲 Free play'},
     ],
     line: gold?'Beat every algorithm on real startups & rounds — pure judgment, not crowd-following.'
       : myRank<=Math.ceil(rows.length/2)?'Top-half fund, picking real startups against the bots.'
       : 'Learning the tape — the algorithms won this round.'
   };
   document.getElementById('shareBtn').onclick=()=>window.FVC&&FVC.share(shareResult);
+  document.getElementById('lpBtn').onclick=()=>window.FVC&&FVC.share({
+    mode:'lp_letter', tier:scoutTier,
+    title:'📜 Your LP Letter', sub:'Season 01, written by the GP desk. Copy it or post the recap.',
+    tweet:`Our fund's Season 01 LP letter is out: ${mult.toFixed(2)}× net, rank #${myRank} of ${rows.length}${boardMode==='daily'?` on today's board (${todayId()})`:''}. Fantasy VC — same deals, no excuses. #FantasyVC`,
+    md: lpLetter({myRank, n:rows.length, mult, prof:my.prof, js, scoutTier, blewUp}),
+  });
+}
+
+/* ---- the LP letter: the season, retold in authentic quarterly-letter voice ---- */
+function lpLetter(c){
+  const nm=(document.getElementById('fundName').value||'Your Fund').slice(0,22);
+  const f=G.funds[G.pIdx];
+  const held=deals.filter(d=>f.pos[d.n]&&f.pos[d.n].cost>0)
+    .map(d=>{const p=f.pos[d.n], fin=p.units*d.path[5]; return {d, cost:p.cost, fin, x:fin/p.cost, pnl:fin-p.cost};})
+    .sort((a,b)=>b.pnl-a.pnl);
+  const winners=held.filter(h=>h.pnl>0).slice(0,2);
+  const zeros=held.filter(h=>h.d.path[5]===0);
+  const bleeders=held.filter(h=>h.pnl<0&&h.d.path[5]>0);
+  const anti=deals.filter(d=>!(alloc[d.n]>0)&&d.path[5]>=40).sort((a,b)=>b.path[5]-a.path[5]).slice(0,2);
+
+  const rankLine = c.myRank===1
+    ? `We finished first. We will resist the urge to annualize this.`
+    : c.myRank<=Math.ceil(c.n/2)
+    ? `The funds ahead of us largely chased momentum; we chose fundamentals. We are told this evens out over a fund life.`
+    : `Venture returns are a power law. This season, we were the denominator.`;
+  const winLine = winners.length
+    ? winners.map(h=>`**${h.d.n}** returned ${h.x.toFixed(1)}× our cost — we ${h.x>=10?'will be retelling this one for years':'consider this thesis validated'}`).join('; ')+'.'
+    : `This section is intentionally left blank.`;
+  const lossLine = zeros.length
+    ? `We wrote ${zeros.length===1?'one position':zeros.length+' positions'} to zero (${zeros.map(h=>'**'+h.d.n+'**').join(', ')}). The red flags were, in retrospect, red.`
+    : bleeders.length
+    ? `No write-offs, though ${bleeders.map(h=>'**'+h.d.n+'**').join(' and ')} exited below our marks. We have updated our models and our expectations.`
+    : `A clean sheet — zero write-offs. We attribute this to discipline and decline to discuss luck.`;
+  const antiLine = anti.length
+    ? `We passed on ${anti.map(d=>`**${d.n}** (${d.path[5]}× at exit)`).join(' and ')}. We had our reasons. We have chosen not to revisit them.`
+    : `For once, nothing got away from us.`;
+  const jsLine = c.js>=70 ? `our conviction ranking tracked realized outcomes closely — the model has edge`
+    : c.js>=55 ? `partial signal; the model caught winners but misread the middle of the book`
+    : `our conviction pointed the wrong way more often than we would like printed in a letter`;
+  const tierLine = c.scoutTier==='gold' ? `\nThe scout network has flagged this vintage as **🥇 New Blood**. We do not fully understand the designation, but it is now on the letterhead.\n`
+    : c.scoutTier==='silver' ? `\nThe scout network rates this vintage **🥈 Silver**. Gold, we are told, requires beating *every* algorithm. Next season.\n`
+    : c.scoutTier==='bronze' ? `\nThe scout network rates this vintage **🥉 Bronze** — in the green, with room above.\n`
+    : ``;
+
+  return [
+`# ${nm} — Letter to Limited Partners`,
+`_Season 01 · ${boardMode==='daily'?'the '+todayId()+' board':'a free-play board'} · written at the Exit marks_`,
+``,
+`Dear Limited Partners,`,
+``,
+`We are pleased¹ to report that ${nm} closed the season at **${c.mult.toFixed(2)}× net** (${c.prof>=0?'+':''}${fmt(c.prof)}), ranking **#${c.myRank} of ${c.n}** funds in the cohort. ${rankLine}`,
+``,
+`**What worked.** ${winLine}`,
+``,
+`**What didn't.** ${lossLine}`,
+``,
+`**The anti-portfolio.** ${antiLine}`,
+``,
+`**On process.** Our **${curName()}** thesis (${Math.round(thesis.finW*100)}% financials) produced a judgment accuracy of **${c.js}%** — ${jsLine}. We continue to believe discipline beats access, except in the specific cases where access would have been nice.`,
+tierLine,
+`We remain grateful stewards of your patient capital. Fund II is now accepting commitments.²`,
+``,
+`— The General Partners, ${nm}`,
+``,
+`¹ contractually obligated phrasing`,
+`² this is a game — please do not wire money`,
+``,
+`Play the same board: ${location.origin&&location.origin.indexOf('http')===0?location.origin+'/':''} \`#FantasyVC\``,
+  ].join('\n');
 }
 
 /* wire up */

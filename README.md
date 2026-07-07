@@ -18,8 +18,11 @@ Two ways to play, one shared analytics + self-improvement loop behind them. No b
 
 Finish in the green and you earn a tiered **Scout flag** — 🥉 Bronze, 🥈 Silver, 🥇 Gold (*New Blood*, the top rung: beat every bot / clean sheet on the frauds).
 
-### 📋 Share your Scout Card
-Every finished run generates a nicely-formatted **markdown Scout Card** you can copy to share privately, or push straight to **X / LinkedIn** (the public share carries a link back to the game). Optionally add your handle and opt in to a **consent-based VC scout leaderboard**. See [Sharing & monetization](#sharing--monetization).
+### 🗓 The Daily Board
+The League defaults to a **date-seeded daily board** — everyone on Earth gets the *same 10 deals and the same bot behavior* that day, so ranks are directly comparable (the DFS mechanic). Free-play mode keeps the classic random board for practice.
+
+### 📋 Share your Scout Card · 📜 LP letter
+Every finished run generates a nicely-formatted **markdown Scout Card** you can copy to share privately, or push straight to **X / LinkedIn** (the public share carries a link back to the game). Optionally add your handle and opt in to a **consent-based VC scout leaderboard**. League seasons also end with a one-click **LP letter** — your vintage retold in authentic quarterly-letter voice, anti-portfolio included. See [Sharing & monetization](#sharing--monetization).
 
 ---
 

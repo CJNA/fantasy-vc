@@ -99,8 +99,8 @@ tiny DB) — this is the first mechanic that can't ship client-only.
 ## Ranked (value ÷ effort, with what each buys)
 | # | Mechanic | Buys | Effort | Verdict |
 |---|---|---|---|---|
-| 1 | **Daily seeded contest** | comparability → credible leaderboard → LP story | S | **build next** |
-| 2 | **LP letter generator** | shareability + teaching, pure content | S | **build next** |
+| 1 | **Daily seeded contest** | comparability → credible leaderboard → LP story | S | ✅ **built 2026-07-07** |
+| 2 | **LP letter generator** | shareability + teaching, pure content | S | ✅ **built 2026-07-07** |
 | 3 | Survivor pool | daily habit + virality | S | soon, rides on #1 |
 | 4 | Event cards | mid-season skill (fixes the "watching" dead zone) | M | soon |
 | 5 | Keeper/vintages | multi-season credential depth | M-S | after #1 |

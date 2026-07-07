@@ -130,6 +130,7 @@
   }
 
   function tweetText(r) {
+    if (r.tweet) return r.tweet;
     const who = handleGet();
     const tier = (TIER_LABEL[r.tier] || '').replace(/^[^ ]+ /, ''); // drop the emoji for the tweet lead
     const lead = r.tier === 'gold' ? 'I got flagged as New Blood on Fantasy VC 🥇'
@@ -159,33 +160,35 @@
     document.head.appendChild(s);
   }
 
+  // r.md (prebuilt markdown, e.g. the LP letter) skips the Scout Card builder and hides the
+  // handle/opt-in rows — those only make sense for the card. r.title/r.sub/r.tweet override copy.
   function share(r) {
     injectStyle();
     track('share_open', { mode: r.mode, tier: r.tier });
-    const md = shareMarkdown(r);
+    const md = r.md || shareMarkdown(r);
     const ov = document.createElement('div'); ov.id = 'fvc-share-ov';
     const url = encodeURIComponent(APP_URL);
     const xUrl = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(tweetText(r)) + '&url=' + url;
     const inUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' + url;
     ov.innerHTML =
-      '<div id="fvc-share" role="dialog" aria-label="Share your Scout Card">' +
-      '<h3>📋 Your Scout Card</h3>' +
-      '<div class="sub">Copy the markdown to share privately, or post your rank publicly.</div>' +
-      '<div class="handle"><input id="fvc-h" placeholder="@yourhandle (optional — shown on the card)" value="' + handleGet().replace(/"/g, '&quot;') + '"></div>' +
+      '<div id="fvc-share" role="dialog" aria-label="Share">' +
+      '<h3>' + (r.title || '📋 Your Scout Card') + '</h3>' +
+      '<div class="sub">' + (r.sub || 'Copy the markdown to share privately, or post your rank publicly.') + '</div>' +
+      (r.md ? '' : '<div class="handle"><input id="fvc-h" placeholder="@yourhandle (optional — shown on the card)" value="' + handleGet().replace(/"/g, '&quot;') + '"></div>') +
       '<textarea id="fvc-md" spellcheck="false"></textarea>' +
       '<div class="row">' +
       '<button class="b-copy" id="fvc-copy">Copy markdown</button>' +
       '<button class="b-x" id="fvc-x">Post on X</button>' +
       '<button class="b-in" id="fvc-in">Share on LinkedIn</button>' +
       '</div>' +
-      '<label class="optin"><input type="checkbox" id="fvc-optin"><span>List me on the public VC scout leaderboard (Gold/Silver only). Consent-based — VC firms browse opted-in performers. Uncheck to stay private.</span></label>' +
+      (r.md ? '' : '<label class="optin"><input type="checkbox" id="fvc-optin"><span>List me on the public VC scout leaderboard (Gold/Silver only). Consent-based — VC firms browse opted-in performers. Uncheck to stay private.</span></label>') +
       '<div class="row"><button class="b-close" id="fvc-close">Close</button></div>' +
       '</div>';
     document.body.appendChild(ov);
     const ta = ov.querySelector('#fvc-md'); ta.value = md;
     const hi = ov.querySelector('#fvc-h');
-    function refresh() { handleSet(hi.value.trim()); ta.value = shareMarkdown(r); }
-    hi.addEventListener('input', refresh);
+    function refresh() { if (hi) { handleSet(hi.value.trim()); } ta.value = r.md || shareMarkdown(r); }
+    if (hi) hi.addEventListener('input', refresh);
     ov.querySelector('#fvc-copy').addEventListener('click', function () {
       refresh(); ta.select();
       const done = function () { const b = ov.querySelector('#fvc-copy'); b.textContent = '✓ Copied'; setTimeout(function () { b.textContent = 'Copy markdown'; }, 1600); };
@@ -199,7 +202,8 @@
       try { navigator.clipboard && navigator.clipboard.writeText(ta.value); } catch (e) {}
       window.open(inUrl, '_blank', 'noopener'); // LinkedIn prefills only the URL — card is on the clipboard to paste
     });
-    ov.querySelector('#fvc-optin').addEventListener('change', function (e) {
+    const oi = ov.querySelector('#fvc-optin');
+    if (oi) oi.addEventListener('change', function (e) {
       refresh();
       if (e.target.checked) track('leaderboard_optin', { mode: r.mode, tier: r.tier, handle: handleGet(), rank: r.rank || '' });
       else track('leaderboard_optout', { mode: r.mode, tier: r.tier });

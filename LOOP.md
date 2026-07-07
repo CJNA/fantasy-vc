@@ -38,15 +38,16 @@ apply) improvements.**
 | `app_open` / `drop` | `path` |
 | `thesis_select` | `thesis`, `finW` — preset (or `Custom`) chosen |
 | `thesis_custom` | `factor`, `val` — a factor slider was dragged (fine-tune granularity) |
-| `season_begin` | `deals`, `deployed`, `thesis`, `finW`, `customW` (the raw weight vector when `thesis==='Custom'`, else `null`) |
+| `board_mode` | `board` — player toggled Daily (`YYYY-MM-DD`) vs Free play (`free`) |
+| `season_begin` | `deals`, `deployed`, `thesis`, `finW`, `customW` (the raw weight vector when `thesis==='Custom'`, else `null`), `board` |
 | `auto_resolve` | `fromRound` — player skipped the rest of the season to the Exit marks |
-| `season_end` | `rank`, `funds`, `profit`, `mult`, `judgment`, `newBlood`, `scoutTier`, `thesis` |
+| `season_end` | `rank`, `funds`, `profit`, `mult`, `judgment`, `newBlood`, `scoutTier`, `thesis`, `board` |
 | `memo_start` | `deals` |
 | `diligence_open` | `cat`, `deal` |
 | `decision` | `deal`, `company`, `invested`, `amount`, `boxes`, `pBreak`, `pWipe`, `mult` |
 | `wager_nudge` | `deal` — fired once/run when a player commits with the wager still at 50/50 |
 | `memo_end` | `profit`, `mult`, `acc`, `bank`, `bankDelta`, `trapsDodged`, `traps`, `newBlood`, `scoutTier` |
-| `share_open` / `share_copy` / `share_close` | `mode`, `tier` — Scout Card opened / copied / dismissed |
+| `share_open` / `share_copy` / `share_close` | `mode`, `tier` — Scout Card (or `mode:'lp_letter'`) opened / copied / dismissed |
 | `share_click` | `net` (`x｜linkedin`), `mode`, `tier` — public share pushed |
 | `leaderboard_optin` / `leaderboard_optout` | `mode`, `tier`, `handle` — consent-based VC-leaderboard toggle |
 
