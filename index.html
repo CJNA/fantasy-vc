@@ -55,6 +55,23 @@
   .fsl-l{min-width:30px;font-weight:700;letter-spacing:.3px}
   .fsl input[type=range]{width:96px;height:4px}
   .fsl b{min-width:18px;text-align:right;color:var(--txt);font-variant-numeric:tabular-nums;font-size:11.5px}
+  /* survivor */
+  #survOv{position:fixed;inset:0;background:rgba(6,7,12,.8);backdrop-filter:blur(5px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:18px}
+  .survbox{background:var(--panel);border:1px solid var(--line);border-radius:18px;max-width:640px;width:100%;padding:24px;box-shadow:0 24px 90px rgba(0,0,0,.6)}
+  .survbox h2{margin:0 0 2px;font-size:20px}
+  .survbox .sub{color:var(--mut);font-size:12.5px;margin-bottom:14px}
+  .survround{font-size:12px;letter-spacing:.6px;text-transform:uppercase;color:var(--gold);font-weight:800;margin:10px 0 8px}
+  .sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px}
+  .scard{background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:9px 10px;cursor:pointer;transition:.12s;text-align:left;font:inherit;color:var(--txt)}
+  .scard:hover:not(:disabled){border-color:var(--acc);transform:translateY(-1px)}
+  .scard:disabled{opacity:.28;cursor:default}
+  .scard .sn{font-weight:800;font-size:13px}
+  .scard .ss{font-size:9.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.4px}
+  .scard .sc{font-size:11px;margin-top:3px;color:#c7cbe0}
+  .survout{margin:12px 0 4px;padding:12px 14px;border-radius:11px;font-size:13.5px;line-height:1.5}
+  .survout.ok{background:#0e221b;border:1px solid #1c4a3a}
+  .survout.rip{background:#2a121a;border:1px solid #5a2a3a}
+  .survtrail{font-size:12px;color:var(--mut);margin-top:10px;line-height:1.8}
   .toppick{font-size:12.5px;color:#c7cbe0;margin-top:11px;border-top:1px solid var(--line);padding-top:11px}
   .toppick b{color:#fff}
   .rankchip{position:absolute;top:-8px;left:-8px;background:var(--panel2);border:1px solid var(--line);
@@ -206,7 +223,10 @@
     <div class="grid" id="grid"></div>
 
     <div class="actions" style="justify-content:space-between">
-      <span id="boardChips" style="display:flex;gap:8px;flex-wrap:wrap"></span>
+      <span style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <span id="boardChips" style="display:flex;gap:8px;flex-wrap:wrap"></span>
+        <button id="survivorBtn" title="The 60-second elimination game on this board">💀 Survivor</button>
+      </span>
       <span style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
         <span class="hint" id="actHint"></span>
         <button id="reshuffleBtn">⟳ New Deal Flow</button>
@@ -816,7 +836,96 @@ tierLine,
   ].join('\n');
 }
 
+/* ========== SURVIVOR — the 60-second elimination game ==========
+ * Five rounds (Seed→A … D→Exit). Each round the board "kills the bottom half": your pick
+ * must land in the TOP HALF of that round's growth (dead = 0×). No repeats. One miss = out.
+ * Rounds 1-2 every name marks up — hype pumps hardest early, which tempts you into exactly
+ * the names that crater later. On the daily board everyone faces the identical gauntlet. */
+const SURV_ROUNDS=[['Seed','Series A'],['Series A','Series B'],['Series B','Series C'],['Series C','Series D'],['Series D','Exit']];
+let SV=null;
+function survGrowth(d,r){ return (d.path[r-1]<=0||d.path[r]<=0) ? (d.path[r]<=0?0:d.path[r]/Math.max(d.path[r-1],1e-9)) : d.path[r]/d.path[r-1]; }
+function survTopHalf(r){ const gs=deals.map(d=>survGrowth(d,r)).sort((a,b)=>b-a); return gs[Math.ceil(gs.length/2)-1]; }
+
+function survStart(){
+  SV={r:1, picks:[], out:false};
+  window.FVC&&FVC.track('survivor_start',{board:boardId()});
+  const ov=document.createElement('div'); ov.id='survOv';
+  ov.innerHTML=`<div class="survbox">
+    <h2>💀 Survivor</h2>
+    <div class="sub">Every round, the board kills the <b>bottom half</b> by growth. Pick a survivor. No repeats. One miss ends the run. ${boardMode==='daily'?`Same gauntlet for everyone on the <b>${todayId()}</b> board.`:'Free-play board.'}</div>
+    <div id="survBody"></div>
+  </div>`;
+  ov.addEventListener('click',e=>{ if(e.target===ov && (SV.out||SV.r>5)) survClose(); });
+  document.body.appendChild(ov);
+  survRound();
+}
+function survClose(){ const ov=document.getElementById('survOv'); if(ov)ov.remove(); SV=null; }
+function survRound(){
+  const b=document.getElementById('survBody');
+  b.innerHTML=`<div class="survround">Round ${SV.r} of 5 — ${SURV_ROUNDS[SV.r-1][0]} → ${SURV_ROUNDS[SV.r-1][1]}</div>
+    <div class="sgrid">${deals.map(d=>{
+      const used=SV.picks.some(p=>p.n===d.n);
+      return `<button class="scard" data-n="${d.n}" ${used?'disabled':''}>
+        <div class="sn">${d.n}</div><div class="ss">${d.s}</div>
+        <div class="sc">conv ${conviction(d)} · ${'★'.repeat(d.hype)}</div></button>`;}).join('')}</div>
+    ${SV.picks.length?`<div class="survtrail">${SV.picks.map((p,i)=>`R${i+1} ${p.n} ${p.ok?'✓':'🪦'}`).join(' &nbsp;·&nbsp; ')}</div>`:''}`;
+  b.querySelectorAll('.scard:not(:disabled)').forEach(btn=>btn.addEventListener('click',()=>survPick(btn.dataset.n)));
+}
+function survPick(name){
+  const d=deals.find(x=>x.n===name), r=SV.r;
+  const g=survGrowth(d,r), cut=survTopHalf(r);
+  const rank=1+deals.filter(x=>survGrowth(x,r)>g).length;
+  const ok=g>=cut;
+  SV.picks.push({n:name,ok});
+  window.FVC&&FVC.track('survivor_pick',{round:r,company:name,ok,rank,board:boardId()});
+  const b=document.getElementById('survBody');
+  const gTxt=g<=0?'went to <b>zero</b>':`marked ${g>=1?'up':'down'} <b>${g.toFixed(1)}×</b>`;
+  if(!ok){ SV.out=true; survEnd(b,`<div class="survout rip"><b>${name}</b> ${gTxt} — <b>#${rank} of ${deals.length}</b>, bottom half. 🪦 <b>Eliminated in round ${r}.</b></div>`); return; }
+  if(r===5){ SV.r=6; survEnd(b,`<div class="survout ok"><b>${name}</b> ${gTxt} — #${rank} of ${deals.length}. 🏆 <b>You survived the vintage — 5/5.</b></div>`); return; }
+  SV.r++;
+  b.querySelectorAll('.scard').forEach(x=>x.disabled=true);
+  const note=document.createElement('div');
+  note.className='survout ok';
+  note.innerHTML=`<b>${name}</b> ${gTxt} — <b>#${rank} of ${deals.length}</b>. You live. Next round…`;
+  b.appendChild(note);
+  setTimeout(survRound,1100);
+}
+function survEnd(b,verdictHtml){
+  const survived=SV.picks.filter(p=>p.ok).length, win=survived===5;
+  window.FVC&&FVC.track('survivor_end',{survived,win,board:boardId(),picks:SV.picks.map(p=>p.n)});
+  const trail=SV.picks.map((p,i)=>`R${i+1} <b>${p.n}</b> ${p.ok?'✓':'🪦'}`).join(' &nbsp;·&nbsp; ');
+  b.innerHTML=`${verdictHtml}<div class="survtrail">${trail}</div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+      <button class="primary" id="survShare">📋 Share the run</button>
+      <button id="survAgain">${win?'Run it again':'Try again'}</button>
+      <button id="survX">Close</button>
+    </div>`;
+  const md=[
+    `## 💀 Fantasy VC — Survivor`,
+    ``,
+    win?`**Survived the ${boardMode==='daily'?todayId():'free-play'} vintage — 5/5** 🏆`:`**Eliminated in round ${SV.picks.length} of 5** — the ${boardMode==='daily'?todayId():'free-play'} board got me 🪦`,
+    ``,
+    SV.picks.map((p,i)=>`R${i+1} ${p.n} ${p.ok?'✓':'🪦'}`).join(' · '),
+    ``,
+    `The board kills the bottom half every round. No repeats. One miss.`,
+    ``,
+    `Think you can survive today's board? → ${location.origin&&location.origin.indexOf('http')===0?location.origin+'/':''}`,
+    ``,
+    '`#FantasyVC` `#Survivor`',
+  ].join('\n');
+  document.getElementById('survShare').onclick=()=>window.FVC&&FVC.share({
+    mode:'survivor', tier:win?'gold':'none',
+    title:'💀 Survivor — your run', sub:'Copy it, or dare someone on the same board.',
+    tweet: win?`Survived today's Fantasy VC vintage 5/5 💀→🏆 The board kills the bottom half every round — same gauntlet for everyone. Can you? #FantasyVC`
+             :`Today's Fantasy VC board eliminated me in round ${SV.picks.length} 🪦 Same gauntlet for everyone — outlast me. #FantasyVC`,
+    md,
+  });
+  document.getElementById('survAgain').onclick=()=>{ survClose(); survStart(); };
+  document.getElementById('survX').onclick=survClose;
+}
+
 /* wire up */
+document.getElementById('survivorBtn').addEventListener('click',survStart);
 document.getElementById('beginBtn').addEventListener('click',enterSeason);
 document.getElementById('advBtn').addEventListener('click',advance);
 document.getElementById('autoBtn').addEventListener('click',autoResolve);

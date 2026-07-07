@@ -21,6 +21,9 @@ Finish in the green and you earn a tiered **Scout flag** — 🥉 Bronze, 🥈 S
 ### 🗓 The Daily Board
 The League defaults to a **date-seeded daily board** — everyone on Earth gets the *same 10 deals and the same bot behavior* that day, so ranks are directly comparable (the DFS mechanic). Free-play mode keeps the classic random board for practice.
 
+### 💀 Survivor
+The 60-second elimination game on the same board: every round the market **kills the bottom half by growth** — pick a survivor, no repeats, one miss ends the run. Hype pumps hardest early, so the "safe" early picks are exactly the names that crater later.
+
 ### 📋 Share your Scout Card · 📜 LP letter
 Every finished run generates a nicely-formatted **markdown Scout Card** you can copy to share privately, or push straight to **X / LinkedIn** (the public share carries a link back to the game). Optionally add your handle and opt in to a **consent-based VC scout leaderboard**. League seasons also end with a one-click **LP letter** — your vintage retold in authentic quarterly-letter voice, anti-portfolio included. See [Sharing & monetization](#sharing--monetization).
 

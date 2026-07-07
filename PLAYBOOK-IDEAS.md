@@ -101,7 +101,7 @@ tiny DB) — this is the first mechanic that can't ship client-only.
 |---|---|---|---|---|
 | 1 | **Daily seeded contest** | comparability → credible leaderboard → LP story | S | ✅ **built 2026-07-07** |
 | 2 | **LP letter generator** | shareability + teaching, pure content | S | ✅ **built 2026-07-07** |
-| 3 | Survivor pool | daily habit + virality | S | soon, rides on #1 |
+| 3 | Survivor pool | daily habit + virality | S | ✅ **built 2026-07-07** — rule evolved: paths are all-up in rounds 1-2, so "don't go down" was a free win; shipped as "**top half of the round's growth or you're out**" (always a real decision, and hype-pumpers like Theranos are the *correct* early picks — the timing lesson) |
 | 4 | Event cards | mid-season skill (fixes the "watching" dead zone) | M | soon |
 | 5 | Keeper/vintages | multi-season credential depth | M-S | after #1 |
 | 6 | H2H + playoffs | drama/cadence | S-M | nice-to-have |

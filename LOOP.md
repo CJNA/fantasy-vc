@@ -47,7 +47,8 @@ apply) improvements.**
 | `decision` | `deal`, `company`, `invested`, `amount`, `boxes`, `pBreak`, `pWipe`, `mult` |
 | `wager_nudge` | `deal` — fired once/run when a player commits with the wager still at 50/50 |
 | `memo_end` | `profit`, `mult`, `acc`, `bank`, `bankDelta`, `trapsDodged`, `traps`, `newBlood`, `scoutTier` |
-| `share_open` / `share_copy` / `share_close` | `mode`, `tier` — Scout Card (or `mode:'lp_letter'`) opened / copied / dismissed |
+| `survivor_start` / `survivor_pick` / `survivor_end` | `board`; picks carry `round`, `company`, `ok`, `rank`; end carries `survived` (0-5), `win`, `picks` |
+| `share_open` / `share_copy` / `share_close` | `mode`, `tier` — Scout Card (or `mode:'lp_letter'`/`'survivor'`) opened / copied / dismissed |
 | `share_click` | `net` (`x｜linkedin`), `mode`, `tier` — public share pushed |
 | `leaderboard_optin` / `leaderboard_optout` | `mode`, `tier`, `handle` — consent-based VC-leaderboard toggle |
 
