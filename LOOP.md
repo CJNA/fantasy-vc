@@ -41,7 +41,7 @@ apply) improvements.**
 | `board_mode` | `board` — player toggled Daily (`YYYY-MM-DD`) vs Free play (`free`) |
 | `season_begin` | `deals`, `deployed`, `thesis`, `finW`, `customW` (the raw weight vector when `thesis==='Custom'`, else `null`), `board` |
 | `auto_resolve` | `fromRound` — player skipped the rest of the season to the Exit marks |
-| `season_end` | `rank`, `funds`, `profit`, `mult`, `judgment`, `newBlood`, `scoutTier`, `thesis`, `board` |
+| `season_end` | `rank`, `funds`, `profit`, `mult`, `judgment`, `newBlood`, `scoutTier`, `thesis`, `board`, `selProfit`, `steerAlpha` (profit decomposition vs the frozen-seed counterfactual — see `STEERING-SCOPE.md`) |
 | `memo_start` | `deals` |
 | `diligence_open` | `cat`, `deal` |
 | `decision` | `deal`, `company`, `invested`, `amount`, `boxes`, `pBreak`, `pWipe`, `mult` |

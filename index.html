@@ -724,12 +724,18 @@ function endSeason(){
   const rows=G.funds.map(f=>({f,prof:value(f,5)-CAPITAL})).sort((a,b)=>b.prof-a.prof);
   const myRank=rows.findIndex(r=>r.f.you)+1, my=rows.find(r=>r.f.you);
   const mult=value(G.funds[G.pIdx],5)/CAPITAL, js=judgmentScore();
+  // Steering α (CEO-Bench-inspired, see STEERING-SCOPE.md): paths are deterministic, so the
+  // "never touched it" counterfactual is exact — seed checks ridden to Exit, reserves idle.
+  // steering = what your follow-ons & sells added (+) or destroyed (−) vs that frozen portfolio.
+  const frozen=(CAPITAL-Object.values(alloc).reduce((a,b)=>a+b,0))
+    + deals.reduce((s,d)=>s+(alloc[d.n]>0 ? (alloc[d.n]/d.path[0])*d.path[5] : 0),0);
+  const selProf=frozen-CAPITAL, steer=value(G.funds[G.pIdx],5)-frozen;
   // Tiered scout flag (was binary). Gold = beat every bot; Silver = top half & green; Bronze = green.
   const gold=myRank===1;
   const silver=!gold && myRank<=Math.ceil(rows.length/2) && my.prof>0;
   const bronze=!gold && !silver && my.prof>0;
   const scoutTier=gold?'gold':silver?'silver':bronze?'bronze':'none';
-  window.FVC&&FVC.track('season_end',{rank:myRank,funds:rows.length,profit:Math.round(my.prof),mult:+mult.toFixed(2),judgment:js,newBlood:gold,scoutTier,thesis:curName(),board:boardId()});
+  window.FVC&&FVC.track('season_end',{rank:myRank,funds:rows.length,profit:Math.round(my.prof),mult:+mult.toFixed(2),judgment:js,newBlood:gold,scoutTier,thesis:curName(),board:boardId(),selProfit:Math.round(selProf),steerAlpha:Math.round(steer)});
   // any zeros held?
   const blewUp=deals.filter(d=>d.path[5]===0 && (G.funds[G.pIdx].pos[d.n]?.cost>0)).map(d=>d.n);
   const card=document.getElementById('endcard'); card.style.display='block';
@@ -737,13 +743,18 @@ function endSeason(){
   document.getElementById('endScores').innerHTML=`
     <div class="scorebox"><div class="k">Fund Multiple</div><div class="v">${mult.toFixed(2)}×</div></div>
     <div class="scorebox"><div class="k">Total Profit</div><div class="v" style="color:${my.prof>=0?'var(--good)':'var(--bad)'}">${my.prof>=0?'+':''}${fmt(my.prof)}</div></div>
-    <div class="scorebox"><div class="k">Judgment Accuracy</div><div class="v" style="color:${js>=70?'var(--good)':js>=55?'var(--gold)':'var(--bad)'}">${js}%</div></div>`;
+    <div class="scorebox"><div class="k">Judgment Accuracy</div><div class="v" style="color:${js>=70?'var(--good)':js>=55?'var(--gold)':'var(--bad)'}">${js}%</div></div>
+    <div class="scorebox" title="What your mid-season moves (follow-ons & sells) added vs never touching your seed portfolio. 0 = you rode it untouched."><div class="k">Steering α</div><div class="v" style="color:${steer>0?'var(--good)':steer<0?'var(--bad)':'var(--mut)'}">${steer>0?'+':''}${Math.round(steer)===0?'0':fmt(steer)}</div></div>`;
   const beatAll=gold;
   let v;
   if(beatAll) v=`You beat every algorithm — including the hype-chasers. Pure judgment, not crowd-following. That's the signal a scout network hunts for.`;
   else if(myRank<=Math.ceil(rows.length/2)) v=`Top half. Solid fund. To get flagged as <b>new blood</b> you have to beat <b>all</b> the bots — especially Bandwagon Capital, who blindly piles into 5-star hype.`;
   else v=`The hype-followers beat you. ${blewUp.length?`What sank you: <b>${blewUp.join(', ')}</b> — high hype, rock-bottom Risk scores, straight to zero.`:`Look at the timing — winners that peaked then bled while you held.`}`;
   v+=` <br><br><b>Judgment ${js}%:</b> ${js>=70?'your conviction ranking closely tracked real outcomes — your thesis has edge.':js>=55?'partial signal — your thesis caught some winners but misread others.':'your conviction pointed the wrong way. Try weighting Risk/Differentiation higher to filter the frauds.'}`;
+  v+=` <br><br><b>Steering α ${steer>0?'+':''}${Math.round(steer)===0?'0':fmt(steer)}:</b> ${
+    Math.round(steer)===0 ? 'you rode your seed picks untouched — selection did all the work. Follow-ons into winners (and selling the bleeders) is where funds separate.'
+    : steer>0 ? 'your mid-season moves beat buy-and-hold — that\'s portfolio stewardship, the skill LPs pay carry for.'
+    : 'buy-and-hold would have beaten your trading — your follow-ons/sells destroyed value vs sitting still. Steer less, or steer better.'}`;
   document.getElementById('endVerdict').innerHTML=v;
   document.getElementById('scoutWrap').innerHTML =
       gold   ? `<div class="scoutbadge">🥇 NEW BLOOD — flagged to the scout network</div>`
@@ -758,6 +769,7 @@ function endSeason(){
       {k:'Fund Multiple', v:mult.toFixed(2)+'×'},
       {k:'Total Profit', v:(my.prof>=0?'+':'')+fmt(my.prof)},
       {k:'Judgment Accuracy', v:js+'%'},
+      {k:'Steering α', v:(steer>0?'+':'')+(Math.round(steer)===0?'0':fmt(steer))},
       {k:'Board', v:boardMode==='daily'?'🗓 Daily '+todayId():'🎲 Free play'},
     ],
     line: gold?'Beat every algorithm on real startups & rounds — pure judgment, not crowd-following.'
@@ -769,7 +781,7 @@ function endSeason(){
     mode:'lp_letter', tier:scoutTier,
     title:'📜 Your LP Letter', sub:'Season 01, written by the GP desk. Copy it or post the recap.',
     tweet:`Our fund's Season 01 LP letter is out: ${mult.toFixed(2)}× net, rank #${myRank} of ${rows.length}${boardMode==='daily'?` on today's board (${todayId()})`:''}. Fantasy VC — same deals, no excuses. #FantasyVC`,
-    md: lpLetter({myRank, n:rows.length, mult, prof:my.prof, js, scoutTier, blewUp}),
+    md: lpLetter({myRank, n:rows.length, mult, prof:my.prof, js, scoutTier, blewUp, steer}),
   });
 }
 
@@ -823,7 +835,7 @@ function lpLetter(c){
 ``,
 `**The anti-portfolio.** ${antiLine}`,
 ``,
-`**On process.** Our **${curName()}** thesis (${Math.round(thesis.finW*100)}% financials) produced a judgment accuracy of **${c.js}%** — ${jsLine}. We continue to believe discipline beats access, except in the specific cases where access would have been nice.`,
+`**On process.** Our **${curName()}** thesis (${Math.round(thesis.finW*100)}% financials) produced a judgment accuracy of **${c.js}%** — ${jsLine}. Our mid-season stewardship ${Math.round(c.steer)===0?'consisted of masterful inactivity (steering α: 0)':c.steer>0?`added **${fmt(c.steer)}** over simply holding our seed checks — we point to this at fundraising`:`subtracted **${fmt(Math.abs(c.steer))}** versus simply holding our seed checks — we have scheduled a partner offsite`}. We continue to believe discipline beats access, except in the specific cases where access would have been nice.`,
 tierLine,
 `We remain grateful stewards of your patient capital. Fund II is now accepting commitments.²`,
 ``,
