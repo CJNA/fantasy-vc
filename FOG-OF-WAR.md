@@ -85,7 +85,7 @@ shown[k] = clamp(true[k] + noise(level) , 5, 99)      noise ~ seeded, per (board
 
 | Phase | Scope | Effort |
 |---|---|---|
-| **F0** | Fog toggle chip (default ON for daily): L1 noise on all factors, 6-pt budget, level pips, seed-phase spend UI, conviction-on-estimates, end-of-season reveal + calibration α | M |
+| **F0 ✅ shipped 2026-07-08** | Fog toggle chip (default ON): ±25/15/8/3 noise ladder, 6-pt budget, level pips + per-card 🔍 sharpen, conviction-on-estimates (incl. risk color — no truth leaks), canonical per-(board,deal,factor) noise so sharpening converges monotonically, end-of-season reveal + calibration α + biggest-misread callout, `fog_toggle`/`fog_spend`/`season_end.{fog,dpSpent,calibration}` events, Scout Card rows | M |
 | **F1** | Held-deal auto-de-fog per round + lagged hype | S |
 | **F2** | Off-market deals (Level 0) | S |
 | **F3** | Async staggered reveals; fog params into the archetype generator (STEERING-SCOPE v1.5) | M |

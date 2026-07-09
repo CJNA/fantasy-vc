@@ -1,0 +1,176 @@
+{
+  "_attribution": "Format mirrors tool_docs.json from CEO-Bench (zlab-princeton/ceobench-src, Zhuang Liu Lab @ Princeton) 1:1 — per-tool entries carry name/category/description/inputSchema/parameters/returns/impact/example_call, and fog-of-war is enforced at the tool layer (their _filter_hidden pattern: true factor scores are never returned while fog is active). Used as design inspiration with thanks; see FOG-OF-WAR.md and STEERING-SCOPE.md.",
+  "get_board": {
+    "name": "get_board",
+    "category": "Market Data",
+    "description": "Return today's deal board. Under fog, factor scores are ANALYST ESTIMATES at each deal's current info level (±25/15/8/3 pts at L1-L4) — true scores are never returned while fog is active.",
+    "inputSchema": { "type": "object", "properties": {}, "required": [] },
+    "parameters": {},
+    "returns": {
+      "success": "{board: '2026-07-08', fog: true, deals: [{name, sector, blurb, hype, maxCheck, infoLevel, estimates: {team, ps, diff, market, comm, ar, fin}, conviction}]}",
+      "failure": "Season already running — board is locked."
+    },
+    "impact": "Read-only. Conviction is computed from estimates under the current thesis — sharpening estimates (spend_diligence) re-ranks the board.",
+    "example_call": { "tool": "get_board", "input": {} }
+  },
+  "get_thesis": {
+    "name": "get_thesis",
+    "category": "Market Data",
+    "description": "Return the active thesis: preset name (or Custom), per-factor weights, and the financials-vs-read split (finW).",
+    "inputSchema": { "type": "object", "properties": {}, "required": [] },
+    "parameters": {},
+    "returns": { "success": "{name: 'Product / Moat', weights: {team: 12, ps: 25, diff: 40, market: 10, comm: 5, ar: 8}, finW: 0.3}", "failure": "—" },
+    "impact": "Read-only.",
+    "example_call": { "tool": "get_thesis", "input": {} }
+  },
+  "set_thesis": {
+    "name": "set_thesis",
+    "category": "Business Configuration",
+    "description": "Set the investment thesis: a preset name, or custom per-factor weights (0-50 each, self-normalizing), plus finW (0.1-0.6). Re-ranks every deal's conviction.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "preset": { "type": "string", "description": "One of: Balanced, Talent-first, Market-first, Product / Moat, Risk-averse" },
+        "weights": { "type": "object", "description": "Custom weights {team, ps, diff, market, comm, ar}, each 0-50. Overrides preset." },
+        "finW": { "type": "number", "description": "Financials weight 0.1-0.6 (default 0.3)" }
+      },
+      "required": []
+    },
+    "parameters": {
+      "preset": { "type": "str", "description": "Preset thesis name (ignored if weights given)" },
+      "weights": { "type": "dict", "description": "Raw factor weights; conviction normalizes by their sum" },
+      "finW": { "type": "float", "description": "Share of conviction driven by the financials score" }
+    },
+    "returns": { "success": "Thesis set: Custom (team 40, ps 25, diff 8, market 7, comm 12, ar 8) · finW 0.3", "failure": "Unknown preset 'X' / weight out of range" },
+    "impact": "Changes conviction for every deal — the board re-ranks. Recorded on season_begin for the leaderboard.",
+    "example_call": { "tool": "set_thesis", "input": { "weights": { "team": 40, "ps": 25, "diff": 8, "market": 7, "comm": 12, "ar": 8 }, "finW": 0.3 } }
+  },
+  "spend_diligence": {
+    "name": "spend_diligence",
+    "category": "Diligence",
+    "description": "Spend 1 of 6 diligence points to raise one deal's info level (max L4). Estimates converge monotonically toward truth (the canonical noise draw narrows; it is not re-rolled). Only available before begin_season.",
+    "inputSchema": {
+      "type": "object",
+      "properties": { "deal": { "type": "string", "description": "Deal name (or codename in blind mode) from get_board" } },
+      "required": ["deal"]
+    },
+    "parameters": { "deal": { "type": "str", "description": "Which deal to sharpen" } },
+    "returns": {
+      "success": "{deal: 'Airbnb', infoLevel: 2, pointsLeft: 5, estimates: {…sharper…}}",
+      "failure": "No points left / already fully diligenced (L4) / season running"
+    },
+    "impact": "10 deals × 4 levels ≫ 6 points: you cannot de-fog the board. Where you choose to see clearly is a scored skill (information efficiency = alpha per point).",
+    "example_call": { "tool": "spend_diligence", "input": { "deal": "Airbnb" } }
+  },
+  "set_seed_allocation": {
+    "name": "set_seed_allocation",
+    "category": "Portfolio Actions",
+    "description": "Set seed checks ($M) per deal, capped by each deal's round size (maxCheck). Requires ≥4 backed deals to qualify. Unallocated capital becomes reserves for follow-ons.",
+    "inputSchema": {
+      "type": "object",
+      "properties": { "allocations": { "type": "object", "description": "Map of deal name → $M (0 to clear)" } },
+      "required": ["allocations"]
+    },
+    "parameters": { "allocations": { "type": "dict", "description": "Per-deal seed checks in $M, each ≤ that deal's maxCheck; total ≤ $100M" } },
+    "returns": { "success": "{deployed: 41, reserves: 59, deals: 4, qualified: true}", "failure": "Check into X exceeds round cap ($8M) / total exceeds fund / fewer than 4 deals" },
+    "impact": "Defines the frozen-portfolio counterfactual that selection α and steering α are measured against.",
+    "example_call": { "tool": "set_seed_allocation", "input": { "allocations": { "Airbnb": 5, "Figma": 10, "Uber": 8, "Plaid": 15 } } }
+  },
+  "begin_season": {
+    "name": "begin_season",
+    "category": "Season Control",
+    "description": "Lock the seed portfolio and start the season vs 4 bot funds (Bandwagon, Index, Momentum, Contrarian). Bot behavior is board-seeded — identical for every player on a daily board. Diligence and thesis lock at this point.",
+    "inputSchema": { "type": "object", "properties": { "fundName": { "type": "string", "description": "Display name for your fund (≤22 chars)" } }, "required": [] },
+    "parameters": { "fundName": { "type": "str", "description": "Optional fund name shown in the league table and LP letter" } },
+    "returns": { "success": "{round: 0, funds: 5, deployed: 38, reserves: 62}", "failure": "Fewer than 4 deals backed" },
+    "impact": "Emits season_begin {thesis, finW, customW, board, fog}. Index Ventures Bot is the published rule-based baseline every score is compared against.",
+    "example_call": { "tool": "begin_season", "input": { "fundName": "Denominator Capital" } }
+  },
+  "get_holdings": {
+    "name": "get_holdings",
+    "category": "Market Data",
+    "description": "Return your positions at the current round: units, cost, current mark, unrealized P&L, follow-on room, plus cash reserves.",
+    "inputSchema": { "type": "object", "properties": {}, "required": [] },
+    "parameters": {},
+    "returns": { "success": "{round: 2, cash: 12.5, positions: [{deal, units, cost, mark, value, pnl, foRoom}]}", "failure": "No season running." },
+    "impact": "Read-only. Marks are public truth (the tape); factor estimates stay fogged.",
+    "example_call": { "tool": "get_holdings", "input": {} }
+  },
+  "follow_on": {
+    "name": "follow_on",
+    "category": "Portfolio Actions",
+    "description": "Deploy reserves into a held deal at the current round's mark (rounds 1-4, alive deals only, capped by round room and cash).",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "deal": { "type": "string", "description": "Held deal name" },
+        "amount": { "type": "number", "description": "$M to deploy (use -1 for max available)" }
+      },
+      "required": ["deal", "amount"]
+    },
+    "parameters": { "deal": { "type": "str", "description": "Which holding" }, "amount": { "type": "float", "description": "$M; clamped to follow-on room and cash" } },
+    "returns": { "success": "Followed on $5.0M into Airbnb at 18× → position $9.3M.", "failure": "Deal not held / dead / round not actionable / no cash" },
+    "impact": "Counts toward steering α: buying below the exit mark adds alpha, above it destroys alpha. Exactly attributed at season end.",
+    "example_call": { "tool": "follow_on", "input": { "deal": "Airbnb", "amount": 5 } }
+  },
+  "sell": {
+    "name": "sell",
+    "category": "Portfolio Actions",
+    "description": "Sell a fraction of a held position at the current round's mark (rounds 1-4). Proceeds go to reserves.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "deal": { "type": "string", "description": "Held deal name" },
+        "fraction": { "type": "number", "description": "0.25, 0.5, or 1.0" }
+      },
+      "required": ["deal", "fraction"]
+    },
+    "parameters": { "deal": { "type": "str", "description": "Which holding" }, "fraction": { "type": "float", "description": "Portion of units to sell" } },
+    "returns": { "success": "Sold 50% of WeWork at 40× → $12.0M to reserves.", "failure": "Deal not held / nothing to sell / round not actionable" },
+    "impact": "Counts toward steering α: selling above the exit mark adds alpha (e.g. exiting hype peaks before the crater).",
+    "example_call": { "tool": "sell", "input": { "deal": "WeWork", "fraction": 0.5 } }
+  },
+  "advance_round": {
+    "name": "advance_round",
+    "category": "Season Control",
+    "description": "Advance one round (Seed→A→B→C→D→Exit). Marks update, bots act, round events log. The next_week() of this world.",
+    "inputSchema": { "type": "object", "properties": {}, "required": [] },
+    "parameters": {},
+    "returns": { "success": "{round: 3, yourValue: 188.2, events: ['Fast collapsed to $0. Your stake is wiped.', …]}", "failure": "Season over — call get_result." },
+    "impact": "Irreversible. All delayed consequences (bot follow-ons, collapses, mark moves) resolve on advance.",
+    "example_call": { "tool": "advance_round", "input": {} }
+  },
+  "auto_resolve": {
+    "name": "auto_resolve",
+    "category": "Season Control",
+    "description": "Advance all remaining rounds to Exit without further actions. Steering α will be exactly 0 for the skipped stretch (pure buy-and-hold).",
+    "inputSchema": { "type": "object", "properties": {}, "required": [] },
+    "parameters": {},
+    "returns": { "success": "{round: 5, done: true}", "failure": "No season running." },
+    "impact": "Emits auto_resolve {fromRound}. Segments the leaderboard into pure-selection vs steered runs.",
+    "example_call": { "tool": "auto_resolve", "input": {} }
+  },
+  "get_standings": {
+    "name": "get_standings",
+    "category": "Market Data",
+    "description": "League table at the current round: every fund's total profit, sorted. Your margin over Index Ventures Bot is the baseline comparison.",
+    "inputSchema": { "type": "object", "properties": {}, "required": [] },
+    "parameters": {},
+    "returns": { "success": "[{fund: 'Bandwagon Capital', profit: 2101}, {fund: 'You', profit: 1954}, …]", "failure": "No season running." },
+    "impact": "Read-only.",
+    "example_call": { "tool": "get_standings", "input": {} }
+  },
+  "get_result": {
+    "name": "get_result",
+    "category": "Results",
+    "description": "Final scorecard after Exit: rank, multiple, profit decomposition (selection α + steering α), judgment accuracy, calibration (fog), scout tier, and the board id for leaderboard grouping.",
+    "inputSchema": { "type": "object", "properties": {}, "required": [] },
+    "parameters": {},
+    "returns": {
+      "success": "{rank: 3, funds: 5, mult: 24.39, profit: 2339, selProfit: 2288, steerAlpha: 51, judgment: 94, calibration: 82, scoutTier: 'silver', board: '2026-07-08', fog: true}",
+      "failure": "Season not finished."
+    },
+    "impact": "Read-only. This is the row the VC-Bench leaderboard ingests — humans and agents on the same daily board are directly comparable.",
+    "example_call": { "tool": "get_result", "input": {} }
+  }
+}

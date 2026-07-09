@@ -79,6 +79,13 @@
   .rankchip.top{background:linear-gradient(135deg,var(--gold),#f08c00);color:#1a1300;border:none}
   @keyframes cardflash{0%{box-shadow:0 0 0 2px var(--gold) inset,0 0 26px rgba(255,209,102,.55)}100%{box-shadow:0 0 0 0 transparent}}
   .card.moved{animation:cardflash .9s ease-out}
+  /* fog of war */
+  .fogrow{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:-2px}
+  .lvlpips b{color:#33384a;font-weight:400;font-size:12px;letter-spacing:1px}
+  .lvlpips b.lit{color:#5ac8fa}
+  .dspend{font:inherit;font-size:10.5px;font-weight:700;padding:4px 9px;border-radius:8px;border:1px solid #2a3a4a;background:#0e1a22;color:#9adcff;cursor:pointer}
+  .dspend:hover:not(:disabled){border-color:#5ac8fa}
+  .dspend:disabled{opacity:.4;cursor:default}
 
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:14px;margin-top:18px}
   .card{background:linear-gradient(180deg,var(--panel) 0%,#11131b 100%);border:1px solid var(--line);
@@ -351,14 +358,48 @@ function boardId(){return boardMode==='daily'?todayId():'free';}
 
 function pick(arr,k){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a.slice(0,k);}
 
+/* ---- FOG OF WAR (F0 — see FOG-OF-WAR.md; mechanics mirror ceobench-src) ----
+ * In fog mode every displayed factor score is an ANALYST ESTIMATE: truth + a canonical
+ * unit-noise draw scaled by the deal's info level (±25/15/8/3 at L1-L4). The unit noise is
+ * seeded per (board, deal, factor) — everyone on the daily board sees the SAME wrong numbers,
+ * and sharpening a level narrows the same error rather than re-rolling it (estimates converge
+ * monotonically to truth). Truth never renders until the end-of-season reveal. */
+let fogOn=true, fogLevel={}, fogRevealed=false, fogNonce='';
+const DP_BUDGET=6; let dpLeft=DP_BUDGET;
+const FOG_NOISE=[null,25,15,8,3];               // ± pts at info level 1..4
+const LVL_PIPS=['▁','▃','▅','▇'];
+function fogU(dealName,fk){                      // canonical unit noise in [-1,1]
+  const key='fvc-fog-'+(boardMode==='daily'?todayId():fogNonce)+'-'+dealName+'-'+fk;
+  return mulberry32(seedFrom(key))()*2-1;
+}
+function fogLvl(d){ return fogLevel[d.n]||1; }
+function fogVal(d,k){                            // estimated score for factor k ('team'…'ar','fin')
+  const truth=(k==='fin')?d.fin:d.f[k];
+  if(!fogOn||fogRevealed) return truth;
+  const lvl=fogLvl(d);
+  return Math.max(5,Math.min(99,Math.round(truth+fogU(d.n,k)*FOG_NOISE[lvl])));
+}
+function spendDP(name){
+  const d=deals.find(x=>x.n===name);
+  if(!d||dpLeft<=0||fogLvl(d)>=4||G)return;      // no spending once the season is running
+  fogLevel[name]=fogLvl(d)+1; dpLeft--;
+  window.FVC&&FVC.track('fog_spend',{deal:name,level:fogLevel[name],left:dpLeft,board:boardId()});
+  renderBoardChips(); renderGrid();              // estimates sharpen → board re-ranks → cards flash
+}
+
 /* ---- conviction from thesis ---- */
 function curW(){ return thesis.custom || THESES[thesis.wIdx].w; }      // active weight vector
 function curName(){ return thesis.custom ? 'Custom' : THESES[thesis.wIdx].n; }
-function conviction(d){
+function conviction(d){                   // the player's model — runs on ESTIMATES under fog
+  const w=curW();
+  let tw=0,acc=0; for(const k in w){acc+=w[k]*fogVal(d,k); tw+=w[k];}
+  const nf=acc/tw;
+  return Math.round(thesis.finW*fogVal(d,'fin') + (1-thesis.finW)*nf);
+}
+function convictionTrue(d){               // same model on TRUTH — calibration reference only
   const w=curW();
   let tw=0,acc=0; for(const k in w){acc+=w[k]*d.f[k]; tw+=w[k];}
-  const nf=acc/tw;                       // weighted avg of non-financial factor scores (self-normalizing)
-  return Math.round(thesis.finW*d.fin + (1-thesis.finW)*nf);
+  return Math.round(thesis.finW*d.fin + (1-thesis.finW)*(acc/tw));
 }
 function convColor(c){return c>=78?'#19c37d':c>=66?'#ffd166':'#ff7a90';}
 
@@ -366,8 +407,11 @@ function convColor(c){return c>=78?'#19c37d':c>=66?'#ffd166':'#ff7a90';}
 function newDealFlow(){
   // Re-seed per flow: same day + daily mode → identical board, deals AND bot behavior.
   rng = boardMode==='daily' ? mulberry32(seedFrom('fvc-'+todayId())) : Math.random;
+  G=null;           // leaving any finished season — unblocks fog spend/toggle guards
   deals=pick(UNIVERSE,10);
   prevRanks=null;   // fresh board — nothing to flash on the first render
+  fogLevel={}; dpLeft=DP_BUDGET; fogRevealed=false;
+  fogNonce=Math.random().toString(36).slice(2,10);   // free-play fog re-rolls per flow; daily fog keys off the date
   alloc={}; deals.forEach(d=>alloc[d.n]=0);
   renderBoardChips(); renderThesis(); renderGrid(); updateBank();
   document.getElementById('seedPhase').style.display='block';
@@ -405,6 +449,12 @@ function renderBoardChips(){
     c.onclick=()=>{ if(boardMode!==m){ boardMode=m; window.FVC&&FVC.track('board_mode',{board:boardId()}); newDealFlow(); } };
     bc.appendChild(c);
   });
+  // fog toggle — analyst estimates vs true scores
+  const fc=document.createElement('span');
+  fc.className='chip'+(fogOn?' on':'');
+  fc.innerHTML=`🌫 Fog${fogOn?` · ${dpLeft} pts`:''}<small>${fogOn?'estimates — 🔍 to sharpen':'true scores shown'}</small>`;
+  fc.onclick=()=>{ if(G)return; fogOn=!fogOn; window.FVC&&FVC.track('fog_toggle',{on:fogOn,board:boardId()}); renderBoardChips(); renderGrid(); };
+  bc.appendChild(fc);
   const rs=document.getElementById('reshuffleBtn');
   rs.disabled = boardMode==='daily';
   rs.title = boardMode==='daily' ? 'The daily board is fixed — everyone plays the same deals. Switch to Free play to reshuffle.' : '';
@@ -461,11 +511,12 @@ function renderGrid(){
   const moved={}; if(prevRanks){deals.forEach(d=>{ if(prevRanks[d.n]!==undefined && prevRanks[d.n]!==rankOf[d.n]) moved[d.n]=true; });}
   deals.forEach(d=>{
     const c=conviction(d), max=d.maxCheck;
+    const foggy=fogOn&&!fogRevealed, lvl=fogLvl(d);
     const facs=FK.map(([k,lbl])=>{
-      const v=d.f[k], risk=(k==='ar');
+      const v=fogVal(d,k), risk=(k==='ar');   // estimates drive the bar, number AND risk color — no truth leaks
       return `<div class="fac ${risk&&v<40?'risklow':''}">
         <div class="fb"><div class="fill" style="height:${v}%"></div></div>
-        <div class="fn">${v}</div><div class="fl">${lbl}</div></div>`;
+        <div class="fn">${foggy&&lvl<4?'~':''}${v}</div><div class="fl">${lbl}</div></div>`;
     }).join('');
     const el=document.createElement('div');
     el.className='card'+(alloc[d.n]>0?' in':'')+(moved[d.n]?' moved':'');
@@ -473,10 +524,12 @@ function renderGrid(){
       <div class="rankchip${rankOf[d.n]<=3?' top':''}" title="conviction rank under your thesis">#${rankOf[d.n]}</div>
       <div class="crow">
         <div><div class="cname">${d.n}</div><div class="sector">${d.s}</div></div>
-        <div class="conv"><div class="cv" style="color:${convColor(c)}">${c}</div><div class="cl">conviction</div></div>
+        <div class="conv"><div class="cv" style="color:${convColor(c)}">${foggy&&lvl<4?'~':''}${c}</div><div class="cl">conviction</div></div>
       </div>
       <div class="blurb">${d.b}</div>
       <div class="factors">${facs}</div>
+      ${foggy?`<div class="fogrow"><span class="lvlpips" title="info level ${lvl} of 4 — analyst estimates carry ±${FOG_NOISE[lvl]} pts of noise">${LVL_PIPS.map((p,i)=>`<b class="${i<lvl?'lit':''}">${p}</b>`).join('')}</span>
+        <button class="dspend" data-n="${d.n}" ${dpLeft<=0||lvl>=4?'disabled':''}>🔍 ${lvl>=4?'fully diligenced':`sharpen · ${dpLeft} pt${dpLeft===1?'':'s'} left`}</button></div>`:''}
       <div class="meta"><span>Crowd hype <span class="stars">${star(d.hype)}</span></span><span>round ≤ <b>${fmt(max)}</b></span></div>
       <div class="alloc"><input type="range" min="0" max="${max}" step="0.5" value="${alloc[d.n]}" data-n="${d.n}"><span class="chk">${fmt(alloc[d.n])}</span></div>
       <div class="maxnote">Your seed check into ${d.n}</div>`;
@@ -504,6 +557,7 @@ function renderGrid(){
       updateBank();
     });
   });
+  g.querySelectorAll('.dspend:not(:disabled)').forEach(b=>b.addEventListener('click',()=>spendDP(b.dataset.n)));
 }
 
 function updateBank(){
@@ -730,12 +784,26 @@ function endSeason(){
   const frozen=(CAPITAL-Object.values(alloc).reduce((a,b)=>a+b,0))
     + deals.reduce((s,d)=>s+(alloc[d.n]>0 ? (alloc[d.n]/d.path[0])*d.path[5] : 0),0);
   const selProf=frozen-CAPITAL, steer=value(G.funds[G.pIdx],5)-frozen;
+  // Fog: calibration α = % of deal pairs your estimate-conviction ordered the same as
+  // truth-conviction would have (same thesis). Computed BEFORE the reveal flips estimates off.
+  let calibration=null, misread=null;
+  if(fogOn&&!fogRevealed){
+    let con=0,tot=0;
+    for(let i=0;i<deals.length;i++)for(let j=i+1;j<deals.length;j++){
+      const a=conviction(deals[i])-conviction(deals[j]), b=convictionTrue(deals[i])-convictionTrue(deals[j]);
+      if(a===0||b===0)continue; tot++; if(a*b>0)con++;
+    }
+    calibration=tot?Math.round(100*con/tot):100;
+    misread=deals.map(d=>({d,gap:conviction(d)-convictionTrue(d)}))
+      .sort((a,b)=>Math.abs(b.gap)-Math.abs(a.gap))[0];
+    fogRevealed=true;   // the reveal: from here on, every surface shows truth
+  }
   // Tiered scout flag (was binary). Gold = beat every bot; Silver = top half & green; Bronze = green.
   const gold=myRank===1;
   const silver=!gold && myRank<=Math.ceil(rows.length/2) && my.prof>0;
   const bronze=!gold && !silver && my.prof>0;
   const scoutTier=gold?'gold':silver?'silver':bronze?'bronze':'none';
-  window.FVC&&FVC.track('season_end',{rank:myRank,funds:rows.length,profit:Math.round(my.prof),mult:+mult.toFixed(2),judgment:js,newBlood:gold,scoutTier,thesis:curName(),board:boardId(),selProfit:Math.round(selProf),steerAlpha:Math.round(steer)});
+  window.FVC&&FVC.track('season_end',{rank:myRank,funds:rows.length,profit:Math.round(my.prof),mult:+mult.toFixed(2),judgment:js,newBlood:gold,scoutTier,thesis:curName(),board:boardId(),selProfit:Math.round(selProf),steerAlpha:Math.round(steer),fog:calibration!==null,dpSpent:calibration!==null?DP_BUDGET-dpLeft:null,calibration});
   // any zeros held?
   const blewUp=deals.filter(d=>d.path[5]===0 && (G.funds[G.pIdx].pos[d.n]?.cost>0)).map(d=>d.n);
   const card=document.getElementById('endcard'); card.style.display='block';
@@ -744,7 +812,8 @@ function endSeason(){
     <div class="scorebox"><div class="k">Fund Multiple</div><div class="v">${mult.toFixed(2)}×</div></div>
     <div class="scorebox"><div class="k">Total Profit</div><div class="v" style="color:${my.prof>=0?'var(--good)':'var(--bad)'}">${my.prof>=0?'+':''}${fmt(my.prof)}</div></div>
     <div class="scorebox"><div class="k">Judgment Accuracy</div><div class="v" style="color:${js>=70?'var(--good)':js>=55?'var(--gold)':'var(--bad)'}">${js}%</div></div>
-    <div class="scorebox" title="What your mid-season moves (follow-ons & sells) added vs never touching your seed portfolio. 0 = you rode it untouched."><div class="k">Steering α</div><div class="v" style="color:${steer>0?'var(--good)':steer<0?'var(--bad)':'var(--mut)'}">${steer>0?'+':''}${Math.round(steer)===0?'0':fmt(steer)}</div></div>`;
+    <div class="scorebox" title="What your mid-season moves (follow-ons & sells) added vs never touching your seed portfolio. 0 = you rode it untouched."><div class="k">Steering α</div><div class="v" style="color:${steer>0?'var(--good)':steer<0?'var(--bad)':'var(--mut)'}">${steer>0?'+':''}${Math.round(steer)===0?'0':fmt(steer)}</div></div>
+    ${calibration!==null?`<div class="scorebox" title="How closely your conviction ranking on the FOGGED estimates matched what the same thesis would say on true scores. High = you read through the noise (or spent your diligence well)."><div class="k">Calibration</div><div class="v" style="color:${calibration>=80?'var(--good)':calibration>=65?'var(--gold)':'var(--bad)'}">${calibration}%</div></div>`:''}`;
   const beatAll=gold;
   let v;
   if(beatAll) v=`You beat every algorithm — including the hype-chasers. Pure judgment, not crowd-following. That's the signal a scout network hunts for.`;
@@ -755,6 +824,13 @@ function endSeason(){
     Math.round(steer)===0 ? 'you rode your seed picks untouched — selection did all the work. Follow-ons into winners (and selling the bleeders) is where funds separate.'
     : steer>0 ? 'your mid-season moves beat buy-and-hold — that\'s portfolio stewardship, the skill LPs pay carry for.'
     : 'buy-and-hold would have beaten your trading — your follow-ons/sells destroyed value vs sitting still. Steer less, or steer better.'}`;
+  if(calibration!==null){
+    v+=` <br><br><b>🌫 The fog lifts — calibration ${calibration}%:</b> ${
+      calibration>=80?'your read of the noisy estimates ranked the board almost exactly as the true scores would. That\'s signal.'
+      :calibration>=65?'decent read through the noise, with real misses.'
+      :'the fog beat you — your diligence points went to the wrong rooms.'}`
+      + (misread&&Math.abs(misread.gap)>=6?` Biggest misread: <b>${misread.d.n}</b> — the analysts showed you ~${convictionTrue(misread.d)+misread.gap} conviction; the truth was <b>${convictionTrue(misread.d)}</b> (${misread.gap>0?'flattered by':'hidden by'} the fog, ${misread.gap>0?'+':''}${misread.gap}).`:'');
+  }
   document.getElementById('endVerdict').innerHTML=v;
   document.getElementById('scoutWrap').innerHTML =
       gold   ? `<div class="scoutbadge">🥇 NEW BLOOD — flagged to the scout network</div>`
@@ -770,7 +846,8 @@ function endSeason(){
       {k:'Total Profit', v:(my.prof>=0?'+':'')+fmt(my.prof)},
       {k:'Judgment Accuracy', v:js+'%'},
       {k:'Steering α', v:(steer>0?'+':'')+(Math.round(steer)===0?'0':fmt(steer))},
-      {k:'Board', v:boardMode==='daily'?'🗓 Daily '+todayId():'🎲 Free play'},
+      ...(calibration!==null?[{k:'Calibration (fog)', v:calibration+'%'}]:[]),
+      {k:'Board', v:(boardMode==='daily'?'🗓 Daily '+todayId():'🎲 Free play')+(calibration!==null?' · 🌫 fog':'')},
     ],
     line: gold?'Beat every algorithm on real startups & rounds — pure judgment, not crowd-following.'
       : myRank<=Math.ceil(rows.length/2)?'Top-half fund, picking real startups against the bots.'
