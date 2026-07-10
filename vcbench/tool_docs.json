@@ -92,8 +92,8 @@
     "description": "Return your positions at the current round: units, cost, current mark, unrealized P&L, follow-on room, plus cash reserves.",
     "inputSchema": { "type": "object", "properties": {}, "required": [] },
     "parameters": {},
-    "returns": { "success": "{round: 2, cash: 12.5, positions: [{deal, units, cost, mark, value, pnl, foRoom}]}", "failure": "No season running." },
-    "impact": "Read-only. Marks are public truth (the tape); factor estimates stay fogged.",
+    "returns": { "success": "{round: 2, cash: 12.5, positions: [{deal, units, cost, mark, value, pnl, foRoom, secondaryBid}]}", "failure": "No season running." },
+    "impact": "Read-only. Marks are public truth (the tape); factor estimates stay fogged. secondaryBid is the fraction of mark a sell fetches THIS round (1.0 = full mark, 0 = no bid — down round, illiquid).",
     "example_call": { "tool": "get_holdings", "input": {} }
   },
   "follow_on": {
@@ -116,7 +116,7 @@
   "sell": {
     "name": "sell",
     "category": "Portfolio Actions",
-    "description": "Sell a fraction of a held position at the current round's mark (rounds 1-4). Proceeds go to reserves.",
+    "description": "Sell a fraction of a held position on the SECONDARY market (rounds 1-4). Secondaries price on heat and momentum: an up-round name sells near mark (hot names at full price, quiet names at a haircut down to 80%), a flat name at 75%, and a name that just marked down has NO BID — the sell fails and you are stuck holding. Exit marks at round 5 are unaffected.",
     "inputSchema": {
       "type": "object",
       "properties": {
@@ -126,8 +126,8 @@
       "required": ["deal", "fraction"]
     },
     "parameters": { "deal": { "type": "str", "description": "Which holding" }, "fraction": { "type": "float", "description": "Portion of units to sell" } },
-    "returns": { "success": "Sold 50% of WeWork at 40× → $12.0M to reserves.", "failure": "Deal not held / nothing to sell / round not actionable" },
-    "impact": "Counts toward steering α: selling above the exit mark adds alpha (e.g. exiting hype peaks before the crater).",
+    "returns": { "success": "Sold 50% of Notion at 6× via secondary (−15% to mark) → $10.2M to reserves.", "failure": "Deal not held / nothing to sell / round not actionable / No bid — the deal just marked down and the secondary market has dried up" },
+    "impact": "Counts toward steering α, which now prices liquidity honestly: selling above the exit mark adds alpha net of the secondary haircut. Down rounds are illiquid — the last chance to exit a name is the round BEFORE it turns (check secondaryBid on get_holdings).",
     "example_call": { "tool": "sell", "input": { "deal": "WeWork", "fraction": 0.5 } }
   },
   "advance_round": {

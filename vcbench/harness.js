@@ -70,6 +70,7 @@ vm.runInContext(gameSrc + `
   get G(){return G}, get dpLeft(){return dpLeft},
   get fogOn(){return fogOn}, set fogOn(v){fogOn=v}, get fogRevealed(){return fogRevealed},
   get accessOn(){return accessOn}, set accessOn(v){accessOn=v}, FILL, fillOf,
+  get secOn(){return secOn}, set secOn(v){secOn=v}, SEC_HAIR, secBid,
   THESES, CAPITAL, MIN_DEALS, ROUNDS, DP_BUDGET, FOG_NOISE, STAGE_LVL,
   boardId, todayId, fogLvl, fogVal, conviction, convictionTrue, spendDP,
   newDealFlow, enterSeason, advance, value, followOn, doSell, curName, curW,
@@ -171,7 +172,8 @@ const TOOLS = {
         const pos = p.pos[d.n], val = pos.units * d.path[r];
         return { deal: d.n, units: +pos.units.toFixed(3), cost: pos.cost, mark: d.path[r],
           value: +val.toFixed(2), pnl: +(val - pos.cost).toFixed(2),
-          foRoom: +Math.max(0, d.maxCheck - (E.G.foRound[d.n] || 0)).toFixed(2) };
+          foRoom: +Math.max(0, d.maxCheck - (E.G.foRound[d.n] || 0)).toFixed(2),
+          secondaryBid: (r >= 1 && r <= 4) ? E.secBid(d, r) : null };
       }),
     });
   },
@@ -197,9 +199,11 @@ const TOOLS = {
     if (r < 1 || r > 4) return fail('Round not actionable');
     const frac = input.fraction;
     if (!(frac > 0 && frac <= 1)) return fail('fraction must be in (0, 1]');
+    const bid = E.secBid(d, r);
+    if (bid <= 0) return fail(`No bid — ${d.n} just marked down and the secondary market has dried up. No buyer at any price this round.`);
     const proceeds = E.doSell(p, d, frac, r);
     E.G.hist[E.G.pIdx][r] = E.value(p, r);
-    return ok(`Sold ${Math.round(frac * 100)}% of ${d.n} at ${d.path[r].toFixed(0)}× → $${proceeds.toFixed(1)}M to reserves.`);
+    return ok(`Sold ${Math.round(frac * 100)}% of ${d.n} at ${d.path[r].toFixed(0)}×${bid < 1 ? ` via secondary (−${Math.round((1 - bid) * 100)}% to mark)` : ''} → $${proceeds.toFixed(1)}M to reserves.`);
   },
   advance_round(){
     if (!E.G) return fail('No season running.');

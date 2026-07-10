@@ -75,7 +75,7 @@ Because paths are deterministic, every counterfactual is *computable, not estima
 - **Selection α** — frozen-portfolio counterfactual: seed checks held untouched to Exit.
   `selection = frozenValue − CAPITAL`
 - **Capital-steering α** — value added/destroyed by follow-ons & sells vs doing nothing:
-  `steering = actualValue − frozenValue`  *(✅ SHIPPED 2026-07-08 — endcard, Scout Card, `season_end.steerAlpha`; auto-resolvers get exactly 0 by construction, a clean segmentation)*
+  `steering = actualValue − frozenValue`  *(✅ SHIPPED 2026-07-08 — endcard, Scout Card, `season_end.steerAlpha`; auto-resolvers get exactly 0 by construction, a clean segmentation. 2026-07-10: sells now price as secondaries — hype/momentum haircuts, no bid on down rounds — so steering α prices liquidity honestly instead of assuming costless exits.)*
 - **Advising α** (once Partner Mode exists) — path-with-interventions vs base path:
   `advising = Σ (modifiedPath − basePath) × unitsHeld`
 - **Information efficiency** (diagnostic): outcome per backchannel/board-seat consumed — CEO-Bench's

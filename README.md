@@ -30,6 +30,9 @@ Factor scores are **analyst estimates**, not truth — board-seeded noise that s
 ### 🔥 Oversubscription
 Money doesn't guarantee allocation. Hot rounds cut back every fund's seed check — a 5-star-hype deal honors ~30% of what you wanted, while the unloved diamonds take every dollar (the realistic path in for unknowns). Once you're in at seed, **the founder makes room for you**: follow-ons are never cut — early conviction is the access edge, exactly as it works in real venture. Season end scores your **access α**: what the cutbacks cost you (squeezed out of winners) or saved you (squeezed out of traps), computed exactly against your intended checks. Design notes in `ACCESS-SCOPE.md`.
 
+### 💧 Secondary pricing
+Mid-season sells are **secondaries, and secondaries price on heat**: an up-round name sells near mark (hot names at full price, quiet ones at 80–92¢ on the dollar), a flat name is a buyer's market (75¢), and a name that just **marked down has no bid at all** — you're stuck holding, which is the real terror of venture. The last chance to exit a name is the round *before* it turns. Exit marks are unaffected, bots pay the same haircuts, and steering α now prices liquidity honestly.
+
 ### 📋 Share your Scout Card · 📜 LP letter
 Every finished run generates a nicely-formatted **markdown Scout Card** you can copy to share privately, or push straight to **X / LinkedIn** (the public share carries a link back to the game). Optionally add your handle and opt in to a **consent-based VC scout leaderboard**. League seasons also end with a one-click **LP letter** — your vintage retold in authentic quarterly-letter voice, anti-portfolio included. See [Sharing & monetization](#sharing--monetization).
 

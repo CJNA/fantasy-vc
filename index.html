@@ -385,6 +385,21 @@ const LVL_PIPS=['▁','▃','▅','▇'];
 let accessOn=true;
 const FILL={1:1,2:1,3:.8,4:.55,5:.3};            // fraction of a seed check honored, by hype
 function fillOf(d){ return accessOn ? FILL[d.hype] : 1; }
+/* ---- SECONDARY PRICING (the sell path, rounds 1-4) ----
+ * Mid-season sells are secondaries, not exits — and secondaries price on heat and momentum.
+ * An up-round name sells near mark (hot names have buyers lined up; quiet ones take a
+ * haircut). A name that just MARKED DOWN has no bid at all: you're stuck holding — the
+ * real terror of venture. Exit marks (round 5) are unaffected. Applies to bots too, so
+ * steering α prices liquidity honestly for everyone. */
+let secOn=true;
+const SEC_HAIR={5:1,4:.97,3:.92,2:.85,1:.8};     // up-round bid (fraction of mark), by hype
+function secBid(d,r){                            // 0 = no bid this round
+  if(!secOn) return 1;
+  if(d.path[r]<=0) return 0;
+  if(d.path[r]<d.path[r-1]) return 0;            // down round — the secondary market dries up
+  if(d.path[r]===d.path[r-1]) return .75;        // flat — a buyer's market
+  return SEC_HAIR[d.hype];
+}
 function fogU(dealName,fk){                      // canonical unit noise in [-1,1]
   const key='fvc-fog-'+(boardMode==='daily'?todayId():fogNonce)+'-'+dealName+'-'+fk;
   return mulberry32(seedFrom(key))()*2-1;
@@ -478,6 +493,12 @@ function renderBoardChips(){
   ac.innerHTML=`🔥 Allocation<small>${accessOn?'hot rounds cut you back':'every check fills'}</small>`;
   ac.onclick=()=>{ if(G)return; accessOn=!accessOn; window.FVC&&FVC.track('access_toggle',{on:accessOn,board:boardId()}); renderBoardChips(); renderGrid(); updateBank(); };
   bc.appendChild(ac);
+  // secondary-pricing toggle — mid-season sells price like real secondaries
+  const sc=document.createElement('span');
+  sc.className='chip'+(secOn?' on':'');
+  sc.innerHTML=`💧 Secondaries<small>${secOn?'down rounds have no bid':'sells at full mark'}</small>`;
+  sc.onclick=()=>{ if(G)return; secOn=!secOn; window.FVC&&FVC.track('sec_toggle',{on:secOn,board:boardId()}); renderBoardChips(); };
+  bc.appendChild(sc);
   const rs=document.getElementById('reshuffleBtn');
   rs.disabled = boardMode==='daily';
   rs.title = boardMode==='daily' ? 'The daily board is fixed — everyone plays the same deals. Switch to Free play to reshuffle.' : '';
@@ -612,7 +633,8 @@ function followOn(f,d,amount,r){
 }
 function doSell(f,d,frac,r){
   const p=f.pos[d.n]; if(!p||p.units<=0)return 0;
-  const units=p.units*frac, proceeds=units*d.path[r], costOut=p.cost*frac;
+  const bid=(r>=1&&r<=4)?secBid(d,r):1; if(bid<=0)return 0;   // no bid → no trade
+  const units=p.units*frac, proceeds=units*d.path[r]*bid, costOut=p.cost*frac;
   p.units-=units; p.cost-=costOut; f.cash+=proceeds; return proceeds;
 }
 
@@ -711,11 +733,17 @@ function renderHoldings(){
   held.forEach(d=>{
     const pos=p.pos[d.n], val=pos.units*d.path[r], pnl=val-pos.cost, alive=d.path[r]>0;
     const foLeft=Math.max(0,d.maxCheck-(G.foRound[d.n]||0));
-    let act='';
+    let act='', secNote='';
     if(actionable && alive){
-      act=`<button class="bsell" data-act="s25" data-n="${d.n}">Trim 25%</button>
-           <button class="bsell" data-act="s50" data-n="${d.n}">Sell ½</button>
-           <button class="bsell" data-act="s100" data-n="${d.n}">Exit</button>`;
+      const bid=secBid(d,r);
+      if(bid>0){
+        act=`<button class="bsell" data-act="s25" data-n="${d.n}">Trim 25%</button>
+             <button class="bsell" data-act="s50" data-n="${d.n}">Sell ½</button>
+             <button class="bsell" data-act="s100" data-n="${d.n}">Exit</button>`;
+        if(bid<1) secNote=`<div class="fonote" title="Mid-season sells are secondaries — buyers pay ${Math.round(bid*100)}% of the mark for this name right now.">💧 secondary bid: ${Math.round(bid*100)}¢ on the $</div>`;
+      } else {
+        act=`<span class="hint" title="The round just marked down — the secondary market has dried up. No buyer at any price until the story turns.">🚫 no bid — down round</span>`;
+      }
       if(foLeft>0.01) act+=`
            <button class="bfo" data-act="fo2" data-n="${d.n}" ${p.cash<2?'disabled':''}>+$2M</button>
            <button class="bfo" data-act="fo5" data-n="${d.n}" ${p.cash<5?'disabled':''}>+$5M</button>
@@ -727,7 +755,7 @@ function renderHoldings(){
         <div class="mark">${alive?d.path[r].toFixed(0)+'×':'0×'}</div>
         <div class="mark">${fmt(val)}</div>
         <div class="pnl ${pnl>=0?'green':'red'}">${pnl>=0?'+':''}${fmt(pnl)}</div>
-        <div class="hact">${act}${actionable&&alive&&foLeft>0.01?`<div class="fonote">follow-on room: ${fmt(foLeft)}</div>`:''}</div>
+        <div class="hact">${act}${secNote}${actionable&&alive&&foLeft>0.01?`<div class="fonote">follow-on room: ${fmt(foLeft)}</div>`:''}</div>
       </div>`);
   });
 }
@@ -736,8 +764,11 @@ document.addEventListener('click',e=>{
   const n=b.dataset.n, d=deals.find(x=>x.n===n), p=G.funds[G.pIdx], r=G.round;
   if(b.dataset.act.startsWith('s')){
     const frac={s25:.25,s50:.5,s100:1}[b.dataset.act];
-    const proceeds=doSell(p,d,frac,r);
-    if(proceeds>0) addEv('sell',`<b>Sold ${Math.round(frac*100)}% of ${d.n}</b> at ${d.path[r].toFixed(0)}× → <b style="color:var(--gold)">${fmt(proceeds)}</b> to reserves.`);
+    const bid=secBid(d,r), proceeds=doSell(p,d,frac,r);
+    if(proceeds>0){
+      addEv('sell',`<b>Sold ${Math.round(frac*100)}% of ${d.n}</b> at ${d.path[r].toFixed(0)}×${bid<1?` via secondary (−${Math.round((1-bid)*100)}% to mark)`:''} → <b style="color:var(--gold)">${fmt(proceeds)}</b> to reserves.`);
+      window.FVC&&FVC.track('secondary_sell',{deal:d.n,frac,round:r,mark:d.path[r],bid,proceeds:+proceeds.toFixed(1),board:boardId()});
+    }
   } else {
     let amt = b.dataset.act==='fo2'?2 : b.dataset.act==='fo5'?5 : Math.min(p.cash, d.maxCheck-(G.foRound[n]||0));
     amt=Math.min(amt, d.maxCheck-(G.foRound[n]||0), p.cash);
