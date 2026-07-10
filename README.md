@@ -111,6 +111,9 @@ collector.js  zero-dep Node usage collector (JSONL + snapshot)
 render.yaml   Render Blueprint (static site + collector)
 LOOP.md       the four-loop self-improvement design
 usage/        synthetic demo traces + example analyst report
+vcbench/      VC-Bench: 13-tool agent contract + headless harness (run the game from Node —
+              `node vcbench/harness.js --demo`); format credits Princeton's CEO-Bench
+*-SCOPE.md    designs on deck: stage as a strategy axis, access/allocation, LP network
 ```
 
 The diligence model is inspired by SimCap's 6-factor scorecard; the competitive league, scouting, and self-improvement loop are ours.

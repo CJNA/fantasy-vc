@@ -1,4 +1,4 @@
-# VC-Bench — agent interface (contract first, harness next)
+# VC-Bench — agent interface (contract + headless harness)
 
 > **Attribution:** the tool interface here mirrors **CEO-Bench**'s agent interface 1:1 in shape —
 > [`zlab-princeton/ceobench-src`](https://github.com/zlab-princeton/ceobench-src) (Zhuang Liu Lab,
@@ -17,9 +17,21 @@ the same seeded board humans play, so agent and human scores land on one leaderb
 (Index Ventures Bot), and exact skill attribution (selection α / steering α / calibration).
 
 - **`tool_docs.json`** — the 13-tool contract (this directory), CEO-Bench format.
-- **Harness (next):** a Node runner that loads the game engine headlessly, exposes these tools
-  over stdin/stdout or HTTP (their `api_server.py` analog), and appends `get_result` rows to the
-  collector. The engine is already deterministic-given-(board, actions), so replays are free.
+- **`harness.js` ✅** — a zero-dep Node runner (their `api_server.py` analog) that runs **the
+  actual game**: it evaluates `index.html`'s own inline script in a `vm` sandbox behind a
+  universal DOM stub, so the harness and the browser can never drift — an agent and a human on
+  the same daily board play byte-identical games. Verified: the same action sequence produces
+  the same result row in Chrome and in Node, to the dollar.
+
+```bash
+node vcbench/harness.js --demo          # scripted baseline agent plays one episode
+node vcbench/harness.js                 # stdio server: {"tool":"get_board","input":{}} per line
+```
+
+Requests are one JSON object per line → `{"ok":true,"result":…}` / `{"ok":false,"error":…}`.
+Fog is enforced at the tool layer: `get_board`/`spend_diligence` only ever return `fogVal()`
+estimates — an agent cannot read true scores through the interface. To wire an LLM agent, hand
+it `tool_docs.json` as its tool schema and bridge tool calls to the stdio server.
 
 ## Episode shape (mirrors their weekly loop)
 
