@@ -3,11 +3,11 @@
   "get_board": {
     "name": "get_board",
     "category": "Market Data",
-    "description": "Return today's deal board. Under fog, factor scores are ANALYST ESTIMATES at each deal's current info level (±25/15/8/3 pts at L1-L4) — true scores are never returned while fog is active.",
+    "description": "Return today's deal board. Under fog, factor scores are ANALYST ESTIMATES at each deal's current info level (±25/15/8/3 pts at L1-L4) — true scores are never returned while fog is active. Each deal's STARTING level is set by its entry stage: Pre-seed L1, Seed L2, Series A L3, Series B L4 — early-stage deals are judged on almost no data; late-stage deals are near-transparent.",
     "inputSchema": { "type": "object", "properties": {}, "required": [] },
     "parameters": {},
     "returns": {
-      "success": "{board: '2026-07-08', fog: true, deals: [{name, sector, blurb, hype, maxCheck, infoLevel, estimates: {team, ps, diff, market, comm, ar, fin}, conviction}]}",
+      "success": "{board: '2026-07-08', fog: true, deals: [{name, sector, stage, blurb, hype, maxCheck, infoLevel, estimates: {team, ps, diff, market, comm, ar, fin}, conviction}]}",
       "failure": "Season already running — board is locked."
     },
     "impact": "Read-only. Conviction is computed from estimates under the current thesis — sharpening estimates (spend_diligence) re-ranks the board.",
@@ -48,7 +48,7 @@
   "spend_diligence": {
     "name": "spend_diligence",
     "category": "Diligence",
-    "description": "Spend 1 of 6 diligence points to raise one deal's info level (max L4). Estimates converge monotonically toward truth (the canonical noise draw narrows; it is not re-rolled). Only available before begin_season.",
+    "description": "Spend 1 of 6 diligence points to raise one deal's info level (max L4). Estimates converge monotonically toward truth (the canonical noise draw narrows; it is not re-rolled). Deals start at their stage's level (Pre-seed L1 … Series B L4), so points only buy signal on earlier-stage deals. Only available before begin_season.",
     "inputSchema": {
       "type": "object",
       "properties": { "deal": { "type": "string", "description": "Deal name (or codename in blind mode) from get_board" } },

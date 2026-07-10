@@ -39,7 +39,7 @@ apply) improvements.**
 | `thesis_select` | `thesis`, `finW` — preset (or `Custom`) chosen |
 | `thesis_custom` | `factor`, `val` — a factor slider was dragged (fine-tune granularity) |
 | `board_mode` | `board` — player toggled Daily (`YYYY-MM-DD`) vs Free play (`free`) |
-| `fog_toggle` / `fog_spend` | fog of war: `on`; spends carry `deal`, `level` (2-4), `left`, `board` |
+| `fog_toggle` / `fog_spend` | fog of war: `on`; spends carry `deal`, `stage` (entry stage sets the starting info level — `FOG-OF-WAR.md`), `level` (2-4), `left`, `board` |
 | `season_begin` | `deals`, `deployed`, `thesis`, `finW`, `customW` (the raw weight vector when `thesis==='Custom'`, else `null`), `board` |
 | `auto_resolve` | `fromRound` — player skipped the rest of the season to the Exit marks |
 | `season_end` | `rank`, `funds`, `profit`, `mult`, `judgment`, `newBlood`, `scoutTier`, `thesis`, `board`, `selProfit`, `steerAlpha` (decomposition vs the frozen-seed counterfactual — `STEERING-SCOPE.md`), `fog`, `dpSpent`, `calibration` (estimate-vs-truth ranking concordance — `FOG-OF-WAR.md`) |

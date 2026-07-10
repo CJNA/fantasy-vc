@@ -4,6 +4,12 @@
 > everyone enters at **Seed** and rides a fixed Seed → A → B → C → D → Exit ladder, so stage is
 > invisible and identical for every player. This scopes making **entry stage a strategic choice.**
 > Companion to the custom-thesis work (shipped) and [`LP-NETWORK.md`](./LP-NETWORK.md).
+>
+> **✅ Partially answered via fog (2026-07-09):** the *information* half of stage shipped as
+> Fog-of-War F0.5 — each deal now carries an entry stage that sets its **starting info level**
+> (Pre-seed ±25 → Series B ±3), per the advisor's follow-up that pre-seed is judged on almost no
+> data while late stage is "closer to stock picking." See `FOG-OF-WAR.md`. What remains scoped
+> here is the *player-side* axis: choosing your entry point and reshaping the return curve.
 
 ## The insight
 Stage is the single biggest driver of a fund's risk/return shape, and real VCs *specialize* by it.

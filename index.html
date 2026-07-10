@@ -95,6 +95,7 @@
   .crow{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
   .cname{font-weight:700;font-size:16px}
   .sector{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px}
+  .sector .stg{color:#5ac8fa;font-weight:600}
   .conv{text-align:right}
   .conv .cv{font-size:22px;font-weight:800;line-height:1}
   .conv .cl{font-size:9.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px}
@@ -299,24 +300,26 @@
  *     market, comm(commercialization), ar(additional-risk/governance — HIGH = clean).
  * fin = financial attractiveness 0-100 (frauds juice this). hype = crowd rating 1-5.
  * path = value of $1 invested at seed, over 5 post-seed rounds (path[0]=1). 0 = wiped out.
- * maxCheck = $M deployable into this round (per-round cap, also caps follow-ons). */
+ * maxCheck = $M deployable into this round (per-round cap, also caps follow-ons).
+ * st = entry stage — sets the deal's STARTING fog info level (STAGE_LVL below): a Pre-seed
+ *      deal is a ±25 teaser deck, a Series B deal arrives nearly transparent (±3). */
 const UNIVERSE = [
-  {n:"Stripe",   s:"Payments",     b:"Two brothers fixing payments with seven lines of code.",            hype:4, maxCheck:8,  fin:85, f:{team:95,ps:90,diff:85,market:90,comm:85,ar:88}, path:[1,3,14,45,80,120]},
-  {n:"Airbnb",   s:"Travel",       b:"Strangers renting air mattresses. Sounds insane.",                  hype:2, maxCheck:5,  fin:70, f:{team:80,ps:85,diff:70,market:95,comm:75,ar:78}, path:[1,4,18,60,130,200]},
-  {n:"Uber",     s:"Mobility",     b:"Press a button, a black car appears. Regulators will hate it.",     hype:3, maxCheck:8,  fin:75, f:{team:88,ps:80,diff:65,market:95,comm:80,ar:55}, path:[1,3,12,40,70,90]},
-  {n:"DoorDash", s:"Delivery",     b:"Suburban food delivery. Thin margins, brutal ops.",                 hype:3, maxCheck:10, fin:65, f:{team:78,ps:75,diff:60,market:80,comm:78,ar:70}, path:[1,2,8,25,50,70]},
-  {n:"Figma",    s:"Design Tools", b:"Design software in the browser. Adobe owns this space.",            hype:3, maxCheck:8,  fin:78, f:{team:85,ps:88,diff:90,market:80,comm:82,ar:85}, path:[1,3,15,45,85,110]},
-  {n:"Coinbase", s:"Crypto",       b:"A friendly on-ramp for Bitcoin. Volatile, unclear regulation.",      hype:3, maxCheck:10, fin:80, f:{team:80,ps:78,diff:70,market:85,comm:75,ar:50}, path:[1,4,20,55,90,60]},
-  {n:"Notion",   s:"Productivity", b:"Yet another notes app. Rebuilt from scratch twice.",                hype:2, maxCheck:6,  fin:60, f:{team:82,ps:80,diff:78,market:70,comm:72,ar:80}, path:[1,2,6,18,32,40]},
-  {n:"Plaid",    s:"Fintech",      b:"Plumbing connecting apps to banks. Visa wants to buy it.",          hype:4, maxCheck:15, fin:70, f:{team:80,ps:78,diff:75,market:78,comm:70,ar:60}, path:[1,3,8,12,9,8]},
-  {n:"Brex",     s:"Fintech",      b:"Corporate cards for startups. Crowded, big incumbents.",            hype:4, maxCheck:15, fin:72, f:{team:78,ps:72,diff:60,market:75,comm:75,ar:68}, path:[1,3,7,9,7,6]},
-  {n:"Robinhood",s:"Fintech",      b:"Commission-free trading for millennials. Gamified, controversial.",  hype:4, maxCheck:12, fin:75, f:{team:75,ps:78,diff:65,market:80,comm:80,ar:45}, path:[1,3,9,22,18,15]},
-  {n:"Instacart",s:"Grocery",      b:"Same-day grocery delivery. Pandemic rocket — but after?",           hype:5, maxCheck:12, fin:78, f:{team:76,ps:75,diff:58,market:82,comm:80,ar:60}, path:[1,4,15,50,22,9]},
-  {n:"WeWork",   s:"Real Estate",  b:"Beautiful co-working, 'community-adjusted EBITDA', a charismatic founder.", hype:5, maxCheck:20, fin:75, f:{team:70,ps:65,diff:50,market:75,comm:70,ar:20}, path:[1,4,18,40,8,0]},
-  {n:"Theranos", s:"HealthTech",   b:"One drop of blood, hundreds of tests. A magazine-cover founder.",    hype:5, maxCheck:15, fin:80, f:{team:72,ps:80,diff:85,market:90,comm:70,ar:10}, path:[1,5,25,30,0,0]},
-  {n:"Quibi",    s:"Streaming",    b:"Hollywood-grade short video. $1.75B raised at launch.",             hype:5, maxCheck:25, fin:50, f:{team:85,ps:55,diff:45,market:60,comm:65,ar:35}, path:[1,2,3,0,0,0]},
-  {n:"Fast",     s:"Checkout",     b:"One-click checkout everywhere. Spending fast, growing faster.",      hype:4, maxCheck:6,  fin:45, f:{team:65,ps:60,diff:50,market:65,comm:70,ar:25}, path:[1,3,10,0,0,0]},
-  {n:"Bird",     s:"Micromobility",b:"Scooters on every corner. Fastest company ever to a $1B valuation.", hype:4, maxCheck:12, fin:55, f:{team:68,ps:62,diff:45,market:70,comm:72,ar:35}, path:[1,3,7,5,1,0]},
+  {n:"Stripe",   s:"Payments",     st:"Pre-seed", b:"Two brothers fixing payments with seven lines of code.",            hype:4, maxCheck:8,  fin:85, f:{team:95,ps:90,diff:85,market:90,comm:85,ar:88}, path:[1,3,14,45,80,120]},
+  {n:"Airbnb",   s:"Travel",       st:"Pre-seed", b:"Strangers renting air mattresses. Sounds insane.",                  hype:2, maxCheck:5,  fin:70, f:{team:80,ps:85,diff:70,market:95,comm:75,ar:78}, path:[1,4,18,60,130,200]},
+  {n:"Uber",     s:"Mobility",     st:"Seed",     b:"Press a button, a black car appears. Regulators will hate it.",     hype:3, maxCheck:8,  fin:75, f:{team:88,ps:80,diff:65,market:95,comm:80,ar:55}, path:[1,3,12,40,70,90]},
+  {n:"DoorDash", s:"Delivery",     st:"Seed",     b:"Suburban food delivery. Thin margins, brutal ops.",                 hype:3, maxCheck:10, fin:65, f:{team:78,ps:75,diff:60,market:80,comm:78,ar:70}, path:[1,2,8,25,50,70]},
+  {n:"Figma",    s:"Design Tools", st:"Seed",     b:"Design software in the browser. Adobe owns this space.",            hype:3, maxCheck:8,  fin:78, f:{team:85,ps:88,diff:90,market:80,comm:82,ar:85}, path:[1,3,15,45,85,110]},
+  {n:"Coinbase", s:"Crypto",       st:"Series A", b:"A friendly on-ramp for Bitcoin. Volatile, unclear regulation.",      hype:3, maxCheck:10, fin:80, f:{team:80,ps:78,diff:70,market:85,comm:75,ar:50}, path:[1,4,20,55,90,60]},
+  {n:"Notion",   s:"Productivity", st:"Pre-seed", b:"Yet another notes app. Rebuilt from scratch twice.",                hype:2, maxCheck:6,  fin:60, f:{team:82,ps:80,diff:78,market:70,comm:72,ar:80}, path:[1,2,6,18,32,40]},
+  {n:"Plaid",    s:"Fintech",      st:"Series B", b:"Plumbing connecting apps to banks. Visa wants to buy it.",          hype:4, maxCheck:15, fin:70, f:{team:80,ps:78,diff:75,market:78,comm:70,ar:60}, path:[1,3,8,12,9,8]},
+  {n:"Brex",     s:"Fintech",      st:"Series A", b:"Corporate cards for startups. Crowded, big incumbents.",            hype:4, maxCheck:15, fin:72, f:{team:78,ps:72,diff:60,market:75,comm:75,ar:68}, path:[1,3,7,9,7,6]},
+  {n:"Robinhood",s:"Fintech",      st:"Series A", b:"Commission-free trading for millennials. Gamified, controversial.",  hype:4, maxCheck:12, fin:75, f:{team:75,ps:78,diff:65,market:80,comm:80,ar:45}, path:[1,3,9,22,18,15]},
+  {n:"Instacart",s:"Grocery",      st:"Series B", b:"Same-day grocery delivery. Pandemic rocket — but after?",           hype:5, maxCheck:12, fin:78, f:{team:76,ps:75,diff:58,market:82,comm:80,ar:60}, path:[1,4,15,50,22,9]},
+  {n:"WeWork",   s:"Real Estate",  st:"Series B", b:"Beautiful co-working, 'community-adjusted EBITDA', a charismatic founder.", hype:5, maxCheck:20, fin:75, f:{team:70,ps:65,diff:50,market:75,comm:70,ar:20}, path:[1,4,18,40,8,0]},
+  {n:"Theranos", s:"HealthTech",   st:"Seed",     b:"One drop of blood, hundreds of tests. A magazine-cover founder.",    hype:5, maxCheck:15, fin:80, f:{team:72,ps:80,diff:85,market:90,comm:70,ar:10}, path:[1,5,25,30,0,0]},
+  {n:"Quibi",    s:"Streaming",    st:"Series B", b:"Hollywood-grade short video. $1.75B raised at launch.",             hype:5, maxCheck:25, fin:50, f:{team:85,ps:55,diff:45,market:60,comm:65,ar:35}, path:[1,2,3,0,0,0]},
+  {n:"Fast",     s:"Checkout",     st:"Seed",     b:"One-click checkout everywhere. Spending fast, growing faster.",      hype:4, maxCheck:6,  fin:45, f:{team:65,ps:60,diff:50,market:65,comm:70,ar:25}, path:[1,3,10,0,0,0]},
+  {n:"Bird",     s:"Micromobility",st:"Series A", b:"Scooters on every corner. Fastest company ever to a $1B valuation.", hype:4, maxCheck:12, fin:55, f:{team:68,ps:62,diff:45,market:70,comm:72,ar:35}, path:[1,3,7,5,1,0]},
 ];
 
 const CAPITAL=100, MIN_DEALS=4;
@@ -360,19 +363,25 @@ function pick(arr,k){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math
 
 /* ---- FOG OF WAR (F0 — see FOG-OF-WAR.md; mechanics mirror ceobench-src) ----
  * In fog mode every displayed factor score is an ANALYST ESTIMATE: truth + a canonical
- * unit-noise draw scaled by the deal's info level (±25/15/8/3 at L1-L4). The unit noise is
+ * unit-noise draw scaled by the deal's info level (±25/15/8/3 at L1-L4). A deal's STARTING
+ * level comes from its entry stage (STAGE_LVL) — pre-seed is a teaser deck, Series B is
+ * near-public data ("later-stage investors are closer to stock pickers"). The unit noise is
  * seeded per (board, deal, factor) — everyone on the daily board sees the SAME wrong numbers,
  * and sharpening a level narrows the same error rather than re-rolling it (estimates converge
  * monotonically to truth). Truth never renders until the end-of-season reveal. */
 let fogOn=true, fogLevel={}, fogRevealed=false, fogNonce='';
 const DP_BUDGET=6; let dpLeft=DP_BUDGET;
 const FOG_NOISE=[null,25,15,8,3];               // ± pts at info level 1..4
+/* Stage = starting rung on the info ladder (the advisor's point: pre-seed is judged on almost
+ * no data; later stages are "closer to stock picking"). Diligence spends stack on top, so the
+ * budget only really matters on early-stage deals — where the alpha (and the fog) lives. */
+const STAGE_LVL={'Pre-seed':1,'Seed':2,'Series A':3,'Series B':4};
 const LVL_PIPS=['▁','▃','▅','▇'];
 function fogU(dealName,fk){                      // canonical unit noise in [-1,1]
   const key='fvc-fog-'+(boardMode==='daily'?todayId():fogNonce)+'-'+dealName+'-'+fk;
   return mulberry32(seedFrom(key))()*2-1;
 }
-function fogLvl(d){ return fogLevel[d.n]||1; }
+function fogLvl(d){ return fogLevel[d.n]||STAGE_LVL[d.st]||1; }
 function fogVal(d,k){                            // estimated score for factor k ('team'…'ar','fin')
   const truth=(k==='fin')?d.fin:d.f[k];
   if(!fogOn||fogRevealed) return truth;
@@ -383,7 +392,7 @@ function spendDP(name){
   const d=deals.find(x=>x.n===name);
   if(!d||dpLeft<=0||fogLvl(d)>=4||G)return;      // no spending once the season is running
   fogLevel[name]=fogLvl(d)+1; dpLeft--;
-  window.FVC&&FVC.track('fog_spend',{deal:name,level:fogLevel[name],left:dpLeft,board:boardId()});
+  window.FVC&&FVC.track('fog_spend',{deal:name,stage:d.st,level:fogLevel[name],left:dpLeft,board:boardId()});
   renderBoardChips(); renderGrid();              // estimates sharpen → board re-ranks → cards flash
 }
 
@@ -523,13 +532,13 @@ function renderGrid(){
     el.innerHTML=`
       <div class="rankchip${rankOf[d.n]<=3?' top':''}" title="conviction rank under your thesis">#${rankOf[d.n]}</div>
       <div class="crow">
-        <div><div class="cname">${d.n}</div><div class="sector">${d.s}</div></div>
+        <div><div class="cname">${d.n}</div><div class="sector"><b class="stg">${d.st}</b> · ${d.s}</div></div>
         <div class="conv"><div class="cv" style="color:${convColor(c)}">${foggy&&lvl<4?'~':''}${c}</div><div class="cl">conviction</div></div>
       </div>
       <div class="blurb">${d.b}</div>
       <div class="factors">${facs}</div>
-      ${foggy?`<div class="fogrow"><span class="lvlpips" title="info level ${lvl} of 4 — analyst estimates carry ±${FOG_NOISE[lvl]} pts of noise">${LVL_PIPS.map((p,i)=>`<b class="${i<lvl?'lit':''}">${p}</b>`).join('')}</span>
-        <button class="dspend" data-n="${d.n}" ${dpLeft<=0||lvl>=4?'disabled':''}>🔍 ${lvl>=4?'fully diligenced':`sharpen · ${dpLeft} pt${dpLeft===1?'':'s'} left`}</button></div>`:''}
+      ${foggy?`<div class="fogrow"><span class="lvlpips" title="info level ${lvl} of 4 — a ${d.st} deal starts at L${STAGE_LVL[d.st]}; estimates carry ±${FOG_NOISE[lvl]} pts of noise">${LVL_PIPS.map((p,i)=>`<b class="${i<lvl?'lit':''}">${p}</b>`).join('')}</span>
+        <button class="dspend" data-n="${d.n}" ${dpLeft<=0||lvl>=4?'disabled':''}>🔍 ${lvl>=4?(STAGE_LVL[d.st]>=4?'late-stage — data’s public':'fully diligenced'):`sharpen · ${dpLeft} pt${dpLeft===1?'':'s'} left`}</button></div>`:''}
       <div class="meta"><span>Crowd hype <span class="stars">${star(d.hype)}</span></span><span>round ≤ <b>${fmt(max)}</b></span></div>
       <div class="alloc"><input type="range" min="0" max="${max}" step="0.5" value="${alloc[d.n]}" data-n="${d.n}"><span class="chk">${fmt(alloc[d.n])}</span></div>
       <div class="maxnote">Your seed check into ${d.n}</div>`;

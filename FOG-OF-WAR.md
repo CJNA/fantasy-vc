@@ -30,8 +30,11 @@ shown[k] = clamp(true[k] + noise(level) , 5, 99)      noise ~ seeded, per (board
 ```
 
 ### 1. Info levels per deal (their #1)
-- **L1 (default):** ±25 pts of noise per factor — you're reading a teaser deck.
+- **L1:** ±25 pts of noise per factor — you're reading a teaser deck.
 - **L2:** ±15 — you've done a call. **L3:** ±8 — data room. **L4:** ±3 — deep diligence.
+- **Stage sets the starting level** *(✅ shipped 2026-07-09, advisor feedback)*: Pre-seed → L1,
+  Seed → L2, Series A → L3, Series B → L4. Pre-seed deals are judged on almost no data; later-stage
+  deals are "closer to stock picking" — the diligence budget only buys signal where the fog is.
 - UI: estimates render with an uncertainty tint (e.g. `~62?`) that sharpens as level rises;
   a per-deal level pip (▂▄▆█) replaces false precision.
 
@@ -86,6 +89,7 @@ shown[k] = clamp(true[k] + noise(level) , 5, 99)      noise ~ seeded, per (board
 | Phase | Scope | Effort |
 |---|---|---|
 | **F0 ✅ shipped 2026-07-08** | Fog toggle chip (default ON): ±25/15/8/3 noise ladder, 6-pt budget, level pips + per-card 🔍 sharpen, conviction-on-estimates (incl. risk color — no truth leaks), canonical per-(board,deal,factor) noise so sharpening converges monotonically, end-of-season reveal + calibration α + biggest-misread callout, `fog_toggle`/`fog_spend`/`season_end.{fog,dpSpent,calibration}` events, Scout Card rows | M |
+| **F0.5 ✅ shipped 2026-07-09** | Stage sets the starting info level (`st` per deal + `STAGE_LVL`): Pre-seed L1 → Series B L4; stage badge on cards; `stage` on `fog_spend` events (advisor: "pre-seed = almost no data; late stage = stock picking") | S |
 | **F1** | Held-deal auto-de-fog per round + lagged hype | S |
 | **F2** | Off-market deals (Level 0) | S |
 | **F3** | Async staggered reveals; fog params into the archetype generator (STEERING-SCOPE v1.5) | M |
