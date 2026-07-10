@@ -69,6 +69,7 @@ vm.runInContext(gameSrc + `
   get deals(){return deals}, get alloc(){return alloc}, get thesis(){return thesis},
   get G(){return G}, get dpLeft(){return dpLeft},
   get fogOn(){return fogOn}, set fogOn(v){fogOn=v}, get fogRevealed(){return fogRevealed},
+  get accessOn(){return accessOn}, set accessOn(v){accessOn=v}, FILL, fillOf,
   THESES, CAPITAL, MIN_DEALS, ROUNDS, DP_BUDGET, FOG_NOISE, STAGE_LVL,
   boardId, todayId, fogLvl, fogVal, conviction, convictionTrue, spendDP,
   newDealFlow, enterSeason, advance, value, followOn, doSell, curName, curW,
@@ -93,6 +94,7 @@ const TOOLS = {
       board: E.boardId(), fog: E.fogOn && !E.fogRevealed, diligencePointsLeft: E.dpLeft,
       deals: E.deals.map(d => ({
         name: d.n, sector: d.s, stage: d.st, blurb: d.b, hype: d.hype, maxCheck: d.maxCheck,
+        fill: E.fillOf(d),
         infoLevel: E.fogLvl(d), estimates: estimatesOf(d), conviction: E.conviction(d),
       })),
     });
@@ -154,8 +156,11 @@ const TOOLS = {
     if (count < E.MIN_DEALS) return fail(`Fewer than ${E.MIN_DEALS} deals backed`);
     E.enterSeason();
     if (input.fundName) player().name = String(input.fundName).slice(0, 22);
+    const cuts = E.deals
+      .filter(d => (E.G.intended[d.n] || 0) > (E.G.honored[d.n] || 0))
+      .map(d => ({ deal: d.n, wanted: E.G.intended[d.n], honored: E.G.honored[d.n] || 0, fill: E.fillOf(d) }));
     return ok({ round: 0, funds: E.G.funds.length,
-      deployed: E.CAPITAL - player().cash, reserves: player().cash });
+      deployed: E.CAPITAL - player().cash, reserves: player().cash, cuts });
   },
   get_holdings(){
     if (!E.G) return fail('No season running.');
@@ -228,9 +233,9 @@ const TOOLS = {
     const e = events.filter(x => x.t === 'season_end').slice(-1)[0];
     if (!e) return fail('Season not finished.');
     return ok({ rank: e.rank, funds: e.funds, mult: e.mult, profit: e.profit,
-      selProfit: e.selProfit, steerAlpha: e.steerAlpha, judgment: e.judgment,
-      calibration: e.calibration, scoutTier: e.scoutTier, thesis: e.thesis,
-      board: e.board, fog: e.fog, dpSpent: e.dpSpent });
+      selProfit: e.selProfit, steerAlpha: e.steerAlpha, accessAlpha: e.accessAlpha,
+      judgment: e.judgment, calibration: e.calibration, scoutTier: e.scoutTier,
+      thesis: e.thesis, board: e.board, fog: e.fog, access: e.access, dpSpent: e.dpSpent });
   },
 };
 

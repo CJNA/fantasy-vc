@@ -103,7 +103,7 @@ distribution.
 
 | Phase | Scope | Effort |
 |---|---|---|
-| **A0** | Oversubscription from hype (board-seeded), visible on the card ("🔥 oversubscribed — expect ~30% fill"); pro-rata cutback at begin_season; **early-conviction exemption** for follow-ons (seed-backed = founder loyalty = full fill in every later round — Ryan's #1, promoted from A1); access α on the endcard + events | M |
+| **A0 ✅ shipped 2026-07-10** | Oversubscription from hype (`FILL` ladder ★3 80% · ★4 55% · ★5 30%, deterministic — same squeeze for everyone incl. bots), visible on the card ("🔥 ~30% fill"); pro-rata cutback at begin_season with `allocation_cut` events + log narration; **early-conviction exemption** for follow-ons (seed-backed = founder loyalty, narrated on first follow-on — Ryan's #1, promoted from A1); access α (honored-vs-intended frozen ride, exact) on the endcard + Scout Card + `season_end.accessAlpha` + harness `get_result`; 🔥 Allocation toggle chip | M |
 | **A1** | "Network in" — spend a diligence point to lift one deal's cutback (proxy for his #2/#3, the founder-trust channel; composes with F2 off-market discovery) | S |
 | **A2** | Multiplayer vouching in private leagues (a player's intro lifts your cutback — the real trust network, tradeable); `get_board` exposes your fill per deal for VC-Bench agents. Track-record access tier is **dropped** per Ryan — record belongs to the LP funnel, not the founder's cap table | M |
 

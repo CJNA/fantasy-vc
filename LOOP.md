@@ -40,9 +40,10 @@ apply) improvements.**
 | `thesis_custom` | `factor`, `val` — a factor slider was dragged (fine-tune granularity) |
 | `board_mode` | `board` — player toggled Daily (`YYYY-MM-DD`) vs Free play (`free`) |
 | `fog_toggle` / `fog_spend` | fog of war: `on`; spends carry `deal`, `stage` (entry stage sets the starting info level — `FOG-OF-WAR.md`), `level` (2-4), `left`, `board` |
-| `season_begin` | `deals`, `deployed`, `thesis`, `finW`, `customW` (the raw weight vector when `thesis==='Custom'`, else `null`), `board` |
+| `access_toggle` / `allocation_cut` | oversubscription (`ACCESS-SCOPE.md` A0): `on`; cuts carry `deal`, `wanted`, `honored`, `factor`, `board` |
+| `season_begin` | `deals`, `deployed` (intended, pre-cutback), `thesis`, `finW`, `customW` (the raw weight vector when `thesis==='Custom'`, else `null`), `board`, `access` |
 | `auto_resolve` | `fromRound` — player skipped the rest of the season to the Exit marks |
-| `season_end` | `rank`, `funds`, `profit`, `mult`, `judgment`, `newBlood`, `scoutTier`, `thesis`, `board`, `selProfit`, `steerAlpha` (decomposition vs the frozen-seed counterfactual — `STEERING-SCOPE.md`), `fog`, `dpSpent`, `calibration` (estimate-vs-truth ranking concordance — `FOG-OF-WAR.md`) |
+| `season_end` | `rank`, `funds`, `profit`, `mult`, `judgment`, `newBlood`, `scoutTier`, `thesis`, `board`, `selProfit`, `steerAlpha` (decomposition vs the frozen-seed counterfactual — `STEERING-SCOPE.md`), `fog`, `dpSpent`, `calibration` (estimate-vs-truth ranking concordance — `FOG-OF-WAR.md`), `access`, `accessAlpha` (honored-vs-intended frozen ride — `ACCESS-SCOPE.md`) |
 | `memo_start` | `deals` |
 | `diligence_open` | `cat`, `deal` |
 | `decision` | `deal`, `company`, `invested`, `amount`, `boxes`, `pBreak`, `pWipe`, `mult` |

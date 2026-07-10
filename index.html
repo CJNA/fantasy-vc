@@ -377,6 +377,14 @@ const FOG_NOISE=[null,25,15,8,3];               // ± pts at info level 1..4
  * budget only really matters on early-stage deals — where the alpha (and the fog) lives. */
 const STAGE_LVL={'Pre-seed':1,'Seed':2,'Series A':3,'Series B':4};
 const LVL_PIPS=['▁','▃','▅','▇'];
+/* ---- ACCESS / OVERSUBSCRIPTION (A0 — see ACCESS-SCOPE.md) ----
+ * Hot rounds don't take your money: seed checks are honored at a hype-driven fill rate,
+ * identical for every player on the board. Follow-ons are NEVER cut — you can only follow
+ * into deals you seed-backed, and early conviction means the founder makes room for you
+ * ("diamond in the rough"). Fill is public market heat, so no fog on it. */
+let accessOn=true;
+const FILL={1:1,2:1,3:.8,4:.55,5:.3};            // fraction of a seed check honored, by hype
+function fillOf(d){ return accessOn ? FILL[d.hype] : 1; }
 function fogU(dealName,fk){                      // canonical unit noise in [-1,1]
   const key='fvc-fog-'+(boardMode==='daily'?todayId():fogNonce)+'-'+dealName+'-'+fk;
   return mulberry32(seedFrom(key))()*2-1;
@@ -464,6 +472,12 @@ function renderBoardChips(){
   fc.innerHTML=`🌫 Fog${fogOn?` · ${dpLeft} pts`:''}<small>${fogOn?'estimates — 🔍 to sharpen':'true scores shown'}</small>`;
   fc.onclick=()=>{ if(G)return; fogOn=!fogOn; window.FVC&&FVC.track('fog_toggle',{on:fogOn,board:boardId()}); renderBoardChips(); renderGrid(); };
   bc.appendChild(fc);
+  // allocation toggle — hot rounds cut back your seed checks
+  const ac=document.createElement('span');
+  ac.className='chip'+(accessOn?' on':'');
+  ac.innerHTML=`🔥 Allocation<small>${accessOn?'hot rounds cut you back':'every check fills'}</small>`;
+  ac.onclick=()=>{ if(G)return; accessOn=!accessOn; window.FVC&&FVC.track('access_toggle',{on:accessOn,board:boardId()}); renderBoardChips(); renderGrid(); updateBank(); };
+  bc.appendChild(ac);
   const rs=document.getElementById('reshuffleBtn');
   rs.disabled = boardMode==='daily';
   rs.title = boardMode==='daily' ? 'The daily board is fixed — everyone plays the same deals. Switch to Free play to reshuffle.' : '';
@@ -539,7 +553,7 @@ function renderGrid(){
       <div class="factors">${facs}</div>
       ${foggy?`<div class="fogrow"><span class="lvlpips" title="info level ${lvl} of 4 — a ${d.st} deal starts at L${STAGE_LVL[d.st]}; estimates carry ±${FOG_NOISE[lvl]} pts of noise">${LVL_PIPS.map((p,i)=>`<b class="${i<lvl?'lit':''}">${p}</b>`).join('')}</span>
         <button class="dspend" data-n="${d.n}" ${dpLeft<=0||lvl>=4?'disabled':''}>🔍 ${lvl>=4?(STAGE_LVL[d.st]>=4?'late-stage — data’s public':'fully diligenced'):`sharpen · ${dpLeft} pt${dpLeft===1?'':'s'} left`}</button></div>`:''}
-      <div class="meta"><span>Crowd hype <span class="stars">${star(d.hype)}</span></span><span>round ≤ <b>${fmt(max)}</b></span></div>
+      <div class="meta"><span>Crowd hype <span class="stars">${star(d.hype)}</span></span>${fillOf(d)<1?`<span style="color:var(--bad)" title="Oversubscribed — the hot round cuts back outside checks. Expect ~${Math.round(fillOf(d)*100)}% of your seed check honored; the rest returns to reserves. Follow-ons are never cut once you're in.">🔥 ~${Math.round(fillOf(d)*100)}% fill</span>`:''}<span>round ≤ <b>${fmt(max)}</b></span></div>
       <div class="alloc"><input type="range" min="0" max="${max}" step="0.5" value="${alloc[d.n]}" data-n="${d.n}"><span class="chk">${fmt(alloc[d.n])}</span></div>
       <div class="maxnote">Your seed check into ${d.n}</div>`;
     g.appendChild(el);
@@ -577,8 +591,10 @@ function updateBank(){
   document.getElementById('dealcount').textContent=count;
   const ok=count>=MIN_DEALS;
   document.getElementById('beginBtn').disabled=!ok;
+  const exp=deals.reduce((s,d)=>s+(alloc[d.n]||0)*fillOf(d),0);
   document.getElementById('actHint').textContent= ok
     ? `${count} deals • ${fmt(dep)} deployed • ${fmt(dry)} reserves for follow-ons`
+      + (accessOn&&exp<dep-0.01?` • 🔥 hot rounds will honor ~${fmt(exp)}`:'')
     : `Back ${MIN_DEALS-count} more startup${MIN_DEALS-count>1?'s':''} to qualify.`;
 }
 
@@ -634,12 +650,19 @@ function enterSeason(){
   document.getElementById('season').style.display='block';
   document.getElementById('endcard').style.display='none';
   const nm=(document.getElementById('fundName').value||'Your Fund').slice(0,22);
-  const player=makeFund({name:nm,tagline:'You',seed:alloc,you:true});
-  const ais=buildAIs().map(makeFund);
-  G={round:0, funds:[player,...ais], pIdx:0, foRound:{}, hist:null};
+  // A0: hot rounds honor only fillOf(d) of each intended seed check — for every fund, bots
+  // included (same market). Cut capital stays in reserves. See ACCESS-SCOPE.md.
+  const cutSeed=o=>{ if(!accessOn)return o; const s={}; deals.forEach(d=>{const w=o[d.n]||0; if(w>0)s[d.n]=Math.round(w*fillOf(d)*2)/2;}); return s; };
+  const honored=cutSeed(alloc);
+  const player=makeFund({name:nm,tagline:'You',seed:honored,you:true});
+  const ais=buildAIs().map(a=>makeFund(Object.assign({},a,{seed:cutSeed(a.seed)})));
+  G={round:0, funds:[player,...ais], pIdx:0, foRound:{}, hist:null, intended:Object.assign({},alloc), honored, loyal:{}};
   G.hist=G.funds.map(f=>[value(f,0)]);
-  window.FVC&&FVC.track('season_begin',{deals:Object.values(alloc).filter(v=>v>0).length,deployed:Object.values(alloc).reduce((a,b)=>a+b,0),thesis:curName(),finW:thesis.finW,customW:thesis.custom||null,board:boardId()});
+  window.FVC&&FVC.track('season_begin',{deals:Object.values(alloc).filter(v=>v>0).length,deployed:Object.values(alloc).reduce((a,b)=>a+b,0),thesis:curName(),finW:thesis.finW,customW:thesis.custom||null,board:boardId(),access:accessOn});
   document.getElementById('log').innerHTML='';
+  if(accessOn) deals.forEach(d=>{ const w=alloc[d.n]||0, h=honored[d.n]||0;
+    if(w>0&&h<w){ addEv('down',`<b>${d.n} was oversubscribed</b> — you asked for ${fmt(w)}, the round honored <b>${fmt(h)}</b>${h===0?' (shut out)':''}. The difference stays in reserves.`);
+      window.FVC&&FVC.track('allocation_cut',{deal:d.n,wanted:w,honored:h,factor:fillOf(d),board:boardId()}); }});
   setHeader(); renderHoldings(); renderLB(); drawChart();
   document.getElementById('advBtn').disabled=false;
   const au=document.getElementById('autoBtn'); au.disabled=false; au.textContent='⏩ Auto-resolve to Exit';
@@ -719,7 +742,8 @@ document.addEventListener('click',e=>{
     let amt = b.dataset.act==='fo2'?2 : b.dataset.act==='fo5'?5 : Math.min(p.cash, d.maxCheck-(G.foRound[n]||0));
     amt=Math.min(amt, d.maxCheck-(G.foRound[n]||0), p.cash);
     const added=followOn(p,d,amt,r);
-    if(added>0){G.foRound[n]=(G.foRound[n]||0)+added; addEv('buy',`<b>Followed on ${fmt(added)} into ${d.n}</b> at ${d.path[r].toFixed(0)}×.`);}
+    if(added>0){G.foRound[n]=(G.foRound[n]||0)+added; addEv('buy',`<b>Followed on ${fmt(added)} into ${d.n}</b> at ${d.path[r].toFixed(0)}×.`);
+      if(accessOn&&fillOf(d)<1&&!G.loyal[n]){G.loyal[n]=1; addEv('up',`<b>You were in ${d.n} at seed</b> — the founder makes room for your full check. Early conviction is never cut.`);}}
   }
   refresh();
 });
@@ -790,9 +814,18 @@ function endSeason(){
   // Steering α (CEO-Bench-inspired, see STEERING-SCOPE.md): paths are deterministic, so the
   // "never touched it" counterfactual is exact — seed checks ridden to Exit, reserves idle.
   // steering = what your follow-ons & sells added (+) or destroyed (−) vs that frozen portfolio.
-  const frozen=(CAPITAL-Object.values(alloc).reduce((a,b)=>a+b,0))
-    + deals.reduce((s,d)=>s+(alloc[d.n]>0 ? (alloc[d.n]/d.path[0])*d.path[5] : 0),0);
+  // Honored basis: what actually entered the fund (post-cutback). Access α compares this
+  // frozen ride against the same ride on INTENDED checks — the cutback's exact cost/save.
+  const hon=G.honored||alloc, intd=G.intended||alloc;
+  const frozenOf=o=>(CAPITAL-Object.values(o).reduce((a,b)=>a+b,0))
+    + deals.reduce((s,d)=>s+(o[d.n]>0 ? (o[d.n]/d.path[0])*d.path[5] : 0),0);
+  const frozen=frozenOf(hon);
   const selProf=frozen-CAPITAL, steer=value(G.funds[G.pIdx],5)-frozen;
+  const accessAlpha=(G.honored&&accessOn)?frozen-frozenOf(intd):null;
+  let bigCut=null;
+  if(accessAlpha!==null){ deals.forEach(d=>{ const w=intd[d.n]||0,h=hon[d.n]||0;
+    if(w>h){ const eff=(h-w)*(d.path[5]/d.path[0]-1);        // >0: the cut saved you
+      if(!bigCut||Math.abs(eff)>Math.abs(bigCut.eff))bigCut={d,w,h,eff}; }}); }
   // Fog: calibration α = % of deal pairs your estimate-conviction ordered the same as
   // truth-conviction would have (same thesis). Computed BEFORE the reveal flips estimates off.
   let calibration=null, misread=null;
@@ -812,7 +845,7 @@ function endSeason(){
   const silver=!gold && myRank<=Math.ceil(rows.length/2) && my.prof>0;
   const bronze=!gold && !silver && my.prof>0;
   const scoutTier=gold?'gold':silver?'silver':bronze?'bronze':'none';
-  window.FVC&&FVC.track('season_end',{rank:myRank,funds:rows.length,profit:Math.round(my.prof),mult:+mult.toFixed(2),judgment:js,newBlood:gold,scoutTier,thesis:curName(),board:boardId(),selProfit:Math.round(selProf),steerAlpha:Math.round(steer),fog:calibration!==null,dpSpent:calibration!==null?DP_BUDGET-dpLeft:null,calibration});
+  window.FVC&&FVC.track('season_end',{rank:myRank,funds:rows.length,profit:Math.round(my.prof),mult:+mult.toFixed(2),judgment:js,newBlood:gold,scoutTier,thesis:curName(),board:boardId(),selProfit:Math.round(selProf),steerAlpha:Math.round(steer),fog:calibration!==null,dpSpent:calibration!==null?DP_BUDGET-dpLeft:null,calibration,access:accessOn,accessAlpha:accessAlpha===null?null:Math.round(accessAlpha)});
   // any zeros held?
   const blewUp=deals.filter(d=>d.path[5]===0 && (G.funds[G.pIdx].pos[d.n]?.cost>0)).map(d=>d.n);
   const card=document.getElementById('endcard'); card.style.display='block';
@@ -822,7 +855,8 @@ function endSeason(){
     <div class="scorebox"><div class="k">Total Profit</div><div class="v" style="color:${my.prof>=0?'var(--good)':'var(--bad)'}">${my.prof>=0?'+':''}${fmt(my.prof)}</div></div>
     <div class="scorebox"><div class="k">Judgment Accuracy</div><div class="v" style="color:${js>=70?'var(--good)':js>=55?'var(--gold)':'var(--bad)'}">${js}%</div></div>
     <div class="scorebox" title="What your mid-season moves (follow-ons & sells) added vs never touching your seed portfolio. 0 = you rode it untouched."><div class="k">Steering α</div><div class="v" style="color:${steer>0?'var(--good)':steer<0?'var(--bad)':'var(--mut)'}">${steer>0?'+':''}${Math.round(steer)===0?'0':fmt(steer)}</div></div>
-    ${calibration!==null?`<div class="scorebox" title="How closely your conviction ranking on the FOGGED estimates matched what the same thesis would say on true scores. High = you read through the noise (or spent your diligence well)."><div class="k">Calibration</div><div class="v" style="color:${calibration>=80?'var(--good)':calibration>=65?'var(--gold)':'var(--bad)'}">${calibration}%</div></div>`:''}`;
+    ${calibration!==null?`<div class="scorebox" title="How closely your conviction ranking on the FOGGED estimates matched what the same thesis would say on true scores. High = you read through the noise (or spent your diligence well)."><div class="k">Calibration</div><div class="v" style="color:${calibration>=80?'var(--good)':calibration>=65?'var(--gold)':'var(--bad)'}">${calibration}%</div></div>`:''}
+    ${accessAlpha!==null?`<div class="scorebox" title="What oversubscription did to you: your honored seed checks ridden to Exit, minus the same ride on your INTENDED checks. Negative = hot rounds squeezed you out of winners; positive = the crowd squeezed you out of traps."><div class="k">Access α</div><div class="v" style="color:${accessAlpha>0?'var(--good)':accessAlpha<0?'var(--bad)':'var(--mut)'}">${accessAlpha>0?'+':''}${Math.round(accessAlpha)===0?'0':fmt(accessAlpha)}</div></div>`:''}`;
   const beatAll=gold;
   let v;
   if(beatAll) v=`You beat every algorithm — including the hype-chasers. Pure judgment, not crowd-following. That's the signal a scout network hunts for.`;
@@ -833,6 +867,12 @@ function endSeason(){
     Math.round(steer)===0 ? 'you rode your seed picks untouched — selection did all the work. Follow-ons into winners (and selling the bleeders) is where funds separate.'
     : steer>0 ? 'your mid-season moves beat buy-and-hold — that\'s portfolio stewardship, the skill LPs pay carry for.'
     : 'buy-and-hold would have beaten your trading — your follow-ons/sells destroyed value vs sitting still. Steer less, or steer better.'}`;
+  if(accessAlpha!==null&&Math.round(accessAlpha)!==0){
+    v+=` <br><br><b>🔥 Access α ${accessAlpha>0?'+':''}${fmt(accessAlpha)}:</b> ${
+      accessAlpha>0 ? 'the rounds that cut you back were the traps — the crowd squeezed you out of its own mistakes.'
+      : 'oversubscription cost you: your best picks were everyone\'s picks. The full check goes to whoever finds the diamond before it\'s hot.'}`
+      + (bigCut?` Biggest: <b>${bigCut.d.n}</b> — you wanted ${fmt(bigCut.w)}, the round honored ${fmt(bigCut.h)}; the cut ${bigCut.eff>=0?'saved':'cost'} you <b>${fmt(Math.abs(bigCut.eff))}</b>.`:'');
+  }
   if(calibration!==null){
     v+=` <br><br><b>🌫 The fog lifts — calibration ${calibration}%:</b> ${
       calibration>=80?'your read of the noisy estimates ranked the board almost exactly as the true scores would. That\'s signal.'
@@ -856,7 +896,8 @@ function endSeason(){
       {k:'Judgment Accuracy', v:js+'%'},
       {k:'Steering α', v:(steer>0?'+':'')+(Math.round(steer)===0?'0':fmt(steer))},
       ...(calibration!==null?[{k:'Calibration (fog)', v:calibration+'%'}]:[]),
-      {k:'Board', v:(boardMode==='daily'?'🗓 Daily '+todayId():'🎲 Free play')+(calibration!==null?' · 🌫 fog':'')},
+      ...(accessAlpha!==null?[{k:'Access α', v:(accessAlpha>0?'+':'')+(Math.round(accessAlpha)===0?'0':fmt(accessAlpha))}]:[]),
+      {k:'Board', v:(boardMode==='daily'?'🗓 Daily '+todayId():'🎲 Free play')+(calibration!==null?' · 🌫 fog':'')+(accessAlpha!==null?' · 🔥 alloc':'')},
     ],
     line: gold?'Beat every algorithm on real startups & rounds — pure judgment, not crowd-following.'
       : myRank<=Math.ceil(rows.length/2)?'Top-half fund, picking real startups against the bots.'

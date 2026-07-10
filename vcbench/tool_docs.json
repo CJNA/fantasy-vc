@@ -7,10 +7,10 @@
     "inputSchema": { "type": "object", "properties": {}, "required": [] },
     "parameters": {},
     "returns": {
-      "success": "{board: '2026-07-08', fog: true, deals: [{name, sector, stage, blurb, hype, maxCheck, infoLevel, estimates: {team, ps, diff, market, comm, ar, fin}, conviction}]}",
+      "success": "{board: '2026-07-08', fog: true, deals: [{name, sector, stage, blurb, hype, maxCheck, fill, infoLevel, estimates: {team, ps, diff, market, comm, ar, fin}, conviction}]}",
       "failure": "Season already running — board is locked."
     },
-    "impact": "Read-only. Conviction is computed from estimates under the current thesis — sharpening estimates (spend_diligence) re-ranks the board.",
+    "impact": "Read-only. Conviction is computed from estimates under the current thesis — sharpening estimates (spend_diligence) re-ranks the board. `fill` is the hype-driven oversubscription rate: the fraction of a seed check a hot round will honor (1.0 = every dollar fills; 0.3 = the round is fought over). Fill is public market heat — never fogged.",
     "example_call": { "tool": "get_board", "input": {} }
   },
   "get_thesis": {
@@ -82,8 +82,8 @@
     "description": "Lock the seed portfolio and start the season vs 4 bot funds (Bandwagon, Index, Momentum, Contrarian). Bot behavior is board-seeded — identical for every player on a daily board. Diligence and thesis lock at this point.",
     "inputSchema": { "type": "object", "properties": { "fundName": { "type": "string", "description": "Display name for your fund (≤22 chars)" } }, "required": [] },
     "parameters": { "fundName": { "type": "str", "description": "Optional fund name shown in the league table and LP letter" } },
-    "returns": { "success": "{round: 0, funds: 5, deployed: 38, reserves: 62}", "failure": "Fewer than 4 deals backed" },
-    "impact": "Emits season_begin {thesis, finW, customW, board, fog}. Index Ventures Bot is the published rule-based baseline every score is compared against.",
+    "returns": { "success": "{round: 0, funds: 5, deployed: 31, reserves: 69, cuts: [{deal: 'Plaid', wanted: 15, honored: 8.5, fill: 0.55}]}", "failure": "Fewer than 4 deals backed" },
+    "impact": "Emits season_begin {thesis, finW, customW, board, fog, access}. Hot rounds cut every fund's seed checks back pro-rata by fill (bots included — same market); cut capital stays in reserves. Follow-ons into seed-backed deals are NEVER cut (early conviction = founder loyalty — ACCESS-SCOPE.md). Index Ventures Bot is the published rule-based baseline every score is compared against.",
     "example_call": { "tool": "begin_season", "input": { "fundName": "Denominator Capital" } }
   },
   "get_holdings": {
@@ -163,11 +163,11 @@
   "get_result": {
     "name": "get_result",
     "category": "Results",
-    "description": "Final scorecard after Exit: rank, multiple, profit decomposition (selection α + steering α), judgment accuracy, calibration (fog), scout tier, and the board id for leaderboard grouping.",
+    "description": "Final scorecard after Exit: rank, multiple, profit decomposition (selection α + steering α), access α (what oversubscription cost or saved you vs your intended checks — negative means the hot rounds squeezed you out of winners), judgment accuracy, calibration (fog), scout tier, and the board id for leaderboard grouping.",
     "inputSchema": { "type": "object", "properties": {}, "required": [] },
     "parameters": {},
     "returns": {
-      "success": "{rank: 3, funds: 5, mult: 24.39, profit: 2339, selProfit: 2288, steerAlpha: 51, judgment: 94, calibration: 82, scoutTier: 'silver', board: '2026-07-08', fog: true}",
+      "success": "{rank: 3, funds: 5, mult: 24.39, profit: 2339, selProfit: 2288, steerAlpha: 51, accessAlpha: -412, judgment: 94, calibration: 82, scoutTier: 'silver', board: '2026-07-08', fog: true, access: true}",
       "failure": "Season not finished."
     },
     "impact": "Read-only. This is the row the VC-Bench leaderboard ingests — humans and agents on the same daily board are directly comparable.",
