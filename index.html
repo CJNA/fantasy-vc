@@ -171,6 +171,17 @@
   .anbtn{background:none;border:none;color:#8b90a5;font-size:12.5px;cursor:pointer;text-decoration:underline;
     text-underline-offset:3px;padding:6px}
   .anbtn:hover{color:#c9cde0}
+  #chBanner .chcopy{display:inline-block;margin-top:8px;background:#7c5cff;border:none;color:#fff;font-weight:700;
+    font-size:12.5px;border-radius:9px;padding:8px 14px;cursor:pointer}
+  #podWrap{max-width:460px;margin:18px auto 0;text-align:left}
+  #podWrap h3{margin:0 0 8px;font-size:14px;text-align:center;color:#c9cde0}
+  .podrow{display:flex;gap:10px;align-items:baseline;padding:7px 12px;border-radius:9px;font-size:13.5px;
+    background:var(--panel2);border:1px solid var(--line);margin-bottom:5px}
+  .podrow.me{border-color:var(--acc);background:linear-gradient(135deg,#241d44,#181628)}
+  .podrow .rk{color:var(--mut);width:22px;font-weight:700}
+  .podrow .nm{flex:1;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .podrow .pf{font-weight:800}
+  .podpar{font-size:12px;color:var(--mut);text-align:center;margin-top:7px}
   .scorebox{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:12px 20px;min-width:130px}
   .scorebox .k{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px}
   .scorebox .v{font-size:22px;font-weight:800;margin-top:2px}
@@ -290,6 +301,7 @@
     <h2 id="endTitle"></h2>
     <div class="scoregrid" id="endScores"></div>
     <div class="verdict" id="endVerdict"></div>
+    <div id="podWrap"></div>
     <div id="scoutWrap"></div>
     <div style="margin-top:22px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="primary" id="challengeBtn">⚔️ Challenge a friend</button><button class="primary" id="lpBtn" style="background:linear-gradient(135deg,#19c37d,#0f8a59);box-shadow:0 6px 22px rgba(25,195,125,.35)">📜 Write my LP letter</button><button class="primary" id="shareBtn" style="background:#232838">📋 Scout Card</button><button class="primary" id="againBtn" style="background:#232838">Run it back →</button></div>
     <div style="text-align:center;margin-top:8px"><button class="anbtn" id="analystBtn">🔬 Analyst breakdown — the four skills, decomposed</button></div>
@@ -413,30 +425,45 @@ function boardId(){return boardMode==='daily'?todayId():'free';}
 function pick(arr,k){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a.slice(0,k);}
 
 /* ---- CHALLENGE LINKS (zero-backend head-to-head — FUN-FIRST P0.4) ----
- * A finished daily run encodes {board, handle, profit, mult, tier} into the URL hash.
- * The friend opens the link, plays the SAME seeded board, and their endcard scores the
- * head-to-head. No server involved — the board seed is the referee. */
+ * A finished daily run encodes {board, handle, profit, mult, tier, risk, picks} into the URL
+ * hash. The friend opens the link, plays the SAME seeded board, and their endcard scores the
+ * head-to-head. No server involved — the board seed is the referee.
+ * COPY TRADING (eToro-inspired): the link also carries the challenger's seed book (`a`) and
+ * risk score (`r`) — performance + risk + a one-click "copy their picks" button, the
+ * CopyTrader loop. Seeds identical → the head-to-head gap is pure steering skill. */
 let CH=null;
 function chParse(){
   try{
     const m=location.hash.match(/vs=([A-Za-z0-9_-]+)/); if(!m)return;
     const c=JSON.parse(decodeURIComponent(escape(atob(m[1].replace(/-/g,'+').replace(/_/g,'/')))));
     if(!c||!c.b||typeof c.p!=='number')return;
-    CH={b:String(c.b),h:String(c.h||'A rival').slice(0,22),p:c.p,m:+c.m||0,t:c.t||'none'};
-    window.FVC&&FVC.track('challenge_open',{board:CH.b,fresh:CH.b===todayId()});
+    let a=null;
+    if(c.a&&typeof c.a==='object'){ a={}; for(const k in c.a){ const v=+c.a[k]; if(v>0)a[String(k).slice(0,40)]=v; } if(!Object.keys(a).length)a=null; }
+    CH={b:String(c.b),h:String(c.h||'A rival').slice(0,22),p:c.p,m:+c.m||0,t:c.t||'none',r:+c.r||0,a};
+    window.FVC&&FVC.track('challenge_open',{board:CH.b,fresh:CH.b===todayId(),picks:!!a});
   }catch(e){}
 }
 function chLink(res){
   const payload=btoa(unescape(encodeURIComponent(JSON.stringify(res)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
   return String(location.href||'').split('#')[0]+'#vs='+payload;
 }
+const RISK_TAG={1:'🧊 ice-cold',2:'❄️ contrarian',3:'⚖️ balanced',4:'🌶 aggressive',5:'🔥 degen'};
 function chBanner(){
   const el=document.getElementById('chBanner'); if(!el)return;
   if(!CH||G){el.style.display='none';return;}
   el.style.display='block';
-  el.innerHTML = CH.b===boardId()
-    ? `⚔️ <b>${CH.h}</b> posted <b style="color:${CH.p>=0?'var(--good)':'var(--bad)'}">${CH.p>=0?'+':''}${fmt(CH.p)}</b> (${CH.m.toFixed(2)}×) on today's board. Same 10 deals, same fog, same fills — <b>beat it.</b>`
+  const live=CH.b===boardId();
+  el.innerHTML = live
+    ? `⚔️ <b>${CH.h}</b> posted <b style="color:${CH.p>=0?'var(--good)':'var(--bad)'}">${CH.p>=0?'+':''}${fmt(CH.p)}</b> (${CH.m.toFixed(2)}×${CH.r?` · risk ${CH.r}/5 ${RISK_TAG[CH.r]||''}`:''}) on today's board. Same 10 deals, same fog, same fills — <b>beat it.</b>`
+      +(CH.a?`<br><button class="chcopy" id="chCopyBtn">📋 Copy ${CH.h}'s picks — then out-steer them</button>`:'')
     : `⚔️ <b>${CH.h}</b> challenged you on the <b>${CH.b}</b> board — that board is gone. Today's is live: set a bar of your own.`;
+  const cbtn=document.getElementById('chCopyBtn');
+  if(cbtn)cbtn.onclick=()=>{
+    deals.forEach(d=>{alloc[d.n]=Math.min(CH.a[d.n]||0,d.maxCheck);});
+    renderGrid(); updateBank();
+    cbtn.textContent=`✓ Book copied — tune it, or run it and beat them on steering alone`;
+    window.FVC&&FVC.track('copy_apply',{board:boardId(),from:CH.h});
+  };
 }
 
 /* ---- FOG OF WAR (F0 — see FOG-OF-WAR.md; mechanics mirror ceobench-src) ----
@@ -961,7 +988,12 @@ function endSeason(){
   const silver=!gold && myRank<=Math.ceil(rows.length/2) && my.prof>0;
   const bronze=!gold && !silver && my.prof>0;
   const scoutTier=gold?'gold':silver?'silver':bronze?'bronze':'none';
-  window.FVC&&FVC.track('season_end',{rank:myRank,funds:rows.length,profit:Math.round(my.prof),mult:+mult.toFixed(2),judgment:js,newBlood:gold,scoutTier,thesis:curName(),board:boardId(),selProfit:Math.round(selProf),steerAlpha:Math.round(steer),fog:calibration!==null,dpSpent:calibration!==null?DP_BUDGET-dpLeft:null,calibration,access:accessOn,accessAlpha:accessAlpha===null?null:Math.round(accessAlpha)});
+  // Risk score (eToro-style, 1-5): the hype your seed dollars chased. A copy-trading surface
+  // needs performance AND risk next to each other — a 5/5 degen 3× isn't a 2/5 contrarian 3×.
+  const spentIntd=Object.values(intd).reduce((a,b)=>a+b,0);
+  const risk=spentIntd>0?Math.max(1,Math.min(5,Math.round(deals.reduce((s,d)=>s+(intd[d.n]||0)*d.hype,0)/spentIntd))):3;
+  let handle=''; try{handle=localStorage.getItem('fvc_handle')||'';}catch(e){}
+  window.FVC&&FVC.track('season_end',{rank:myRank,funds:rows.length,profit:Math.round(my.prof),mult:+mult.toFixed(2),judgment:js,newBlood:gold,scoutTier,thesis:curName(),board:boardId(),selProfit:Math.round(selProf),steerAlpha:Math.round(steer),fog:calibration!==null,dpSpent:calibration!==null?DP_BUDGET-dpLeft:null,calibration,access:accessOn,accessAlpha:accessAlpha===null?null:Math.round(accessAlpha),risk,handle:handle||null});
   // any zeros held?
   const blewUp=deals.filter(d=>d.path[5]===0 && (G.funds[G.pIdx].pos[d.n]?.cost>0)).map(d=>d.n);
   const card=document.getElementById('endcard'); card.style.display='block';
@@ -971,7 +1003,8 @@ function endSeason(){
   // what do I paste in the chat" — the four-α homework is opt-in).
   document.getElementById('endScores').innerHTML=`
     <div class="scorebox"><div class="k">Fund Multiple</div><div class="v">${mult.toFixed(2)}×</div></div>
-    <div class="scorebox"><div class="k">Total Profit</div><div class="v" style="color:${my.prof>=0?'var(--good)':'var(--bad)'}">${my.prof>=0?'+':''}${fmt(my.prof)}</div></div>`;
+    <div class="scorebox"><div class="k">Total Profit</div><div class="v" style="color:${my.prof>=0?'var(--good)':'var(--bad)'}">${my.prof>=0?'+':''}${fmt(my.prof)}</div></div>
+    <div class="scorebox" title="How much hype your seed dollars chased (1 = ice-cold contrarian, 5 = full degen). Shown next to performance, copy-trading style — a 3× at risk 5 is not a 3× at risk 2."><div class="k">Risk</div><div class="v">${risk}/5 <span style="font-size:13px;font-weight:600;color:var(--mut)">${RISK_TAG[risk]}</span></div></div>`;
   const beatAll=gold;
   let v;
   if(beatAll) v=`You beat every algorithm — including the hype-chasers. Pure judgment, not crowd-following.`;
@@ -980,8 +1013,11 @@ function endSeason(){
   // head-to-head: a challenge on THIS board resolves right here
   if(CH&&CH.b===boardId()){
     const win=my.prof>CH.p, tie=Math.round(my.prof)===Math.round(CH.p);
-    v=`⚔️ <b>Head-to-head: you ${my.prof>=0?'+':''}${fmt(my.prof)} vs ${CH.h} ${CH.p>=0?'+':''}${fmt(CH.p)}</b> — ${tie?'a dead heat. Rematch tomorrow.':win?`<b style="color:var(--good)">you take the board.</b> Send it back.`:`<b style="color:var(--bad)">${CH.h} holds the board.</b> Tomorrow's deals are new.`}<br><br>`+v;
-    window.FVC&&FVC.track('challenge_result',{win,tie,mine:Math.round(my.prof),theirs:CH.p,board:boardId()});
+    // pure copy? identical intended seeds → the whole gap is steering (the CopyTrader readout)
+    const pureCopy=!!CH.a&&deals.every(d=>Math.round((intd[d.n]||0)*2)===Math.round((CH.a[d.n]||0)*2));
+    v=`⚔️ <b>Head-to-head: you ${my.prof>=0?'+':''}${fmt(my.prof)} vs ${CH.h} ${CH.p>=0?'+':''}${fmt(CH.p)}</b> — ${tie?'a dead heat. Rematch tomorrow.':win?`<b style="color:var(--good)">you take the board.</b> Send it back.`:`<b style="color:var(--bad)">${CH.h} holds the board.</b> Tomorrow's deals are new.`}${
+      pureCopy?`<br>📋 <b>Copy α:</b> you ran ${CH.h}'s exact book, so the ${fmt(Math.abs(my.prof-CH.p))} gap is <b>pure steering</b> — ${tie?'you matched their moves.':win?'your follow-ons and exits beat theirs.':'their mid-season moves beat yours.'}`:''}<br><br>`+v;
+    window.FVC&&FVC.track('challenge_result',{win,tie,mine:Math.round(my.prof),theirs:CH.p,copied:pureCopy,board:boardId()});
   }
   document.getElementById('endVerdict').innerHTML=v;
   // ANALYST layer: the four-skill decomposition, opt-in
@@ -1019,11 +1055,12 @@ function endSeason(){
   const cb=document.getElementById('challengeBtn');
   cb.style.display = boardMode==='daily' ? '' : 'none';
   if(boardMode==='daily'){
-    let handle=''; try{handle=localStorage.getItem('fvc_handle')||'';}catch(e){}
     const me=handle||(document.getElementById('fundName').value||'Your rival').slice(0,22);
-    const url=chLink({b:boardId(),h:me,p:Math.round(my.prof),m:+mult.toFixed(2),t:scoutTier});
+    // the link carries the seed book (`a`) — the friend can copy the picks and race on steering
+    const book={}; deals.forEach(d=>{const w=intd[d.n]||0; if(w>0)book[d.n]=w;});
+    const url=chLink({b:boardId(),h:me,p:Math.round(my.prof),m:+mult.toFixed(2),t:scoutTier,r:risk,a:book});
     const beatBit=(CH&&CH.b===boardId()&&my.prof>CH.p)?` (${CH.h} just lost it)`:'';
-    const taunt=`I put up ${my.prof>=0?'+':''}${fmt(my.prof)} (${mult.toFixed(2)}×) on today's VC board${beatBit}. Same 10 deals, same fog, no excuses — beat me: ${url}`;
+    const taunt=`I put up ${my.prof>=0?'+':''}${fmt(my.prof)} (${mult.toFixed(2)}×, risk ${risk}/5) on today's VC board${beatBit}. Same 10 deals, same fog, no excuses — beat me, or copy my book and out-steer me: ${url}`;
     cb.onclick=()=>{
       const done=()=>{cb.textContent='✓ Copied — paste it in the chat'; setTimeout(()=>{cb.textContent='⚔️ Challenge a friend';},2200);};
       try{ navigator.clipboard.writeText(taunt).then(done,()=>{prompt('Copy your challenge:',taunt);done();}); }
@@ -1031,6 +1068,8 @@ function endSeason(){
       window.FVC&&FVC.track('challenge_create',{board:boardId(),profit:Math.round(my.prof)});
     };
   }
+  // 👥 P1: flip the story from bots to humans — fetch this cid's pod on today's board
+  renderPod(my.prof,mult,scoutTier,risk,rows);
   document.getElementById('scoutWrap').innerHTML =
       gold   ? `<div class="scoutbadge">🥇 NEW BLOOD — flagged to the scout network</div>`
     : silver ? `<div class="scoutbadge silver">🥈 SILVER SCOUT — top half &amp; in the green. Finish #1 for New Blood.</div>`
@@ -1043,6 +1082,7 @@ function endSeason(){
     stats:[
       {k:'Fund Multiple', v:mult.toFixed(2)+'×'},
       {k:'Total Profit', v:(my.prof>=0?'+':'')+fmt(my.prof)},
+      {k:'Risk', v:risk+'/5 ('+RISK_TAG[risk].replace(/^\S+ /,'')+')'},
       {k:'Judgment Accuracy', v:js+'%'},
       {k:'Steering α', v:(steer>0?'+':'')+(Math.round(steer)===0?'0':fmt(steer))},
       ...(calibration!==null?[{k:'Calibration (fog)', v:calibration+'%'}]:[]),
@@ -1060,6 +1100,38 @@ function endSeason(){
     tweet:`Our fund's Season 01 LP letter is out: ${mult.toFixed(2)}× net, rank #${myRank} of ${rows.length}${boardMode==='daily'?` on today's board (${todayId()})`:''}. Fantasy VC — same deals, no excuses. #FantasyVC`,
     md: lpLetter({myRank, n:rows.length, mult, prof:my.prof, js, scoutTier, blewUp, steer}),
   });
+}
+
+/* ---- RANDO PODS (FUN-FIRST P1) ----
+ * Everyone who finishes today's daily board lands, by arrival order, in a pod of 8 humans
+ * (collector.js /pod — first attempt per client counts). The endcard's story flips from
+ * "you vs 4 scripts" to "you vs 7 real people on the same board"; bots demote to a
+ * dumb-money par line. Degrades silently: no collector / offline / free play → no pod. */
+function renderPod(myProf,myMult,myTier,myRisk,botRows){
+  const el=document.getElementById('podWrap'); if(!el)return;
+  try{ el.innerHTML=''; }catch(e){}
+  try{
+    if(boardMode!=='daily'||typeof fetch!=='function'||!window.FVC||typeof FVC.getSink!=='function')return;
+    const sinkUrl=FVC.getSink();
+    if(typeof sinkUrl!=='string'||!/^https?:/.test(sinkUrl))return;
+    const base=sinkUrl.replace(/\/collect\/?$/,'');
+    const botBest=Math.max(...botRows.filter(r=>!r.f.you).map(r=>r.prof));
+    setTimeout(()=>{                                   // let our own season_end beacon land first
+      fetch(base+'/pod?board='+encodeURIComponent(boardId())+'&cid='+encodeURIComponent(FVC.cid))
+        .then(r=>r.json()).then(pod=>{
+          let rs=(pod&&pod.rows)||[];
+          if(!rs.some(r=>r.you))                       // beacon still in flight — splice us in
+            rs.push({h:'You',p:Math.round(myProf),m:+myMult.toFixed(2),tier:myTier,risk:myRisk,you:true});
+          if(rs.length<2)return;                       // alone in the pod — keep the bot story
+          rs.sort((a,b)=>b.p-a.p);
+          const myRank=rs.findIndex(r=>r.you)+1;
+          el.innerHTML=`<h3>👥 Your Pod — ${rs.length} human${rs.length>1?'s':''} on today's board</h3>`
+            +rs.map((r,i)=>`<div class="podrow${r.you?' me':''}"><span class="rk">${i+1}.</span><span class="nm">${r.you?'You':r.h}${r.risk?` <span style="color:var(--mut);font-weight:400;font-size:11.5px">risk ${r.risk}/5</span>`:''}</span><span class="pf" style="color:${r.p>=0?'var(--good)':'var(--bad)'}">${r.p>=0?'+':''}${fmt(r.p)}</span><span style="color:var(--mut);font-size:12px">${(+r.m||0).toFixed(2)}×</span></div>`).join('')
+            +`<div class="podpar">🤖 dumb-money par: best bot finished ${botBest>=0?'+':''}${fmt(botBest)} — ${myProf>botBest?'you cleared the machines':'the machines beat you'}${(()=>{const me=rs.find(r=>r.you);return me&&Math.abs(me.p-Math.round(myProf))>1?' · pod ranks your first attempt on each board':'';})()}</div>`;
+          window.FVC&&FVC.track('pod_view',{board:boardId(),size:rs.length,rank:myRank});
+        }).catch(()=>{});
+    },900);
+  }catch(e){}
 }
 
 /* ---- the LP letter: the season, retold in authentic quarterly-letter voice ---- */

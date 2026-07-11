@@ -70,7 +70,8 @@ the fraud (juiced fin 88, ar 22, dies at Series C) is only catchable through the
 ### P1 · Add the humans (one collector endpoint)
 | # | Change | Why |
 |---|---|---|
-| 5 | **Rando pods** — `GET /pod?board&cid` on collector.js (~40 lines over the existing events array): dedupe `season_end` per cid, chunk into pods of 8, return standings. Endcard right rail flips from bots to **"Your Pod — 8 humans on today's board"**; bots demote to a "dumb-money par" line | The first time you place 2nd of 8 real people is the hook. Write path already exists — every season_end already POSTs |
+| 5 | ✅ **Rando pods** — `GET /pod?board&cid` on collector.js: dedupe `season_end` per cid (**first attempt counts** — no rerolling), chunk into pods of 8 by arrival, return standings. Endcard flips from bots to **"Your Pod — N humans on today's board"**; bots demote to a "dumb-money par" line. Other players show as deterministic scout aliases ("Feral Otter") unless they opted in a handle; raw cids never leave the server | The first time you place 2nd of 8 real people is the hook. Write path already existed — every season_end already POSTs |
+| 5b | ✅ **Copy trading (eToro CopyTrader-inspired)** — challenge links now carry the challenger's **seed book** (`a`) and a 1-5 **risk score** (`r`, hype-weighted seed dollars). The banner shows performance + risk side by side and a **"📋 Copy their picks — then out-steer them"** button; run the book untouched and the endcard prints **Copy α**: "the $132M gap is pure steering." Risk also sits on the casual endcard, the Scout Card, and the taunt | eToro's loop (metrics + risk score → one-click mirror) is exactly Ryan's demand side: proven books become copyable, and copying isolates the *other* skill — steering. Events: `copy_apply`, `challenge_result.copied` |
 | 6 | **Friend leagues** — same endpoint keyed by a shared code (`VELVET-OTTER`); daily points (8/5/3/1…) roll into a weekly table; Sunday recap card ("Champion: Dana. Wooden spoon: Marcus") | The 5-friend loop: daily appointment + weekly redemption arc + a permanent loser who wants revenge |
 | 7 | **Streaks & pod promotion** — top-3 promote to tougher pods, bottom-2 relegate; personal streak counter | The reason midnight pulls you back |
 
@@ -83,7 +84,10 @@ résumé for the scout network — opt in. That's the paywall seam, and it now h
 to exist rather than being the default UI.
 
 ## Blocked / prerequisites
-- **P1 needs the real collector URL** (Render dashboard) — the meta tags still point at the
-  placeholder, so no season_end reaches the server today. P0 needs nothing.
+- ~~P1 needs the real collector URL~~ **Resolved 2026-07-10:** `https://fvc-collector.onrender.com`
+  is live and answering `/health` — the meta tags in all three HTML files already point at it, so
+  season_end events flow as soon as anyone plays the deployed site. (Free-tier caveat still
+  applies: the events file is wiped on restart, so pods reset when the service redeploys — a paid
+  Render Disk at `./usage` makes them durable.)
 - Deal-generator balancing is the one genuinely hard design task (outcome distribution, fraud
   rate, hype-vs-quality correlation). Budget a dedicated session; everything else in P0 is small.

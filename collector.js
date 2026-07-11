@@ -9,6 +9,7 @@
  *   POST /collect   append an event (or array of events) as JSONL. Returns 204.
  *   GET  /export    the full event array as JSON (curl it, or feed the analyst).
  *   GET  /health    { events, sessions, clients, file } counts.
+ *   GET  /pod?board=YYYY-MM-DD&cid=…   your pod of 8 humans on that daily board (FUN-FIRST P1).
  *   GET  /          tiny human status page.
  *
  * Durable log:   usage/events.jsonl   (one JSON event per line, append-only)
@@ -75,6 +76,42 @@ const CORS = {
   'Access-Control-Allow-Headers': 'Content-Type',
 };
 
+/* ---- RANDO PODS (FUN-FIRST P1) ----
+ * Everyone who finishes today's daily board gets grouped, by arrival order, into pods of 8
+ * humans. First attempt per client counts (the honest fantasy rule — no rerolling until you
+ * like your score). Raw cids never leave the server: other players appear under a
+ * deterministic scout alias unless their season_end carried an opted-in handle. */
+const POD_SIZE = 8;
+const POD_ADJ = ['Feral', 'Quiet', 'Golden', 'Midnight', 'Turbo', 'Velvet', 'Stubborn', 'Lucky', 'Grim', 'Solar', 'Cobalt', 'Maverick', 'Humble', 'Rowdy', 'Icy', 'Neon'];
+const POD_ANI = ['Otter', 'Falcon', 'Heron', 'Badger', 'Lynx', 'Mongoose', 'Walrus', 'Magpie', 'Ibex', 'Tapir', 'Puffin', 'Gecko', 'Marmot', 'Orca', 'Wombat', 'Yak'];
+function scoutAlias(cid) {
+  let h = 2166136261; const s = String(cid);
+  for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+  h = h >>> 0;
+  return POD_ADJ[h % POD_ADJ.length] + ' ' + POD_ANI[(h >>> 4) % POD_ANI.length];
+}
+function podFor(board, cid) {
+  const seen = new Set(); const entries = [];
+  for (const e of events) {                          // append order = arrival order
+    if (e.t !== 'season_end' || e.board !== board || !e.cid) continue;
+    if (seen.has(e.cid)) continue;                   // first attempt counts
+    seen.add(e.cid);
+    entries.push({
+      cid: e.cid,
+      h: (typeof e.handle === 'string' && e.handle.trim()) ? e.handle.trim().slice(0, 22) : scoutAlias(e.cid),
+      p: Math.round(e.profit || 0), m: +(e.mult || 0), tier: e.scoutTier || 'none',
+      risk: e.risk || null,
+    });
+  }
+  let idx = entries.findIndex(x => x.cid === cid);
+  if (idx < 0) idx = entries.length;                 // not landed yet → the still-filling pod
+  const podIdx = Math.floor(idx / POD_SIZE);
+  const rows = entries.slice(podIdx * POD_SIZE, (podIdx + 1) * POD_SIZE)
+    .map(x => ({ h: x.h, p: x.p, m: x.m, tier: x.tier, risk: x.risk, you: x.cid === cid }))
+    .sort((a, b) => b.p - a.p);
+  return { board: board, pod: podIdx + 1, size: rows.length, total: entries.length, rows: rows };
+}
+
 const server = http.createServer(function (req, res) {
   const url = (req.url || '/').split('?')[0];
 
@@ -94,6 +131,14 @@ const server = http.createServer(function (req, res) {
   if (req.method === 'GET' && url === '/export') {
     res.writeHead(200, Object.assign({ 'Content-Type': 'application/json' }, CORS));
     return res.end(JSON.stringify(events));
+  }
+
+  if (req.method === 'GET' && url === '/pod') {
+    const q = new URLSearchParams((req.url || '').split('?')[1] || '');
+    const board = (q.get('board') || '').slice(0, 10), cid = (q.get('cid') || '').slice(0, 40);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(board)) { res.writeHead(400, CORS); return res.end('bad board'); }
+    res.writeHead(200, Object.assign({ 'Content-Type': 'application/json' }, CORS));
+    return res.end(JSON.stringify(podFor(board, cid)));
   }
 
   if (req.method === 'GET' && url === '/health') {
