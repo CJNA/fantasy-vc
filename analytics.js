@@ -137,7 +137,7 @@
       : r.tier === 'none' ? 'I just ran a fund on Fantasy VC'
         : 'I scored ' + (TIER_LABEL[r.tier] || 'a card') + ' on Fantasy VC';
     const stat = (r.stats && r.stats[0]) ? ' (' + r.stats[0].v + ' ' + r.stats[0].k.toLowerCase() + ')' : '';
-    return (who ? '' : '') + lead + stat + ' — beating the bots on real startups & rounds. Can you? #FantasyVC';
+    return (who ? '' : '') + lead + stat + ' — same board for everyone today. Beat me. #FantasyVC';
   }
 
   let styled = false;

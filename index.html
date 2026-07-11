@@ -100,6 +100,7 @@
   .conv .cv{font-size:22px;font-weight:800;line-height:1}
   .conv .cl{font-size:9.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px}
   .blurb{font-size:12.5px;color:#b9bdce;min-height:34px}
+  .newsline{font-size:11px;color:#8b90a5;font-style:italic;margin:-2px 0 2px}
   .factors{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;margin-top:2px}
   .fac{text-align:center}
   .fac .fb{height:34px;width:100%;background:var(--panel2);border-radius:4px;position:relative;overflow:hidden;display:flex;align-items:flex-end}
@@ -295,32 +296,71 @@
 
 <script src="analytics.js"></script>
 <script>
-/* ========== UNIVERSE ==========
- * f = analyst factor scores 0-100: team, ps(problem/solution), diff(differentiation),
- *     market, comm(commercialization), ar(additional-risk/governance — HIGH = clean).
- * fin = financial attractiveness 0-100 (frauds juice this). hype = crowd rating 1-5.
- * path = value of $1 invested at seed, over 5 post-seed rounds (path[0]=1). 0 = wiped out.
- * maxCheck = $M deployable into this round (per-round cap, also caps follow-ons).
- * st = entry stage — sets the deal's STARTING fog info level (STAGE_LVL below): a Pre-seed
- *      deal is a ±25 teaser deck, a Series B deal arrives nearly transparent (±3). */
-const UNIVERSE = [
-  {n:"Stripe",   s:"Payments",     st:"Pre-seed", b:"Two brothers fixing payments with seven lines of code.",            hype:4, maxCheck:8,  fin:85, f:{team:95,ps:90,diff:85,market:90,comm:85,ar:88}, path:[1,3,14,45,80,120]},
-  {n:"Airbnb",   s:"Travel",       st:"Pre-seed", b:"Strangers renting air mattresses. Sounds insane.",                  hype:2, maxCheck:5,  fin:70, f:{team:80,ps:85,diff:70,market:95,comm:75,ar:78}, path:[1,4,18,60,130,200]},
-  {n:"Uber",     s:"Mobility",     st:"Seed",     b:"Press a button, a black car appears. Regulators will hate it.",     hype:3, maxCheck:8,  fin:75, f:{team:88,ps:80,diff:65,market:95,comm:80,ar:55}, path:[1,3,12,40,70,90]},
-  {n:"DoorDash", s:"Delivery",     st:"Seed",     b:"Suburban food delivery. Thin margins, brutal ops.",                 hype:3, maxCheck:10, fin:65, f:{team:78,ps:75,diff:60,market:80,comm:78,ar:70}, path:[1,2,8,25,50,70]},
-  {n:"Figma",    s:"Design Tools", st:"Seed",     b:"Design software in the browser. Adobe owns this space.",            hype:3, maxCheck:8,  fin:78, f:{team:85,ps:88,diff:90,market:80,comm:82,ar:85}, path:[1,3,15,45,85,110]},
-  {n:"Coinbase", s:"Crypto",       st:"Series A", b:"A friendly on-ramp for Bitcoin. Volatile, unclear regulation.",      hype:3, maxCheck:10, fin:80, f:{team:80,ps:78,diff:70,market:85,comm:75,ar:50}, path:[1,4,20,55,90,60]},
-  {n:"Notion",   s:"Productivity", st:"Pre-seed", b:"Yet another notes app. Rebuilt from scratch twice.",                hype:2, maxCheck:6,  fin:60, f:{team:82,ps:80,diff:78,market:70,comm:72,ar:80}, path:[1,2,6,18,32,40]},
-  {n:"Plaid",    s:"Fintech",      st:"Series B", b:"Plumbing connecting apps to banks. Visa wants to buy it.",          hype:4, maxCheck:15, fin:70, f:{team:80,ps:78,diff:75,market:78,comm:70,ar:60}, path:[1,3,8,12,9,8]},
-  {n:"Brex",     s:"Fintech",      st:"Series A", b:"Corporate cards for startups. Crowded, big incumbents.",            hype:4, maxCheck:15, fin:72, f:{team:78,ps:72,diff:60,market:75,comm:75,ar:68}, path:[1,3,7,9,7,6]},
-  {n:"Robinhood",s:"Fintech",      st:"Series A", b:"Commission-free trading for millennials. Gamified, controversial.",  hype:4, maxCheck:12, fin:75, f:{team:75,ps:78,diff:65,market:80,comm:80,ar:45}, path:[1,3,9,22,18,15]},
-  {n:"Instacart",s:"Grocery",      st:"Series B", b:"Same-day grocery delivery. Pandemic rocket — but after?",           hype:5, maxCheck:12, fin:78, f:{team:76,ps:75,diff:58,market:82,comm:80,ar:60}, path:[1,4,15,50,22,9]},
-  {n:"WeWork",   s:"Real Estate",  st:"Series B", b:"Beautiful co-working, 'community-adjusted EBITDA', a charismatic founder.", hype:5, maxCheck:20, fin:75, f:{team:70,ps:65,diff:50,market:75,comm:70,ar:20}, path:[1,4,18,40,8,0]},
-  {n:"Theranos", s:"HealthTech",   st:"Seed",     b:"One drop of blood, hundreds of tests. A magazine-cover founder.",    hype:5, maxCheck:15, fin:80, f:{team:72,ps:80,diff:85,market:90,comm:70,ar:10}, path:[1,5,25,30,0,0]},
-  {n:"Quibi",    s:"Streaming",    st:"Series B", b:"Hollywood-grade short video. $1.75B raised at launch.",             hype:5, maxCheck:25, fin:50, f:{team:85,ps:55,diff:45,market:60,comm:65,ar:35}, path:[1,2,3,0,0,0]},
-  {n:"Fast",     s:"Checkout",     st:"Seed",     b:"One-click checkout everywhere. Spending fast, growing faster.",      hype:4, maxCheck:6,  fin:45, f:{team:65,ps:60,diff:50,market:65,comm:70,ar:25}, path:[1,3,10,0,0,0]},
-  {n:"Bird",     s:"Micromobility",st:"Series A", b:"Scooters on every corner. Fastest company ever to a $1B valuation.", hype:4, maxCheck:12, fin:55, f:{team:68,ps:62,diff:45,market:70,comm:72,ar:35}, path:[1,3,7,5,1,0]},
+/* ========== SYNTHETIC UNIVERSE (YC-archetype generator) ==========
+ * The board is GENERATED, not drawn from famous companies — recognition was the win condition
+ * (FUN-FIRST.md). Archetypes are YC-batch-shaped; names, factors, paths and news are all drawn
+ * from the board-seeded rng, so the daily board is still identical for everyone AND fresh every
+ * day. Outcome classes guarantee a tense mix per 10: ~1 rocket (often low-hype — the diamond in
+ * the rough), 2 solid, 2 grinders, 2 hype-fades, 2 zeros, 1 fraud (juiced financials, rotten
+ * Risk bar). Under fog, diligence — not recall — is what separates them.
+ * Deal shape is unchanged: n, s, st (stage → fog level), b, news, hype, maxCheck, fin,
+ * f{team,ps,diff,market,comm,ar}, path[6] ($1 at seed → Exit; 0 = wiped out).
+ * "Real mode" (fake names over live YC companies, genuine news, monitored) is scoped for P1. */
+const ARCH=[
+  {sec:"Fintech Infra",  noun:["payroll","card issuing","cross-border payouts","treasury ops"],      pitch:"The API layer for {noun}."},
+  {sec:"Dev Tools",      noun:["code review","incident response","flaky tests","release trains"],    pitch:"Makes {noun} stop hurting. Engineers evangelize it free."},
+  {sec:"AI Agents",      noun:["claims processing","contract review","tier-1 support","bookkeeping"],pitch:"An AI associate that does {noun} end-to-end."},
+  {sec:"Health Ops",     noun:["prior auth","medical billing","clinic scheduling","referrals"],      pitch:"Drags {noun} out of the fax era."},
+  {sec:"Logistics",      noun:["freight brokerage","last-mile","customs paperwork","cold chain"],    pitch:"A marketplace that makes {noun} liquid."},
+  {sec:"Consumer",       noun:["run clubs","home cooks","college sports fans","vinyl collectors"],   pitch:"Where {noun} actually hang out. Growth is word-of-mouth."},
+  {sec:"Climate",        noun:["grid batteries","industrial heat","carbon accounting","EV fleets"],  pitch:"Boring infrastructure for {noun}. Huge if it works."},
+  {sec:"Edtech",         noun:["nurse upskilling","trade certifications","coding cohorts"],          pitch:"Gets people paid more via {noun}. Outcomes-based pricing."},
+  {sec:"Bio Tools",      noun:["lab automation","protein assays","clinical trial ops"],              pitch:"Picks-and-shovels for {noun}."},
+  {sec:"Space & Defense",noun:["sat imagery","drone logistics","maritime sensing"],                  pitch:"Sells {noun} to customers with real budgets."},
 ];
+const NAME_A=["Nor","Vel","Har","Osk","Bryn","Tam","Ceda","Fen","Lark","Mos","Pell","Gild","Sor","Wick","Juni","Quill"];
+const NAME_B=["line","forge","point","well","ward","loop","mark","field","gate","row","span","shore","deck","works"];
+const NEWS_HI=['“Everyone we know is trying to angel into {n}” — group-chat screenshot','{n}\'s round is 3× oversubscribed; allocations are a knife fight','Podcast twitter has decided {n} is a generational company'];
+const NEWS_MID=['{n} lands design partner #14 in {noun}','Two-person {n} is outshipping teams 10× their size','{n} posts a hiring spree: six roles, all engineering'];
+const NEWS_LO=['{n} quietly shipped v3 — no launch tweet, revenue anyway','HN comment: “{n} is boring, but the {noun} people swear by it”','{n}\'s founder still answers every support ticket herself'];
+function genBoard(){
+  const u=(a,b)=>a+rng()*(b-a), ui=(a,b)=>Math.round(u(a,b));
+  const pk=arr=>arr[Math.floor(rng()*arr.length)];
+  const mk=v=>v>=10?Math.round(v):Math.round(v*10)/10;
+  // per-class recipes: quality band drives the read factors; ar/fin/hype carry the tells
+  const C={
+    rocket:{q:[.72,.92], ar:[65,90], fin:[55,85], hype:[1,3], st:["Pre-seed","Pre-seed","Seed","Series A"],
+      path:()=>{const E=u(60,200);return [1,u(2,5),u(8,20),u(25,55),E*u(.55,.8),E];}},
+    solid:{q:[.6,.8],   ar:[60,85], fin:[60,80], hype:[2,4], st:["Seed","Series A"],
+      path:()=>{const E=u(18,55);return [1,u(2,4),u(5,12),u(12,24),E*u(.7,.95),E];}},
+    grinder:{q:[.5,.68], ar:[50,75], fin:[45,65], hype:[1,3], st:["Seed","Series A","Series B"],
+      path:()=>{const E=u(4,14);return [1,u(1.4,2.4),u(2.5,5),u(4,8),E*u(.8,1),E];}},
+    fade:{q:[.48,.68],  ar:[20,45], fin:[55,75], hype:[4,5], st:["Series A","Series B"],
+      path:()=>{const r2=u(9,22),P=Math.max(u(12,40),r2*1.3);return [1,u(3,6),r2,P,P*u(.2,.5),u(.5,4)];}},
+    zero:{q:[.4,.6],    ar:[25,45], fin:[35,60], hype:[3,5], st:["Seed","Series A","Series B"],
+      path:()=>{const z=2+Math.floor(rng()*3),p=[1,u(2,5),u(6,15),u(10,20),u(8,16),0];for(let k=z;k<=5;k++)p[k]=0;return p;}},
+    fraud:{q:[.55,.8],  ar:[8,25],  fin:[80,95], hype:[4,5], st:["Seed","Series A"],
+      path:()=>[1,u(4,6),u(18,30),u(22,35),0,0]},
+  };
+  const MAXCHK={"Pre-seed":[4,6],"Seed":[6,10],"Series A":[10,16],"Series B":[15,25]};
+  const classes=["rocket","solid","solid","grinder","grinder","fade","fade","zero","zero","fraud"];
+  for(let i=classes.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[classes[i],classes[j]]=[classes[j],classes[i]];}
+  const archs=[...ARCH];
+  for(let i=archs.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[archs[i],archs[j]]=[archs[j],archs[i]];}
+  const used=new Set();
+  return classes.map((cls,i)=>{
+    const c=C[cls], a=archs[i], noun=pk(a.noun);
+    let n; do{ n=pk(NAME_A)+pk(NAME_B); }while(used.has(n)); used.add(n);
+    const q=u(c.q[0],c.q[1]), f={};
+    ["team","ps","diff","market","comm"].forEach(k=>{ f[k]=Math.max(8,Math.min(97,Math.round(18+ (q+u(-.12,.12))*78 ))); });
+    f.ar=ui(c.ar[0],c.ar[1]);
+    const st=pk(c.st), hype=ui(c.hype[0],c.hype[1]);
+    const news=(hype>=4?pk(NEWS_HI):hype<=2?pk(NEWS_LO):pk(NEWS_MID)).replace(/{n}/g,n).replace(/{noun}/g,noun);
+    return { n, s:a.sec, st, b:a.pitch.replace('{noun}',noun), news, hype,
+      maxCheck:ui(MAXCHK[st][0],MAXCHK[st][1]), fin:ui(c.fin[0],c.fin[1]), f,
+      path:c.path().map(mk) };
+  });
+}
 
 const CAPITAL=100, MIN_DEALS=4;
 const ROUNDS=["Seed","Series A","Series B","Series C","Series D","Exit / Mark"];
@@ -440,7 +480,8 @@ function newDealFlow(){
   // Re-seed per flow: same day + daily mode → identical board, deals AND bot behavior.
   rng = boardMode==='daily' ? mulberry32(seedFrom('fvc-'+todayId())) : Math.random;
   G=null;           // leaving any finished season — unblocks fog spend/toggle guards
-  deals=pick(UNIVERSE,10);
+  if(boardMode==='daily'){ fogOn=true; accessOn=true; secOn=true; }  // daily ruleset is LOCKED — comparability is the product
+  deals=genBoard();
   prevRanks=null;   // fresh board — nothing to flash on the first render
   fogLevel={}; dpLeft=DP_BUDGET; fogRevealed=false;
   fogNonce=Math.random().toString(36).slice(2,10);   // free-play fog re-rolls per flow; daily fog keys off the date
@@ -481,23 +522,23 @@ function renderBoardChips(){
     c.onclick=()=>{ if(boardMode!==m){ boardMode=m; window.FVC&&FVC.track('board_mode',{board:boardId()}); newDealFlow(); } };
     bc.appendChild(c);
   });
-  // fog toggle — analyst estimates vs true scores
+  // ruleset chips. On the DAILY board the ruleset is locked (fog/allocation/secondaries all on)
+  // — everyone's score must be comparable. Toggles only exist in Free play.
+  const locked=boardMode==='daily';
   const fc=document.createElement('span');
   fc.className='chip'+(fogOn?' on':'');
-  fc.innerHTML=`🌫 Fog${fogOn?` · ${dpLeft} pts`:''}<small>${fogOn?'estimates — 🔍 to sharpen':'true scores shown'}</small>`;
-  fc.onclick=()=>{ if(G)return; fogOn=!fogOn; window.FVC&&FVC.track('fog_toggle',{on:fogOn,board:boardId()}); renderBoardChips(); renderGrid(); };
+  fc.innerHTML=`🌫 Fog${fogOn?` · ${dpLeft} pts`:''}<small>${locked?'daily ruleset — locked':fogOn?'estimates — 🔍 to sharpen':'true scores shown'}</small>`;
+  if(!locked) fc.onclick=()=>{ if(G)return; fogOn=!fogOn; window.FVC&&FVC.track('fog_toggle',{on:fogOn,board:boardId()}); renderBoardChips(); renderGrid(); };
   bc.appendChild(fc);
-  // allocation toggle — hot rounds cut back your seed checks
   const ac=document.createElement('span');
   ac.className='chip'+(accessOn?' on':'');
-  ac.innerHTML=`🔥 Allocation<small>${accessOn?'hot rounds cut you back':'every check fills'}</small>`;
-  ac.onclick=()=>{ if(G)return; accessOn=!accessOn; window.FVC&&FVC.track('access_toggle',{on:accessOn,board:boardId()}); renderBoardChips(); renderGrid(); updateBank(); };
+  ac.innerHTML=`🔥 Allocation<small>${locked?'daily ruleset — locked':accessOn?'hot rounds cut you back':'every check fills'}</small>`;
+  if(!locked) ac.onclick=()=>{ if(G)return; accessOn=!accessOn; window.FVC&&FVC.track('access_toggle',{on:accessOn,board:boardId()}); renderBoardChips(); renderGrid(); updateBank(); };
   bc.appendChild(ac);
-  // secondary-pricing toggle — mid-season sells price like real secondaries
   const sc=document.createElement('span');
   sc.className='chip'+(secOn?' on':'');
-  sc.innerHTML=`💧 Secondaries<small>${secOn?'down rounds have no bid':'sells at full mark'}</small>`;
-  sc.onclick=()=>{ if(G)return; secOn=!secOn; window.FVC&&FVC.track('sec_toggle',{on:secOn,board:boardId()}); renderBoardChips(); };
+  sc.innerHTML=`💧 Secondaries<small>${locked?'daily ruleset — locked':secOn?'down rounds have no bid':'sells at full mark'}</small>`;
+  if(!locked) sc.onclick=()=>{ if(G)return; secOn=!secOn; window.FVC&&FVC.track('sec_toggle',{on:secOn,board:boardId()}); renderBoardChips(); };
   bc.appendChild(sc);
   const rs=document.getElementById('reshuffleBtn');
   rs.disabled = boardMode==='daily';
@@ -571,6 +612,7 @@ function renderGrid(){
         <div class="conv"><div class="cv" style="color:${convColor(c)}">${foggy&&lvl<4?'~':''}${c}</div><div class="cl">conviction</div></div>
       </div>
       <div class="blurb">${d.b}</div>
+      <div class="newsline">📰 ${d.news}</div>
       <div class="factors">${facs}</div>
       ${foggy?`<div class="fogrow"><span class="lvlpips" title="info level ${lvl} of 4 — a ${d.st} deal starts at L${STAGE_LVL[d.st]}; estimates carry ±${FOG_NOISE[lvl]} pts of noise">${LVL_PIPS.map((p,i)=>`<b class="${i<lvl?'lit':''}">${p}</b>`).join('')}</span>
         <button class="dspend" data-n="${d.n}" ${dpLeft<=0||lvl>=4?'disabled':''}>🔍 ${lvl>=4?(STAGE_LVL[d.st]>=4?'late-stage — data’s public':'fully diligenced'):`sharpen · ${dpLeft} pt${dpLeft===1?'':'s'} left`}</button></div>`:''}
@@ -782,12 +824,17 @@ function addEv(cls,html){const el=document.createElement('div');el.className='ev
 
 function logRound(r){
   const p=G.funds[G.pIdx], evs=[];
+  // news-flavored round events, seeded per (board, deal, round) — same headlines for everyone
+  const nPick=(d,arr)=>arr[Math.floor(mulberry32(seedFrom('fvc-news-'+boardId()+'-'+d.n+'-'+r))()*arr.length)];
+  const DEAD=['shuts down — the farewell thread is trending','runs out of runway; assets sold for parts','freezes operations after a board dispute — it\'s over'];
+  const UP=['raised an up-round — now {x}× on cost','signed a whale logo; marked up to {x}×','leaked metrics look absurd — new mark {x}×'];
+  const DOWN=['marked down to {x}× — “resetting expectations”','takes a quiet down round at {x}×','misses plan; the new mark is {x}×'];
   deals.forEach(d=>{
     const prev=d.path[r-1],cur=d.path[r];
     const held=p.pos[d.n]&&p.pos[d.n].units>1e-9;
-    if(cur===0&&prev!==0) evs.push({c:'dead',h:`<b>${d.n}</b> collapsed to $0.${held?' <b style="color:var(--bad)">Your stake is wiped.</b>':' (You weren\'t in it.)'}`});
-    else if(held&&cur>prev) evs.push({c:'up',h:`<b>${d.n}</b> raised an up-round — now ${cur.toFixed(0)}× on cost.`});
-    else if(held&&cur<prev) evs.push({c:'down',h:`<b>${d.n}</b> marked down to ${cur.toFixed(0)}×.`});
+    if(cur===0&&prev!==0) evs.push({c:'dead',h:`<b>${d.n}</b> ${nPick(d,DEAD)}${held?' <b style="color:var(--bad)">Your stake is wiped.</b>':' (You weren\'t in it.)'}`});
+    else if(held&&cur>prev) evs.push({c:'up',h:`<b>${d.n}</b> ${nPick(d,UP).replace('{x}',cur.toFixed(0))}`});
+    else if(held&&cur<prev) evs.push({c:'down',h:`<b>${d.n}</b> ${nPick(d,DOWN).replace('{x}',cur.toFixed(0))}`});
   });
   evs.reverse().forEach(e=>addEv(e.c,e.h));
   const tag=document.createElement('div');tag.className='roundtag';tag.textContent='▸ '+ROUNDS[r]+' round';document.getElementById('log').prepend(tag);
@@ -930,8 +977,8 @@ function endSeason(){
       ...(accessAlpha!==null?[{k:'Access α', v:(accessAlpha>0?'+':'')+(Math.round(accessAlpha)===0?'0':fmt(accessAlpha))}]:[]),
       {k:'Board', v:(boardMode==='daily'?'🗓 Daily '+todayId():'🎲 Free play')+(calibration!==null?' · 🌫 fog':'')+(accessAlpha!==null?' · 🔥 alloc':'')},
     ],
-    line: gold?'Beat every algorithm on real startups & rounds — pure judgment, not crowd-following.'
-      : myRank<=Math.ceil(rows.length/2)?'Top-half fund, picking real startups against the bots.'
+    line: gold?'Beat every algorithm on today\'s board — pure judgment, not crowd-following.'
+      : myRank<=Math.ceil(rows.length/2)?'Top-half fund on today\'s board, picking against the bots.'
       : 'Learning the tape — the algorithms won this round.'
   };
   document.getElementById('shareBtn').onclick=()=>window.FVC&&FVC.share(shareResult);

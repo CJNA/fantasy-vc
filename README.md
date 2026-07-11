@@ -1,6 +1,6 @@
 # 🏆 Fantasy VC
 
-**Fantasy sports, but for venture capital.** Real startups, real rounds — everyone gets the same fund and the same blind deals. Out-pick the algorithms and you get flagged as **New Blood**: the whole point is to surface people with genuine investing judgment, no résumé required.
+**Fantasy sports, but for venture capital.** A fresh board of YC-style startups every day — synthetic companies, real dynamics — and everyone on Earth gets the *same* board, estimates, and news. Out-pick the algorithms and you get flagged as **New Blood**: the whole point is to surface people with genuine investing judgment, no résumé required.
 
 Two ways to play, one shared analytics + self-improvement loop behind them. No build step, no framework, no dependencies — every app is a single HTML file you can open by double-clicking.
 
@@ -19,7 +19,7 @@ Two ways to play, one shared analytics + self-improvement loop behind them. No b
 Finish in the green and you earn a tiered **Scout flag** — 🥉 Bronze, 🥈 Silver, 🥇 Gold (*New Blood*, the top rung: beat every bot / clean sheet on the frauds).
 
 ### 🗓 The Daily Board
-The League defaults to a **date-seeded daily board** — everyone on Earth gets the *same 10 deals and the same bot behavior* that day, so ranks are directly comparable (the DFS mechanic). Free-play mode keeps the classic random board for practice.
+The League defaults to a **date-seeded daily board** — everyone on Earth gets the *same 10 deals, the same news, and the same bot behavior* that day, so ranks are directly comparable (the DFS mechanic). Deals are **generated from YC-batch archetypes** (fintech infra, devtools, AI agents, climate hardware…) with fake names and seeded daily headlines — no famous companies, so recognizing WeWork isn't a skill and the fraud on today's board is only catchable through diligence. Every 10-deal board guarantees a tense mix: about one hidden rocket, a couple of solid outcomes and grinders, two hype-fades, two zeros, and one fraud. **The daily ruleset is locked** (fog, allocation, and secondary pricing all on) so scores stay comparable; Free-play keeps the toggles and a random board for practice. A "real mode" — fake names over live YC companies with genuine news — is scoped for later (`FUN-FIRST.md`).
 
 ### 💀 Survivor
 The 60-second elimination game on the same board: every round the market **kills the bottom half by growth** — pick a survivor, no repeats, one miss ends the run. Hype pumps hardest early, so the "safe" early picks are exactly the names that crater later.

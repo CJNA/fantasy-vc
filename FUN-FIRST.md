@@ -37,13 +37,33 @@ is a stats table nobody screenshots.
 What already works (keep, promote): follow-on compounding ("the game's real toy"), Survivor's
 sudden-death tension and taunt voice, the LP letter as shareable flavor.
 
+## Scope reduction (2026-07-11) — two company modes, YC-grounded
+
+No bespoke fictional-world engine. Companies come from **YC-batch archetypes**, two modes:
+
+- **Synthetic mode ✅ (shipped, default):** YC-shaped archetypes (fintech infra, devtools, AI
+  agents, health ops, logistics, consumer, climate, edtech, bio tools, space/defense) with
+  generated fake names, factors, outcome paths, and **daily seeded news** — headlines on every
+  card plus news-flavored round events. New board + new news every day; identical for everyone.
+- **Real mode (P1, later):** fake names layered over *actual current YC companies*, where the
+  news is **genuine** — requires monitoring real coverage and adding companies over time. Goes
+  with the P1 collector work.
+
+Shipped with it: the **daily ruleset lock** (fog/allocation/secondaries forced on, chips inert
+on the daily board — comparability restored; toggles live in Free Play only).
+
+Verified the fun loop turned over: on the first synthetic board, an all-hype portfolio finished
+**rank 5/5 at 0.93×** (you can lose now), a careful reader made 13.45×, and the demo agent that
+spent all 6 diligence points took **rank #1** — diligence finally beats non-diligence, because
+the fraud (juiced fin 88, ar 22, dies at Series C) is only catchable through the fog.
+
 ## The reset — build order
 
 ### P0 · Make it a game (no backend needed)
 | # | Change | Why |
 |---|---|---|
-| 1 | **Lock the daily ruleset** — fog ON, allocation ON, secondaries ON, no toggles on the daily board (chips move to Free Play) | Comparability is the whole social asset; ~5 lines |
-| 2 | **Fictional deal generator** (the archetype generator, promoted from STEERING-SCOPE v1.5) — board-seeded fictional startups, tuned outcome distribution where the median decent run is *tense* and bad reads genuinely lose money | Kills trivia-as-win-condition; makes diligence the difference between a blow-up and a winner; makes losses possible → wins earned. One feature fixes fun-killers 1–3 AND the benchmark's memorization hole |
+| 1 | ✅ **Lock the daily ruleset** — fog ON, allocation ON, secondaries ON, no toggles on the daily board (chips move to Free Play) | Comparability is the whole social asset; ~5 lines |
+| 2 | ✅ **Synthetic YC-archetype generator** (see scope reduction above) — board-seeded startups + daily news, tuned outcome mix (1 rocket / 2 solid / 2 grinders / 2 fades / 2 zeros / 1 fraud per 10) | Kills trivia-as-win-condition; makes diligence the difference between a blow-up and a winner; makes losses possible → wins earned. Also closes the benchmark's memorization hole |
 | 3 | **Casual endcard** — big number (profit/multiple), one-line verdict, one fat taunt-share button. Judgment/Steering α/Access α/Calibration move behind a **🔬 Analyst** toggle | The scoreboard should answer: how'd I do, who'd I beat, what do I paste in the chat |
 | 4 | **Challenge links** — result encoded in the URL hash; friend opens it, plays the same board, gets head-to-head on their endcard ("You +$142M vs CJ +$98M") | Zero-backend human competition; the group-chat acquisition wedge |
 
