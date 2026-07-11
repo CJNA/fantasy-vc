@@ -33,6 +33,9 @@ Money doesn't guarantee allocation. Hot rounds cut back every fund's seed check 
 ### 💧 Secondary pricing
 Mid-season sells are **secondaries, and secondaries price on heat**: an up-round name sells near mark (hot names at full price, quiet ones at 80–92¢ on the dollar), a flat name is a buyer's market (75¢), and a name that just **marked down has no bid at all** — you're stuck holding, which is the real terror of venture. The last chance to exit a name is the round *before* it turns. Exit marks are unaffected, bots pay the same haircuts, and steering α now prices liquidity honestly.
 
+### ⚔️ Challenge a friend
+The endcard's first button copies a taunt with a **challenge link** — your result encoded in the URL, zero backend. Your friend opens it, sees *"@you posted +$1,245M on today's board — beat it,"* plays the **same seeded board**, and their endcard resolves the head-to-head (*"you take the board. Send it back."*). The casual endcard shows just your multiple, profit, and verdict; the full quant decomposition (judgment, steering α, access α, calibration) lives behind the **🔬 Analyst breakdown** toggle.
+
 ### 📋 Share your Scout Card · 📜 LP letter
 Every finished run generates a nicely-formatted **markdown Scout Card** you can copy to share privately, or push straight to **X / LinkedIn** (the public share carries a link back to the game). Optionally add your handle and opt in to a **consent-based VC scout leaderboard**. League seasons also end with a one-click **LP letter** — your vintage retold in authentic quarterly-letter voice, anti-portfolio included. See [Sharing & monetization](#sharing--monetization).
 

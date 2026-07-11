@@ -58,8 +58,8 @@ const sandbox = {
     addEventListener(){}, body: makeEl(), documentElement: makeEl(),
   },
   window: { FVC, scrollTo(){}, addEventListener(){} },
-  FVC, location: { origin: '' },
-  setTimeout, clearTimeout, console,
+  FVC, location: { origin: '', href: '', hash: '' },
+  atob, btoa, setTimeout, clearTimeout, console,
 };
 vm.createContext(sandbox);
 // Top-level let/const in the script are scoped to it, not the context — append an accessor

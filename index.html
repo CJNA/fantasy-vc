@@ -166,6 +166,11 @@
     border:1px solid var(--acc);border-radius:20px;padding:26px;text-align:center}
   .endcard h2{margin:0 0 6px;font-size:25px}
   .scoregrid{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+  #chBanner{background:linear-gradient(135deg,#2a1a3a,#1a1430);border:1px solid #7c5cff66;border-radius:12px;
+    padding:12px 16px;margin-bottom:14px;font-size:14px}
+  .anbtn{background:none;border:none;color:#8b90a5;font-size:12.5px;cursor:pointer;text-decoration:underline;
+    text-underline-offset:3px;padding:6px}
+  .anbtn:hover{color:#c9cde0}
   .scorebox{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:12px 20px;min-width:130px}
   .scorebox .k{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px}
   .scorebox .v{font-size:22px;font-weight:800;margin-top:2px}
@@ -201,6 +206,7 @@
 
   <!-- ===================== SEED / DRAFT PHASE ===================== -->
   <div id="seedPhase">
+    <div id="chBanner" style="display:none"></div>
     <div class="bankbar">
       <div class="stat"><div class="k">Committed Capital</div><div class="v">$100.0M</div></div>
       <div class="stat"><div class="k">Deployed at Seed</div><div class="v" id="deployed">$0.0M</div></div>
@@ -285,7 +291,12 @@
     <div class="scoregrid" id="endScores"></div>
     <div class="verdict" id="endVerdict"></div>
     <div id="scoutWrap"></div>
-    <div style="margin-top:22px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="primary" id="shareBtn">📋 Share your Scout Card</button><button class="primary" id="lpBtn" style="background:linear-gradient(135deg,#19c37d,#0f8a59);box-shadow:0 6px 22px rgba(25,195,125,.35)">📜 Write my LP letter</button><button class="primary" id="againBtn" style="background:#232838">Run it back →</button></div>
+    <div style="margin-top:22px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="primary" id="challengeBtn">⚔️ Challenge a friend</button><button class="primary" id="lpBtn" style="background:linear-gradient(135deg,#19c37d,#0f8a59);box-shadow:0 6px 22px rgba(25,195,125,.35)">📜 Write my LP letter</button><button class="primary" id="shareBtn" style="background:#232838">📋 Scout Card</button><button class="primary" id="againBtn" style="background:#232838">Run it back →</button></div>
+    <div style="text-align:center;margin-top:8px"><button class="anbtn" id="analystBtn">🔬 Analyst breakdown — the four skills, decomposed</button></div>
+    <div id="analystWrap" style="display:none">
+      <div class="scoregrid" id="anScores"></div>
+      <div class="verdict" id="anVerdict"></div>
+    </div>
   </div>
 
   <footer>
@@ -401,6 +412,33 @@ function boardId(){return boardMode==='daily'?todayId():'free';}
 
 function pick(arr,k){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a.slice(0,k);}
 
+/* ---- CHALLENGE LINKS (zero-backend head-to-head — FUN-FIRST P0.4) ----
+ * A finished daily run encodes {board, handle, profit, mult, tier} into the URL hash.
+ * The friend opens the link, plays the SAME seeded board, and their endcard scores the
+ * head-to-head. No server involved — the board seed is the referee. */
+let CH=null;
+function chParse(){
+  try{
+    const m=location.hash.match(/vs=([A-Za-z0-9_-]+)/); if(!m)return;
+    const c=JSON.parse(decodeURIComponent(escape(atob(m[1].replace(/-/g,'+').replace(/_/g,'/')))));
+    if(!c||!c.b||typeof c.p!=='number')return;
+    CH={b:String(c.b),h:String(c.h||'A rival').slice(0,22),p:c.p,m:+c.m||0,t:c.t||'none'};
+    window.FVC&&FVC.track('challenge_open',{board:CH.b,fresh:CH.b===todayId()});
+  }catch(e){}
+}
+function chLink(res){
+  const payload=btoa(unescape(encodeURIComponent(JSON.stringify(res)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+  return String(location.href||'').split('#')[0]+'#vs='+payload;
+}
+function chBanner(){
+  const el=document.getElementById('chBanner'); if(!el)return;
+  if(!CH||G){el.style.display='none';return;}
+  el.style.display='block';
+  el.innerHTML = CH.b===boardId()
+    ? `⚔️ <b>${CH.h}</b> posted <b style="color:${CH.p>=0?'var(--good)':'var(--bad)'}">${CH.p>=0?'+':''}${fmt(CH.p)}</b> (${CH.m.toFixed(2)}×) on today's board. Same 10 deals, same fog, same fills — <b>beat it.</b>`
+    : `⚔️ <b>${CH.h}</b> challenged you on the <b>${CH.b}</b> board — that board is gone. Today's is live: set a bar of your own.`;
+}
+
 /* ---- FOG OF WAR (F0 — see FOG-OF-WAR.md; mechanics mirror ceobench-src) ----
  * In fog mode every displayed factor score is an ANALYST ESTIMATE: truth + a canonical
  * unit-noise draw scaled by the deal's info level (±25/15/8/3 at L1-L4). A deal's STARTING
@@ -486,7 +524,7 @@ function newDealFlow(){
   fogLevel={}; dpLeft=DP_BUDGET; fogRevealed=false;
   fogNonce=Math.random().toString(36).slice(2,10);   // free-play fog re-rolls per flow; daily fog keys off the date
   alloc={}; deals.forEach(d=>alloc[d.n]=0);
-  renderBoardChips(); renderThesis(); renderGrid(); updateBank();
+  renderBoardChips(); renderThesis(); renderGrid(); updateBank(); chBanner();
   document.getElementById('seedPhase').style.display='block';
   document.getElementById('season').style.display='none';
   document.getElementById('endcard').style.display='none';
@@ -928,37 +966,71 @@ function endSeason(){
   const blewUp=deals.filter(d=>d.path[5]===0 && (G.funds[G.pIdx].pos[d.n]?.cost>0)).map(d=>d.n);
   const card=document.getElementById('endcard'); card.style.display='block';
   document.getElementById('endTitle').innerHTML=`Rank #${myRank} of ${rows.length} — ${my.prof>=0?'+':''}${fmt(my.prof)} profit`;
+  // CASUAL layer: two numbers, one verdict, one taunt. The quant decomposition lives in
+  // Analyst mode below (FUN-FIRST: the scoreboard answers "how'd I do, who'd I beat,
+  // what do I paste in the chat" — the four-α homework is opt-in).
   document.getElementById('endScores').innerHTML=`
     <div class="scorebox"><div class="k">Fund Multiple</div><div class="v">${mult.toFixed(2)}×</div></div>
-    <div class="scorebox"><div class="k">Total Profit</div><div class="v" style="color:${my.prof>=0?'var(--good)':'var(--bad)'}">${my.prof>=0?'+':''}${fmt(my.prof)}</div></div>
+    <div class="scorebox"><div class="k">Total Profit</div><div class="v" style="color:${my.prof>=0?'var(--good)':'var(--bad)'}">${my.prof>=0?'+':''}${fmt(my.prof)}</div></div>`;
+  const beatAll=gold;
+  let v;
+  if(beatAll) v=`You beat every algorithm — including the hype-chasers. Pure judgment, not crowd-following.`;
+  else if(myRank<=Math.ceil(rows.length/2)) v=`Top half. Solid fund. To get flagged as <b>new blood</b> you have to beat <b>all</b> the bots — especially Bandwagon Capital, who blindly piles into 5-star hype.`;
+  else v=`The hype-followers beat you. ${blewUp.length?`What sank you: <b>${blewUp.join(', ')}</b> — big hype, rotten Risk bar, straight to zero.`:`Look at the timing — winners that peaked then bled while you held.`}`;
+  // head-to-head: a challenge on THIS board resolves right here
+  if(CH&&CH.b===boardId()){
+    const win=my.prof>CH.p, tie=Math.round(my.prof)===Math.round(CH.p);
+    v=`⚔️ <b>Head-to-head: you ${my.prof>=0?'+':''}${fmt(my.prof)} vs ${CH.h} ${CH.p>=0?'+':''}${fmt(CH.p)}</b> — ${tie?'a dead heat. Rematch tomorrow.':win?`<b style="color:var(--good)">you take the board.</b> Send it back.`:`<b style="color:var(--bad)">${CH.h} holds the board.</b> Tomorrow's deals are new.`}<br><br>`+v;
+    window.FVC&&FVC.track('challenge_result',{win,tie,mine:Math.round(my.prof),theirs:CH.p,board:boardId()});
+  }
+  document.getElementById('endVerdict').innerHTML=v;
+  // ANALYST layer: the four-skill decomposition, opt-in
+  document.getElementById('anScores').innerHTML=`
     <div class="scorebox"><div class="k">Judgment Accuracy</div><div class="v" style="color:${js>=70?'var(--good)':js>=55?'var(--gold)':'var(--bad)'}">${js}%</div></div>
     <div class="scorebox" title="What your mid-season moves (follow-ons & sells) added vs never touching your seed portfolio. 0 = you rode it untouched."><div class="k">Steering α</div><div class="v" style="color:${steer>0?'var(--good)':steer<0?'var(--bad)':'var(--mut)'}">${steer>0?'+':''}${Math.round(steer)===0?'0':fmt(steer)}</div></div>
     ${calibration!==null?`<div class="scorebox" title="How closely your conviction ranking on the FOGGED estimates matched what the same thesis would say on true scores. High = you read through the noise (or spent your diligence well)."><div class="k">Calibration</div><div class="v" style="color:${calibration>=80?'var(--good)':calibration>=65?'var(--gold)':'var(--bad)'}">${calibration}%</div></div>`:''}
     ${accessAlpha!==null?`<div class="scorebox" title="What oversubscription did to you: your honored seed checks ridden to Exit, minus the same ride on your INTENDED checks. Negative = hot rounds squeezed you out of winners; positive = the crowd squeezed you out of traps."><div class="k">Access α</div><div class="v" style="color:${accessAlpha>0?'var(--good)':accessAlpha<0?'var(--bad)':'var(--mut)'}">${accessAlpha>0?'+':''}${Math.round(accessAlpha)===0?'0':fmt(accessAlpha)}</div></div>`:''}`;
-  const beatAll=gold;
-  let v;
-  if(beatAll) v=`You beat every algorithm — including the hype-chasers. Pure judgment, not crowd-following. That's the signal a scout network hunts for.`;
-  else if(myRank<=Math.ceil(rows.length/2)) v=`Top half. Solid fund. To get flagged as <b>new blood</b> you have to beat <b>all</b> the bots — especially Bandwagon Capital, who blindly piles into 5-star hype.`;
-  else v=`The hype-followers beat you. ${blewUp.length?`What sank you: <b>${blewUp.join(', ')}</b> — high hype, rock-bottom Risk scores, straight to zero.`:`Look at the timing — winners that peaked then bled while you held.`}`;
-  v+=` <br><br><b>Judgment ${js}%:</b> ${js>=70?'your conviction ranking closely tracked real outcomes — your thesis has edge.':js>=55?'partial signal — your thesis caught some winners but misread others.':'your conviction pointed the wrong way. Try weighting Risk/Differentiation higher to filter the frauds.'}`;
-  v+=` <br><br><b>Steering α ${steer>0?'+':''}${Math.round(steer)===0?'0':fmt(steer)}:</b> ${
+  let av=`<b>Judgment ${js}%:</b> ${js>=70?'your conviction ranking closely tracked real outcomes — your thesis has edge.':js>=55?'partial signal — your thesis caught some winners but misread others.':'your conviction pointed the wrong way. Try weighting Risk/Differentiation higher to filter the frauds.'}`;
+  av+=` <br><br><b>Steering α ${steer>0?'+':''}${Math.round(steer)===0?'0':fmt(steer)}:</b> ${
     Math.round(steer)===0 ? 'you rode your seed picks untouched — selection did all the work. Follow-ons into winners (and selling the bleeders) is where funds separate.'
     : steer>0 ? 'your mid-season moves beat buy-and-hold — that\'s portfolio stewardship, the skill LPs pay carry for.'
     : 'buy-and-hold would have beaten your trading — your follow-ons/sells destroyed value vs sitting still. Steer less, or steer better.'}`;
   if(accessAlpha!==null&&Math.round(accessAlpha)!==0){
-    v+=` <br><br><b>🔥 Access α ${accessAlpha>0?'+':''}${fmt(accessAlpha)}:</b> ${
+    av+=` <br><br><b>🔥 Access α ${accessAlpha>0?'+':''}${fmt(accessAlpha)}:</b> ${
       accessAlpha>0 ? 'the rounds that cut you back were the traps — the crowd squeezed you out of its own mistakes.'
       : 'oversubscription cost you: your best picks were everyone\'s picks. The full check goes to whoever finds the diamond before it\'s hot.'}`
       + (bigCut?` Biggest: <b>${bigCut.d.n}</b> — you wanted ${fmt(bigCut.w)}, the round honored ${fmt(bigCut.h)}; the cut ${bigCut.eff>=0?'saved':'cost'} you <b>${fmt(Math.abs(bigCut.eff))}</b>.`:'');
   }
   if(calibration!==null){
-    v+=` <br><br><b>🌫 The fog lifts — calibration ${calibration}%:</b> ${
+    av+=` <br><br><b>🌫 The fog lifts — calibration ${calibration}%:</b> ${
       calibration>=80?'your read of the noisy estimates ranked the board almost exactly as the true scores would. That\'s signal.'
       :calibration>=65?'decent read through the noise, with real misses.'
       :'the fog beat you — your diligence points went to the wrong rooms.'}`
       + (misread&&Math.abs(misread.gap)>=6?` Biggest misread: <b>${misread.d.n}</b> — the analysts showed you ~${convictionTrue(misread.d)+misread.gap} conviction; the truth was <b>${convictionTrue(misread.d)}</b> (${misread.gap>0?'flattered by':'hidden by'} the fog, ${misread.gap>0?'+':''}${misread.gap}).`:'');
   }
-  document.getElementById('endVerdict').innerHTML=v;
+  document.getElementById('anVerdict').innerHTML=av;
+  const aw=document.getElementById('analystWrap'); aw.style.display='none';
+  document.getElementById('analystBtn').onclick=()=>{
+    const show=aw.style.display==='none'; aw.style.display=show?'block':'none';
+    if(show) window.FVC&&FVC.track('analyst_open',{board:boardId()});
+  };
+  // ⚔️ the taunt: result + challenge link to the clipboard (daily boards only — the link
+  // must point at a board the friend can actually still play)
+  const cb=document.getElementById('challengeBtn');
+  cb.style.display = boardMode==='daily' ? '' : 'none';
+  if(boardMode==='daily'){
+    let handle=''; try{handle=localStorage.getItem('fvc_handle')||'';}catch(e){}
+    const me=handle||(document.getElementById('fundName').value||'Your rival').slice(0,22);
+    const url=chLink({b:boardId(),h:me,p:Math.round(my.prof),m:+mult.toFixed(2),t:scoutTier});
+    const beatBit=(CH&&CH.b===boardId()&&my.prof>CH.p)?` (${CH.h} just lost it)`:'';
+    const taunt=`I put up ${my.prof>=0?'+':''}${fmt(my.prof)} (${mult.toFixed(2)}×) on today's VC board${beatBit}. Same 10 deals, same fog, no excuses — beat me: ${url}`;
+    cb.onclick=()=>{
+      const done=()=>{cb.textContent='✓ Copied — paste it in the chat'; setTimeout(()=>{cb.textContent='⚔️ Challenge a friend';},2200);};
+      try{ navigator.clipboard.writeText(taunt).then(done,()=>{prompt('Copy your challenge:',taunt);done();}); }
+      catch(e){ prompt('Copy your challenge:',taunt); done(); }
+      window.FVC&&FVC.track('challenge_create',{board:boardId(),profit:Math.round(my.prof)});
+    };
+  }
   document.getElementById('scoutWrap').innerHTML =
       gold   ? `<div class="scoutbadge">🥇 NEW BLOOD — flagged to the scout network</div>`
     : silver ? `<div class="scoutbadge silver">🥈 SILVER SCOUT — top half &amp; in the green. Finish #1 for New Blood.</div>`
@@ -1148,6 +1220,7 @@ document.getElementById('advBtn').addEventListener('click',advance);
 document.getElementById('autoBtn').addEventListener('click',autoResolve);
 document.getElementById('reshuffleBtn').addEventListener('click',newDealFlow);
 document.getElementById('againBtn').addEventListener('click',()=>{document.getElementById('holdingsPanel').style.opacity=1;newDealFlow();window.scrollTo({top:0,behavior:'smooth'});});
+chParse();        // ⚔️ incoming challenge link? (must run before the first board render)
 newDealFlow();
 </script>
 </body>

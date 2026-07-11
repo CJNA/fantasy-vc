@@ -42,6 +42,8 @@ apply) improvements.**
 | `fog_toggle` / `fog_spend` | fog of war: `on`; spends carry `deal`, `stage` (entry stage sets the starting info level — `FOG-OF-WAR.md`), `level` (2-4), `left`, `board` |
 | `access_toggle` / `allocation_cut` | oversubscription (`ACCESS-SCOPE.md` A0): `on`; cuts carry `deal`, `wanted`, `honored`, `factor`, `board` |
 | `sec_toggle` / `secondary_sell` | secondary pricing on the sell path: `on`; sells carry `deal`, `frac`, `round`, `mark`, `bid` (fraction of mark paid; down rounds have no bid so no event fires), `proceeds`, `board` |
+| `challenge_open` / `challenge_create` / `challenge_result` | ⚔️ challenge links (`FUN-FIRST.md` P0.4): open carries `board`, `fresh` (link's board is today's); create carries `board`, `profit`; result carries `win`, `tie`, `mine`, `theirs`, `board` |
+| `analyst_open` | the 🔬 Analyst breakdown was expanded on the endcard (quant layer is opt-in — casual endcard shows multiple/profit only) |
 | `season_begin` | `deals`, `deployed` (intended, pre-cutback), `thesis`, `finW`, `customW` (the raw weight vector when `thesis==='Custom'`, else `null`), `board`, `access` |
 | `auto_resolve` | `fromRound` — player skipped the rest of the season to the Exit marks |
 | `season_end` | `rank`, `funds`, `profit`, `mult`, `judgment`, `newBlood`, `scoutTier`, `thesis`, `board`, `selProfit`, `steerAlpha` (decomposition vs the frozen-seed counterfactual — `STEERING-SCOPE.md`), `fog`, `dpSpent`, `calibration` (estimate-vs-truth ranking concordance — `FOG-OF-WAR.md`), `access`, `accessAlpha` (honored-vs-intended frozen ride — `ACCESS-SCOPE.md`) |

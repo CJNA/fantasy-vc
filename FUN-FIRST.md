@@ -64,8 +64,8 @@ the fraud (juiced fin 88, ar 22, dies at Series C) is only catchable through the
 |---|---|---|
 | 1 | ✅ **Lock the daily ruleset** — fog ON, allocation ON, secondaries ON, no toggles on the daily board (chips move to Free Play) | Comparability is the whole social asset; ~5 lines |
 | 2 | ✅ **Synthetic YC-archetype generator** (see scope reduction above) — board-seeded startups + daily news, tuned outcome mix (1 rocket / 2 solid / 2 grinders / 2 fades / 2 zeros / 1 fraud per 10) | Kills trivia-as-win-condition; makes diligence the difference between a blow-up and a winner; makes losses possible → wins earned. Also closes the benchmark's memorization hole |
-| 3 | **Casual endcard** — big number (profit/multiple), one-line verdict, one fat taunt-share button. Judgment/Steering α/Access α/Calibration move behind a **🔬 Analyst** toggle | The scoreboard should answer: how'd I do, who'd I beat, what do I paste in the chat |
-| 4 | **Challenge links** — result encoded in the URL hash; friend opens it, plays the same board, gets head-to-head on their endcard ("You +$142M vs CJ +$98M") | Zero-backend human competition; the group-chat acquisition wedge |
+| 3 | ✅ **Casual endcard** — multiple + profit only, one-line verdict, ⚔️ Challenge button first. Judgment/Steering α/Access α/Calibration + their coaching paragraphs behind the **🔬 Analyst breakdown** toggle (`analyst_open` event = the paywall-seam metric) | The scoreboard should answer: how'd I do, who'd I beat, what do I paste in the chat |
+| 4 | ✅ **Challenge links** — `#vs=` hash carries {board, handle, profit, mult, tier}; opener sees a banner ("@cjna posted +$1,245M on today's board — beat it"), plays the same board, endcard resolves the head-to-head and the return-taunt notes the dethroning. Daily boards only (the link must be playable) | Zero-backend human competition; the group-chat acquisition wedge |
 
 ### P1 · Add the humans (one collector endpoint)
 | # | Change | Why |
