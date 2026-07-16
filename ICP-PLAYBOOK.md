@@ -34,22 +34,42 @@ channel, and the wedge in one.
 
 ## The plan — fun first
 
-### P0 · Fun & retention (small, ship now)
-1. **Streaks as a hero feature.** Daily streak counter on the seed screen and endcard; "🔥 N-day
-   streak," "3-win streak vs the AI scouts." *Why: her #1 predictor of who makes it (consistency)
-   doubles as the retention hook. (#3, #34)* — small; already scoped in FUN-FIRST P1, promote it.
-2. **"Defined by your best pick" endcard beat.** One line naming your single highest-multiple
-   position + what it did for the fund. *Why: power-law is how VCs actually think about their
-   careers (#27); it's a more emotional payoff than total P&L.* — small.
-3. **Shareable result reads as a credential, not a flex.** The challenge/share card leads with the
-   record (boards played · first-attempt calibration · times beat the field), not one 23× score.
-   *Why: matches how she says juniors get noticed — consistent evidence, not a lucky hit (#11).* — small.
+## Her 8-step "build a public track record" program → we automate it
+
+Across the archive she lays out an explicit program for building a VC record without a job. Fantasy
+VC can run the whole thing on rails — this is the product's spine:
+
+| Her step | In the game |
+|---|---|
+| Track a hypothetical portfolio / dashboard (#82, #11) | Every daily run + the **record page** (P1 #5) |
+| **Write memos** on your picks (#90, #28) | ✅ **Investment memo** (P1 #4, shipped) — 8 fields on your lead pick, scored vs outcome |
+| **Step 7 — quarterly LP updates**: new investments, follow-ons, markups, write-downs, a win, a miss, one lesson (#33) | ✅ **LP letter** already generates this voice — it hits winners/write-offs/anti-portfolio/lesson. TODO: make the "one lesson you're taking forward" line explicit |
+| **Step 8 — make it public**: share memos + updates, be public about what you're watching (Turner Novak) (#3) | ✅ **Scout Card carries the memo** (shipped) + challenge links + LP-letter share. The public, comparable, first-attempt record is the whole pitch |
+| Consistency & patience (#3, #34) | ✅ **Streaks** (P0 #1, shipped) |
+
+**Valuation under imperfect info (#37 "what drives startup valuations at each stage").** Her note:
+you rarely get the valuation — you triangulate from round-size signals, comparables, Carta. *Estimating
+under imperfect information is itself the skill.* We already embody this with **fog of war**; the
+**memo's Decision field** now makes it explicit ("no cap table — estimate the ownership"). Scoped
+next: a fuzzy, fog-affected **round valuation** per deal so check size → ownership %, rewarding good
+ownership at exit (a real dimension, P2 — see also `STAGE-SCOPE.md`).
+
+### P0 · Fun & retention — ✅ SHIPPED
+1. ✅ **Streaks as a hero feature.** Daily play streak + win streak vs the bots; seed-screen nudge
+   ("play today to keep it alive") + endcard line; first attempt per board counts once. *Her #1
+   predictor of who makes it (consistency) doubling as the retention hook. (#3, #34)*
+2. ✅ **"Defined by your best pick" endcard beat.** Names the single position that drove the fund
+   + its % of gains. *Power-law is how VCs think about their careers (#27); more emotional than total P&L.*
+3. ✅ **Shareable result reads as a credential.** Streak + "fund-maker" pick on the Scout Card and
+   the challenge taunt. *Matches how she says juniors get noticed — evidence, not a lucky hit (#11).*
 
 ### P1 · The credential layer (the thing her audience will pay attention to)
-4. **Capture the *why* — a one-line thesis per pick.** Optional memo field at seed; surface it on
-   the endcard next to the outcome ("you said 'clean gov, real moat' → 89×"). *Why: case studies
-   test reasoning, not the answer (#28). This is the single biggest gap between "a game" and "a
-   track record a firm respects."* — medium. This is also the Analyst-tier / paywall seam.
+4. ✅ **Capture the *why* — the investment memo.** SHIPPED as an 8-field memo (Problem / Why now /
+   Team / Market / Competition / Business model / Key risks / Decision) on your **lead pick**,
+   optional, saved per board, **scored against the outcome** on the endcard and copyable onto the
+   Scout Card. Decision field embodies the valuation-under-uncertainty note. *Case studies test
+   reasoning, not the answer (#28) — the biggest gap between "a game" and "a record a firm respects."*
+   **Fast-follow: AI "fill the gaps"** (decision pending on wiring — collector proxy vs Artifact).
 5. **A real record page.** Persistent history keyed to the player: boards played, streak,
    first-attempt calibration trend, rocket hit-rate, fraud dodge-rate. *Why: this is the automated
    version of the spreadsheet she tells everyone to keep (#82); it's the exportable "self-pitch

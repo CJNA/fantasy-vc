@@ -176,6 +176,25 @@
     background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:11px 16px}
   .streakbar{margin-bottom:12px;font-size:13.5px;color:var(--gold);font-weight:600;text-align:center;
     background:linear-gradient(135deg,#2a2410,#1a1608);border:1px solid #d9a52633;border-radius:10px;padding:9px 14px}
+  #memoOv{position:fixed;inset:0;background:rgba(6,7,12,.74);backdrop-filter:blur(4px);z-index:9999;
+    display:flex;align-items:flex-start;justify-content:center;padding:28px 16px;overflow:auto}
+  #memoCard{background:#0f1118;border:1px solid #262a3a;border-radius:16px;max-width:560px;width:100%;
+    padding:22px 22px 18px;box-shadow:0 24px 80px rgba(0,0,0,.6)}
+  #memoCard h3{margin:0 0 4px;font-size:18px}
+  #memoCard .memosub{color:var(--mut);font-size:12.5px;line-height:1.5;margin-bottom:14px}
+  .memofield{margin-bottom:11px}
+  .memofield label{display:block;font-size:12.5px;font-weight:700;color:#cdd2e6;margin-bottom:3px}
+  .memofield .q{font-weight:400;color:var(--mut);font-size:11.5px}
+  .memofield textarea{width:100%;background:#0a0b10;border:1px solid #262a3a;border-radius:9px;color:#e7e9f0;
+    padding:8px 10px;font:13px/1.45 inherit;resize:vertical;min-height:38px;box-sizing:border-box}
+  .memorow{display:flex;gap:8px;margin-top:8px}
+  .memorow button{flex:1;border:0;border-radius:10px;padding:11px 14px;font-weight:700;font-size:13.5px;cursor:pointer;color:#fff}
+  .b-msave{background:#7c5cff}.b-mclose{background:#232838;color:#c7ccdb}
+  #memoBtn.done{background:#19c37d33;border-color:#19c37d;color:#8ef0c0}
+  .memoout{max-width:600px;margin:12px auto 0;text-align:left;background:var(--panel2);border:1px solid var(--line);
+    border-radius:12px;padding:12px 16px;font-size:13px;line-height:1.5}
+  .memoout h4{margin:0 0 8px;font-size:13.5px;color:#cdd2e6}
+  .memoout .mrow{margin-bottom:5px}.memoout .mk{color:var(--mut);font-weight:700}
   #chBanner .chcopy{display:inline-block;margin-top:8px;background:#7c5cff;border:none;color:#fff;font-weight:700;
     font-size:12.5px;border-radius:9px;padding:8px 14px;cursor:pointer}
   #podWrap{max-width:460px;margin:18px auto 0;text-align:left}
@@ -261,9 +280,23 @@
       </span>
       <span style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
         <span class="hint" id="actHint"></span>
+        <button id="memoBtn" title="Write a one-deal investment memo on your lead pick — the credential artifact" style="display:none">📝 Investment memo</button>
         <button id="reshuffleBtn">⟳ New Deal Flow</button>
         <button class="primary" id="beginBtn" disabled>▶ Begin Season</button>
       </span>
+    </div>
+  </div>
+
+  <!-- ===================== MEMO MODAL ===================== -->
+  <div id="memoOv" style="display:none">
+    <div id="memoCard">
+      <h3 id="memoTitle">📝 Investment Memo</h3>
+      <div class="memosub">On your lead pick. Terse is fine — this is the artifact a real firm reads (it tests <i>how you think</i>, not the “right” answer). It saves with your run and can go on your Scout Card.</div>
+      <div id="memoFields"></div>
+      <div class="memorow">
+        <button class="b-mclose" id="memoCancel">Close</button>
+        <button class="b-msave" id="memoSave">Save memo</button>
+      </div>
     </div>
   </div>
 
@@ -308,6 +341,7 @@
     <div class="endstreak" id="endStreak" style="display:none"></div>
     <div class="scoregrid" id="endScores"></div>
     <div class="bestpick" id="bestPick" style="display:none"></div>
+    <div class="memoout" id="memoWrap" style="display:none"></div>
     <div class="verdict" id="endVerdict"></div>
     <div id="podWrap"></div>
     <div id="scoutWrap"></div>
@@ -766,6 +800,68 @@ function updateBank(){
     ? `${count} deals • ${fmt(dep)} deployed • ${fmt(dry)} reserves for follow-ons`
       + (accessOn&&exp<dep-0.01?` • 🔥 hot rounds will honor ~${fmt(exp)}`:'')
     : `Back ${MIN_DEALS-count} more startup${MIN_DEALS-count>1?'s':''} to qualify.`;
+  renderMemoBtn();
+}
+
+/* ---- INVESTMENT MEMO (ICP-PLAYBOOK P1 #4 — capture the *why*) ----
+ * The 8-field seed memo Nicole DeTommaso's newsletter says firms actually read — case studies
+ * test HOW you think, not the "right" answer. Optional, one memo on your lead pick (largest
+ * intended check). The Decision field embodies her valuation note: you don't get a cap table,
+ * you ESTIMATE ownership — reasoning under imperfect info is itself the skill. Saved with the
+ * run (localStorage, per board) and surfaced on the endcard + Scout Card = a public track
+ * record (her Step 8). AI "fill the gaps" is a scoped fast-follow. */
+const MEMO_FIELDS=[
+  ['problem','Problem','What is this company solving, and why does it matter?'],
+  ['whynow','Why now','What changed in the world that makes this possible today?'],
+  ['team','Team','Why are these the right people to build this?'],
+  ['market','Market','How big is this, and can a startup actually win this market?'],
+  ['comp','Competition','Who else is doing this, and what’s the differentiation?'],
+  ['model','Business model','How does this make money?'],
+  ['risks','Key risks','What would have to be true for this to fail?'],
+  ['decision','Decision','How much are you investing, and what ownership does that imply? (No cap table — estimate it. Triangulating under imperfect info is the job.)'],
+];
+function memoLead(){                                 // your conviction bet = largest intended check
+  let best=null; deals.forEach(d=>{ const a=alloc[d.n]||0; if(a>0&&(!best||a>best.a))best={n:d.n,a}; }); return best;
+}
+function memoKey(){ return 'fvc_memo_'+boardId(); }
+function memoGet(){ try{return JSON.parse(localStorage.getItem(memoKey()))||null;}catch(e){return null;} }
+function memoFilled(m){ return m&&m.f?MEMO_FIELDS.filter(([k])=>String(m.f[k]||'').trim()).length:0; }
+function renderMemoBtn(){
+  const b=document.getElementById('memoBtn'); if(!b)return;
+  const lead=memoLead();
+  if(!lead){ b.style.display='none'; return; }
+  b.style.display='';
+  const m=memoGet(), n=memoFilled(m);
+  if(n>0){ b.classList.add('done'); b.textContent=`📝 Memo · ${n}/8 on ${m.deal}`; }
+  else { b.classList.remove('done'); b.textContent='📝 Investment memo'; }
+}
+function openMemo(){
+  const lead=memoLead(); if(!lead)return;
+  const ov=document.getElementById('memoOv'), wrap=document.getElementById('memoFields');
+  const saved=memoGet(); const f=(saved&&saved.deal===lead.n&&saved.f)?saved.f:{};
+  document.getElementById('memoTitle').innerHTML=`📝 Investment Memo — <span style="color:var(--acc)">${lead.n}</span>`;
+  wrap.innerHTML=MEMO_FIELDS.map(([k,label,q])=>{
+    const pre=(k==='decision'&&!f[k])?`$${lead.a}M for ~____% (your estimate)`:(f[k]||'');
+    return `<div class="memofield"><label>${label} <span class="q">${q}</span></label>`
+      +`<textarea id="mf_${k}" spellcheck="false">${String(pre).replace(/</g,'&lt;')}</textarea></div>`;
+  }).join('');
+  ov.style.display='flex';
+  document.getElementById('memoCancel').onclick=()=>{ ov.style.display='none'; };
+  ov.onclick=e=>{ if(e.target===ov) ov.style.display='none'; };
+  document.getElementById('memoSave').onclick=()=>{
+    const out={}; MEMO_FIELDS.forEach(([k])=>{ out[k]=document.getElementById('mf_'+k).value.trim().slice(0,600); });
+    const rec={deal:lead.n,f:out};
+    try{localStorage.setItem(memoKey(),JSON.stringify(rec));}catch(e){}
+    window.FVC&&FVC.track('memo_write',{board:boardId(),deal:lead.n,filled:memoFilled(rec)});
+    ov.style.display='none'; renderMemoBtn();
+  };
+}
+function memoMarkdown(m,mult){                        // for the shareable Scout Card (Step 8)
+  if(!m||!m.f)return '';
+  const rows=MEMO_FIELDS.filter(([k])=>String(m.f[k]||'').trim())
+    .map(([k,label])=>`**${label}:** ${m.f[k]}`).join('\n');
+  if(!rows)return '';
+  return `\n---\n### 📝 My memo on ${m.deal}${mult!=null?` (exited ${mult>=10?mult.toFixed(0):mult.toFixed(1)}×)`:''}\n${rows}\n`;
 }
 
 /* ========== FUND ENGINE (unit-based, shared by player + AIs) ========== */
@@ -1037,7 +1133,7 @@ function endSeason(){
   const spentIntd=Object.values(intd).reduce((a,b)=>a+b,0);
   const risk=spentIntd>0?Math.max(1,Math.min(5,Math.round(deals.reduce((s,d)=>s+(intd[d.n]||0)*d.hype,0)/spentIntd))):3;
   let handle=''; try{handle=localStorage.getItem('fvc_handle')||'';}catch(e){}
-  window.FVC&&FVC.track('season_end',{rank:myRank,funds:rows.length,profit:Math.round(my.prof),mult:+mult.toFixed(2),judgment:js,newBlood:gold,scoutTier,thesis:curName(),board:boardId(),selProfit:Math.round(selProf),steerAlpha:Math.round(steer),fog:calibration!==null,dpSpent:calibration!==null?DP_BUDGET-dpLeft:null,calibration,access:accessOn,accessAlpha:accessAlpha===null?null:Math.round(accessAlpha),risk,handle:handle||null,streakDays:streak?streak.days:null,streakWin:streak?streak.win:null});
+  window.FVC&&FVC.track('season_end',{rank:myRank,funds:rows.length,profit:Math.round(my.prof),mult:+mult.toFixed(2),judgment:js,newBlood:gold,scoutTier,thesis:curName(),board:boardId(),selProfit:Math.round(selProf),steerAlpha:Math.round(steer),fog:calibration!==null,dpSpent:calibration!==null?DP_BUDGET-dpLeft:null,calibration,access:accessOn,accessAlpha:accessAlpha===null?null:Math.round(accessAlpha),risk,handle:handle||null,streakDays:streak?streak.days:null,streakWin:streak?streak.win:null,memoFilled:memoFilled(memoGet())});
   // any zeros held?
   const blewUp=deals.filter(d=>d.path[5]===0 && (G.funds[G.pIdx].pos[d.n]?.cost>0)).map(d=>d.n);
   // Power-law beat (ICP-PLAYBOOK P0 #2): the single position that drove the fund. VCs think in
@@ -1069,6 +1165,17 @@ function endSeason(){
       : `No breakout this round — your best position (<b>${bestPick.n}</b>) only managed ${mx}×. In venture, one rocket makes the fund; you're still hunting yours.`;
     bp.style.display='block';
   } else bp.style.display='none';
+  // 📝 the memo, scored against the outcome (ICP-PLAYBOOK P1 #4 — the credential artifact)
+  const memo=memoGet(); const mw=document.getElementById('memoWrap');
+  if(memo&&memoFilled(memo)>0){
+    const md=deals.find(x=>x.n===memo.deal); const mmult=md?md.path[5]/md.path[0]:null;
+    const called = mmult!=null ? (mmult>=2?'that call aged well':mmult>0?'the market disagreed':'it went to zero — the memo is the lesson') : '';
+    mw.innerHTML=`<h4>📝 Your memo on ${memo.deal}${mmult!=null?` — exited <b>${mmult>=10?mmult.toFixed(0):mmult.toFixed(1)}×</b>, ${called}`:''}</h4>`
+      +MEMO_FIELDS.filter(([k])=>String(memo.f[k]||'').trim())
+        .map(([k,label])=>`<div class="mrow"><span class="mk">${label}:</span> ${String(memo.f[k]).replace(/</g,'&lt;')}</div>`).join('')
+      +`<div style="margin-top:8px;font-size:12px;color:var(--mut)">This is the track record a firm reads — copy it onto your Scout Card to make it public.</div>`;
+    mw.style.display='block';
+  } else mw.style.display='none';
   const beatAll=gold;
   let v;
   if(beatAll) v=`You beat every algorithm — including the hype-chasers. Pure judgment, not crowd-following.`;
@@ -1158,7 +1265,8 @@ function endSeason(){
     ],
     line: gold?'Beat every algorithm on today\'s board — pure judgment, not crowd-following.'
       : myRank<=Math.ceil(rows.length/2)?'Top-half fund on today\'s board, picking against the bots.'
-      : 'Learning the tape — the algorithms won this round.'
+      : 'Learning the tape — the algorithms won this round.',
+    appendix: (memo&&memoFilled(memo)>0) ? memoMarkdown(memo, (()=>{const md=deals.find(x=>x.n===memo.deal);return md?md.path[5]/md.path[0]:null;})()) : ''
   };
   document.getElementById('shareBtn').onclick=()=>window.FVC&&FVC.share(shareResult);
   document.getElementById('lpBtn').onclick=()=>window.FVC&&FVC.share({
@@ -1355,6 +1463,7 @@ function survEnd(b,verdictHtml){
 /* wire up */
 document.getElementById('survivorBtn').addEventListener('click',survStart);
 document.getElementById('beginBtn').addEventListener('click',enterSeason);
+document.getElementById('memoBtn').addEventListener('click',openMemo);
 document.getElementById('advBtn').addEventListener('click',advance);
 document.getElementById('autoBtn').addEventListener('click',autoResolve);
 document.getElementById('reshuffleBtn').addEventListener('click',newDealFlow);

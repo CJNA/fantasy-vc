@@ -122,6 +122,7 @@
       rows,
       '',
       (r.thesis ? '_Thesis: ' + r.thesis + '._ ' : '') + (r.line || ''),
+      (r.appendix ? r.appendix : ''),
       '',
       'Think you can out-pick the algorithms? → ' + APP_URL,
       '',
