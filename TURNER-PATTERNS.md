@@ -70,6 +70,45 @@ mystery deal"** UGC prompt, or a recurring "beat today's board" call-to-action f
 full check gets in). The best story is backing the name nobody wanted. Keep the daily board's rocket
 often low-hype; make the endcard call it out when you caught an unloved winner.
 
+## Pre-fund era (2015–2019): our ICP, on tape
+
+Sampled his genuinely early tweets — **before Banana Capital** (his own fund, ~2020), when he was a
+junior at Ludlow/Gelt with 0–5 likes per post. This is the single most important slice, because
+**pre-fund Turner *is* our ICP**, and what he did then is exactly the game.
+
+**The origin story (2015–2016): fantasy sports → stock picking → VC.** His earliest tweets are
+Winnipeg Jets fandom and **fantasy football** ("I took him 1st round in my PPG — Point Per Garment —
+league"; DeMarco Murray "fantasy points") interleaved with **retail/microcap stock picking**
+($YHOO, $WFCF, replying to microcap value investor @iancassel about non-GMO pricing to "back into
+some numbers"). The reframe instinct is already there: *"$YHOO streamed an NFL game to 5M people — if
+a startup did that it'd be worth $5B."* → **Positioning gold:** the person whose public track record
+inspired this game literally came from *fantasy sports + picking*. Fantasy VC is for who Turner was
+in 2016.
+
+**The method that built the record (2017–2019): public, real-time diligence threads.** With almost
+no audience he ran live company breakdowns:
+- **Beyond Meat (2019):** read the S-1/disclosures, surfaced the **Don Lee Farms lawsuit + the
+  production-driven revenue drop** (the risk/governance tell), questioned the moat (*"unique process,
+  or does it come down to distribution?"*), and checked valuation sanity (*"won't get patience at
+  ~60× sales"*). A public investment memo, performed live.
+- **Uber / Bird / Lime (2018):** applied frameworks out loud (*"network effect vs economies of scale
+  is the better lens"*), made the big-analogy bet (*"Uber will be to services what Amazon is to
+  goods"*), reasoned about capital dynamics (SoftBank underpricing).
+- **The number others miss:** *"analysts downgrading Apple don't realize AirPods are $160 each."*
+
+**What the pre-fund era proves for the design:**
+1. **The memo IS his pre-fund behavior.** Our 8-field memo = his public diligence thread,
+   compressed. Reinforces shipping it — and reframing it as *"your public take."*
+2. **Reward the reasoning + the number others miss, not just the pick.** His edge was the risk tell
+   (BYND lawsuit), the framework (network-effects-vs-scale), the contrarian datapoint (AirPods). Our
+   **fog + calibration score** ("read through the noise") + the fraud tell reward exactly this — the
+   thing Nicole says case studies test (*how* you think). Keep leaning here.
+3. **Thoughtful public engagement — with no following — built the network.** Most 2018 posts are
+   replies debating strategy in others' threads = Nicole's "recognition before access." Validates
+   **challenge links / pods / sharing** as the growth loop, and **consistency** (streaks) as the moat.
+4. **The comparison/reframe is his oldest instinct** (2015 YHOO→$5B). Our single-stat gut-punch
+   copy (Pattern A) should be *comparisons*, not bare stats — "X, which is more than all of Y."
+
 ## The build shortlist this implies (new, on top of ICP-PLAYBOOK)
 1. **"The arc" share card** (Pattern D) — best pick's struggle→conviction→exit as a Turner-style
    post. Highest-leverage, most on-brand shareable. *small–medium.*
@@ -80,3 +119,8 @@ often low-hype; make the endcard call it out when you caught an unloved winner.
 4. **"Name this deal" / mystery-deal tease** (B/G) — a blind, metrics-only shareable from the board.
    *medium.*
 5. Feeds the scoped **ownership/valuation** dimension (F) and keeps the **low-hype rocket** central (H).
+6. **Positioning line** (pre-fund era) — lead the pitch/landing with *"Fantasy VC is for who Turner
+   Novak was in 2016: a fantasy-sports-playing stock-picker with no fund, building judgment in
+   public."* It fuses the fantasy-sports hook, the credential thesis, and a name the ICP respects.
+7. **Reframe the memo as "your public take"** (pre-fund method) — thread-shaped, comparison-driven,
+   surfacing the risk tell + the number others miss. *copy/framing on the shipped memo.*
