@@ -190,6 +190,10 @@
   .memorow{display:flex;gap:8px;margin-top:8px}
   .memorow button{flex:1;border:0;border-radius:10px;padding:11px 14px;font-weight:700;font-size:13.5px;cursor:pointer;color:#fff}
   .b-msave{background:#7c5cff}.b-mclose{background:#232838;color:#c7ccdb}
+  .b-mdraft{background:#1c2233;border:1px solid #7c5cff55;color:#b9a8ff;border-radius:9px;padding:8px 13px;
+    font-weight:700;font-size:12.5px;cursor:pointer}
+  .b-mdraft:hover{background:#232a40}
+  #memoCard code{background:#0a0b10;border:1px solid #262a3a;border-radius:4px;padding:0 4px;font-size:11.5px}
   #memoBtn.done{background:#19c37d33;border-color:#19c37d;color:#8ef0c0}
   .memoout{max-width:600px;margin:12px auto 0;text-align:left;background:var(--panel2);border:1px solid var(--line);
     border-radius:12px;padding:12px 16px;font-size:13px;line-height:1.5}
@@ -291,7 +295,8 @@
   <div id="memoOv" style="display:none">
     <div id="memoCard">
       <h3 id="memoTitle">📝 Investment Memo</h3>
-      <div class="memosub">On your lead pick. Terse is fine — this is the artifact a real firm reads (it tests <i>how you think</i>, not the “right” answer). It saves with your run and can go on your Scout Card.</div>
+      <div class="memosub">On your lead pick. The fields come <b>pre-drafted from your scorecard</b> — sharpen the lines, fill the <code>____</code> blanks, delete what you disagree with. Terse is fine; it tests <i>how you think</i>, not the “right” answer. Saves with your run and can go on your Scout Card.</div>
+      <div style="margin-bottom:12px"><button class="b-mdraft" id="memoDraftBtn" type="button">✨ Draft from the scorecard</button></div>
       <div id="memoFields"></div>
       <div class="memorow">
         <button class="b-mclose" id="memoCancel">Close</button>
@@ -823,6 +828,29 @@ const MEMO_FIELDS=[
 function memoLead(){                                 // your conviction bet = largest intended check
   let best=null; deals.forEach(d=>{ const a=alloc[d.n]||0; if(a>0&&(!best||a>best.a))best={n:d.n,a}; }); return best;
 }
+/* Draft starting lines from the deal's OWN data — the fog-aware estimates, sector, hype and news
+ * the player is already looking at. Zero-backend: turns "write 8 fields from nothing" into "edit
+ * these grounded starters." The Decision line triangulates ownership from a stage-typical post
+ * (the valuation-under-imperfect-info skill). AI "flesh it out" is the scoped fast-follow. */
+const MEMO_MODEL={"Fintech Infra":"usage-based API fees on volume","Dev Tools":"bottoms-up seats/usage — devs adopt free, then pay","AI Agents":"per-task or per-seat pricing that undercuts the labor it replaces","Health Ops":"SaaS plus a clip on each transaction","Logistics":"a take-rate on the GMV flowing through it","Consumer":"subscriptions, ads, or a marketplace take once the crowd shows up","Climate":"hardware margin plus recurring service/offtake contracts","Edtech":"outcomes-based or income-share pricing","Bio Tools":"instruments plus recurring consumables (picks-and-shovels)","Space & Defense":"multi-year government / enterprise contracts"};
+const MEMO_POST={"Pre-seed":[8,15],"Seed":[15,30],"Series A":[40,80],"Series B":[120,250]};
+function memoDraft(d){
+  const est=k=>fogVal(d,k), q=v=>v>=75?'strong':v>=60?'solid':v>=46?'middling':'weak', S=d.s;
+  const t=est('team'),mk=est('market'),cm=est('comm'),df=est('diff'),ar=est('ar'),fn=est('fin');
+  const reads=[['the team',t],['the market',mk],['GTM/traction',cm],['differentiation',df],['product/scale',est('ps')]].sort((a,b)=>a[1]-b[1]);
+  const pv=MEMO_POST[d.st]||[15,30], chk=(alloc[d.n]||d.maxCheck);
+  const own=[(chk/pv[1]*100).toFixed(1),(chk/pv[0]*100).toFixed(1)];
+  return {
+    problem:`${d.b} (${S}.) Matters because ____ feel this today and will pay to make it go away.`,
+    whynow:`Market read is ${d.hype}/5 hype${d.hype>=4?" — loud, so check it isn't just noise":d.hype<=2?" — quiet, could be early":""}. What structurally changed to make ${S.toLowerCase()} work now: ____.`,
+    team:`Team signal ~${t}/100 (${q(t)}). Why these are the right people: ____.`,
+    market:`Market ~${mk}/100, GTM ~${cm}/100. Big enough AND winnable by a startup? ____.`,
+    comp:`Differentiation ~${df}/100 (${q(df)}). One line — why an incumbent can't just copy this: ____.`,
+    model:`Likely model: ${MEMO_MODEL[S]||"how it charges"}. In practice it makes money by: ____.`,
+    risks:`Weakest read is ${reads[0][0]} (~${reads[0][1]}/100). Risk/governance ~${ar}/100${ar<40?` against financials ~${fn}/100 — that gap is a classic fraud tell, dig in`:""}. Fails if: ____.`,
+    decision:`$${chk}M — at a typical ${d.st} post (~$${pv[0]}–${pv[1]}M) that's ~${own[0]}–${own[1]}%. My estimate: ____.`,
+  };
+}
 function memoKey(){ return 'fvc_memo_'+boardId(); }
 function memoGet(){ try{return JSON.parse(localStorage.getItem(memoKey()))||null;}catch(e){return null;} }
 function memoFilled(m){ return m&&m.f?MEMO_FIELDS.filter(([k])=>String(m.f[k]||'').trim()).length:0; }
@@ -837,15 +865,20 @@ function renderMemoBtn(){
 }
 function openMemo(){
   const lead=memoLead(); if(!lead)return;
+  const dObj=deals.find(x=>x.n===lead.n);
   const ov=document.getElementById('memoOv'), wrap=document.getElementById('memoFields');
   const saved=memoGet(); const f=(saved&&saved.deal===lead.n&&saved.f)?saved.f:{};
+  const draft=dObj?memoDraft(dObj):{};              // grounded starters from the scorecard
   document.getElementById('memoTitle').innerHTML=`📝 Investment Memo — <span style="color:var(--acc)">${lead.n}</span>`;
   wrap.innerHTML=MEMO_FIELDS.map(([k,label,q])=>{
-    const pre=(k==='decision'&&!f[k])?`$${lead.a}M for ~____% (your estimate)`:(f[k]||'');
+    const pre=(f[k]||draft[k]||'');                 // saved wins; else the data-drawn starter
     return `<div class="memofield"><label>${label} <span class="q">${q}</span></label>`
       +`<textarea id="mf_${k}" spellcheck="false">${String(pre).replace(/</g,'&lt;')}</textarea></div>`;
   }).join('');
   ov.style.display='flex';
+  // ✨ redraft-from-scorecard: fill only empty fields, never clobber typed text
+  const rb=document.getElementById('memoDraftBtn');
+  if(rb) rb.onclick=()=>{ MEMO_FIELDS.forEach(([k])=>{ const ta=document.getElementById('mf_'+k); if(ta&&!ta.value.trim()&&draft[k]) ta.value=draft[k]; }); };
   document.getElementById('memoCancel').onclick=()=>{ ov.style.display='none'; };
   ov.onclick=e=>{ if(e.target===ov) ov.style.display='none'; };
   document.getElementById('memoSave').onclick=()=>{
